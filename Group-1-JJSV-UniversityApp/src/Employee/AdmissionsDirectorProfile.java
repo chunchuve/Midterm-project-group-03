@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Employee.AdmissionsDirector;
+package Employee;
 
-import Employee.*;
+//import Employee.AdmissionsDirector.*;
+
 import Persona.Person;
-import Profile.Profile;
+//import Profile.Profile;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
-public class AdmissionsDirectorProfile extends Profile {
+public class AdmissionsDirectorProfile extends EmployeeProfile {
 
 
 
-    public AdmissionsDirectorProfile(Person p) {
+    public AdmissionsDirectorProfile(Person e) {
 
-        super(p); 
+        super(e); 
 
     }
     

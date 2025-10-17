@@ -5,35 +5,42 @@
  */
 package University;
 
-import Business.Person.PersonDirectory;
-import Business.Profiles.EmployeeDirectory;
-import Business.Profiles.StudentDirectory;
-import Business.Profiles.FacultyDirectory;
-import Business.UserAccounts.UserAccountDirectory;
+import Persona.PersonDirectory;
+import Employee.EmployeeDirectory;
+import Student.StudentDirectory;
+import Faculty.FacultyDirectory;
+import UserAccounts.UserAccountDirectory;
+import Department.Department;
+import College.College;
+import Employee.AdmissionsDirector.AdmissionsDirectorProfile;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
-public class Business {
+public class University {
 
     String name;
+    College college; //list of departments
+    
     PersonDirectory persondirectory; //all people profiles regardless of the role
-
+    
     EmployeeDirectory employeedirectory;
     UserAccountDirectory useraccountdirectory;
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
 
 
-    public Business(String n) {
+    public University(String n) {
         name = n;
-
+        
         persondirectory = new PersonDirectory();
         employeedirectory = new EmployeeDirectory(this);
-        useraccountdirectory = new UserAccountDirectory();
-        studentdirectory = new StudentDirectory();
+        useraccountdirectory = new UserAccountDirectory(d);
+        studentdirectory = new StudentDirectory(d);
         facultydirectory = new FacultyDirectory(this);
+        AdmissionsDirectorProfile admissionsDirector = employeedirectory.;
+        Department d = new Department("CS", studentdirectory, facultydirectory,  );
 
 
     }

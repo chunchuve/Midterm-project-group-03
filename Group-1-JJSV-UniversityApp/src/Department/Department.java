@@ -11,6 +11,7 @@ import CourseSchedule.CourseLoad;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.CourseSchedule;
 import Degree.Degree;
+import Employee.AdmissionsDirector.AdmissionsDirectorProfile;
 import Employer.EmployerDirectory;
 import Faculty.FacultyDirectory;
 import Persona.PersonDirectory;
@@ -30,16 +31,21 @@ public class Department {
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
     EmployerDirectory employerdirectory;
+    AdmissionsDirectorProfile admissionsDirector;
     Degree degree;
 
     HashMap<String, CourseSchedule> mastercoursecatalog;
 
-    public Department(String n) {
+    public Department(String n, StudentDirectory studentdirectory, FacultyDirectory facultydirectory, AdmissionsDirectorProfile admissionsDirector) {
         name = n;
         mastercoursecatalog = new HashMap<>();
         coursecatalog = new CourseCatalog(this);
-        studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
-        persondirectory = new PersonDirectory();
+        this.studentdirectory = studentdirectory;
+        this.facultydirectory = facultydirectory;
+        this.admissionsDirector = admissionsDirector;
+        
+        //studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
+        //persondirectory = new PersonDirectory();
         degree = new Degree("MSIS");
         
     }

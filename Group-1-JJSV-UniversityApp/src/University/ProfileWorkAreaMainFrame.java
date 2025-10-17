@@ -5,18 +5,18 @@
  */
 package University;
 
-import Business.Profiles.EmployeeProfile;
-import Business.Profiles.FacultyProfile;
-import Business.Profiles.Profile;
-import Business.Profiles.StudentProfile;
+import Employee.EmployeeProfile;
+import Faculty.FacultyProfile;
+import Profile.Profile;
+import Student.StudentProfile;
 
-import Business.UserAccounts.UserAccount;
-import Business.UserAccounts.UserAccountDirectory;
+import UserAccounts.UserAccount;
+import UserAccounts.UserAccountDirectory;
 
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
-import UserInterface.WorkAreas.StudentRole.StudentSignUpJPanel;
+//import UserInterface.WorkAreas.StudentRole.StudentSignUpJPanel;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,7 +27,7 @@ import javax.swing.JPanel;
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
-    Business business;
+    University business;
     UserAccount user;
 
     /**

@@ -5,7 +5,7 @@
  */
 package Employee;
 
-import Business.Business;
+import University.University;
 import Persona.Person;
 
 import java.util.ArrayList;
@@ -16,12 +16,12 @@ import java.util.ArrayList;
  */
 public class EmployeeDirectory {
 
-    Business business;
+    University university;
     ArrayList<EmployeeProfile> employeelist;
 
-    public EmployeeDirectory(Business d) {
+    public EmployeeDirectory(University u) {
 
-        business = d;
+        university = u;
         employeelist = new ArrayList();
 
     }

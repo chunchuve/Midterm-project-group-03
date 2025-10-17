@@ -25,8 +25,8 @@ import Business.UserAccounts.UserAccountDirectory;
  */
 class ConfigureABusiness {
 
-    static Business initialize() {
-        Business business = new Business("Information Systems");
+    static University initialize() {
+        University business = new University("Information Systems");
 
 // Create Persons
       PersonDirectory persondirectory = business.getPersonDirectory();
