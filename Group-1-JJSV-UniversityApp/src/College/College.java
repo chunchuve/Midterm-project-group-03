@@ -5,7 +5,7 @@
  */
 package College;
 
-import info5100.university.example.Department.Department;
+import Department.Department;
 import java.util.ArrayList;
 
 /**

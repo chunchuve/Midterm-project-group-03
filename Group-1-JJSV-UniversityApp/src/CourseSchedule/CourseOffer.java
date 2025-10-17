@@ -5,9 +5,9 @@
  */
 package CourseSchedule;
 
-import info5100.university.example.CourseCatalog.Course;
-import info5100.university.example.Persona.Faculty.FacultyAssignment;
-import info5100.university.example.Persona.Faculty.FacultyProfile;
+import CourseCatalog.Course;
+import Faculty.FacultyAssignment;
+import Faculty.FacultyProfile;
 import java.util.ArrayList;
 
 /**

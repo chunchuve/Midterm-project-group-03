@@ -5,7 +5,7 @@
  */
 package CourseSchedule;
 
-import info5100.university.example.CourseCatalog.Course;
+import CourseCatalog.Course;
 
 /**
  *

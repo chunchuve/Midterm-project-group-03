@@ -5,17 +5,17 @@
  */
 package Department;
 
-import info5100.university.example.CourseCatalog.Course;
-import info5100.university.example.CourseCatalog.CourseCatalog;
-import info5100.university.example.CourseSchedule.CourseLoad;
-import info5100.university.example.CourseSchedule.CourseOffer;
-import info5100.university.example.CourseSchedule.CourseSchedule;
-import info5100.university.example.Degree.Degree;
-import info5100.university.example.Employer.EmployerDirectory;
-import info5100.university.example.Persona.Faculty.FacultyDirectory;
-import info5100.university.example.Persona.PersonDirectory;
-import info5100.university.example.Persona.StudentDirectory;
-import info5100.university.example.Persona.StudentProfile;
+import CourseCatalog.Course;
+import CourseCatalog.CourseCatalog;
+import CourseSchedule.CourseLoad;
+import CourseSchedule.CourseOffer;
+import CourseSchedule.CourseSchedule;
+import Degree.Degree;
+import Employer.EmployerDirectory;
+import Faculty.FacultyDirectory;
+import Persona.PersonDirectory;
+import Student.StudentDirectory;
+import Student.StudentProfile;
 import java.util.HashMap;
 
 /**
@@ -98,7 +98,7 @@ public void addElectiveCourse(Course c){
 
         StudentProfile sp = studentdirectory.findStudent(studentid);
 
-        CourseLoad cl = sp.getCurrentCourseLoad();
+        CourseLoad cl = (CourseLoad) sp.getCurrentCourseLoad();
 
         CourseSchedule cs = mastercoursecatalog.get(semester);
 

@@ -5,9 +5,9 @@
  */
 package Degree;
 
-import info5100.university.example.CourseCatalog.Course;
-import info5100.university.example.CourseSchedule.SeatAssignment;
-import info5100.university.example.Persona.StudentProfile;
+import CourseCatalog.Course;
+import CourseSchedule.SeatAssignment;
+import Student.StudentProfile;
 import java.util.ArrayList;
 
 /**

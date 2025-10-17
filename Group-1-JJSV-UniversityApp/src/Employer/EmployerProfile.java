@@ -5,7 +5,7 @@
  */
 package Employer;
 
-import info5100.university.example.Persona.EmploymentHistory.Employment;
+import EmploymentHistory.Employment;
 import java.util.ArrayList;
 
 /**

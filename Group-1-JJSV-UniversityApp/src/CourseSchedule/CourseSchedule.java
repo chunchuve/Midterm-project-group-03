@@ -5,8 +5,8 @@
  */
 package CourseSchedule;
 
-import info5100.university.example.CourseCatalog.Course;
-import info5100.university.example.CourseCatalog.CourseCatalog;
+import CourseCatalog.Course;
+import CourseCatalog.CourseCatalog;
 import java.util.ArrayList;
 
 /**
