@@ -6,6 +6,7 @@
 package Student;
 
 import Persona.Person;
+import Profile.Profile;
 import CourseSchedule.CourseLoad;
 import CourseSchedule.SeatAssignment;
 import EmploymentHistory.EmploymentHistroy;
@@ -13,23 +14,47 @@ import java.util.ArrayList;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
-public class StudentProfile {
+public class StudentProfile extends Profile {
 
-    Person person;
+    //Person person;
     Transcript transcript;
     EmploymentHistroy employmenthistory;
+    
+    private String nUID;
+    
 
     public StudentProfile(Person p) {
-
-        person = p;
+        super(p);   
         transcript = new Transcript(this);
         employmenthistory = new EmploymentHistroy();
     }
+    
+    //new constructor
+    public StudentProfile(Person p, String nUID) {
+       super(p);
+       this.nUID = nUID;
+    }
 
+    public String getnUID() {
+        return nUID;
+    }
+
+    public void setnUID(String nUID) {
+        this.nUID = nUID;
+    }
+
+
+    //public boolean isMatch(String id) {
+       // return person.getPersonId().equals(id);
+    //}
+    
     public boolean isMatch(String id) {
-        return person.getPersonId().equals(id);
+        if (super.isMatch(id)) {
+            return true;
+        }
+        return false;
     }
 
     public Transcript getTranscript() {
@@ -55,5 +80,10 @@ public class StudentProfile {
 
         return transcript.getCourseList();
 
+    }
+    
+    @Override
+    public String getRole() {
+        return "Student";
     }
 }

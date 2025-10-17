@@ -6,6 +6,7 @@
 package Faculty;
 
 import Persona.*;
+import Profile.Profile;
 import CourseSchedule.CourseOffer;
 import java.util.ArrayList;
 
@@ -13,14 +14,14 @@ import java.util.ArrayList;
  *
  * @author kal bugrara
  */
-public class FacultyProfile {
+public class FacultyProfile extends Profile {
 
-    Person person;
+    //Person person;
     ArrayList <FacultyAssignment> facultyassignments; 
     
     public FacultyProfile(Person p) {
 
-        person = p;
+        super(p);
         facultyassignments = new ArrayList();
     }
     public  double getProfAverageOverallRating(){
@@ -52,10 +53,15 @@ public class FacultyProfile {
     }
 
     public boolean isMatch(String id) {
-        if (person.getPersonId().equals(id)) {
+        if (super.isMatch(id)) {
             return true;
         }
         return false;
+    }
+    
+    @Override
+    public String getRole() {
+        return "Faculty";
     }
 
 }
