@@ -5,7 +5,7 @@
  */
 package Faculty;
 
-import info5100.university.example.CourseSchedule.CourseOffer;
+import CourseSchedule.CourseOffer;
 
 /**
  *

@@ -6,9 +6,9 @@
 package Student;
 
 import Persona.Person;
-import info5100.university.example.CourseSchedule.CourseLoad;
-import info5100.university.example.CourseSchedule.SeatAssignment;
-import info5100.university.example.Persona.EmploymentHistory.EmploymentHistroy;
+import CourseSchedule.CourseLoad;
+import CourseSchedule.SeatAssignment;
+import EmploymentHistory.EmploymentHistroy;
 import java.util.ArrayList;
 
 /**

@@ -5,7 +5,7 @@
  */
 package Profile;
 
-import Business.Person.Person;
+import Persona.Person;
 
 /**
  *

@@ -5,8 +5,8 @@
  */
 package Faculty;
 
-import info5100.university.example.Persona.*;
-import info5100.university.example.CourseSchedule.CourseOffer;
+import Persona.*;
+import CourseSchedule.CourseOffer;
 import java.util.ArrayList;
 
 /**
