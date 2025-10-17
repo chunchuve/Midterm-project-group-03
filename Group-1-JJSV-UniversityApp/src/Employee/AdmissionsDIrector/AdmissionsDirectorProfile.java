@@ -25,7 +25,7 @@ public class AdmissionsDirectorProfile extends Profile {
     
     @Override
     public String getRole(){
-        return  "Admin";
+        return  "AdmissionsDirector";
     }
 
 }

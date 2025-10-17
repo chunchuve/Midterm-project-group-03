@@ -5,8 +5,9 @@
  */
 package UserAccounts;
 
-import info5100.university.example.Persona.*;
-import info5100.university.example.Department.Department;
+import Persona.*;
+import Profile.Profile;
+import Department.Department;
 import java.util.ArrayList;
 
 /**
@@ -16,8 +17,54 @@ import java.util.ArrayList;
 public class UserAccountDirectory {
 
     Department department;
-    ArrayList<UserAccount> studentlist;
+    //ArrayList<UserAccount> studentlist;
+    ArrayList<UserAccount> useraccountlist ;
+    
+      public UserAccountDirectory (Department d){
+       department = d;   
+       useraccountlist = new ArrayList();
 
+    }
+
+    public UserAccount newUserAccount(Profile p, String un, String pw) {
+
+        UserAccount ua = new UserAccount (p,  un,  pw);
+        useraccountlist.add(ua);
+        return ua;
+    }
+    
+    //remove user account
+    public void removeUserAccount(UserAccount acc) {
+        useraccountlist.remove(acc);
+    }
+    
+    
+    public UserAccount findUserAccount(String id) {
+
+        for (UserAccount ua : useraccountlist) {
+
+            if (ua.isMatch(id)) {
+                return ua;
+            }
+        }
+            return null; //not found after going through the whole list
+         }
+    public UserAccount AuthenticateUser(String un, String pw) {
+
+        for (UserAccount ua : useraccountlist) {
+
+            if (ua.IsValidUser(un, pw)) {
+                return ua;
+            }
+        }
+            return null; //not found after going through the whole list
+    }   
+     
+    public ArrayList<UserAccount> getUserAccountList() {
+         return useraccountlist;
+     }
+    
+    /*
     public UserAccountDirectory(Department d) {
 
         department = d;
@@ -41,6 +88,6 @@ public class UserAccountDirectory {
          //   }
         }
             return null; //not found after going through the whole list
-         }
-    
+    }
+    */
 }
