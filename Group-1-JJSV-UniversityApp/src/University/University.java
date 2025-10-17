@@ -39,8 +39,12 @@ public class University {
         useraccountdirectory = new UserAccountDirectory(d);
         studentdirectory = new StudentDirectory(d);
         facultydirectory = new FacultyDirectory(this);
-        AdmissionsDirectorProfile admissionsDirector = employeedirectory.;
-        Department d = new Department("CS", studentdirectory, facultydirectory,  );
+        
+        //create a college and initialize list of departments
+        college = new College("Engineering College");
+        //create a department
+        
+        //Department d = new Department("CS", studentdirectory, facultydirectory,  );
 
 
     }

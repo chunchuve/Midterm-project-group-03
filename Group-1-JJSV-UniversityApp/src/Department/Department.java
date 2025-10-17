@@ -36,6 +36,12 @@ public class Department {
 
     HashMap<String, CourseSchedule> mastercoursecatalog;
 
+    public Department(String name) {
+        this.name = name;
+    }
+    
+    
+
     public Department(String n, StudentDirectory studentdirectory, FacultyDirectory facultydirectory, AdmissionsDirectorProfile admissionsDirector) {
         name = n;
         mastercoursecatalog = new HashMap<>();

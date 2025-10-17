@@ -18,4 +18,20 @@ public class College {
     public College(String name){
         departments = new ArrayList();
     }
+    
+    //create a new department
+    public Department newDepartment(String name) {
+        Department d = new Department(name);
+        departments.add(d);
+        return d;
+    }
+    
+    public ArrayList<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(ArrayList<Department> departments) {
+        this.departments = departments;
+    }
+    
 }

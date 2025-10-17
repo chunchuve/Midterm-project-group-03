@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
 public class EmployeeDirectory {
 
@@ -29,6 +29,14 @@ public class EmployeeDirectory {
     public EmployeeProfile newEmployeeProfile(Person p) {
 
         EmployeeProfile sp = new EmployeeProfile(p);
+        employeelist.add(sp);
+        return sp;
+    }
+    
+    //create new admissions director and add to employee list
+    public EmployeeProfile newAdmissionsDirectorProfile(Person p) {
+
+        EmployeeProfile sp = new AdmissionsDirectorProfile(p);
         employeelist.add(sp);
         return sp;
     }
