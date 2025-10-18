@@ -5,6 +5,7 @@
  */
 package Persona;
 
+import Department.Department;
 import java.util.ArrayList;
 
 /**
@@ -12,11 +13,12 @@ import java.util.ArrayList;
  * @author kal bugrara
  */
 public class PersonDirectory {
-    
+      
+      Department department;  
       ArrayList<Person> personlist ;
     
-      public PersonDirectory (){
-          
+      public PersonDirectory (Department d){
+       department = d;
        personlist = new ArrayList();
 
     }
@@ -38,5 +40,21 @@ public class PersonDirectory {
         }
             return null; //not found after going through the whole list
          }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public ArrayList<Person> getPersonlist() {
+        return personlist;
+    }
+
+    public void setPersonlist(ArrayList<Person> personlist) {
+        this.personlist = personlist;
+    }
     
 }

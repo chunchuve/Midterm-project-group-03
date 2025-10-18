@@ -55,5 +55,22 @@ public class FacultyDirectory {
         }
             return null; //not found after going through the whole list
          }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public ArrayList<FacultyProfile> getTeacherlist() {
+        return teacherlist;
+    }
+
+    public void setTeacherlist(ArrayList<FacultyProfile> teacherlist) {
+        this.teacherlist = teacherlist;
+    }
+    
     
 }

@@ -5,7 +5,8 @@
  */
 package Employee;
 
-import University.University;
+import Department.Department;
+//import University.University;
 import Persona.Person;
 
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import java.util.ArrayList;
  */
 public class EmployeeDirectory {
 
-    University university;
+    Department department;
     ArrayList<EmployeeProfile> employeelist;
 
-    public EmployeeDirectory(University u) {
+    public EmployeeDirectory(Department department) {
 
-        university = u;
+        this.department = department;
         employeelist = new ArrayList();
 
     }
@@ -51,6 +52,22 @@ public class EmployeeDirectory {
         }
             return null; //not found after going through the whole list
          }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public ArrayList<EmployeeProfile> getEmployeelist() {
+        return employeelist;
+    }
+
+    public void setEmployeelist(ArrayList<EmployeeProfile> employeelist) {
+        this.employeelist = employeelist;
+    }
     
     
 }

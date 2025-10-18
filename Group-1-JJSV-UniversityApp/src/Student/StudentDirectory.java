@@ -42,5 +42,21 @@ public class StudentDirectory {
         }
             return null; //not found after going through the whole list
          }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public ArrayList<StudentProfile> getStudentlist() {
+        return studentlist;
+    }
+
+    public void setStudentlist(ArrayList<StudentProfile> studentlist) {
+        this.studentlist = studentlist;
+    }
     
 }

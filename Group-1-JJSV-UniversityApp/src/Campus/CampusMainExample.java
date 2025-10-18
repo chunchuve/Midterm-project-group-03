@@ -14,7 +14,7 @@ public class CampusMainExample {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
         // TODO code application logic here
         /*
         0. Create Address object  
@@ -26,10 +26,6 @@ public class CampusMainExample {
         6. Write methods to determine is campus safe => are builinds safe etc.
 */
 
-
-
-
-
-    }
+    //}
     
 }

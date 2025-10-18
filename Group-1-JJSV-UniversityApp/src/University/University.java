@@ -12,7 +12,7 @@ import Faculty.FacultyDirectory;
 import UserAccounts.UserAccountDirectory;
 import Department.Department;
 import College.College;
-import Employee.AdmissionsDirector.AdmissionsDirectorProfile;
+import Employee.AdmissionsDirectorProfile;
 
 /**
  *
@@ -33,18 +33,23 @@ public class University {
 
     public University(String n) {
         name = n;
-        
-        persondirectory = new PersonDirectory();
-        employeedirectory = new EmployeeDirectory(this);
-        useraccountdirectory = new UserAccountDirectory();
-        studentdirectory = new StudentDirectory();
-        facultydirectory = new FacultyDirectory();
-        
-        //create a college and initialize list of departments
         college = new College("Engineering College"); //~department directory
         
+       
         //create a department
-        //Department d = new Department("CS", studentdirectory, facultydirectory,  );
+        Department d = new Department("CS");
+        
+        persondirectory = new PersonDirectory(d);
+        employeedirectory = new EmployeeDirectory(d);
+        useraccountdirectory = new UserAccountDirectory(d);
+        studentdirectory = new StudentDirectory(d);
+        facultydirectory = new FacultyDirectory(d);
+        
+        persondirectory.setDepartment(d);
+        employeedirectory.setDepartment(d);
+        studentdirectory.setDepartment(d);
+        facultydirectory.setDepartment(d);
+        
         
     }
 

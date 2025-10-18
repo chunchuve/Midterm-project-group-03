@@ -11,12 +11,13 @@ import CourseSchedule.CourseLoad;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.CourseSchedule;
 import Degree.Degree;
-import Employee.AdmissionsDirector.AdmissionsDirectorProfile;
+import Employee.AdmissionsDirectorProfile;
 import Employer.EmployerDirectory;
 import Faculty.FacultyDirectory;
 import Persona.PersonDirectory;
 import Student.StudentDirectory;
 import Student.StudentProfile;
+import UserAccounts.UserAccountDirectory;
 import java.util.HashMap;
 
 /**
@@ -31,30 +32,27 @@ public class Department {
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
     EmployerDirectory employerdirectory;
-    AdmissionsDirectorProfile admissionsDirector;
+    UserAccountDirectory useraccountdirectory;
+    //AdmissionsDirectorProfile admissionsDirector;
     Degree degree;
 
     HashMap<String, CourseSchedule> mastercoursecatalog;
 
-    public Department(String name) {
-        this.name = name;
-    }
+    //public Department(String name) {
+    //    this.name = name;
+    //}
     
     
 
-    public Department(String n, StudentDirectory studentdirectory, FacultyDirectory facultydirectory, AdmissionsDirectorProfile admissionsDirector) {
+    public Department(String n) {
         name = n;
         mastercoursecatalog = new HashMap<>();
         coursecatalog = new CourseCatalog(this);
-        this.studentdirectory = studentdirectory;
-        this.facultydirectory = facultydirectory;
-        this.admissionsDirector = admissionsDirector;
-        
-        //studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
-        //persondirectory = new PersonDirectory();
+     
         degree = new Degree("MSIS");
         
     }
+    
     public void addCoreCourse(Course c){
         degree.addCoreCourse(c);
         
