@@ -6,16 +6,16 @@
 package University;
 
 import Employee.EmployeeProfile;
-import Faculty.FacultyProfile;
+//import Faculty.FacultyProfile;
 import Profile.Profile;
-import Student.StudentProfile;
+//import Student.StudentProfile;
 
 import UserAccounts.UserAccount;
 import UserAccounts.UserAccountDirectory;
 
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
-import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
-import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
+//import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
+//import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 //import UserInterface.WorkAreas.StudentRole.StudentSignUpJPanel;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
@@ -36,7 +36,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
     public ProfileWorkAreaMainFrame() {
         initComponents();
-        business = ConfigureABusiness.initialize();
+        business = ConfigureUniversity.initialize();
         
 
     }
@@ -164,8 +164,8 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             return;
         }
         user = useraccount;
-        StudentWorkAreaJPanel studentworkareajpanel;
-        FacultyWorkAreaJPanel facultyworkarea;
+        //StudentWorkAreaJPanel studentworkareajpanel;
+        //FacultyWorkAreaJPanel facultyworkarea;
         AdminRoleWorkAreaJPanel adminworkarea;
         String r = useraccount.getRole();
         //System.out.println(r);
@@ -185,6 +185,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         }
         
+        /*
         if (profile instanceof StudentProfile) {
             
             //update last activity at the user login
@@ -209,7 +210,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
-
+        */
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -221,10 +222,12 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //Open sign up student form
+        /*
         StudentSignUpJPanel studentsignup = new StudentSignUpJPanel(CardSequencePanel, business);
             //CardSequencePanel.removeAll();
             CardSequencePanel.add("student sign up", studentsignup);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        */
         
     }//GEN-LAST:event_btnSignUpStudentActionPerformed
 

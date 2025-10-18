@@ -36,17 +36,64 @@ public class University {
         
         persondirectory = new PersonDirectory();
         employeedirectory = new EmployeeDirectory(this);
-        useraccountdirectory = new UserAccountDirectory(d);
-        studentdirectory = new StudentDirectory(d);
-        facultydirectory = new FacultyDirectory(this);
+        useraccountdirectory = new UserAccountDirectory();
+        studentdirectory = new StudentDirectory();
+        facultydirectory = new FacultyDirectory();
         
         //create a college and initialize list of departments
-        college = new College("Engineering College");
-        //create a department
+        college = new College("Engineering College"); //~department directory
         
+        //create a department
         //Department d = new Department("CS", studentdirectory, facultydirectory,  );
+        
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
+
+    public PersonDirectory getPersondirectory() {
+        return persondirectory;
+    }
+
+    public void setPersondirectory(PersonDirectory persondirectory) {
+        this.persondirectory = persondirectory;
+    }
+
+    public EmployeeDirectory getEmployeedirectory() {
+        return employeedirectory;
+    }
+
+    public void setEmployeedirectory(EmployeeDirectory employeedirectory) {
+        this.employeedirectory = employeedirectory;
+    }
+
+    public UserAccountDirectory getUseraccountdirectory() {
+        return useraccountdirectory;
+    }
+
+    public void setUseraccountdirectory(UserAccountDirectory useraccountdirectory) {
+        this.useraccountdirectory = useraccountdirectory;
+    }
+
+    public StudentDirectory getStudentdirectory() {
+        return studentdirectory;
+    }
+
+    public void setStudentdirectory(StudentDirectory studentdirectory) {
+        this.studentdirectory = studentdirectory;
     }
 
     public PersonDirectory getPersonDirectory() {

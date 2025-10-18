@@ -6,24 +6,24 @@
 */
 package University;
 
-import Business.Person.Person;
-import Business.Person.PersonDirectory;
-import Business.Profiles.EmployeeDirectory;
-import Business.Profiles.EmployeeProfile;
-import Business.Profiles.FacultyDirectory;
-import Business.Profiles.FacultyProfile;
-import Business.Profiles.StudentDirectory;
-import Business.Profiles.StudentProfile;
+import Persona.Person;
+import Persona.PersonDirectory;
+import Employee.EmployeeDirectory;
+import Employee.EmployeeProfile;
+import Faculty.FacultyDirectory;
+import Faculty.FacultyProfile;
+import Student.StudentDirectory;
+import Student.StudentProfile;
 
-import Business.UserAccounts.UserAccount;
-import Business.UserAccounts.UserAccountDirectory;
+import UserAccounts.UserAccount;
+import UserAccounts.UserAccountDirectory;
 
 
 /**
  *
  * @author kal bugrara
  */
-class ConfigureABusiness {
+class ConfigureUniversity {
 
     static University initialize() {
         University business = new University("Information Systems");
