@@ -6,6 +6,7 @@
 */
 package University;
 
+import College.College;
 import Persona.Person;
 import Persona.PersonDirectory;
 import Employee.EmployeeDirectory;
@@ -26,50 +27,59 @@ import UserAccounts.UserAccountDirectory;
 class ConfigureUniversity {
 
     static University initialize() {
-        University business = new University("Information Systems");
-
+        College college = new College("Engineering College");
+        PersonDirectory personDirectory = new PersonDirectory(); 
+        EmployeeDirectory employeeDirectory = new EmployeeDirectory();
+        UserAccountDirectory userAccountDirectory = new UserAccountDirectory();
+        StudentDirectory studentDirectory = new StudentDirectory();
+        FacultyDirectory facultyDirectory = new FacultyDirectory();
+        
+        //link directories to university instance and pass it to app/login page
+        University university = new University("Information Systems", college, personDirectory,
+            employeeDirectory, userAccountDirectory, studentDirectory, facultyDirectory);
+        
 // Create Persons
-      PersonDirectory persondirectory = business.getPersonDirectory();
-// person representing sales organization        
-        Person person001 = persondirectory.newPerson("John Smith"); //employee
-        Person person002 = persondirectory.newPerson("Gina Montana"); //faculty
-        Person person003 = persondirectory.newPerson("Adam Rollen"); //student
+        
+        Person person001 = personDirectory.newPerson("John Smith"); //employee
+        Person person002 = personDirectory.newPerson("Gina Montana"); //faculty
+        Person person003 = personDirectory.newPerson("Adam Rollen"); //student
  
-        Person person005 = persondirectory.newPerson("Jim Dellon"); //student
-        Person person006 = persondirectory.newPerson("Anna Shnider");
-        Person person007 = persondirectory.newPerson("Laura Brown");
-        Person person008 = persondirectory.newPerson("Jack While");
-        Person person009 = persondirectory.newPerson("Fidelity"); //we use this as customer
+        Person person005 = personDirectory.newPerson("Jim Dellon"); //student
+        Person person006 = personDirectory.newPerson("Anna Shnider");
+        Person person007 = personDirectory.newPerson("Laura Brown");
+        Person person008 = personDirectory.newPerson("Jack While");
+        Person person009 = personDirectory.newPerson("Fidelity"); //we use this as customer
 
-// Create Admins to manage the business
-        EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
-        EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(person001); //John Smith as employee username admin
+// Create Admins to manage the univ
         
-        StudentDirectory studentdirectory = business.getStudentDirectory();
-        StudentProfile studentprofile0 = studentdirectory.newStudentProfile(person003); //Adam Rollen as student username adam
-        StudentProfile studentprofile1 = studentdirectory.newStudentProfile(person005); //Jim Dellon as student username jim
+        EmployeeProfile employeeprofile0 = employeeDirectory.newEmployeeProfile(person001); //John Smith as employee username admin
         
-        FacultyDirectory facultydirectory = business.getFacultydirectory();
-        FacultyProfile facultyprofile0 = facultydirectory.newFacultyProfile(person002); //Gina Montana as faculty username gina
+// create students       
+        
+        StudentProfile studentprofile0 = studentDirectory.newStudentProfile(person003); //Adam Rollen as student username adam
+        StudentProfile studentprofile1 = studentDirectory.newStudentProfile(person005); //Jim Dellon as student username jim
+        
+// create faculty      
+        FacultyProfile facultyprofile0 = facultyDirectory.newFacultyProfile(person002); //Gina Montana as faculty username gina
 
    
 // Create User accounts that link to specific profiles
-        UserAccountDirectory uadirectory = business.getUserAccountDirectory();
-        UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****");
+        
+        UserAccount ua3 = userAccountDirectory.newUserAccount(employeeprofile0, "admin", "****");
         ua3.setStatus("Active"); //set status active
         
-        UserAccount ua4 = uadirectory.newUserAccount(studentprofile0, "adam", "****");
+        UserAccount ua4 = userAccountDirectory.newUserAccount(studentprofile0, "adam", "****");
         ua4.setStatus("Active"); //set status active
         studentprofile0.setnUID("NUID123");
         studentprofile1.setnUID("NUID456");
         
-        UserAccount ua6 = uadirectory.newUserAccount(studentprofile1, "jim", "1234");
+        UserAccount ua6 = userAccountDirectory.newUserAccount(studentprofile1, "jim", "1234");
         ua6.setStatus("Active"); //set status active
         
-        UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "gina", "*123");
+        UserAccount ua5 = userAccountDirectory.newUserAccount(facultyprofile0, "gina", "*123");
         ua5.setStatus("Active"); //set status active
         
-        return business;
+        return university;
 
     }
 

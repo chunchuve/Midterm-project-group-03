@@ -10,9 +10,9 @@ import Employee.EmployeeDirectory;
 import Student.StudentDirectory;
 import Faculty.FacultyDirectory;
 import UserAccounts.UserAccountDirectory;
-import Department.Department;
+//import Department.Department;
 import College.College;
-import Employee.AdmissionsDirectorProfile;
+//import Employee.AdmissionsDirectorProfile;
 
 /**
  *
@@ -23,27 +23,27 @@ public class University {
     String name;
     College college; //list of departments
     
-    PersonDirectory persondirectory; //all people profiles regardless of the role
+    PersonDirectory personDirectory; //all people profiles regardless of the role
     
-    EmployeeDirectory employeedirectory;
-    UserAccountDirectory useraccountdirectory;
-    StudentDirectory studentdirectory;
-    FacultyDirectory facultydirectory;
+    EmployeeDirectory employeeDirectory;
+    UserAccountDirectory userAccountDirectory;
+    StudentDirectory studentDirectory;
+    FacultyDirectory facultyDirectory;
+    
 
-
-    public University(String n) {
+    public University(String n, College college, PersonDirectory personDirectory, EmployeeDirectory employeeDirectory, 
+            UserAccountDirectory userAccountDirectory,
+                    StudentDirectory studentDirectory, FacultyDirectory facultyDirectory) {
         name = n;
-        //college = new College("Engineering College"); //~department directory //create outside the University
         
-       
-        //create a department
-        //Department d = new Department("CS"); //create this instance outside the University
+        //college = new College("Engineering College"); //per UML it is a composition - create outside the University?
         
-        persondirectory = new PersonDirectory(); 
-        employeedirectory = new EmployeeDirectory();
-        useraccountdirectory = new UserAccountDirectory();
-        studentdirectory = new StudentDirectory();
-        facultydirectory = new FacultyDirectory();
+        this.college = college;
+        this.personDirectory = personDirectory; 
+        this.employeeDirectory = employeeDirectory;
+        this.userAccountDirectory = userAccountDirectory;
+        this.studentDirectory = studentDirectory;
+        this.facultyDirectory = facultyDirectory;
         
         //Department should have a link to directory
         //set the values of directories with the directory instances I created
@@ -68,56 +68,56 @@ public class University {
     }
 
     public PersonDirectory getPersondirectory() {
-        return persondirectory;
+        return personDirectory;
     }
 
-    public void setPersondirectory(PersonDirectory persondirectory) {
-        this.persondirectory = persondirectory;
+    public void setPersondirectory(PersonDirectory personDirectory) {
+        this.personDirectory = personDirectory;
     }
 
     public EmployeeDirectory getEmployeedirectory() {
-        return employeedirectory;
+        return employeeDirectory;
     }
 
-    public void setEmployeedirectory(EmployeeDirectory employeedirectory) {
-        this.employeedirectory = employeedirectory;
+    public void setEmployeedirectory(EmployeeDirectory employeeDirectory) {
+        this.employeeDirectory = employeeDirectory;
     }
 
     public UserAccountDirectory getUseraccountdirectory() {
-        return useraccountdirectory;
+        return userAccountDirectory;
     }
 
-    public void setUseraccountdirectory(UserAccountDirectory useraccountdirectory) {
-        this.useraccountdirectory = useraccountdirectory;
+    public void setUseraccountdirectory(UserAccountDirectory userAccountDirectory) {
+        this.userAccountDirectory = userAccountDirectory;
     }
 
     public StudentDirectory getStudentdirectory() {
-        return studentdirectory;
+        return studentDirectory;
     }
 
-    public void setStudentdirectory(StudentDirectory studentdirectory) {
-        this.studentdirectory = studentdirectory;
+    public void setStudentdirectory(StudentDirectory studentDirectory) {
+        this.studentDirectory = studentDirectory;
     }
 
     public PersonDirectory getPersonDirectory() {
-        return persondirectory;
+        return personDirectory;
     }
 
     public UserAccountDirectory getUserAccountDirectory() {
-        return useraccountdirectory;
+        return userAccountDirectory;
     }
 
 
     public EmployeeDirectory getEmployeeDirectory() {
-        return employeedirectory;
+        return employeeDirectory;
     }
 
     public StudentDirectory getStudentDirectory(){
-        return studentdirectory;
+        return studentDirectory;
     }
 
     public FacultyDirectory getFacultydirectory() {
-        return facultydirectory;
+        return facultyDirectory;
     }
     
 }
