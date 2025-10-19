@@ -27,7 +27,7 @@ import javax.swing.JPanel;
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
-    University business;
+    University university;
     UserAccount user;
 
     /**
@@ -36,7 +36,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
     public ProfileWorkAreaMainFrame() {
         initComponents();
-        business = ConfigureUniversity.initialize();
+        university = ConfigureUniversity.initialize();
     
     }
 
@@ -155,7 +155,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         String un = UserNameTextField.getText();
         String pw = PasswordTextField.getText();
 
-        UserAccountDirectory uad = business.getUserAccountDirectory();
+        UserAccountDirectory uad = university.getUserAccountDirectory();
         UserAccount useraccount = uad.AuthenticateUser(un, pw);
         
         if (useraccount == null) {
@@ -177,7 +177,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             //update last activity at the user login
             user.setLastActivity(LocalDateTime.now());
             
-            adminworkarea = new AdminRoleWorkAreaJPanel(business, CardSequencePanel, user);
+            adminworkarea = new AdminRoleWorkAreaJPanel(university, CardSequencePanel, user);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("Admin", adminworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -191,7 +191,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             user.setLastActivity(LocalDateTime.now());
             
             StudentProfile spp = (StudentProfile) profile;
-            studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, CardSequencePanel);
+            studentworkareajpanel = new StudentWorkAreaJPanel(university, spp, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("student", studentworkareajpanel);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -203,7 +203,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             //update last activity at the user login
             user.setLastActivity(LocalDateTime.now());
             FacultyProfile fp = (FacultyProfile) profile;
-            facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel, fp);
+            facultyworkarea = new FacultyWorkAreaJPanel(university, CardSequencePanel, fp);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -222,7 +222,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         
         //Open sign up student form
         /*
-        StudentSignUpJPanel studentsignup = new StudentSignUpJPanel(CardSequencePanel, business);
+        StudentSignUpJPanel studentsignup = new StudentSignUpJPanel(CardSequencePanel, university);
             //CardSequencePanel.removeAll();
             CardSequencePanel.add("student sign up", studentsignup);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
