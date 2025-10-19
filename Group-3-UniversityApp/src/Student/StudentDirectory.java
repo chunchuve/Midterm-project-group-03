@@ -7,6 +7,7 @@ package Student;
 
 import Persona.Person;
 import Department.Department;
+import Employee.EmployeeProfile;
 import java.util.ArrayList;
 
 /**
@@ -15,12 +16,11 @@ import java.util.ArrayList;
  */
 public class StudentDirectory {
 
-    //Department department;
+    
     ArrayList<StudentProfile> studentlist;
 
     public StudentDirectory() {
 
-        //department = d;
         studentlist = new ArrayList();
 
     }
@@ -32,6 +32,22 @@ public class StudentDirectory {
         return sp;
     }
 
+    //begin changes to add new methods to create student with nuid and/or department 
+    public StudentProfile newStudentProfile(Person p, String nuid) {
+
+        StudentProfile sp = new StudentProfile(p,nuid);
+        studentlist.add(sp);
+        return sp;
+    }
+    
+    public StudentProfile newStudentProfile(Person p, String nuid, Department d) {
+
+        StudentProfile sp = new StudentProfile(p,nuid, d);
+        studentlist.add(sp);
+        return sp;
+    }
+    //end of changes
+    
     public StudentProfile findStudent(String id) {
 
         for (StudentProfile sp : studentlist) {

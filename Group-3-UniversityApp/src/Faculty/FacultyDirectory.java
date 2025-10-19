@@ -15,22 +15,31 @@ import java.util.ArrayList;
  */
 public class FacultyDirectory {
 
-    //Department department;
+   
     ArrayList<FacultyProfile> teacherlist;
 
     public FacultyDirectory() {
 
-        //department = d;
         teacherlist = new ArrayList();
 
     }
 
     public FacultyProfile newFacultyProfile(Person p) {
 
-        FacultyProfile sp = new FacultyProfile(p);
-        teacherlist.add(sp);
-        return sp;
+        FacultyProfile fp = new FacultyProfile(p);
+        teacherlist.add(fp);
+        return fp;
     }
+    
+    //@author vrmohanc
+    //begin of new method to create faculty with a department
+    public FacultyProfile newFacultyProfile(Person p, Department d) {
+
+        FacultyProfile fp = new FacultyProfile(p,d);
+        teacherlist.add(fp);
+        return fp;
+    }
+    //end of changes
     
     public FacultyProfile getTopProfessor(){
         

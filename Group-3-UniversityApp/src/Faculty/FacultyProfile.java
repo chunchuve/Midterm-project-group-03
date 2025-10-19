@@ -8,6 +8,7 @@ package Faculty;
 import Persona.*;
 import Profile.Profile;
 import CourseSchedule.CourseOffer;
+import Department.Department;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  */
 public class FacultyProfile extends Profile {
 
-    //Person person;
+    Department department;
     ArrayList <FacultyAssignment> facultyassignments; 
     
     public FacultyProfile(Person p) {
@@ -24,6 +25,17 @@ public class FacultyProfile extends Profile {
         super(p);
         facultyassignments = new ArrayList();
     }
+    
+    //@author vrmohanc
+    //begin of new constructor with dept
+    public FacultyProfile(Person p, Department department) {
+
+        super(p);
+        this.department = department;
+        facultyassignments = new ArrayList();
+    }
+    //end of changes
+    
     public  double getProfAverageOverallRating(){
         
         double sum = 0.0;
@@ -58,6 +70,23 @@ public class FacultyProfile extends Profile {
         }
         return false;
     }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public ArrayList<FacultyAssignment> getFacultyassignments() {
+        return facultyassignments;
+    }
+
+    public void setFacultyassignments(ArrayList<FacultyAssignment> facultyassignments) {
+        this.facultyassignments = facultyassignments;
+    }
+    
     
     @Override
     public String getRole() {
