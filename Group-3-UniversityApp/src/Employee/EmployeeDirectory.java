@@ -17,12 +17,12 @@ import java.util.ArrayList;
  */
 public class EmployeeDirectory {
 
-    Department department;
+    //Department department;
     ArrayList<EmployeeProfile> employeelist;
 
-    public EmployeeDirectory(Department department) {
+    public EmployeeDirectory() {
 
-        this.department = department;
+        //this.department = department;
         employeelist = new ArrayList();
 
     }
@@ -53,14 +53,7 @@ public class EmployeeDirectory {
             return null; //not found after going through the whole list
          }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
+    
     public ArrayList<EmployeeProfile> getEmployeelist() {
         return employeelist;
     }

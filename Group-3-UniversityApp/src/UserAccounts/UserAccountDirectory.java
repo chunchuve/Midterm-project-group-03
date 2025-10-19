@@ -16,12 +16,12 @@ import java.util.ArrayList;
  */
 public class UserAccountDirectory {
 
-    Department department;
+    //Department department;
     //ArrayList<UserAccount> studentlist;
     ArrayList<UserAccount> useraccountlist ;
     
-      public UserAccountDirectory (Department d){
-       department = d;   
+      public UserAccountDirectory (){
+       //department = d;   
        useraccountlist = new ArrayList();
 
     }

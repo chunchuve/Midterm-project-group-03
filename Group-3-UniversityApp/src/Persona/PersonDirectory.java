@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class PersonDirectory {
       
-      Department department;  
+      //Department department;  
       ArrayList<Person> personlist ;
     
-      public PersonDirectory (Department d){
-       department = d;
+      public PersonDirectory (){
+       //department = d;
        personlist = new ArrayList();
 
     }
@@ -41,13 +41,6 @@ public class PersonDirectory {
             return null; //not found after going through the whole list
          }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
     public ArrayList<Person> getPersonlist() {
         return personlist;

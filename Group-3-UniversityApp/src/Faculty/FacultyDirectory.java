@@ -15,12 +15,12 @@ import java.util.ArrayList;
  */
 public class FacultyDirectory {
 
-    Department department;
+    //Department department;
     ArrayList<FacultyProfile> teacherlist;
 
-    public FacultyDirectory(Department d) {
+    public FacultyDirectory() {
 
-        department = d;
+        //department = d;
         teacherlist = new ArrayList();
 
     }
@@ -56,13 +56,7 @@ public class FacultyDirectory {
             return null; //not found after going through the whole list
          }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
+    
 
     public ArrayList<FacultyProfile> getTeacherlist() {
         return teacherlist;

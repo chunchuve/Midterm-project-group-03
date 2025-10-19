@@ -37,8 +37,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     public ProfileWorkAreaMainFrame() {
         initComponents();
         business = ConfigureUniversity.initialize();
-        
-
+    
     }
 
     public void insert(JPanel jpanel) {

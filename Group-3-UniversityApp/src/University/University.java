@@ -33,22 +33,20 @@ public class University {
 
     public University(String n) {
         name = n;
-        college = new College("Engineering College"); //~department directory
+        //college = new College("Engineering College"); //~department directory //create outside the University
         
        
         //create a department
-        Department d = new Department("CS");
+        //Department d = new Department("CS"); //create this instance outside the University
         
-        persondirectory = new PersonDirectory(d);
-        employeedirectory = new EmployeeDirectory(d);
-        useraccountdirectory = new UserAccountDirectory(d);
-        studentdirectory = new StudentDirectory(d);
-        facultydirectory = new FacultyDirectory(d);
+        persondirectory = new PersonDirectory(); 
+        employeedirectory = new EmployeeDirectory();
+        useraccountdirectory = new UserAccountDirectory();
+        studentdirectory = new StudentDirectory();
+        facultydirectory = new FacultyDirectory();
         
-        persondirectory.setDepartment(d);
-        employeedirectory.setDepartment(d);
-        studentdirectory.setDepartment(d);
-        facultydirectory.setDepartment(d);
+        //Department should have a link to directory
+        //set the values of directories with the directory instances I created
         
         
     }
