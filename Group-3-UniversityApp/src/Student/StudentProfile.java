@@ -9,6 +9,7 @@ import Persona.Person;
 import Profile.Profile;
 import CourseSchedule.CourseLoad;
 import CourseSchedule.SeatAssignment;
+import Department.Department;
 import EmploymentHistory.EmploymentHistroy;
 import java.util.ArrayList;
 
@@ -21,9 +22,11 @@ public class StudentProfile extends Profile {
     //Person person;
     Transcript transcript;
     EmploymentHistroy employmenthistory;
-    
     private String nUID;
     
+    //begin of changes to link dept to student
+    Department department;
+    //end of changes
 
     public StudentProfile(Person p) {
         super(p);   
@@ -36,7 +39,24 @@ public class StudentProfile extends Profile {
        super(p);
        this.nUID = nUID;
     }
+    
+    //begin of changes to link dept to student
+    public StudentProfile(Person p, String nUID, Department department) {
+        
+        super(p); 
+        this.nUID = nUID;
+        this.department = department;
+    }
+    //end
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+    
     public String getnUID() {
         return nUID;
     }

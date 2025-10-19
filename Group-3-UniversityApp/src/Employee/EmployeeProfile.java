@@ -5,6 +5,7 @@
  */
 package Employee;
 
+import Department.Department;
 import Persona.Person;
 import Profile.Profile;
 
@@ -15,11 +16,30 @@ import Profile.Profile;
 public class EmployeeProfile extends Profile {
 
 
-
-    public EmployeeProfile(Person p) {
-
+    // @author vrmohanc
+    //begin of changes
+    Department department;
+    
+    
+    public EmployeeProfile(Person p, Department department) {
+        
         super(p); 
+        this.department = department;
+    }
+    // end of changes
+    
+    public EmployeeProfile(Person p) {
+        
+        super(p); 
+        
+    }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
     
     @Override

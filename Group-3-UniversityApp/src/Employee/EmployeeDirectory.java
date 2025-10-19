@@ -29,25 +29,35 @@ public class EmployeeDirectory {
 
     public EmployeeProfile newEmployeeProfile(Person p) {
 
-        EmployeeProfile sp = new EmployeeProfile(p);
-        employeelist.add(sp);
-        return sp;
+        EmployeeProfile ep = new EmployeeProfile(p);
+        employeelist.add(ep);
+        return ep;
     }
+    
+    //begin changes to add new method to create employee with department 
+    public EmployeeProfile newEmployeeProfile(Person p, Department d) {
+
+        EmployeeProfile ep = new EmployeeProfile(p,d);
+        employeelist.add(ep);
+        return ep;
+    }
+    
+    //end of changes
     
     //create new admissions director and add to employee list
     public EmployeeProfile newAdmissionsDirectorProfile(Person p) {
 
-        EmployeeProfile sp = new AdmissionsDirectorProfile(p);
-        employeelist.add(sp);
-        return sp;
+        EmployeeProfile ep = new AdmissionsDirectorProfile(p);
+        employeelist.add(ep);
+        return ep;
     }
 
     public EmployeeProfile findEmployee(String id) {
 
-        for (EmployeeProfile sp : employeelist) {
+        for (EmployeeProfile ep : employeelist) {
 
-            if (sp.isMatch(id)) {
-                return sp;
+            if (ep.isMatch(id)) {
+                return ep;
             }
         }
             return null; //not found after going through the whole list
