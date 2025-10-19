@@ -4,13 +4,13 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
-import Business.Business;
-import Business.Person.Person;
-import Business.Profiles.Profile;
-import Business.Profiles.StudentDirectory;
-import Business.Profiles.StudentProfile;
-import Business.UserAccounts.UserAccount;
-import Business.UserAccounts.UserAccountDirectory;
+import University.University;
+import Persona.Person;
+import Profile.Profile;
+import Student.StudentDirectory;
+import Student.StudentProfile;
+import UserAccounts.UserAccount;
+import UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.time.LocalDateTime;
@@ -25,20 +25,20 @@ import javax.swing.table.DefaultTableModel;
 public class UpdateUserAccountJPanel extends javax.swing.JPanel {
     
     JPanel CardSequencePanel;
-    Business business;
+    University university;
 
     UserAccount selecteduseraccount;
     
     /**
      * Creates new form UpdateUserAccountJPanel
      */
-    public UpdateUserAccountJPanel(JPanel jp, Business bz, UserAccount sua) {
+    public UpdateUserAccountJPanel(JPanel jp, University university, UserAccount sua) {
         initComponents();
         this.CardSequencePanel = jp;
-        this.business = bz;
+        this.university = university;
         this.selecteduseraccount = sua;
         
-        StudentDirectory stuDir = business.getStudentDirectory();
+        StudentDirectory stuDir = university.getStudentDirectory();
         
         //get acc info and display form
         txtUserName.setText(selecteduseraccount.getUserLoginName());
@@ -49,12 +49,6 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         txtFullName.setText(selecteduseraccount.getPersonId());
         txtFullName.setEnabled(false);
         
-        //get nUID for student accounts only
-            //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-                //for (StudentProfile stu: stuDir.getStudentlist()){
-                    //txtNUID.setText(stu.getnUID());
-                //}
-            //}
             
         //display nUID for found student
         if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {

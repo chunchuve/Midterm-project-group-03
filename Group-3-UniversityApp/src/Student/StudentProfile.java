@@ -57,6 +57,11 @@ public class StudentProfile extends Profile {
         return false;
     }
 
+    //is NUID match?
+    public boolean isNUIDMatch(String id) {
+        return nUID.equals(id);
+    }
+    
     public Transcript getTranscript() {
         return transcript;
     }

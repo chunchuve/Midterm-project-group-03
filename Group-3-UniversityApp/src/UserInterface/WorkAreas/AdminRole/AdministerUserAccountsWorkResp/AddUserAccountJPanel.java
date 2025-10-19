@@ -4,11 +4,11 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
-import Business.Business;
-import Business.Person.Person;
-import Business.Profiles.Profile;
-import Business.UserAccounts.UserAccount;
-import Business.UserAccounts.UserAccountDirectory;
+import University.University;
+import Persona.Person;
+import Profile.Profile;
+import UserAccounts.UserAccount;
+import UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.time.LocalDateTime;
@@ -22,15 +22,15 @@ import javax.swing.JPanel;
 public class AddUserAccountJPanel extends javax.swing.JPanel {
     
     JPanel CardSequencePanel;
-    Business business;
+    University university;
     UserAccountDirectory uad;
     /**
      * Creates new form AddUserAccountJPanel
      */
-    public AddUserAccountJPanel(JPanel jp, Business bz) {
+    public AddUserAccountJPanel(JPanel jp, University university) {
         initComponents();
         this.CardSequencePanel = jp;
-        this.business = bz;
+        this.university = university;
     }
 
     /**
@@ -175,21 +175,21 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         //add user account
-        Person p = business.getPersonDirectory().newPerson(txtFullName.getText());
+        Person p = university.getPersonDirectory().newPerson(txtFullName.getText());
         Profile pr = null;
         if (txtRole.getText().equalsIgnoreCase("Student")) {
             //add as new student
             
-            pr = business.getStudentDirectory().newStudentProfile(p);
+            pr = university.getStudentDirectory().newStudentProfile(p);
         } else if (txtRole.getText().equalsIgnoreCase("Employee")) {
             //add as new employee
-            pr = business.getEmployeeDirectory().newEmployeeProfile(p);
+            pr = university.getEmployeeDirectory().newEmployeeProfile(p);
         } else if (txtRole.getText().equalsIgnoreCase("Faculty")) {
             //add as new faculty
-            pr = business.getFacultydirectory().newFacultyProfile(p);
+            pr = university.getFacultydirectory().newFacultyProfile(p);
         }
         
-        UserAccount ua = business.getUserAccountDirectory().newUserAccount(pr, txtUserName.getText(), txtPswd.getText());
+        UserAccount ua = university.getUserAccountDirectory().newUserAccount(pr, txtUserName.getText(), txtPswd.getText());
         ua.setLastActivity(LocalDateTime.now());
         ua.setLastUpdated(LocalDateTime.now());
         ua.setStatus(txtStatus.getText());

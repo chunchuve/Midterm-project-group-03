@@ -5,11 +5,11 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
-import Business.Business;
-import Business.Profiles.StudentDirectory;
-import Business.Profiles.StudentProfile;
-import Business.UserAccounts.UserAccount;
-import Business.UserAccounts.UserAccountDirectory;
+import University.University;
+import Student.StudentDirectory;
+import Student.StudentProfile;
+import UserAccounts.UserAccount;
+import UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *h
- * @author kal bugrara
+ * @author vrmohanc
  */
 
 public class AdminUserAccount extends javax.swing.JPanel {
@@ -27,15 +27,15 @@ public class AdminUserAccount extends javax.swing.JPanel {
      * Creates new form ManageSuppliersJPanel
      */
     JPanel CardSequencePanel;
-    Business business;
+    University university;
     
     UserAccount selecteduseraccount;
 
-    public AdminUserAccount(UserAccount sua, JPanel jp, Business bz) {
+    public AdminUserAccount(UserAccount sua, JPanel jp, University university) {
 
         CardSequencePanel = jp;
         selecteduseraccount= sua;
-        business = bz;
+        this.university = university;
         initComponents();
         
         refreshTable();
@@ -122,7 +122,7 @@ public class AdminUserAccount extends javax.swing.JPanel {
         selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(row, 0);
         //System.out.println(selecteduseraccount);
         
-        UpdateUserAccountJPanel uuajp = new UpdateUserAccountJPanel(CardSequencePanel, business, selecteduseraccount);
+        UpdateUserAccountJPanel uuajp = new UpdateUserAccountJPanel(CardSequencePanel, university, selecteduseraccount);
         CardSequencePanel.add("UpdateUserAccountJPanel", uuajp);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);

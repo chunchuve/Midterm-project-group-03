@@ -43,7 +43,17 @@ public class StudentDirectory {
             return null; //not found after going through the whole list
          }
 
-    
+    //search for student by NUID
+    public StudentProfile findStudentByNUID(String nuid) {
+
+        for (StudentProfile sp : studentlist) {
+            //System.out.println(sp.getnUID());
+            if (sp.isNUIDMatch(nuid)) {
+                return sp;
+            }
+        }
+            return null; //not found after going through the whole list
+    }
 
     public ArrayList<StudentProfile> getStudentlist() {
         return studentlist;
