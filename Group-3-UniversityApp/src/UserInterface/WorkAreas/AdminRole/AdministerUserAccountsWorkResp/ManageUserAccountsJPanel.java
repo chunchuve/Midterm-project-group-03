@@ -5,11 +5,11 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
-import Business.Business;
-import Business.Profiles.StudentDirectory;
-import Business.Profiles.StudentProfile;
-import Business.UserAccounts.UserAccount;
-import Business.UserAccounts.UserAccountDirectory;
+import University.University;
+import Student.StudentDirectory;
+import Student.StudentProfile;
+import UserAccounts.UserAccount;
+import UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 
@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
 public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
@@ -27,14 +27,14 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
      * Creates new form User Acc form
      */
     JPanel CardSequencePanel;
-    Business business;
+    University university;
     UserAccount selecteduseraccount;
     UserAccountDirectory uad;
 
 
-    public ManageUserAccountsJPanel(Business bz, JPanel jp) {
+    public ManageUserAccountsJPanel(University uni, JPanel jp) {
         CardSequencePanel = jp;
-        this.business = bz;
+        this.university = uni;
         
         initComponents();
         refreshTable();
@@ -50,7 +50,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) UserAccountTable.getModel()).removeRow(i);
         }
 
-        UserAccountDirectory uad = business.getUserAccountDirectory();
+        UserAccountDirectory uad = university.getUserAccountDirectory();
         //StudentDirectory stuDir = business.getStudentDirectory();
         
         
@@ -206,7 +206,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             return;
         }
         selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(row, 0);
-        AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel, business);
+        AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel, university);
         CardSequencePanel.add(mppd);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
@@ -232,7 +232,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         
         //add new supplier
         //int i=1;
-        AddUserAccountJPanel as = new AddUserAccountJPanel(CardSequencePanel, business);
+        AddUserAccountJPanel as = new AddUserAccountJPanel(CardSequencePanel, university);
         CardSequencePanel.add("AddUserAccount", as);
         CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
@@ -251,7 +251,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             
             if (dialogResult == JOptionPane.YES_OPTION) {
                 selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(row, 0);
-                business.getUserAccountDirectory().removeUserAccount(selecteduseraccount);
+                university.getUserAccountDirectory().removeUserAccount(selecteduseraccount);
                
                 refreshTable();
             }
@@ -284,7 +284,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) UserAccountTable.getModel()).removeRow(i);
         }
 
-        UserAccountDirectory uad = business.getUserAccountDirectory();
+        UserAccountDirectory uad = university.getUserAccountDirectory();
         //StudentDirectory stuDir = business.getStudentDirectory();
     
             Object[] row = new Object[6];
@@ -304,9 +304,9 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     
     private UserAccount searchStudentbyNUID(String searchID) {
         
-        StudentProfile stu = business.getStudentDirectory().findStudentByNUID(searchID);
+        StudentProfile stu = university.getStudentDirectory().findStudentByNUID(searchID);
         
-        for (UserAccount ua: business.getUserAccountDirectory().getUserAccountList()) {
+        for (UserAccount ua: university.getUserAccountDirectory().getUserAccountList()) {
             if (ua.isProfileMatch(stu)) {
                 return ua;
             }

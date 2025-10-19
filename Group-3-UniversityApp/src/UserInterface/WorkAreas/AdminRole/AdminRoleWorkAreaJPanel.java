@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author kal
+ * @author vrmohanc
  */
 public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
@@ -34,18 +34,18 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form UnitRiskWorkArea
      */
 
-    public AdminRoleWorkAreaJPanel(Business b, JPanel clp) {
+    public AdminRoleWorkAreaJPanel(University u, JPanel clp) {
 
-        business = b;
+        university = u;
         this.CardSequencePanel = clp;
         initComponents();
 
     }
     
     //constructor to display my profile
-    public AdminRoleWorkAreaJPanel(Business b, JPanel clp, UserAccount ua) {
+    public AdminRoleWorkAreaJPanel(University u, JPanel clp, UserAccount ua) {
 
-        business = b;
+        university = u;
         this.CardSequencePanel = clp;
         useraccount = ua;
         initComponents();
@@ -179,7 +179,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void btnAdminUserAccIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminUserAccIdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
 
-        ManageUserAccountsJPanel aos = new ManageUserAccountsJPanel(business, CardSequencePanel);
+        ManageUserAccountsJPanel aos = new ManageUserAccountsJPanel(university, CardSequencePanel);
 
         CardSequencePanel.add("ManageVulns", aos);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -189,7 +189,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
 
-        ManagePersonsJPanel aos = new ManagePersonsJPanel(business, CardSequencePanel);
+        ManagePersonsJPanel aos = new ManagePersonsJPanel(university, CardSequencePanel);
 
         CardSequencePanel.add("Manage Persons", aos);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -205,7 +205,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         // to do
         //open admin profile form
         AdminMyProfileJPanel mp;
-        mp = new AdminMyProfileJPanel(CardSequencePanel, business, useraccount);
+        mp = new AdminMyProfileJPanel(CardSequencePanel, university, useraccount);
         
         
         CardSequencePanel.add("AdminMyProfileJPanel", mp);

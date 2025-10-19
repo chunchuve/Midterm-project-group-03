@@ -5,14 +5,14 @@
  */
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
-import Business.Business;
+import University.University;
 
 
 import javax.swing.JPanel;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
 public class ManagePersonsJPanel extends javax.swing.JPanel {
 
@@ -20,12 +20,12 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
      * Creates new form ManageSuppliersJPanel
      */
     JPanel CardSequencePanel;
-    Business business;
+    University university;
 
 
-    public ManagePersonsJPanel(Business bz, JPanel jp) {
+    public ManagePersonsJPanel(University university, JPanel jp) {
         CardSequencePanel = jp;
-        this.business = bz;
+        this.university = university;
         initComponents();
 
     }
@@ -87,7 +87,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
         
-        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, CardSequencePanel);
+        AdministerPersonJPanel mppd = new AdministerPersonJPanel(university, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 

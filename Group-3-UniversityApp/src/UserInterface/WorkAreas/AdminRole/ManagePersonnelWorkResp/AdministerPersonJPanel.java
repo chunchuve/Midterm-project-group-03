@@ -5,13 +5,13 @@
  */
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
-import Business.Business;
+import University.University;
 
 import javax.swing.JPanel;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
 public class AdministerPersonJPanel extends javax.swing.JPanel {
 
@@ -20,12 +20,12 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
      */
     JPanel CardSequencePanel;
 
-    Business business;
+    University university;
 
-    public AdministerPersonJPanel(Business bz, JPanel jp) {
+    public AdministerPersonJPanel(University university, JPanel jp) {
 
         CardSequencePanel = jp;
-        this.business = bz;
+        this.university = university;
         initComponents();
 
 

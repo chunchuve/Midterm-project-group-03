@@ -4,8 +4,9 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
-import Business.Business;
-import Business.UserAccounts.UserAccount;
+import University.University;
+import UserAccounts.UserAccount;
+
 import javax.swing.JPanel;
 
 /**
@@ -19,12 +20,13 @@ public class AdminMyProfileJPanel extends javax.swing.JPanel {
      * Creates new form AdminMyProfileJPanel
      */
     JPanel CardSequencePanel;
-    Business business;
+    University university;
     UserAccount useraccount;
-    public AdminMyProfileJPanel(JPanel CardSequencePanel, Business business, UserAccount useraccount) {
+    
+    public AdminMyProfileJPanel(JPanel CardSequencePanel, University university, UserAccount useraccount) {
         
         this.CardSequencePanel = CardSequencePanel;
-        this.business = business;
+        this.university = university;
         this.useraccount = useraccount;
         initComponents();
         
