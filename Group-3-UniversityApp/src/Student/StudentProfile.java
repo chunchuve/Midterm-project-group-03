@@ -23,9 +23,11 @@ public class StudentProfile extends Profile {
     Transcript transcript;
     EmploymentHistroy employmenthistory;
     private String nUID;
-    
+    private String termAdmittedFirst; // term admitted in
+    private String instructionMode; // online or on-campus
+    private String programEnrolled; //example MSIS
     //begin of changes to link dept to student
-    Department department;
+    private Department department;
     //end of changes
 
     public StudentProfile(Person p) {
@@ -63,6 +65,38 @@ public class StudentProfile extends Profile {
 
     public void setnUID(String nUID) {
         this.nUID = nUID;
+    }
+
+    public EmploymentHistroy getEmploymenthistory() {
+        return employmenthistory;
+    }
+
+    public void setEmploymenthistory(EmploymentHistroy employmenthistory) {
+        this.employmenthistory = employmenthistory;
+    }
+
+    public String getTermAdmittedFirst() {
+        return termAdmittedFirst;
+    }
+
+    public void setTermAdmittedFirst(String termAdmittedFirst) {
+        this.termAdmittedFirst = termAdmittedFirst;
+    }
+
+    public String getInstructionMode() {
+        return instructionMode;
+    }
+
+    public void setInstructionMode(String instructionMode) {
+        this.instructionMode = instructionMode;
+    }
+
+    public String getProgramEnrolled() {
+        return programEnrolled;
+    }
+
+    public void setProgramEnrolled(String programEnrolled) {
+        this.programEnrolled = programEnrolled;
     }
 
 
