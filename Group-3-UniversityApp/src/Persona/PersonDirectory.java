@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class PersonDirectory {
       
-      //Department department;  
+        
       ArrayList<Person> personlist ;
     
       public PersonDirectory (){
-       //department = d;
+       
        personlist = new ArrayList();
 
     }

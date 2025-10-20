@@ -13,11 +13,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author kal bugrara
+ * @author kal bugrara - changes by @vrmohanc
  */
 public class FacultyProfile extends Profile {
-
-    Department department;
+    
+    private String title; //professor, associate professor, lecturer etc
+    private String researchArea;
+    
+    private Department department;
     ArrayList <FacultyAssignment> facultyassignments; 
     
     public FacultyProfile(Person p) {
@@ -85,6 +88,22 @@ public class FacultyProfile extends Profile {
 
     public void setFacultyassignments(ArrayList<FacultyAssignment> facultyassignments) {
         this.facultyassignments = facultyassignments;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getResearchArea() {
+        return researchArea;
+    }
+
+    public void setResearchArea(String researchArea) {
+        this.researchArea = researchArea;
     }
     
     
