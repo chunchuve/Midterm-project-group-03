@@ -11,7 +11,7 @@ import CourseSchedule.CourseLoad;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.CourseSchedule;
 import Degree.Degree;
-import Employee.AdmissionsDirectorProfile;
+
 import Employer.EmployerDirectory;
 import Faculty.FacultyDirectory;
 import Persona.PersonDirectory;
@@ -33,7 +33,7 @@ public class Department {
     FacultyDirectory facultydirectory;
     EmployerDirectory employerdirectory;
     UserAccountDirectory useraccountdirectory;
-    //AdmissionsDirectorProfile admissionsDirector;
+    
     Degree degree;
 
     HashMap<String, CourseSchedule> mastercoursecatalog;
@@ -115,6 +115,32 @@ public void addElectiveCourse(Course c){
         CourseOffer co = cs.getCourseOfferByNumber(cn);
 
         co.assignEmptySeat(cl);
-
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CourseCatalog getCoursecatalog() {
+        return coursecatalog;
+    }
+
+    public void setCoursecatalog(CourseCatalog coursecatalog) {
+        this.coursecatalog = coursecatalog;
+    }
+
+    public Degree getDegree() {
+        return degree;
+    }
+
+    public void setDegree(Degree degree) {
+        this.degree = degree;
+    }
+    
+    
+    
 }
