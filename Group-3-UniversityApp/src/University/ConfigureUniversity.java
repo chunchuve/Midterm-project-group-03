@@ -7,6 +7,7 @@
 package University;
 
 import College.College;
+import Department.Department;
 import Persona.Person;
 import Persona.PersonDirectory;
 import Employee.EmployeeDirectory;
@@ -36,8 +37,12 @@ class ConfigureUniversity {
         FacultyDirectory facultyDirectory = new FacultyDirectory();
         
         //link directories to university instance and pass it to app/login page
-        University university = new University("Information Systems", college, personDirectory,
+        University university = new University("NEW University", college, personDirectory,
             employeeDirectory, userAccountDirectory, studentDirectory, facultyDirectory);
+        
+        //create departments
+        Department department1 = university.getCollege().newDepartment("Computer Science Engg.");
+        Department department2 = university.getCollege().newDepartment("Information Technology");
         
 // Create Persons
         
@@ -59,7 +64,7 @@ class ConfigureUniversity {
         
 // create faculty      
         FacultyProfile facultyprofile0 = facultyDirectory.newFacultyProfile(person002); //Gina Montana as faculty username gina
-        facultyprofile0.setDepartment(university.getCollege().newDepartment("Computer Science Engg."));
+        facultyprofile0.setDepartment(department1);
         facultyprofile0.setResearchArea("Artificial Intelligence");
         
         // create students       

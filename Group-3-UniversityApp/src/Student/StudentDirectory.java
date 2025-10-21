@@ -41,6 +41,13 @@ public class StudentDirectory {
         return sp;
     }
     
+    public StudentProfile newStudentProfile(Person p, Department d) {
+
+        StudentProfile sp = new StudentProfile(p,d);
+        studentlist.add(sp);
+        return sp;
+    }
+    
     public StudentProfile newStudentProfile(Person p, String nuid, Department d) {
 
         StudentProfile sp = new StudentProfile(p,nuid, d);

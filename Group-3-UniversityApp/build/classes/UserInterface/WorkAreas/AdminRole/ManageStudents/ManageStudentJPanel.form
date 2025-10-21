@@ -38,7 +38,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Next">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View/Next &gt;&gt;"/>
+        <Property name="text" type="java.lang.String" value="View/Edit &gt;&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NextActionPerformed"/>
@@ -146,19 +146,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnCreateStudent">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Create Student"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateStudentActionPerformed"/>
-      </Events>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="170" y="300" width="-1" height="-1"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JButton" name="btnRemoveStudent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove Student"/>
