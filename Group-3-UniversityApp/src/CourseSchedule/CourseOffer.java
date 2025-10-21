@@ -19,6 +19,8 @@ public class CourseOffer {
     Course course;
     ArrayList<Seat> seatlist;
     FacultyAssignment facultyassignment;
+    String building;
+    String room;
 
     public CourseOffer(Course c) {
         course = c;
@@ -35,7 +37,7 @@ public class CourseOffer {
     }
 
     public String getCourseNumber() {
-        return course.getCOurseNumber();
+        return course.getCourseNumber();
     }
 
     public void generatSeats(int n) {
