@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author kal bugrara
+ * @author kal bugrara - changes by vrmohanc
  */
 public class PersonDirectory {
       
@@ -29,7 +29,21 @@ public class PersonDirectory {
         personlist.add(p);
         return p;
     }
+    
+    
+    //overloaded method for new person
+    public Person newPerson(String id, String firstName, String lastName, String dateOfBirth) {
 
+        Person p = new Person(id, firstName, lastName, dateOfBirth);
+        personlist.add(p);
+        return p;
+    }
+    
+    //remove person
+    public void removePerson(Person person) {
+        personlist.remove(person);
+    }
+    
     public Person findPerson(String id) {
 
         for (Person p : personlist) {

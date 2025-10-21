@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class StudentProfile extends Profile {
 
-    //Person person;
+    
     Transcript transcript;
     EmploymentHistroy employmenthistory;
     private String nUID;
@@ -145,4 +145,10 @@ public class StudentProfile extends Profile {
     public String getRole() {
         return "Student";
     }
+    
+    @Override
+    public String toString() {
+        return super.getPerson().getPersonId();
+    }  
+    
 }

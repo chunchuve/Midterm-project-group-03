@@ -16,19 +16,20 @@ public class Person {
     private String lastName;
     private String dateOfBirth; //date of birth
     private Address address;
-    
     private String id;
+    
     //constructors
     public Person (String id){
         
         this.id = id;
     }
     
-    public Person (String id, String firstName, String lastName, String dateOfBirth, Address address){
+    //overloaded constructor for person
+    public Person (String id, String firstName, String lastName, String dateOfBirth){
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        this.address = address;
+        this.address = new Address(); //address is created per person
         this.id = id;
     }
     
@@ -81,5 +82,8 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
     }
     
-        
+    @Override
+    public String toString() {
+        return getPersonId();
+    }    
 }
