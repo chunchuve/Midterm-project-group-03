@@ -53,8 +53,9 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         for (i = rc - 1; i >= 0; i--) {
             ((DefaultTableModel) PersonTable.getModel()).removeRow(i);
         }
-
-        PersonDirectory pd = university.getPersonDirectory();
+        
+        pd = university.getPersonDirectory();
+        //PersonDirectory pd = university.getPersonDirectory();
         //StudentDirectory stuDir = business.getStudentDirectory();
         
         
@@ -111,7 +112,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         add(Back);
         Back.setBounds(30, 300, 80, 23);
 
-        Next.setText("View/Next >>");
+        Next.setText("View/Edit >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NextActionPerformed(evt);
@@ -268,18 +269,19 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         
-        //search student accounts by NUID
+        
+        //search person by person ID
         try {
-            UserAccount stu = searchStudentbyNUID(txtSearchbyID.getText());
+            Person person = pd.findPerson(txtSearchbyID.getText()); 
             //display search results
-            refreshSearchResults(stu);
+            refreshSearchResults(person);
         } catch (NullPointerException e){
-            JOptionPane.showMessageDialog(this,"student with NUID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"person with person ID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
     
-    private void refreshSearchResults(UserAccount ua) {
+    private void refreshSearchResults(Person person) {
         //clear table
         int rc = PersonTable.getRowCount();
         int i;
@@ -287,20 +289,18 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) PersonTable.getModel()).removeRow(i);
         }
 
-        UserAccountDirectory uad = university.getUserAccountDirectory();
-        //StudentDirectory stuDir = business.getStudentDirectory();
-    
-            Object[] row = new Object[6];
-            row[0] = ua;
-            row[1] = ua.getStatus(); //Status
-            row[2] = ua.getLastActivity(); //Last activity
-            row[3] = ua.getLastUpdated();          //Last updated
-            row[4] = ua.getRole();                           //role
+        
+            Object[] row = new Object[4];
+            row[0] = person;
+            row[1] = person.getFirstName();
+            row[2] = person.getLastName();
+            row[3] = person.getDateOfBirth();
+            
             //display nUID for found student
-            if (ua.getRole().equalsIgnoreCase("Student")) {
-                StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-                row[5] = stu.getnUID();
-            }                           
+            //if (ua.getRole().equalsIgnoreCase("Student")) {
+            //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
+            //    row[5] = stu.getnUID();
+            //}                           
             ((DefaultTableModel) PersonTable.getModel()).addRow(row);
           
     }

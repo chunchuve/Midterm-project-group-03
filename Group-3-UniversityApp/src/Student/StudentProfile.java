@@ -49,6 +49,12 @@ public class StudentProfile extends Profile {
         this.nUID = nUID;
         this.department = department;
     }
+    
+    public StudentProfile(Person p, Department department) {
+        
+        super(p); 
+        this.department = department;
+    }
     //end
 
     public Department getDepartment() {

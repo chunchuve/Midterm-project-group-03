@@ -38,7 +38,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Next">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View/Next &gt;&gt;"/>
+        <Property name="text" type="java.lang.String" value="View/Edit &gt;&gt;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NextActionPerformed"/>

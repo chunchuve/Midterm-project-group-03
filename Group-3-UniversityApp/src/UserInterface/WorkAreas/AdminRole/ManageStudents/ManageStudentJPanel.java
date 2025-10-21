@@ -56,7 +56,7 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) StudentTable.getModel()).removeRow(i);
         }
 
-        StudentDirectory sd = university.getStudentdirectory();
+        sd = university.getStudentdirectory();
         
         
         for (StudentProfile sa : sd.getStudentlist()) {
@@ -97,7 +97,6 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         StudentTable = new javax.swing.JTable();
-        btnCreateStudent = new javax.swing.JButton();
         btnRemoveStudent = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtSearchbyID = new javax.swing.JTextField();
@@ -115,7 +114,7 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
         add(Back);
         Back.setBounds(30, 300, 80, 23);
 
-        Next.setText("View/Next >>");
+        Next.setText("View/Edit >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NextActionPerformed(evt);
@@ -162,15 +161,6 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(30, 110, 570, 130);
-
-        btnCreateStudent.setText("Create Student");
-        btnCreateStudent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateStudentActionPerformed(evt);
-            }
-        });
-        add(btnCreateStudent);
-        btnCreateStudent.setBounds(170, 300, 117, 23);
 
         btnRemoveStudent.setText("Remove Student");
         btnRemoveStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -235,17 +225,6 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
     
     }
     
-    private void btnCreateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateStudentActionPerformed
-        // TODO add your handling code here:
-        
-        //create new student form
-        AddStudentJPanel af = new AddStudentJPanel(CardSequencePanel, university);
-        CardSequencePanel.add("Add Student", af);
-        CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
-        layout.next(CardSequencePanel);
-        
-    }//GEN-LAST:event_btnCreateStudentActionPerformed
-
     private void btnRemoveStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveStudentActionPerformed
         // TODO add your handling code here:
         //remove selected User account
@@ -272,18 +251,18 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         
-        //search student accounts by NUID
+        //search student by person ID
         try {
-            UserAccount stu = searchStudentbyNUID(txtSearchbyID.getText());
+            StudentProfile student = sd.findStudent(txtSearchbyID.getText());
             //display search results
-            refreshSearchResults(stu);
+            refreshSearchResults(student);
         } catch (NullPointerException e){
-            JOptionPane.showMessageDialog(this,"student with NUID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"student with person ID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
     
-    private void refreshSearchResults(UserAccount ua) {
+    private void refreshSearchResults(StudentProfile student) {
         //clear table
         int rc = StudentTable.getRowCount();
         int i;
@@ -291,20 +270,21 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) StudentTable.getModel()).removeRow(i);
         }
 
-        UserAccountDirectory uad = university.getUserAccountDirectory();
-        //StudentDirectory stuDir = business.getStudentDirectory();
+        
     
-            Object[] row = new Object[6];
-            row[0] = ua;
-            row[1] = ua.getStatus(); //Status
-            row[2] = ua.getLastActivity(); //Last activity
-            row[3] = ua.getLastUpdated();          //Last updated
-            row[4] = ua.getRole();                           //role
+            Object[] row = new Object[7];
+            row[0] = student;
+            row[1] = student.getPerson().getFirstName();
+            row[2] = student.getPerson().getLastName();
+            row[3] = student.getDepartment().getName();
+            row[4] = student.getProgramEnrolled();
+            row[5] = student.getInstructionMode();
+            row[6] = student.getnUID();
             //display nUID for found student
-            if (ua.getRole().equalsIgnoreCase("Student")) {
-                StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-                row[5] = stu.getnUID();
-            }                           
+            //if (ua.getRole().equalsIgnoreCase("Student")) {
+            //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
+            //    row[5] = stu.getnUID();
+            //}                           
             ((DefaultTableModel) StudentTable.getModel()).addRow(row);
           
     }
@@ -327,7 +307,6 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton Back;
     private javax.swing.JButton Next;
     private javax.swing.JTable StudentTable;
-    private javax.swing.JButton btnCreateStudent;
     private javax.swing.JButton btnRemoveStudent;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;

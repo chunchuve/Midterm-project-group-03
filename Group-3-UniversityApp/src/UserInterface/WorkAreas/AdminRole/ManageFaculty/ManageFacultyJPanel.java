@@ -55,7 +55,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) FacultyTable.getModel()).removeRow(i);
         }
 
-        FacultyDirectory fd = university.getFacultydirectory();
+        fd = university.getFacultydirectory();
         
         
         for (FacultyProfile fa : fd.getTeacherlist()) {
@@ -64,7 +64,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             row[0] = fa;
             row[1] = fa.getPerson().getFirstName();
             row[2] = fa.getPerson().getLastName();
-            row[3] = fa.getDepartment();
+            row[3] = fa.getDepartment().getName();
             row[4] = fa.getRole();
             row[5] = fa.getTitle();
             
@@ -95,7 +95,6 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         FacultyTable = new javax.swing.JTable();
-        btnCreateFaculty = new javax.swing.JButton();
         btnRemoveFaculty = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtSearchbyID = new javax.swing.JTextField();
@@ -113,7 +112,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         add(Back);
         Back.setBounds(30, 300, 80, 23);
 
-        Next.setText("View/Next >>");
+        Next.setText("View/Edit >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NextActionPerformed(evt);
@@ -160,15 +159,6 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(30, 110, 570, 130);
-
-        btnCreateFaculty.setText("Create Faculty");
-        btnCreateFaculty.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateFacultyActionPerformed(evt);
-            }
-        });
-        add(btnCreateFaculty);
-        btnCreateFaculty.setBounds(170, 300, 114, 23);
 
         btnRemoveFaculty.setText("Remove Faculty");
         btnRemoveFaculty.addActionListener(new java.awt.event.ActionListener() {
@@ -233,17 +223,6 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     
     }
     
-    private void btnCreateFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateFacultyActionPerformed
-        // TODO add your handling code here:
-        
-        //create new faculty form
-        AddFacultyJPanel af = new AddFacultyJPanel(CardSequencePanel, university);
-        CardSequencePanel.add("AddFaculty", af);
-        CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
-        layout.next(CardSequencePanel);
-        
-    }//GEN-LAST:event_btnCreateFacultyActionPerformed
-
     private void btnRemoveFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveFacultyActionPerformed
         // TODO add your handling code here:
         //remove selected User account
@@ -270,18 +249,18 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         
-        //search student accounts by NUID
+        //search faculty by person ID
         try {
-            UserAccount stu = searchStudentbyNUID(txtSearchbyID.getText());
+            FacultyProfile faculty = fd.findTeachingFaculty(txtSearchbyID.getText());
             //display search results
-            refreshSearchResults(stu);
+            refreshSearchResults(faculty);
         } catch (NullPointerException e){
-            JOptionPane.showMessageDialog(this,"student with NUID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"faculty with person ID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
     
-    private void refreshSearchResults(UserAccount ua) {
+    private void refreshSearchResults(FacultyProfile faculty) {
         //clear table
         int rc = FacultyTable.getRowCount();
         int i;
@@ -289,20 +268,19 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) FacultyTable.getModel()).removeRow(i);
         }
 
-        UserAccountDirectory uad = university.getUserAccountDirectory();
-        //StudentDirectory stuDir = business.getStudentDirectory();
     
             Object[] row = new Object[6];
-            row[0] = ua;
-            row[1] = ua.getStatus(); //Status
-            row[2] = ua.getLastActivity(); //Last activity
-            row[3] = ua.getLastUpdated();          //Last updated
-            row[4] = ua.getRole();                           //role
+            row[0] = faculty;
+            row[1] = faculty.getPerson().getFirstName();
+            row[2] = faculty.getPerson().getLastName();
+            row[3] = faculty.getDepartment().getName();          
+            row[4] = faculty.getRole();
+            row[5] = faculty.getTitle();
             //display nUID for found student
-            if (ua.getRole().equalsIgnoreCase("Student")) {
-                StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-                row[5] = stu.getnUID();
-            }                           
+            //if (ua.getRole().equalsIgnoreCase("Student")) {
+            //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
+             //   row[5] = stu.getnUID();
+            //}                           
             ((DefaultTableModel) FacultyTable.getModel()).addRow(row);
           
     }
@@ -325,7 +303,6 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     private javax.swing.JButton Back;
     private javax.swing.JTable FacultyTable;
     private javax.swing.JButton Next;
-    private javax.swing.JButton btnCreateFaculty;
     private javax.swing.JButton btnRemoveFaculty;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;

@@ -141,6 +141,10 @@ public void addElectiveCourse(Course c){
         this.degree = degree;
     }
     
+    @Override
+    public String toString() {
+        return getName();
+    }
     
     
 }
