@@ -5,6 +5,7 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Department.Department;
+import Faculty.FacultyProfile;
 import University.University;
 import UserInterface.WorkAreas.FacultyRole.ManageCoursesResp.ManageCourseJPanel;
 import javax.swing.JPanel;
@@ -18,14 +19,16 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     University university;
     Department department;
+    FacultyProfile facultyProfile;
     
     /**
      * Creates new form FacultyRoleWorkAreaJPanel
      */
-    public FacultyWorkAreaJPanel(University u, JPanel clp, Department d) {
+    public FacultyWorkAreaJPanel(University u, JPanel clp, FacultyProfile fp) {
         
-        university = u;
-        this.department = d;
+        this.university = u;
+        this.facultyProfile = fp;
+        this.department = fp.getDepartment();
         this.CardSequencePanel = clp;
         initComponents();
     }
@@ -139,9 +142,9 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
 
-        ManageCourseJPanel aos = new ManageCourseJPanel(department, CardSequencePanel);
+        ManageCourseJPanel manageCourseJPanel = new ManageCourseJPanel(facultyProfile, CardSequencePanel);
 
-        CardSequencePanel.add("ManageCourse", aos);
+        CardSequencePanel.add("ManageCourse",manageCourseJPanel);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_jButton4IdentifyResourceAssetsActionPerformed
 

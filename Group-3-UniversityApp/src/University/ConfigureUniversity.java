@@ -41,6 +41,10 @@ class ConfigureUniversity {
         
     //Create department
         Department department001 = college.newDepartment("Computer Science");
+        department001.newCourse("INFO 5100", "Application Engineering and Development", 4); //create new course
+        department001.newCourse("EECE 5641", "Introduction to Software Security", 4); //create new course
+        
+        
         Department department002 = college.newDepartment("Bioengineering");
         Department department003 = college.newDepartment("Civil & Environmental Engineering");
 // Create Persons

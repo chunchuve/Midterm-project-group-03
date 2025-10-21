@@ -206,7 +206,8 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             //update last activity at the user login
             user.setLastActivity(LocalDateTime.now());
             FacultyProfile fp = (FacultyProfile) profile;
-            facultyworkarea = new FacultyWorkAreaJPanel(university, CardSequencePanel, department);
+            Department facultydept = fp.getDepartment(); //retrieve department from faculty profile during login
+            facultyworkarea = new FacultyWorkAreaJPanel(university, CardSequencePanel, fp);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);

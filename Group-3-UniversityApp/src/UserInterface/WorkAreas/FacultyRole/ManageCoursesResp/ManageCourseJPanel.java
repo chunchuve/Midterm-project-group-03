@@ -9,8 +9,10 @@ import CourseCatalog.CourseCatalog;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.CourseSchedule;
 import Department.Department;
+import Faculty.FacultyProfile;
 import University.University;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +25,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     University university;
     Department department;
+    FacultyProfile facultyProfile;
     Course course;
     CourseCatalog courseCatalog;
     CourseOffer courseOffer;
@@ -31,9 +34,10 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     /**
      * Creates new form FacultyManageCourseJPanel
      */
-    public ManageCourseJPanel(Department d, JPanel clp) {
+    public ManageCourseJPanel(FacultyProfile fp, JPanel clp) {
         CardSequencePanel = clp;
-        this.department = d;
+        this.facultyProfile = fp;
+        this.department = fp.getDepartment();
         initComponents();
         refreshCourseTable();
     }
@@ -260,6 +264,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         }
         
         CourseCatalog cc = department.getCourseCatalog();
+        List<Course> courses = cc.getCourseList();
         
         for (Course c : cc.getCourseList()) {
         Object[] row = new Object[4];
@@ -267,6 +272,8 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         row[1] = c.getCourseName();
         row[2] = c.getCredits();
         row[3] = c.getCoursePrice();
+        
+        ((DefaultTableModel) CourseTable.getModel()).addRow(row);
     }
         
     }
