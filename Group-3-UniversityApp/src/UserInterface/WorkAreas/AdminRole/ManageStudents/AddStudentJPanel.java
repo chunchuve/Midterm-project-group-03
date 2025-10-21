@@ -211,7 +211,7 @@ public class AddStudentJPanel extends javax.swing.JPanel {
         CardSequencePanel.remove(this);
         Component[] componentArray = CardSequencePanel.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManagePersonsJPanel mua = (ManagePersonsJPanel) component;
+        ManageStudentJPanel mua = (ManageStudentJPanel) component;
         mua.refreshTable();
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
