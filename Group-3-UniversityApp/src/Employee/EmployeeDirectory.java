@@ -8,6 +8,7 @@ package Employee;
 import Department.Department;
 //import University.University;
 import Persona.Person;
+import Student.StudentProfile;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,10 @@ public class EmployeeDirectory {
         EmployeeProfile ep = new EmployeeProfile(p,d);
         employeelist.add(ep);
         return ep;
+    }
+    //remove employee
+    public void removeEmployeeProfile(EmployeeProfile employee) {
+        employeelist.remove(employee);
     }
     
     //end of changes

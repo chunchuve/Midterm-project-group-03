@@ -4,6 +4,7 @@
  */
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
+import Department.Department;
 import Persona.Address;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.*;
 import University.University;
@@ -11,11 +12,14 @@ import Persona.Person;
 import Profile.Profile;
 import Student.StudentDirectory;
 import Student.StudentProfile;
-import UserAccounts.UserAccount;
-import UserAccounts.UserAccountDirectory;
+import Employee.EmployeeDirectory;
+import Employee.EmployeeProfile;
+import Faculty.FacultyProfile;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,8 +33,8 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     University university;
 
-    //UserAccount selecteduseraccount;
     Person selectedPerson;
+    Profile selectedProfile;
     /**
      * Creates new form UpdateUserAccountJPanel
      */
@@ -40,7 +44,42 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         this.university = university;
         this.selectedPerson = person;
         
-        //StudentDirectory stuDir = university.getStudentDirectory();
+        //populate role combo box
+        populateRoleCombo();
+        
+        //populate department combo box
+        populateDepartmentCombo();
+        
+        String personId = selectedPerson.getPersonId();
+        
+        try {
+            StudentProfile student = university.getStudentDirectory().findStudent(personId);
+            this.selectedProfile = student;
+            System.out.println(student.getDepartment().getName());
+            comboDepartment.setSelectedItem(student.getDepartment().getName());
+            comboRole.setSelectedItem(student.getRole());
+        } catch(Exception e) {
+            try {
+                EmployeeProfile employee = university.getEmployeeDirectory().findEmployee(personId);
+                this.selectedProfile = employee;
+                System.out.println(employee.getDepartment().getName());
+                comboDepartment.setSelectedItem(employee.getDepartment().getName());
+                comboRole.setSelectedItem(employee.getRole());
+            } catch(Exception ex) {
+                try {
+                    FacultyProfile faculty = university.getFacultydirectory().findTeachingFaculty(personId);
+                    this.selectedProfile = faculty;
+                    System.out.println(faculty.getDepartment().getName());
+                    comboDepartment.setSelectedItem(faculty.getDepartment().getName());
+                    comboRole.setSelectedItem(faculty.getRole());
+                } catch(Exception ey) {
+                    JOptionPane.showMessageDialog(this, "Person role is not defined yet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        }
+        
+        
         
         //get person info and display form
         txtFirstName.setText(selectedPerson.getFirstName());
@@ -49,22 +88,9 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         txtLine1.setText(selectedPerson.getAddress().getLine1());
         txtLine2.setText(selectedPerson.getAddress().getLine2());
         txtCity.setText(selectedPerson.getAddress().getCity());
-        //txtRole.setEnabled(false);
-        //txtFullName.setText(selecteduseraccount.getPersonId());
-        //txtFullName.setEnabled(false);
-        
-            
-        //display nUID for found student
-        //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-        //    StudentProfile stu = (StudentProfile) selecteduseraccount.getAssociatedPersonProfile();
-        //    txtNUID.setText(stu.getnUID());
-        //}
-        
-        //disable edit for NUID for not students
-        //if (!selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-                
-        //        txtNUID.setEnabled(false);       
-        //}
+        txtState.setText(selectedPerson.getAddress().getState());
+        txtZip.setText(selectedPerson.getAddress().getZipCode());
+       
         
     }
 
@@ -92,6 +118,14 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         txtLine2 = new javax.swing.JTextField();
         lblCity = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
+        lblCity1 = new javax.swing.JLabel();
+        txtState = new javax.swing.JTextField();
+        lblCity2 = new javax.swing.JLabel();
+        txtZip = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        comboRole = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        comboDepartment = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -102,6 +136,7 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblTitle.setText("Update Person");
 
         lblFirstName.setText("First Name");
@@ -123,50 +158,79 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
 
         lblCity.setText("City");
 
+        lblCity1.setText("State");
+
+        lblCity2.setText("Zip");
+
+        jLabel1.setText("Role");
+
+        comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText("Department");
+
+        comboDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(399, 399, 399))
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(backButton)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(backButton)
-                        .addGap(22, 22, 22)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDateOfBirth)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblLine1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLine2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtLine2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblCity1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblCity, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel1)
+                                .addGap(23, 23, 23)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(lblCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(46, 46, 46)
+                                .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblDateOfBirth)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblLine1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblLine2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtLine2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblCity, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblLastName)
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(284, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(60, 60, 60)
-                    .addComponent(lblFirstName)
-                    .addContainerGap(583, Short.MAX_VALUE)))
+                                .addComponent(lblFirstName))
+                            .addGap(30, 30, 30)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblTitle))
+                .addGap(0, 94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +240,9 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
                     .addComponent(backButton)
                     .addComponent(lblTitle))
                 .addGap(33, 33, 33)
-                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFirstName))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,14 +263,21 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCity))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCity1)
+                    .addComponent(lblCity2)
+                    .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnSave)
-                .addGap(85, 85, 85))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(73, 73, 73)
-                    .addComponent(lblFirstName)
-                    .addContainerGap(428, Short.MAX_VALUE)))
+                .addGap(54, 54, 54))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -231,12 +304,27 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         selectedPerson.setFirstName(txtFirstName.getText());
         selectedPerson.setLastName(txtLastName.getText());
         selectedPerson.setDateOfBirth(txtDateOfBirth.getText());
-        Address address = new Address();
+        
+        Address address = selectedPerson.getAddress();
         address.setLine1(txtLine1.getText());
         address.setLine2(txtLine2.getText());
         address.setCity(txtCity.getText());
+        address.setState(txtState.getText());
+        address.setZipCode(txtZip.getText());
         selectedPerson.setAddress(address);
-      
+        
+        
+        //get selected department and role to update
+        if (selectedProfile instanceof StudentProfile) {
+            university.getStudentDirectory().removeStudentProfile((StudentProfile)selectedProfile);
+            university.getStudentDirectory().newStudentProfile(selectedPerson, (Department)comboDepartment.getSelectedItem());
+        } else if (selectedProfile instanceof EmployeeProfile) {
+            university.getEmployeeDirectory().removeEmployeeProfile((EmployeeProfile)selectedProfile);
+            university.getEmployeeDirectory().newEmployeeProfile(selectedPerson, (Department)comboDepartment.getSelectedItem());
+        } else {
+            university.getFacultydirectory().removeFaculty((FacultyProfile)selectedProfile);
+            university.getFacultydirectory().newFacultyProfile(selectedPerson, (Department)comboDepartment.getSelectedItem());
+        }
         
     }
     
@@ -251,10 +339,40 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         layout.previous(CardSequencePanel);
     }
 
+    private void populateRoleCombo() {
+        //
+        comboDepartment.removeAllItems();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) comboDepartment.getModel();
+        
+        ArrayList<Department> departments = university.getCollege().getDepartments();
+        
+        for (Department d: departments) {
+            model.addElement(d);
+        }
+        
+    }
+
+    private void populateDepartmentCombo() {
+        //
+        comboRole.removeAllItems();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) comboRole.getModel();
+        
+        model.addElement("Faculty");
+        model.addElement("Student");
+        model.addElement("Employee");
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> comboDepartment;
+    private javax.swing.JComboBox<String> comboRole;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblCity;
+    private javax.swing.JLabel lblCity1;
+    private javax.swing.JLabel lblCity2;
     private javax.swing.JLabel lblDateOfBirth;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
@@ -267,5 +385,7 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtLine1;
     private javax.swing.JTextField txtLine2;
+    private javax.swing.JTextField txtState;
+    private javax.swing.JTextField txtZip;
     // End of variables declaration//GEN-END:variables
 }
