@@ -51,7 +51,7 @@ class ConfigureUniversity {
         Person person003 = personDirectory.newPerson("ID7890", "Adam", "Rollen", "09-10-2003"); //student
  
         Person person005 = personDirectory.newPerson("ID7845", "Jim", "Dellon", "01-01-2004"); //student
-        //Person person006 = personDirectory.newPerson("Anna Shnider");
+        Person person006 = personDirectory.newPerson("ID7845", "Anna", "Shnider", "01-01-2004"); //faculty
         //Person person007 = personDirectory.newPerson("Laura Brown");
         //Person person008 = personDirectory.newPerson("Jack While");
         //Person person009 = personDirectory.newPerson("Fidelity"); //we use this as customer
@@ -66,6 +66,12 @@ class ConfigureUniversity {
         FacultyProfile facultyprofile0 = facultyDirectory.newFacultyProfile(person002); //Gina Montana as faculty username gina
         facultyprofile0.setDepartment(department1);
         facultyprofile0.setResearchArea("Artificial Intelligence");
+        facultyprofile0.setTitle("Professor");
+        
+        FacultyProfile facultyprofile1 = facultyDirectory.newFacultyProfile(person006); //Anna Shnider as faculty username anna
+        facultyprofile1.setDepartment(department1);
+        facultyprofile1.setResearchArea("Encryption");
+        facultyprofile1.setTitle("Professor");
         
         // create students       
         
@@ -84,6 +90,9 @@ class ConfigureUniversity {
 
    
 // Create User accounts that link to specific profiles
+        
+        UserAccount ua1 = userAccountDirectory.newUserAccount(facultyprofile1, "anna", "*123");
+        ua1.setStatus("Active"); //set status active
         
         UserAccount ua3 = userAccountDirectory.newUserAccount(employeeprofile0, "admin", "****");
         ua3.setStatus("Active"); //set status active
