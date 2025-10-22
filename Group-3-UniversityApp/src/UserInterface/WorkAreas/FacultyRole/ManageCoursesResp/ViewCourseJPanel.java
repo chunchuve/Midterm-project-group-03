@@ -4,16 +4,35 @@
  */
 package UserInterface.WorkAreas.FacultyRole.ManageCoursesResp;
 
+import CourseCatalog.Course;
+import CourseCatalog.CourseCatalog;
+import Department.Department;
+import Faculty.FacultyProfile;
+import University.University;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Sabrina
  */
 public class ViewCourseJPanel extends javax.swing.JPanel {
 
+    JPanel CardSequencePanel;
+    University university;
+    Department department;
+    FacultyProfile facultyProfile;
+    Course course;
+    CourseCatalog courseCatalog;
+    
     /**
      * Creates new form ViewCourseJPanel
      */
-    public ViewCourseJPanel() {
+    public ViewCourseJPanel(University u, CourseCatalog cc, Course course, JPanel clp) {
+        university = u;
+        this.courseCatalog = cc;
+        this.course = course;
+        this.CardSequencePanel = clp;
         initComponents();
     }
 
@@ -26,19 +45,140 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1136, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-        );
+        lblCredits = new javax.swing.JLabel();
+        fieldCredits = new javax.swing.JTextField();
+        lblCourseDetails = new javax.swing.JLabel();
+        lblPrice = new javax.swing.JLabel();
+        fieldPrice = new javax.swing.JTextField();
+        lblCourseNumber = new javax.swing.JLabel();
+        fieldCourseName = new javax.swing.JTextField();
+        lblCourseName = new javax.swing.JLabel();
+        fieldCourseNumber = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCredits.setText("Course Credit:");
+        add(lblCredits, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 209, -1, -1));
+        add(fieldCredits, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 209, 182, -1));
+
+        lblCourseDetails.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblCourseDetails.setText("Course Details");
+        add(lblCourseDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 22, 550, -1));
+
+        lblPrice.setText("Course Price:");
+        add(lblPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 273, -1, -1));
+        add(fieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 270, 182, -1));
+
+        lblCourseNumber.setText("Course Number:");
+        add(lblCourseNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 97, -1, -1));
+        add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 153, 182, -1));
+
+        lblCourseName.setText("Course Name:");
+        add(lblCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 153, -1, -1));
+        add(fieldCourseNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 97, 182, -1));
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 349, -1, -1));
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 349, 100, -1));
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 349, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        //setFacultyEditMode();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        /*
+        String firstName = fieldFirstName.getText();
+        String lastName = fieldLastName.getText();
+        String dateOfBirth = fieldDOB.getText();
+        String id = fieldPersonID.getText();
+        String line1 = fieldAddressLine1.getText();
+        String line2 = fieldAddressLine2.getText();
+        String city = fieldCity.getText();
+        String state = fieldState.getText();
+        String zipCode = fieldZipCode.getText();
+        String researchArea = fieldResearchArea.getText();
+        String deptName = fieldDepartment.getText();
+        String title = fieldTitle.getText();
+        String username = fieldUsername.getText();
+        String password = fieldPassword.getText();
+
+        //check if all fields are filled out
+        if (firstName.isBlank() || lastName.isBlank() || dateOfBirth.isBlank() || id.isBlank() || line1.isBlank() || line2.isBlank() || city.isBlank() || state.isBlank() || zipCode.isBlank() || researchArea.isBlank() || deptName.isBlank() || title.isBlank() || username.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        FacultyProfile facultyProfile = (FacultyProfile) userAccount.getAssociatedPersonProfile();
+        facultyProfile.getPerson().setFirstName(firstName);
+        facultyProfile.getPerson().setLastName(lastName);
+        facultyProfile.getPerson().setDateOfBirth(dateOfBirth);
+        facultyProfile.getPerson().setId(id);
+        facultyProfile.getPerson().getAddress().setLine1(line1);
+        facultyProfile.getPerson().getAddress().setLine2(line2);
+        facultyProfile.getPerson().getAddress().setCity(city);
+        facultyProfile.getPerson().getAddress().setState(state);
+        facultyProfile.getPerson().getAddress().setZipCode(zipCode);
+        facultyProfile.setResearchArea(researchArea);
+        facultyProfile.getDepartment().setName(deptName);
+        facultyProfile.setTitle(title);
+
+        userAccount.setUsername(username);
+        userAccount.setPassword(password);
+
+        //userAccount.setLastUpdated();
+
+        JOptionPane.showMessageDialog(this, "Account updated successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        setFacultyViewMode(); */
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JTextField fieldCourseName;
+    private javax.swing.JTextField fieldCourseNumber;
+    private javax.swing.JTextField fieldCredits;
+    private javax.swing.JTextField fieldPrice;
+    private javax.swing.JLabel lblCourseDetails;
+    private javax.swing.JLabel lblCourseName;
+    private javax.swing.JLabel lblCourseNumber;
+    private javax.swing.JLabel lblCredits;
+    private javax.swing.JLabel lblPrice;
     // End of variables declaration//GEN-END:variables
 }

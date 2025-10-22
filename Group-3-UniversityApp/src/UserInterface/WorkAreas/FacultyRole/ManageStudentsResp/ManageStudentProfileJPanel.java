@@ -2,45 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.WorkAreas.FacultyRole.ManageCoursesResp;
+package UserInterface.WorkAreas.FacultyRole.ManageStudentsResp;
 
-import CourseCatalog.Course;
-import CourseCatalog.CourseCatalog;
-import CourseSchedule.CourseOffer;
-import CourseSchedule.CourseSchedule;
-import Department.Department;
-import Faculty.FacultyProfile;
+import Student.StudentProfile;
 import University.University;
+import UserAccounts.UserAccount;
 import java.awt.CardLayout;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Sabrina
  */
-public class ManageCourseJPanel extends javax.swing.JPanel {
+public class ManageStudentProfileJPanel extends javax.swing.JPanel {
 
     JPanel CardSequencePanel;
+    StudentProfile studentProfile;
     University university;
-    Department department;
-    FacultyProfile facultyProfile;
-    Course course;
-    CourseCatalog courseCatalog;
-    CourseOffer courseOffer;
-    CourseSchedule courseSchedule;
     
     /**
-     * Creates new form FacultyManageCourseJPanel
+     * Creates new form ManageStudentProfileJPanel
      */
-    public ManageCourseJPanel(FacultyProfile fp, JPanel clp) {
+    public ManageStudentProfileJPanel(StudentProfile sp, JPanel clp) {
         CardSequencePanel = clp;
-        this.facultyProfile = fp;
-        this.department = fp.getDepartment();
+        this.studentProfile = sp;
         initComponents();
-        refreshCourseTable();
     }
 
     /**
@@ -53,14 +40,13 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Back = new javax.swing.JButton();
-        btnDeleteCourse = new javax.swing.JButton();
         lblCourses = new javax.swing.JLabel();
         lblManageCourses = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         CourseTable = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
         fieldSearch = new javax.swing.JTextField();
-        btnViewCourse = new javax.swing.JButton();
+        btnViewStudent = new javax.swing.JButton();
 
         Back.setText("<< Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -69,28 +55,21 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDeleteCourse.setText("Delete Course");
-        btnDeleteCourse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteCourseActionPerformed(evt);
-            }
-        });
-
         lblCourses.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblCourses.setText("Courses");
 
         lblManageCourses.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblManageCourses.setText("Manage Courses");
+        lblManageCourses.setText("Manage Students");
 
         CourseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Number", "Name", "Credits", "Price"
+                "NUID", "First Name", "Last Name", "Hobbies", "Interests"
             }
         ));
         CourseTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,10 +86,10 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnViewCourse.setText("View Course");
-        btnViewCourse.addActionListener(new java.awt.event.ActionListener() {
+        btnViewStudent.setText("View Student Details");
+        btnViewStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewCourseActionPerformed(evt);
+                btnViewStudentActionPerformed(evt);
             }
         });
 
@@ -132,9 +111,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                                 .addGap(10, 10, 10)
                                 .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20)
-                                .addComponent(btnViewCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(btnDeleteCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnViewStudent))
                             .addComponent(Back))))
                 .addContainerGap(506, Short.MAX_VALUE))
         );
@@ -151,8 +128,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSearch)
                     .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewCourse)
-                    .addComponent(btnDeleteCourse))
+                    .addComponent(btnViewStudent))
                 .addGap(37, 37, 37)
                 .addComponent(Back)
                 .addContainerGap(114, Short.MAX_VALUE))
@@ -167,25 +143,6 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
         //       ((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
     }//GEN-LAST:event_BackActionPerformed
-
-    private void btnDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCourseActionPerformed
-        // TODO add your handling code here:
-        /*
-        int selectedRow = UserAccountTable.getSelectedRow();
-
-        if (selectedRow >= 0) {
-
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected account?","Warning",dialogButton);
-            if (dialogResult == JOptionPane.YES_OPTION) {
-                UserAccount selectedAccount = (UserAccount) UserAccountTable.getValueAt(selectedRow, 0);
-                business.getUserAccountDirectory().deleteUserAccount(selectedAccount);
-                refreshTable();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select an account from the list to delete.", "Warning",JOptionPane.WARNING_MESSAGE);
-        } */
-    }//GEN-LAST:event_btnDeleteCourseActionPerformed
 
     private void CourseTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CourseTableMousePressed
         // Extracts the row (uaser account) in the table that is selected by the user
@@ -206,25 +163,27 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         if (!fieldSearch.getText().isBlank()) {
-            String number = fieldSearch.getText();
-            Course foundCourse = department.getCourseCatalog().getCourseByNumber(number);
             
-            if (foundCourse != null) {
-                ViewCourseJPanel vc = new ViewCourseJPanel(university, courseCatalog, foundCourse, CardSequencePanel);
-                CardSequencePanel.add("ViewCourseJPanel", vc);
+            String nUID = fieldSearch.getText();
+            StudentProfile foundStudent = university.getStudentDirectory().findStudentByNUID(nUID);
+            
+            if (foundStudent != null) {
+                
+                ViewStudentProfileJPanel viewStudentProfileJPanel = new ViewStudentProfileJPanel(university, university.getStudentDirectory(), foundStudent, CardSequencePanel);
+                CardSequencePanel.add("viewStudentProfileJPanel", viewStudentProfileJPanel);
                 CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
                 layout.next(CardSequencePanel);
                 fieldSearch.setText("");
             } else {
-                JOptionPane.showMessageDialog(null, "Course not found. Please check course number and try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Student not found. Please check student NUID and try again.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else JOptionPane.showMessageDialog(null, "Please enter a course number to view.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else JOptionPane.showMessageDialog(null, "Please enter a student NUID to view.", "Warning", JOptionPane.WARNING_MESSAGE);        
         
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCourseActionPerformed
+    private void btnViewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentActionPerformed
         // TODO add your handling code here:
-
+        /*
         int selectedRow = CourseTable.getSelectedRow();
         if (selectedRow >=0) {
             Course selectedCourse = (Course) CourseTable.getValueAt(selectedRow, 0);
@@ -232,38 +191,16 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
             CardSequencePanel.add("ViewCourseJPanel", vc);
             CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
             layout.next(CardSequencePanel);
-        } else JOptionPane.showMessageDialog(null, "Please select a course from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);    
-        
-    }//GEN-LAST:event_btnViewCourseActionPerformed
+        } else JOptionPane.showMessageDialog(null, "Please select a course from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);
+        */
+    }//GEN-LAST:event_btnViewStudentActionPerformed
 
-    public void refreshCourseTable() {
-        int rc = CourseTable.getRowCount();
-        int i;
-        for (i = rc - 1; i>=0; i--) {
-            ((DefaultTableModel) CourseTable.getModel()).removeRow(i);
-        }
-        
-        CourseCatalog cc = department.getCourseCatalog();
-        List<Course> courses = cc.getCourseList();
-        
-        for (Course c : courses) {
-        Object[] row = new Object[4];
-        row[0] = c;
-        row[1] = c.getCourseName();
-        row[2] = c.getCredits();
-        row[3] = c.getCoursePrice();
-        
-        ((DefaultTableModel) CourseTable.getModel()).addRow(row);
-    }
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JTable CourseTable;
-    private javax.swing.JButton btnDeleteCourse;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnViewCourse;
+    private javax.swing.JButton btnViewStudent;
     private javax.swing.JTextField fieldSearch;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCourses;
