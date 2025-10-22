@@ -37,6 +37,14 @@ public class FacultyProfile extends Profile {
         this.department = department;
         facultyassignments = new ArrayList();
     }
+    public FacultyProfile(Person p, Department department, String title, String researchArea) {
+
+        super(p);
+        this.department = department;
+        this.title = title;
+        this.researchArea = researchArea;
+        facultyassignments = new ArrayList();
+    }
     //end of changes
     
     public  double getProfAverageOverallRating(){
@@ -111,5 +119,10 @@ public class FacultyProfile extends Profile {
     public String getRole() {
         return "Faculty";
     }
+    
+   @Override
+    public String toString() {
+        return super.getPerson().getPersonId();
+    }    
 
 }

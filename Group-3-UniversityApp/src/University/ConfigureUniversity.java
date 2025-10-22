@@ -14,6 +14,7 @@ import Employee.EmployeeDirectory;
 import Employee.EmployeeProfile;
 import Faculty.FacultyDirectory;
 import Faculty.FacultyProfile;
+import Persona.Address;
 import Student.StudentDirectory;
 import Student.StudentProfile;
 
@@ -23,7 +24,7 @@ import UserAccounts.UserAccountDirectory;
 
 /**
  *
- * @author kal bugrara
+ * @author vrmohanc
  */
 class ConfigureUniversity {
 
@@ -36,53 +37,70 @@ class ConfigureUniversity {
         FacultyDirectory facultyDirectory = new FacultyDirectory();
         
         //link directories to university instance and pass it to app/login page
-        University university = new University("Information Systems", college, personDirectory,
+        University university = new University("NEW University", college, personDirectory,
             employeeDirectory, userAccountDirectory, studentDirectory, facultyDirectory);
         
-    //Create department
-        Department department001 = college.newDepartment("Computer Science");
-        department001.newCourse("INFO 5100", "Application Engineering and Development", 4); //create new course
-        department001.newCourse("EECE 5641", "Introduction to Software Security", 4); //create new course
+        //create departments
+        Department department1 = university.getCollege().newDepartment("Computer Science Engg.");
+        Department department2 = university.getCollege().newDepartment("Information Technology");
         
-        
-        Department department002 = college.newDepartment("Bioengineering");
-        Department department003 = college.newDepartment("Civil & Environmental Engineering");
 // Create Persons
         
-        Person person001 = personDirectory.newPerson("John Smith"); //employee
-        Person person002 = personDirectory.newPerson("Gina Montana"); //faculty
-        Person person003 = personDirectory.newPerson("Adam Rollen"); //student
+        Person person001 = personDirectory.newPerson("ID1234", "John", "Smith", "10-16-1990"); //employee
+        Person person002 = personDirectory.newPerson("ID3456", "Gina", "Montana", "11-15-1980"); //faculty
+        Person person003 = personDirectory.newPerson("ID7890", "Adam", "Rollen", "09-10-2003"); //student
  
-        Person person005 = personDirectory.newPerson("Jim Dellon"); //student
-        Person person006 = personDirectory.newPerson("Anna Shnider");
-        Person person007 = personDirectory.newPerson("Laura Brown");
-        Person person008 = personDirectory.newPerson("Jack While");
-        Person person009 = personDirectory.newPerson("Fidelity"); //we use this as customer
+        Person person005 = personDirectory.newPerson("ID7845", "Jim", "Dellon", "01-01-2004"); //student
+        Person person006 = personDirectory.newPerson("ID7845", "Anna", "Shnider", "01-01-2004"); //faculty
+        //Person person007 = personDirectory.newPerson("Laura Brown");
+        //Person person008 = personDirectory.newPerson("Jack While");
+        //Person person009 = personDirectory.newPerson("Fidelity"); //we use this as customer
 
 // Create Admins to manage the univ
         
         EmployeeProfile employeeprofile0 = employeeDirectory.newEmployeeProfile(person001); //John Smith as employee username admin
         
-// create students       
+
+        
+// create faculty      
+        FacultyProfile facultyprofile0 = facultyDirectory.newFacultyProfile(person002); //Gina Montana as faculty username gina
+        facultyprofile0.setDepartment(department1);
+        facultyprofile0.setResearchArea("Artificial Intelligence");
+        facultyprofile0.setTitle("Professor");
+        
+        FacultyProfile facultyprofile1 = facultyDirectory.newFacultyProfile(person006); //Anna Shnider as faculty username anna
+        facultyprofile1.setDepartment(department1);
+        facultyprofile1.setResearchArea("Encryption");
+        facultyprofile1.setTitle("Professor");
+        
+        // create students       
         
         StudentProfile studentprofile0 = studentDirectory.newStudentProfile(person003); //Adam Rollen as student username adam
         StudentProfile studentprofile1 = studentDirectory.newStudentProfile(person005); //Jim Dellon as student username jim
         
-// create faculty      
-        FacultyProfile facultyprofile0 = facultyDirectory.newFacultyProfile(person002); //Gina Montana as faculty username gina
-        facultyprofile0.setTitle("Professor");
-        facultyprofile0.setResearchArea("Computer Engineering");
-        facultyprofile0.setDepartment(department001); //set department to Computer Science
+        studentprofile0.setDepartment(facultyprofile0.getDepartment()); //assign computer science engg
+        studentprofile0.setProgramEnrolled("MSIS");
+        studentprofile0.setInstructionMode("Online");
+        studentprofile0.setnUID("NUID46537");
+        
+        studentprofile1.setDepartment(facultyprofile0.getDepartment()); //assign computer science engg
+        studentprofile1.setProgramEnrolled("MSDS");
+        studentprofile1.setInstructionMode("OnCampus");
+        studentprofile1.setnUID("NUID756893");
+
    
 // Create User accounts that link to specific profiles
+        
+        UserAccount ua1 = userAccountDirectory.newUserAccount(facultyprofile1, "anna", "*123");
+        ua1.setStatus("Active"); //set status active
         
         UserAccount ua3 = userAccountDirectory.newUserAccount(employeeprofile0, "admin", "****");
         ua3.setStatus("Active"); //set status active
         
         UserAccount ua4 = userAccountDirectory.newUserAccount(studentprofile0, "adam", "****");
         ua4.setStatus("Active"); //set status active
-        studentprofile0.setnUID("NUID123");
-        studentprofile1.setnUID("NUID456");
+        //studentprofile0.setnUID("NUID123");
+        //studentprofile1.setnUID("NUID456");
         
         UserAccount ua6 = userAccountDirectory.newUserAccount(studentprofile1, "jim", "1234");
         ua6.setStatus("Active"); //set status active

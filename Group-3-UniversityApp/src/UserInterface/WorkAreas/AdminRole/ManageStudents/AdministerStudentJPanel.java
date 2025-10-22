@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
+package UserInterface.WorkAreas.AdminRole.ManageStudents;
 
+import UserInterface.WorkAreas.AdminRole.ManageFaculty.*;
+import Faculty.FacultyProfile;
+import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.*;
 import Persona.Person;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.*;
 import University.University;
@@ -23,20 +26,20 @@ import javax.swing.table.DefaultTableModel;
  * @author vrmohanc
  */
 
-public class AdministerPersonJPanel extends javax.swing.JPanel {
+public class AdministerStudentJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form Admin person
+     * Creates new form admin student
      */
     JPanel CardSequencePanel;
     University university;
     
-    Person selectedPerson;
+    StudentProfile selectedStudent;
 
-    public AdministerPersonJPanel(Person person, JPanel jp, University university) {
+    public AdministerStudentJPanel(StudentProfile student, JPanel jp, University university) {
 
         CardSequencePanel = jp;
-        selectedPerson = person;
+        this.selectedStudent = student;
         this.university = university;
         initComponents();
         
@@ -58,7 +61,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         Back1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        PeronTable = new javax.swing.JTable();
+        StudentTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -73,7 +76,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
         Update.setBounds(480, 290, 100, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Administer Person");
+        jLabel2.setText("Administer Faculty");
         add(jLabel2);
         jLabel2.setBounds(21, 20, 550, 28);
 
@@ -86,46 +89,46 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
         add(Back1);
         Back1.setBounds(40, 290, 100, 23);
 
-        PeronTable.setModel(new javax.swing.table.DefaultTableModel(
+        StudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Person ID", "First Name", "Last Name", "Date of Birth"
+                "Person ID", "First Name", "Last Name", "Department", "Program", "Mode", "NUID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(PeronTable);
+        jScrollPane1.setViewportView(StudentTable);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(70, 70, 460, 170);
+        jScrollPane1.setBounds(40, 70, 560, 170);
     }// </editor-fold>//GEN-END:initComponents
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         // TODO add your handling code here:
         
-        //open update panel to edit NUID and other details
-        int row = PeronTable.getSelectedRow();
+        //open update panel to edit faculty details
+        int row = StudentTable.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        //UserAccount selUser = (UserAccount) UserAccountTable.getValueAt(row, 0);
-        selectedPerson = (Person) PeronTable.getValueAt(row, 0);
+        
+        selectedStudent = (StudentProfile) StudentTable.getValueAt(row, 0);
         //System.out.println(selecteduseraccount);
         
-        UpdatePersonJPanel uuajp = new UpdatePersonJPanel(CardSequencePanel, university, selectedPerson);
-        CardSequencePanel.add("UpdatePersonJPanel", uuajp);
+        UpdateStudentJPanel uuajp = new UpdateStudentJPanel(CardSequencePanel, university, selectedStudent);
+        CardSequencePanel.add("UpdateStudentJPanel", uuajp);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
        
@@ -146,8 +149,8 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
         CardSequencePanel.remove(this);
         Component[] componentArray = CardSequencePanel.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManagePersonsJPanel managePersonsJPanel = (ManagePersonsJPanel) component;
-        managePersonsJPanel.refreshTable();
+        ManageStudentJPanel manageStudentJPanel = (ManageStudentJPanel) component;
+        manageStudentJPanel.refreshTable();
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }
@@ -156,18 +159,22 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             
             //clear table
             
-            int rc = PeronTable.getRowCount();
+            int rc = StudentTable.getRowCount();
             int i;
             for (i = rc - 1; i >= 0; i--) {
-                ((DefaultTableModel) PeronTable.getModel()).removeRow(i);
+                ((DefaultTableModel) StudentTable.getModel()).removeRow(i);
             }
+            
         
-            //fill selected person details to display
-            Object[] row = new Object[4];
-            row[0] = selectedPerson;
-            row[1] = selectedPerson.getFirstName(); 
-            row[2] = selectedPerson.getLastName(); //last Name
-            row[3] = selectedPerson.getDateOfBirth();
+            //fill selected student details to display
+            Object[] row = new Object[7];
+            row[0] = selectedStudent;
+            row[1] = selectedStudent.getPerson().getFirstName();
+            row[2] = selectedStudent.getPerson().getLastName();
+            row[3] = selectedStudent.getDepartment();
+            row[4] = selectedStudent.getProgramEnrolled();
+            row[5] = selectedStudent.getInstructionMode();
+            row[6] = selectedStudent.getnUID();
                                                             
             //display nUID for found student
             //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
@@ -176,13 +183,13 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             //}
             
                                                             
-            ((DefaultTableModel) PeronTable.getModel()).addRow(row);
+            ((DefaultTableModel) StudentTable.getModel()).addRow(row);
         
             //System.out.println(selecteduseraccount);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back1;
-    private javax.swing.JTable PeronTable;
+    private javax.swing.JTable StudentTable;
     private javax.swing.JButton Update;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

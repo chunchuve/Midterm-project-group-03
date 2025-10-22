@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
+package UserInterface.WorkAreas.AdminRole.ManageFaculty;
 
+import Faculty.FacultyDirectory;
+import Faculty.FacultyProfile;
+import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.*;
 import Persona.Person;
 import Persona.PersonDirectory;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.*;
@@ -24,19 +27,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vrmohanc
  */
-public class ManagePersonsJPanel extends javax.swing.JPanel {
+public class ManageFacultyJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new manage persons form
      */
     JPanel CardSequencePanel;
     University university;
-    //UserAccount selecteduseraccount;
-    Person selectedPerson;
-    //UserAccountDirectory uad;
-    PersonDirectory pd;
+    FacultyProfile selectedFaculty;
+    FacultyDirectory fd;
 
-    public ManagePersonsJPanel(University uni, JPanel jp) {
+    public ManageFacultyJPanel(University uni, JPanel jp) {
         CardSequencePanel = jp;
         this.university = uni;
         
@@ -48,24 +49,24 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     public void refreshTable() {
 
         //clear table
-        int rc = PersonTable.getRowCount();
+        int rc = FacultyTable.getRowCount();
         int i;
         for (i = rc - 1; i >= 0; i--) {
-            ((DefaultTableModel) PersonTable.getModel()).removeRow(i);
+            ((DefaultTableModel) FacultyTable.getModel()).removeRow(i);
         }
-        
-        pd = university.getPersonDirectory();
-        //PersonDirectory pd = university.getPersonDirectory();
-        //StudentDirectory stuDir = business.getStudentDirectory();
-        
-        
-        for (Person pa : pd.getPersonlist()) {
 
-            Object[] row = new Object[4];
-            row[0] = pa;
-            row[1] = pa.getFirstName(); 
-            row[2] = pa.getLastName(); 
-            row[3] = pa.getDateOfBirth();          
+        fd = university.getFacultydirectory();
+        
+        
+        for (FacultyProfile fa : fd.getTeacherlist()) {
+
+            Object[] row = new Object[6];
+            row[0] = fa;
+            row[1] = fa.getPerson().getFirstName();
+            row[2] = fa.getPerson().getLastName();
+            row[3] = fa.getDepartment().getName();
+            row[4] = fa.getRole();
+            row[5] = fa.getTitle();
             
             
             //get nUID for student accounts only
@@ -74,7 +75,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
                 //row[5] = stu.getnUID();
             //}
                                         
-            ((DefaultTableModel) PersonTable.getModel()).addRow(row);
+            ((DefaultTableModel) FacultyTable.getModel()).addRow(row);
         }  
     }
 
@@ -93,9 +94,8 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        PersonTable = new javax.swing.JTable();
-        btnCreatePerson = new javax.swing.JButton();
-        btnRemovePerson = new javax.swing.JButton();
+        FacultyTable = new javax.swing.JTable();
+        btnRemoveFaculty = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtSearchbyID = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
@@ -122,61 +122,52 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         Next.setBounds(470, 300, 110, 23);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setText("Person details");
+        jLabel1.setText("Faculty details");
         add(jLabel1);
         jLabel1.setBounds(30, 90, 190, 17);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Manage Persons");
+        jLabel2.setText("Manage Faculty");
         add(jLabel2);
         jLabel2.setBounds(21, 20, 550, 28);
 
-        PersonTable.setModel(new javax.swing.table.DefaultTableModel(
+        FacultyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Person ID", "First Name", "Last Name", "Date of Birth"
+                "Person ID", "First Name", "Last Name", "Department", "Role", "Title"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        PersonTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        FacultyTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                PersonTableMousePressed(evt);
+                FacultyTableMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(PersonTable);
+        jScrollPane1.setViewportView(FacultyTable);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 110, 550, 130);
+        jScrollPane1.setBounds(30, 110, 570, 130);
 
-        btnCreatePerson.setText("Create Person");
-        btnCreatePerson.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoveFaculty.setText("Remove Faculty");
+        btnRemoveFaculty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreatePersonActionPerformed(evt);
+                btnRemoveFacultyActionPerformed(evt);
             }
         });
-        add(btnCreatePerson);
-        btnCreatePerson.setBounds(170, 300, 112, 23);
-
-        btnRemovePerson.setText("Remove Person");
-        btnRemovePerson.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemovePersonActionPerformed(evt);
-            }
-        });
-        add(btnRemovePerson);
-        btnRemovePerson.setBounds(310, 300, 110, 23);
+        add(btnRemoveFaculty);
+        btnRemoveFaculty.setBounds(310, 300, 110, 23);
 
         jLabel3.setText("Search by ID");
         add(jLabel3);
@@ -205,19 +196,19 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
         //if(selecteduseraccount==null) return;
-        int row = PersonTable.getSelectedRow();
+        int row = FacultyTable.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        selectedPerson = (Person) PersonTable.getValueAt(row, 0);
-        AdministerPersonJPanel mppd = new AdministerPersonJPanel(selectedPerson, CardSequencePanel, university);
+        selectedFaculty = (FacultyProfile) FacultyTable.getValueAt(row, 0);
+        AdministerFacultyJPanel mppd = new AdministerFacultyJPanel(selectedFaculty, CardSequencePanel, university);
         CardSequencePanel.add(mppd);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_NextActionPerformed
 
-    private void PersonTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PersonTableMousePressed
+    private void FacultyTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FacultyTableMousePressed
         // Extracts the row (uaser account) in the table that is selected by the user
         //int size = UserAccountTable.getRowCount();
         //int selectedrow = UserAccountTable.getSelectionModel().getLeadSelectionIndex();
@@ -226,36 +217,25 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
          //   return;
         //}
         //selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(selectedrow, 0);
-    if (selectedPerson == null) {
+    if (selectedFaculty == null) {
             return;        
-    }//GEN-LAST:event_PersonTableMousePressed
+    }//GEN-LAST:event_FacultyTableMousePressed
     
     }
     
-    private void btnCreatePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePersonActionPerformed
-        // TODO add your handling code here:
-        
-        //create person form
-        AddPersonJPanel as = new AddPersonJPanel(CardSequencePanel, university);
-        CardSequencePanel.add("AddPerson", as);
-        CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
-        layout.next(CardSequencePanel);
-        
-    }//GEN-LAST:event_btnCreatePersonActionPerformed
-
-    private void btnRemovePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovePersonActionPerformed
+    private void btnRemoveFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveFacultyActionPerformed
         // TODO add your handling code here:
         //remove selected User account
-        int row = PersonTable.getSelectedRow();
+        int row = FacultyTable.getSelectedRow();
      
         //error handling
         if (row >= 0) {
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected user account?", "Warning", JOptionPane.WARNING_MESSAGE);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected faculty?", "Warning", JOptionPane.WARNING_MESSAGE);
             
             if (dialogResult == JOptionPane.YES_OPTION) {
-                selectedPerson = (Person) PersonTable.getValueAt(row, 0);
-                university.getPersonDirectory().removePerson(selectedPerson);
+                selectedFaculty = (FacultyProfile) FacultyTable.getValueAt(row, 0);
+                university.getFacultydirectory().removeFaculty(selectedFaculty);
                
                 refreshTable();
             }
@@ -264,44 +244,44 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Select a row to delete", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
         
-    }//GEN-LAST:event_btnRemovePersonActionPerformed
+    }//GEN-LAST:event_btnRemoveFacultyActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         
-        
-        //search person by person ID
+        //search faculty by person ID
         try {
-            Person person = pd.findPerson(txtSearchbyID.getText()); 
+            FacultyProfile faculty = fd.findTeachingFaculty(txtSearchbyID.getText());
             //display search results
-            refreshSearchResults(person);
+            refreshSearchResults(faculty);
         } catch (NullPointerException e){
-            JOptionPane.showMessageDialog(this,"person with person ID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"faculty with person ID not found", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
     
-    private void refreshSearchResults(Person person) {
+    private void refreshSearchResults(FacultyProfile faculty) {
         //clear table
-        int rc = PersonTable.getRowCount();
+        int rc = FacultyTable.getRowCount();
         int i;
         for (i = rc - 1; i >= 0; i--) {
-            ((DefaultTableModel) PersonTable.getModel()).removeRow(i);
+            ((DefaultTableModel) FacultyTable.getModel()).removeRow(i);
         }
 
-        
-            Object[] row = new Object[4];
-            row[0] = person;
-            row[1] = person.getFirstName();
-            row[2] = person.getLastName();
-            row[3] = person.getDateOfBirth();
-            
+    
+            Object[] row = new Object[6];
+            row[0] = faculty;
+            row[1] = faculty.getPerson().getFirstName();
+            row[2] = faculty.getPerson().getLastName();
+            row[3] = faculty.getDepartment().getName();          
+            row[4] = faculty.getRole();
+            row[5] = faculty.getTitle();
             //display nUID for found student
             //if (ua.getRole().equalsIgnoreCase("Student")) {
             //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-            //    row[5] = stu.getnUID();
+             //   row[5] = stu.getnUID();
             //}                           
-            ((DefaultTableModel) PersonTable.getModel()).addRow(row);
+            ((DefaultTableModel) FacultyTable.getModel()).addRow(row);
           
     }
     
@@ -321,10 +301,9 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JTable FacultyTable;
     private javax.swing.JButton Next;
-    private javax.swing.JTable PersonTable;
-    private javax.swing.JButton btnCreatePerson;
-    private javax.swing.JButton btnRemovePerson;
+    private javax.swing.JButton btnRemoveFaculty;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

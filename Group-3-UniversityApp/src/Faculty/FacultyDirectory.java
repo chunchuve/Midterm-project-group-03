@@ -39,6 +39,10 @@ public class FacultyDirectory {
         teacherlist.add(fp);
         return fp;
     }
+    //remove faculty
+    public void removeFaculty(FacultyProfile faculty) {
+        teacherlist.remove(faculty);
+    }
     //end of changes
     
     public FacultyProfile getTopProfessor(){
