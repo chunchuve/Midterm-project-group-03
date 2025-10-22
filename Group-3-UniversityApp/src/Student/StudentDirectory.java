@@ -8,6 +8,7 @@ package Student;
 import Persona.Person;
 import Department.Department;
 import Employee.EmployeeProfile;
+import Faculty.FacultyProfile;
 import java.util.ArrayList;
 
 /**
@@ -40,11 +41,23 @@ public class StudentDirectory {
         return sp;
     }
     
+    public StudentProfile newStudentProfile(Person p, Department d) {
+
+        StudentProfile sp = new StudentProfile(p,d);
+        studentlist.add(sp);
+        return sp;
+    }
+    
     public StudentProfile newStudentProfile(Person p, String nuid, Department d) {
 
         StudentProfile sp = new StudentProfile(p,nuid, d);
         studentlist.add(sp);
         return sp;
+    }
+    
+    //remove student
+    public void removeStudentProfile(StudentProfile student) {
+        studentlist.remove(student);
     }
     //end of changes
     

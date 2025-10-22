@@ -6,6 +6,7 @@
 package Employee;
 
 import Department.Department;
+import Persona.Address;
 import Persona.Person;
 import Profile.Profile;
 
@@ -18,7 +19,8 @@ public class EmployeeProfile extends Profile {
 
     // @author vrmohanc
     //begin of changes
-    Department department;
+    private Department department;
+    private Address address;
     
     
     public EmployeeProfile(Person p, Department department) {
@@ -40,6 +42,14 @@ public class EmployeeProfile extends Profile {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
     
     @Override

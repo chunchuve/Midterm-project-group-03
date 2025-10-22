@@ -5,33 +5,43 @@
  */
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
+import Persona.Person;
+import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.*;
 import University.University;
-
+import Student.StudentDirectory;
+import Student.StudentProfile;
+import UserAccounts.UserAccount;
+import UserAccounts.UserAccountDirectory;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ *h
  * @author vrmohanc
  */
+
 public class AdministerPersonJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ManageSuppliersJPanel
+     * Creates new form Admin person
      */
     JPanel CardSequencePanel;
-
     University university;
+    
+    Person selectedPerson;
 
-    public AdministerPersonJPanel(University university, JPanel jp) {
+    public AdministerPersonJPanel(Person person, JPanel jp, University university) {
 
         CardSequencePanel = jp;
+        selectedPerson = person;
         this.university = university;
         initComponents();
-
-
-    }
-
-    public void refreshTable() {
+        
+        refreshTable();
+        
 
     }
 
@@ -44,39 +54,138 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Back = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        Back1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        PeronTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
 
-        Back.setText("<< Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
+        Update.setText("Update>>");
+        Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
+                UpdateActionPerformed(evt);
             }
         });
-        add(Back);
-        Back.setBounds(30, 290, 76, 32);
+        add(Update);
+        Update.setBounds(480, 290, 100, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Manage Person Profile");
+        jLabel2.setText("Administer Person");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
+
+        Back1.setText("<< Back");
+        Back1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Back1ActionPerformed(evt);
+            }
+        });
+        add(Back1);
+        Back1.setBounds(40, 290, 100, 23);
+
+        PeronTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Person ID", "First Name", "Last Name", "Date of Birth"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(PeronTable);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(70, 70, 460, 170);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
         // TODO add your handling code here:
+        
+        //open update panel to edit NUID and other details
+        int row = PeronTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row from the table", "WARNING", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        //UserAccount selUser = (UserAccount) UserAccountTable.getValueAt(row, 0);
+        selectedPerson = (Person) PeronTable.getValueAt(row, 0);
+        //System.out.println(selecteduseraccount);
+        
+        UpdatePersonJPanel uuajp = new UpdatePersonJPanel(CardSequencePanel, university, selectedPerson);
+        CardSequencePanel.add("UpdatePersonJPanel", uuajp);
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.next(CardSequencePanel);
+       
+        
+        
+
+    }//GEN-LAST:event_UpdateActionPerformed
+
+    private void Back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back1ActionPerformed
+        // TODO add your handling code here:
+         //CardSequencePanel.remove(this);
+        //((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        backAction();
+
+    }//GEN-LAST:event_Back1ActionPerformed
+
+    private void backAction() {
         CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
-
-    }//GEN-LAST:event_BackActionPerformed
-
-
+        Component[] componentArray = CardSequencePanel.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManagePersonsJPanel managePersonsJPanel = (ManagePersonsJPanel) component;
+        managePersonsJPanel.refreshTable();
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }
+    
+    public void refreshTable() {
+            
+            //clear table
+            
+            int rc = PeronTable.getRowCount();
+            int i;
+            for (i = rc - 1; i >= 0; i--) {
+                ((DefaultTableModel) PeronTable.getModel()).removeRow(i);
+            }
+        
+            //fill selected person details to display
+            Object[] row = new Object[4];
+            row[0] = selectedPerson;
+            row[1] = selectedPerson.getFirstName(); 
+            row[2] = selectedPerson.getLastName(); //last Name
+            row[3] = selectedPerson.getDateOfBirth();
+                                                            
+            //display nUID for found student
+            //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
+            //    StudentProfile stu = (StudentProfile) selecteduseraccount.getAssociatedPersonProfile();
+            //    row[4] = stu.getnUID();
+            //}
+            
+                                                            
+            ((DefaultTableModel) PeronTable.getModel()).addRow(row);
+        
+            //System.out.println(selecteduseraccount);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
+    private javax.swing.JButton Back1;
+    private javax.swing.JTable PeronTable;
+    private javax.swing.JButton Update;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
 }

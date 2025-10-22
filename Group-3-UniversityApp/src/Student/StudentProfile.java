@@ -19,13 +19,17 @@ import java.util.ArrayList;
  */
 public class StudentProfile extends Profile {
 
-    //Person person;
+    
     Transcript transcript;
     EmploymentHistroy employmenthistory;
+    //begin of changes to student
     private String nUID;
-    
-    //begin of changes to link dept to student
-    Department department;
+    private String termAdmittedFirst; // term admitted in
+    private String instructionMode; // online or on-campus
+    private String programEnrolled; //example MSIS
+    private String hobbies;
+    private String interests;
+    private Department department;
     //end of changes
 
     public StudentProfile(Person p) {
@@ -47,6 +51,12 @@ public class StudentProfile extends Profile {
         this.nUID = nUID;
         this.department = department;
     }
+    
+    public StudentProfile(Person p, Department department) {
+        
+        super(p); 
+        this.department = department;
+    }
     //end
 
     public Department getDepartment() {
@@ -65,7 +75,55 @@ public class StudentProfile extends Profile {
         this.nUID = nUID;
     }
 
+    public EmploymentHistroy getEmploymenthistory() {
+        return employmenthistory;
+    }
 
+    public void setEmploymenthistory(EmploymentHistroy employmenthistory) {
+        this.employmenthistory = employmenthistory;
+    }
+
+    public String getTermAdmittedFirst() {
+        return termAdmittedFirst;
+    }
+
+    public void setTermAdmittedFirst(String termAdmittedFirst) {
+        this.termAdmittedFirst = termAdmittedFirst;
+    }
+
+    public String getInstructionMode() {
+        return instructionMode;
+    }
+
+    public void setInstructionMode(String instructionMode) {
+        this.instructionMode = instructionMode;
+    }
+
+    public String getProgramEnrolled() {
+        return programEnrolled;
+    }
+
+    public void setProgramEnrolled(String programEnrolled) {
+        this.programEnrolled = programEnrolled;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public String getInterests() {
+        return interests;
+    }
+
+    public void setInterests(String interests) {
+        this.interests = interests;
+    }
+
+    
     //public boolean isMatch(String id) {
        // return person.getPersonId().equals(id);
     //}
@@ -111,4 +169,10 @@ public class StudentProfile extends Profile {
     public String getRole() {
         return "Student";
     }
+    
+    @Override
+    public String toString() {
+        return super.getPerson().getPersonId();
+    }  
+    
 }
