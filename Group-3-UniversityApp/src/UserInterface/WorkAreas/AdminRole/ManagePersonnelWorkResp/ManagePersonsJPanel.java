@@ -31,9 +31,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
      */
     JPanel CardSequencePanel;
     University university;
-    //UserAccount selecteduseraccount;
     Person selectedPerson;
-    //UserAccountDirectory uad;
     PersonDirectory pd;
 
     public ManagePersonsJPanel(University uni, JPanel jp) {
@@ -55,10 +53,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         }
         
         pd = university.getPersonDirectory();
-        //PersonDirectory pd = university.getPersonDirectory();
-        //StudentDirectory stuDir = business.getStudentDirectory();
-        
-        
+       
         for (Person pa : pd.getPersonlist()) {
 
             Object[] row = new Object[4];
@@ -66,14 +61,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             row[1] = pa.getFirstName(); 
             row[2] = pa.getLastName(); 
             row[3] = pa.getDateOfBirth();          
-            
-            
-            //get nUID for student accounts only
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-                //StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-                //row[5] = stu.getnUID();
-            //}
-                                        
+                                      
             ((DefaultTableModel) PersonTable.getModel()).addRow(row);
         }  
     }
@@ -245,13 +233,13 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
 
     private void btnRemovePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovePersonActionPerformed
         // TODO add your handling code here:
-        //remove selected User account
+        //remove selected person
         int row = PersonTable.getSelectedRow();
      
         //error handling
         if (row >= 0) {
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected user account?", "Warning", JOptionPane.WARNING_MESSAGE);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected person?", "Warning", JOptionPane.WARNING_MESSAGE);
             
             if (dialogResult == JOptionPane.YES_OPTION) {
                 selectedPerson = (Person) PersonTable.getValueAt(row, 0);
@@ -289,18 +277,12 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) PersonTable.getModel()).removeRow(i);
         }
 
-        
             Object[] row = new Object[4];
             row[0] = person;
             row[1] = person.getFirstName();
             row[2] = person.getLastName();
             row[3] = person.getDateOfBirth();
-            
-            //display nUID for found student
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-            //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-            //    row[5] = stu.getnUID();
-            //}                           
+                                      
             ((DefaultTableModel) PersonTable.getModel()).addRow(row);
           
     }

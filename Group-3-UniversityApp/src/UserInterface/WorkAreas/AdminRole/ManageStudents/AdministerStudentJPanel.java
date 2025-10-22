@@ -76,7 +76,7 @@ public class AdministerStudentJPanel extends javax.swing.JPanel {
         Update.setBounds(480, 290, 100, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Administer Faculty");
+        jLabel2.setText("Administer Student");
         add(jLabel2);
         jLabel2.setBounds(21, 20, 550, 28);
 

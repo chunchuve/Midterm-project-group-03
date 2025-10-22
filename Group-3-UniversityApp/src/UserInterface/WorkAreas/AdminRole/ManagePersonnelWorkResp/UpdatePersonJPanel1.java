@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vrmohanc
  */
-public class UpdatePersonJPanel extends javax.swing.JPanel {
+public class UpdatePersonJPanel1 extends javax.swing.JPanel {
     
     JPanel CardSequencePanel;
     University university;
@@ -39,48 +39,13 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UpdatePersonJPanel
      */
-    public UpdatePersonJPanel(JPanel jp, University university, Person person) {
+    public UpdatePersonJPanel1(JPanel jp, University university, Person person) {
         initComponents();
         this.CardSequencePanel = jp;
         this.university = university;
         this.selectedPerson = person;
         
-        //populate role combo box
-        populateRoleCombo();
-        
-        //populate department combo box
-        populateDepartmentCombo();
-        
-        String personId = selectedPerson.getPersonId();
-        //get the profile corresponding to personID selected and show that person details
-        try {
-            StudentProfile student = university.getStudentDirectory().findStudent(personId);
-            this.selectedProfile = student;
-            System.out.println(student.getDepartment().getName());
-            comboDepartment.setSelectedItem(student.getDepartment().getName());
-            comboRole.setSelectedItem(student.getRole());
-        } catch(Exception e) {
-            try {
-                EmployeeProfile employee = university.getEmployeeDirectory().findEmployee(personId);
-                this.selectedProfile = employee;
-                System.out.println(employee.getDepartment().getName());
-                comboDepartment.setSelectedItem(employee.getDepartment().getName());
-                comboRole.setSelectedItem(employee.getRole());
-            } catch(Exception ex) {
-                try {
-                    FacultyProfile faculty = university.getFacultydirectory().findTeachingFaculty(personId);
-                    this.selectedProfile = faculty;
-                    System.out.println(faculty.getDepartment().getName());
-                    comboDepartment.setSelectedItem(faculty.getDepartment().getName());
-                    comboRole.setSelectedItem(faculty.getRole());
-                } catch(Exception ey) {
-                    JOptionPane.showMessageDialog(this, "Person role is not defined yet", "Warning", JOptionPane.INFORMATION_MESSAGE);
-                }
-                
-            }
-        }
-        
-        //get person info and display form
+       //get person info and display form
         txtFirstName.setText(selectedPerson.getFirstName());
         txtLastName.setText(selectedPerson.getLastName());
         txtDateOfBirth.setText(selectedPerson.getDateOfBirth());
@@ -89,8 +54,38 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         txtCity.setText(selectedPerson.getAddress().getCity());
         txtState.setText(selectedPerson.getAddress().getState());
         txtZip.setText(selectedPerson.getAddress().getZipCode());
-       
         
+        String personId = selectedPerson.getPersonId();
+        //get the profile corresponding to personID selected and show that profile department
+        try {
+            StudentProfile student = university.getStudentDirectory().findStudent(personId);
+            txtDepartment.setText(student.getDepartment().getName());
+            this.selectedProfile = student;
+            
+        } catch(Exception e) {
+            try {
+                EmployeeProfile employee = university.getEmployeeDirectory().findEmployee(personId);
+                txtDepartment.setText(employee.getDepartment().getName());
+                this.selectedProfile = employee;
+                
+            } catch(Exception ex) {
+                try {
+                    FacultyProfile faculty = university.getFacultydirectory().findTeachingFaculty(personId);
+                    txtDepartment.setText(faculty.getDepartment().getName());
+                    this.selectedProfile = faculty;
+                    
+                } catch(Exception ey) {
+                    JOptionPane.showMessageDialog(this, "Person role is not defined yet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        }
+        
+         //display profile specific fields
+        txtRole.setText(selectedProfile.getRole());
+        
+        txtRole.setEnabled(false);
+        txtDepartment.setEnabled(false);
     }
 
     /**
@@ -122,9 +117,9 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         lblCity2 = new javax.swing.JLabel();
         txtZip = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        comboRole = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        comboDepartment = new javax.swing.JComboBox<>();
+        txtRole = new javax.swing.JTextField();
+        txtDepartment = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -163,11 +158,7 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Role");
 
-        comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Department");
-
-        comboDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -195,14 +186,16 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
                                 .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)
                                 .addComponent(lblCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(46, 46, 46)
-                                .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(33, 33, 33)
+                                .addComponent(txtDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblDateOfBirth)
@@ -229,7 +222,7 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
                                 .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(lblTitle))
-                .addGap(0, 94, Short.MAX_VALUE))
+                .addGap(0, 133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,9 +264,9 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnSave)
                 .addGap(54, 54, 54))
@@ -313,28 +306,6 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         selectedPerson.setAddress(address);
         
         
-        //delete current selected profile
-        if (selectedProfile instanceof StudentProfile) {
-            university.getStudentDirectory().removeStudentProfile((StudentProfile)selectedProfile);
-           
-        } else if (selectedProfile instanceof EmployeeProfile) {
-            university.getEmployeeDirectory().removeEmployeeProfile((EmployeeProfile)selectedProfile);
-           
-        } else if (selectedProfile instanceof FacultyProfile){
-            university.getFacultydirectory().removeFaculty((FacultyProfile)selectedProfile);
-            
-        } else return;
-        
-        //re-create profile per role and department selected on the combo boxes
-        if (comboRole.getSelectedItem().equals("Student")) {
-            university.getStudentDirectory().newStudentProfile(selectedPerson, (Department)comboDepartment.getSelectedItem());
-        } else if (comboRole.getSelectedItem().equals("Faculty")) {
-            university.getEmployeeDirectory().newEmployeeProfile(selectedPerson, (Department)comboDepartment.getSelectedItem());
-        } else if (comboRole.getSelectedItem().equals("Admin")) {
-            university.getFacultydirectory().newFacultyProfile(selectedPerson, (Department)comboDepartment.getSelectedItem());
-        } else return;
-        
-        
     }
     
     
@@ -348,35 +319,11 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         layout.previous(CardSequencePanel);
     }
 
-    private void populateRoleCombo() {
-        //
-        comboDepartment.removeAllItems();
-        DefaultComboBoxModel model = (DefaultComboBoxModel) comboDepartment.getModel();
-        
-        ArrayList<Department> departments = university.getCollege().getDepartments();
-        
-        for (Department d: departments) {
-            model.addElement(d);
-        }
-        
-    }
-
-    private void populateDepartmentCombo() {
-        //
-        comboRole.removeAllItems();
-        DefaultComboBoxModel model = (DefaultComboBoxModel) comboRole.getModel();
-        
-        model.addElement("Faculty");
-        model.addElement("Student");
-        model.addElement("Admin");
-        
-    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> comboDepartment;
-    private javax.swing.JComboBox<String> comboRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblCity;
@@ -390,10 +337,12 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtDateOfBirth;
+    private javax.swing.JTextField txtDepartment;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtLine1;
     private javax.swing.JTextField txtLine2;
+    private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtState;
     private javax.swing.JTextField txtZip;
     // End of variables declaration//GEN-END:variables

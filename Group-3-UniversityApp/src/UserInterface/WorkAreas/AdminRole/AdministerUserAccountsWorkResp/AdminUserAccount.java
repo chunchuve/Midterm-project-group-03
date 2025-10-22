@@ -92,7 +92,7 @@ public class AdminUserAccount extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "User Name", "Password", "Full Name", "Status", "NUID"
+                "User Name", "Password", "Person ID", "Status", "NUID"
             }
         ) {
             boolean[] canEdit = new boolean [] {

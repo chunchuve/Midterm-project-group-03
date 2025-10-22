@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sabrina/Downloads/Backup/Midterm-project-group-03/Group-3-UniversityApp/src/University/ProfileWorkAreaMainFrame.java</file>
-            <file>file:/C:/Users/Sabrina/Downloads/Backup/Midterm-project-group-03/Group-3-UniversityApp/src/Department/Department.java</file>
-            <file>file:/C:/Users/Sabrina/Downloads/Backup/Midterm-project-group-03/Group-3-UniversityApp/src/University/ConfigureUniversity.java</file>
+            <file>file:/Users/vrmohanc/Midterm-project-group-03/Group-3-UniversityApp/src/UserInterface/WorkAreas/AdminRole/ManageFaculty/UpdateFacultyJPanel.java</file>
+            <file>file:/Users/vrmohanc/Midterm-project-group-03/Group-3-UniversityApp/src/UserInterface/WorkAreas/AdminRole/ManagePersonnelWorkResp/AddPersonJPanel.java</file>
+            <file>file:/Users/vrmohanc/Midterm-project-group-03/Group-3-UniversityApp/src/UserInterface/WorkAreas/AdminRole/ManagePersonnelWorkResp/UpdatePersonJPanel.java</file>
         </group>
     </open-files>
 </project-private>
