@@ -22,23 +22,19 @@
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblDepartment" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="39" max="-2" attributes="0"/>
-                              </Group>
                               <Component id="fieldTitle" alignment="1" min="-2" pref="182" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="407" max="-2" attributes="0"/>
-                                      <Component id="fieldPassword" min="-2" pref="182" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblUsername" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                      <Component id="fieldUsername" min="-2" pref="182" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblUsername" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="fieldPassword" min="-2" pref="182" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                          <Component id="fieldUsername" min="-2" pref="182" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Component id="fieldRole" alignment="1" min="-2" pref="182" max="-2" attributes="0"/>
@@ -65,9 +61,13 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="fieldDepartment" alignment="1" min="-2" pref="182" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblDepartment" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="fieldDepartment" min="-2" pref="182" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
                                               <Component id="lblResearchArea" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                               <Component id="fieldResearchArea" min="-2" pref="182" max="-2" attributes="0"/>
@@ -77,8 +77,9 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lblRole" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
@@ -180,24 +181,24 @@
                   <Component id="lblResearchArea" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fieldResearchArea" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fieldRole" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblRole" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblRole" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblDepartment" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="fieldDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="fieldTitle" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="fieldPassword" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblUsername" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="fieldUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>

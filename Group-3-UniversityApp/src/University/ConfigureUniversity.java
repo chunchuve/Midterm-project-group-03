@@ -41,12 +41,14 @@ class ConfigureUniversity {
             employeeDirectory, userAccountDirectory, studentDirectory, facultyDirectory);
         
         //create departments
-        Department department1 = university.getCollege().newDepartment("Computer Science Engg.");
+        Department department1 = university.getCollege().newDepartment("Computer Science");
         Department department2 = university.getCollege().newDepartment("Information Technology");
         
-        //create courses
-        department1.newCourse("EECE 5641", "Introduction to Software Security", 4);
-        department1.newCourse("EECE 5642", "Data Visualization", 4);
+        //Create courses
+        department1.newCourse("High-Performance Computing", "EECE 5640",4);
+        department1.newCourse( "Introduction to Software Security", "EECE 5641", 4);
+        department2.newCourse("Computer System Security", "CY 5130", 4);
+        department2.newCourse("Mobile and Wireless Networking", "EECE 7364", 4);
         
         // Create Persons
         
@@ -59,6 +61,7 @@ class ConfigureUniversity {
         //Person person001 = personDirectory.newPerson("John Smith"); //employee
         
         person002.getAddress().setLine1("127 Chipmunk Lane"); //creating address for faculty
+        person002.getAddress().setLine2("Unit 1");
         person002.getAddress().setCity("Portland");
         person002.getAddress().setState("NY");
         person002.getAddress().setZipCode("14202");
