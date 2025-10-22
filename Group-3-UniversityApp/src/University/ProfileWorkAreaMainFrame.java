@@ -8,14 +8,14 @@ package University;
 import Employee.EmployeeProfile;
 //import Faculty.FacultyProfile;
 import Profile.Profile;
-//import Student.StudentProfile;
+import Student.StudentProfile;
 
 import UserAccounts.UserAccount;
 import UserAccounts.UserAccountDirectory;
 
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
+import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 //import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
-//import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 //import UserInterface.WorkAreas.StudentRole.StudentSignUpJPanel;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
@@ -163,7 +163,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             return;
         }
         user = useraccount;
-        //StudentWorkAreaJPanel studentworkareajpanel;
+        StudentWorkAreaJPanel studentworkareajpanel;
         //FacultyWorkAreaJPanel facultyworkarea;
         AdminRoleWorkAreaJPanel adminworkarea;
         String r = useraccount.getRole();
@@ -184,7 +184,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         }
         
-        /*
+
         if (profile instanceof StudentProfile) {
             
             //update last activity at the user login
@@ -197,6 +197,8 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
+
+        /*
 
          if (profile instanceof FacultyProfile) {
              
