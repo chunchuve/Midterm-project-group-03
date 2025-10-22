@@ -183,7 +183,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 
     private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
-        StudentManageProfileJPanel myProfile = new StudentManageProfileJPanel(student, CardSequencePanel);
+        StudentViewProfileJPanel myProfile = new StudentViewProfileJPanel(student, CardSequencePanel);
         CardSequencePanel.add("StudentManageProfileJPanel", myProfile);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);

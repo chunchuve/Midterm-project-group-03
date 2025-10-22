@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author csong
  */
-public class StudentManageProfileJPanel extends javax.swing.JPanel {
+public class StudentViewProfileJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form UserProfileJPanel
@@ -23,34 +23,32 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     StudentProfile student;
     
-    public StudentManageProfileJPanel(StudentProfile s, JPanel cjp) {
+    public StudentViewProfileJPanel(StudentProfile s, JPanel cjp) {
         initComponents();
         
         CardSequencePanel = cjp;
         student = s;
         
-//        // get profile's information
-//        String name = student.getPerson().getName();
-//        String id = student.getPerson().getPersonId();
-//        String phone = student.getPerson().getPhone();
-//        String address = student.getPerson().getAddress();
-//        String nuid = student.getNUID();
-//        
-//        // check if NUID is available
-//        if(nuid == null) {
-//            nuid = "Not Assigned";
-//        }
-//        
-//        // set the field
-//        fieldName.setText(name);
-//        fieldID.setText(id);
-//        fieldPhone.setText(phone);
-//        fieldAddress.setText(address);
-//        fieldNUID.setText(nuid);
-//        
-//        fieldName.setEditable(false);
-//        fieldID.setEditable(false);
-//        fieldNUID.setEditable(false);
+        // get profile's information
+        String firstname = student.getPerson().getFirstName();
+        String lastname = student.getPerson().getLastName();
+        String NUID = student.getnUID();
+        String department = student.getDepartment().getName();
+        String admittedTerm = student.getTermAdmittedFirst();
+        String program = student.getProgramEnrolled();
+                
+        // set the field
+        fieldName.setText(firstname + " " + lastname);
+        fieldAdmittedTerm.setText(admittedTerm);
+        fieldDepartment.setText(department);
+        fieldProgram.setText(program);
+        fieldNUID.setText(NUID);
+        
+        fieldName.setEditable(false);
+        fieldAdmittedTerm.setEditable(false);
+        fieldDepartment.setEditable(false);
+        fieldProgram.setEditable(false);
+        fieldNUID.setEditable(false);
         
     }
 
@@ -66,29 +64,28 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
         fieldName = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
-        lblP = new javax.swing.JLabel();
-        fieldID = new javax.swing.JTextField();
-        lbPhone = new javax.swing.JLabel();
-        lblAddress = new javax.swing.JLabel();
-        fieldPhone = new javax.swing.JTextField();
-        fieldAddress = new javax.swing.JTextField();
+        lblAdmittedTerm = new javax.swing.JLabel();
+        fieldAdmittedTerm = new javax.swing.JTextField();
+        lblDepartment = new javax.swing.JLabel();
+        lblProgram = new javax.swing.JLabel();
+        fieldDepartment = new javax.swing.JTextField();
+        fieldProgram = new javax.swing.JTextField();
         lblNUID = new javax.swing.JLabel();
         fieldNUID = new javax.swing.JTextField();
         Back = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 255, 255));
+        setBackground(new java.awt.Color(255, 255, 204));
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitle.setText("Personal Information");
+        lblTitle.setText("Student Profile");
 
         lblName.setText("Name:");
 
-        lblP.setText("Person ID:");
+        lblAdmittedTerm.setText("Admitted Term:");
 
-        lbPhone.setText("Phone:");
+        lblDepartment.setText("Department:");
 
-        lblAddress.setText("Address:");
+        lblProgram.setText("Program:");
 
         lblNUID.setText("NUID:");
 
@@ -96,13 +93,6 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setText("Updated");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
             }
         });
 
@@ -119,25 +109,23 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
                         .addGap(197, 197, 197)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNUID, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblAddress, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbPhone, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblP, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblProgram, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDepartment, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblAdmittedTerm, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblName, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fieldAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(fieldProgram, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(fieldNUID)
-                            .addComponent(fieldPhone)
-                            .addComponent(fieldID)
+                            .addComponent(fieldDepartment)
+                            .addComponent(fieldAdmittedTerm)
                             .addComponent(fieldName))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(Back)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUpdate)
-                .addGap(39, 39, 39))
+                .addGap(39, 514, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,24 +138,22 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
                     .addComponent(lblName))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblP)
-                    .addComponent(fieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAdmittedTerm)
+                    .addComponent(fieldAdmittedTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPhone)
-                    .addComponent(fieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDepartment)
+                    .addComponent(fieldDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAddress)
-                    .addComponent(fieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblProgram)
+                    .addComponent(fieldProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNUID)
                     .addComponent(fieldNUID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Back)
-                    .addComponent(btnUpdate))
+                .addComponent(Back)
                 .addGap(68, 68, 68))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -178,56 +164,19 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_BackActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
-//        String phone = fieldPhone.getText();
-//        String address = fieldAddress.getText();
-//
-//        
-//        // validate if the name is not blank
-//        if (address.isBlank() || phone.isBlank()) {
-//            JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Warning", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//        
-//        // check phone number can be converted to integer
-//        if (!phone.isBlank()) {
-//            try {
-//                Integer.parseInt(phone);
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(this, "Please enter all numbers for phone number.", "Warning", JOptionPane.WARNING_MESSAGE);
-//                return;
-//            }
-//        }
-
-        
-//        // set to new values
-//        student.getPerson().setPhone(phone);
-//        student.getPerson().setAddress(address);
-//        
-//        // record update time
-//        student.getUserAccountLinked().setLastUpdatedTime();
-
-
-        // add success message
-        JOptionPane.showMessageDialog(this, "Your updated information is successfully added.", "Information", JOptionPane.INFORMATION_MESSAGE);
-
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JButton btnUpdate;
-    private javax.swing.JTextField fieldAddress;
-    private javax.swing.JTextField fieldID;
+    private javax.swing.JTextField fieldAdmittedTerm;
+    private javax.swing.JTextField fieldDepartment;
     private javax.swing.JTextField fieldNUID;
     private javax.swing.JTextField fieldName;
-    private javax.swing.JTextField fieldPhone;
-    private javax.swing.JLabel lbPhone;
-    private javax.swing.JLabel lblAddress;
+    private javax.swing.JTextField fieldProgram;
+    private javax.swing.JLabel lblAdmittedTerm;
+    private javax.swing.JLabel lblDepartment;
     private javax.swing.JLabel lblNUID;
     private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblP;
+    private javax.swing.JLabel lblProgram;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }
