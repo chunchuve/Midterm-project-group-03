@@ -54,7 +54,7 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
         lblRole = new javax.swing.JLabel();
         txtRole = new javax.swing.JTextField();
         lblFullName = new javax.swing.JLabel();
-        txtFullName = new javax.swing.JTextField();
+        txtPersonID = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -82,7 +82,7 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
 
         lblRole.setText("Role");
 
-        lblFullName.setText("Full Name");
+        lblFullName.setText("Person ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -113,7 +113,7 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblFullName)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(289, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -149,7 +149,7 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
                     .addComponent(lblRole))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFullName))
                 .addContainerGap(260, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,18 +175,23 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         //add user account
-        Person p = university.getPersonDirectory().newPerson(txtFullName.getText());
+        Person p = university.getPersonDirectory().newPerson(txtPersonID.getText());
         Profile pr = null;
         if (txtRole.getText().equalsIgnoreCase("Student")) {
             //add as new student
-            
             pr = university.getStudentDirectory().newStudentProfile(p);
-        } else if (txtRole.getText().equalsIgnoreCase("Employee")) {
+        } else if (txtRole.getText().equalsIgnoreCase("Admin")) {
             //add as new employee
             pr = university.getEmployeeDirectory().newEmployeeProfile(p);
         } else if (txtRole.getText().equalsIgnoreCase("Faculty")) {
             //add as new faculty
             pr = university.getFacultydirectory().newFacultyProfile(p);
+        } else {
+            // \"Admin\" or \"Faculty\" or \"Student\"
+            JOptionPane.showMessageDialog(this, "User role invalid: select one of"
+                    + " \"Admin\" or \"Faculty\" or \"Student\" ",
+                    "Warning", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         
         UserAccount ua = university.getUserAccountDirectory().newUserAccount(pr, txtUserName.getText(), txtPswd.getText());
@@ -194,9 +199,9 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
         ua.setLastUpdated(LocalDateTime.now());
         ua.setStatus(txtStatus.getText());
       
-
+        
         JOptionPane.showMessageDialog(this, "New User successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        //backAction();
+        
     }//GEN-LAST:event_btnAddSupplierActionPerformed
 
     private void backAction() {
@@ -218,7 +223,7 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JTextField txtFullName;
+    private javax.swing.JTextField txtPersonID;
     private javax.swing.JTextField txtPswd;
     private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtStatus;

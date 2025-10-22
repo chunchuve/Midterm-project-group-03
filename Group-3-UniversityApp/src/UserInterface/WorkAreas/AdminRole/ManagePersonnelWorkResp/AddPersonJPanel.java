@@ -280,7 +280,7 @@ public class AddPersonJPanel extends javax.swing.JPanel {
         Department selectedDept = (Department) comboDepartment.getSelectedItem();
         String selectedRole = (String) comboRole.getSelectedItem();
       
-        if (selectedRole.equalsIgnoreCase("Employee")) {
+        if (selectedRole.equalsIgnoreCase("Admin")) {
             //create person as employee
             university.getEmployeeDirectory().newEmployeeProfile(p, selectedDept);
         } else if (selectedRole.equalsIgnoreCase("Faculty")) {
