@@ -44,6 +44,10 @@ class ConfigureUniversity {
         Department department1 = university.getCollege().newDepartment("Computer Science Engg.");
         Department department2 = university.getCollege().newDepartment("Information Technology");
         
+        //create courses
+        department1.newCourse("EECE 5641", "Introduction to Software Security", 4);
+        department1.newCourse("EECE 5642", "Data Visualization", 4);
+        
         // Create Persons
         
         Person person001 = personDirectory.newPerson("ID1234", "John", "Smith", "10-16-1990"); //employee
