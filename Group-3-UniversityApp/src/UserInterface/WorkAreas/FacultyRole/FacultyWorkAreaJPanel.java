@@ -7,6 +7,7 @@ package UserInterface.WorkAreas.FacultyRole;
 import Department.Department;
 import Faculty.FacultyProfile;
 import University.University;
+import UserAccounts.UserAccount;
 import UserInterface.WorkAreas.FacultyRole.ManageCoursesResp.ManageCourseJPanel;
 import javax.swing.JPanel;
 
@@ -20,16 +21,18 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     University university;
     Department department;
     FacultyProfile facultyProfile;
+    UserAccount userAccount;
     
     /**
      * Creates new form FacultyRoleWorkAreaJPanel
      */
-    public FacultyWorkAreaJPanel(University u, JPanel clp, FacultyProfile fp) {
+    public FacultyWorkAreaJPanel(University u, JPanel clp, FacultyProfile fp, UserAccount ua) {
         
         this.university = u;
         this.facultyProfile = fp;
         this.department = fp.getDepartment();
         this.CardSequencePanel = clp;
+        this.userAccount = ua;
         initComponents();
     }
 
@@ -155,12 +158,12 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
         // TODO add your handling code here:
+        
+        ViewFacultyProfileJPanel viewFacultyProfileJPanel;
+        viewFacultyProfileJPanel = new ViewFacultyProfileJPanel(university, university.getUserAccountDirectory(), userAccount, CardSequencePanel);
         //CardSequencePanel.removeAll();
-        //    IdentifyEventTypes iet= new IdentifyEventTypes(businessunit, CardSequencePanel);
-
-        //    CardSequencePanel.add("IdentifyEventTypes", iet);
-        //((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        //((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
+        CardSequencePanel.add("viewFacultyProfileJPanel", viewFacultyProfileJPanel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);    
     }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed

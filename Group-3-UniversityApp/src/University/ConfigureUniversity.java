@@ -41,17 +41,36 @@ class ConfigureUniversity {
             employeeDirectory, userAccountDirectory, studentDirectory, facultyDirectory);
         
         //create departments
-        Department department1 = university.getCollege().newDepartment("Computer Science Engg.");
+        Department department1 = university.getCollege().newDepartment("Computer Science");
         Department department2 = university.getCollege().newDepartment("Information Technology");
         
-// Create Persons
+        //Create courses
+        department1.newCourse("High-Performance Computing", "EECE 5640",4);
+        department1.newCourse( "Introduction to Software Security", "EECE 5641", 4);
+        department2.newCourse("Computer System Security", "CY 5130", 4);
+        department2.newCourse("Mobile and Wireless Networking", "EECE 7364", 4);
+        
+        // Create Persons
         
         Person person001 = personDirectory.newPerson("ID1234", "John", "Smith", "10-16-1990"); //employee
         Person person002 = personDirectory.newPerson("ID3456", "Gina", "Montana", "11-15-1980"); //faculty
         Person person003 = personDirectory.newPerson("ID7890", "Adam", "Rollen", "09-10-2003"); //student
- 
         Person person005 = personDirectory.newPerson("ID7845", "Jim", "Dellon", "01-01-2004"); //student
         Person person006 = personDirectory.newPerson("ID7845", "Anna", "Shnider", "01-01-2004"); //faculty
+    
+        //Person person001 = personDirectory.newPerson("John Smith"); //employee
+        
+        person002.getAddress().setLine1("127 Chipmunk Lane"); //creating address for faculty
+        person002.getAddress().setLine2("Unit 1");
+        person002.getAddress().setCity("Portland");
+        person002.getAddress().setState("NY");
+        person002.getAddress().setZipCode("14202");
+        
+        
+        //Person person003 = personDirectory.newPerson("Adam Rollen"); //student
+
+ 
+        
         //Person person007 = personDirectory.newPerson("Laura Brown");
         //Person person008 = personDirectory.newPerson("Jack While");
         //Person person009 = personDirectory.newPerson("Fidelity"); //we use this as customer

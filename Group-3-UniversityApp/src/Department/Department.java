@@ -52,6 +52,31 @@ public class Department {
         degree = new Degree("MSIS");
         
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CourseCatalog getCoursecatalog() {
+        return coursecatalog;
+    }
+
+    public void setCoursecatalog(CourseCatalog coursecatalog) {
+        this.coursecatalog = coursecatalog;
+    }
+
+    public FacultyDirectory getFacultydirectory() {
+        return facultydirectory;
+    }
+
+    public void setFacultydirectory(FacultyDirectory facultydirectory) {
+        this.facultydirectory = facultydirectory;
+    }
+    
     
     public void addCoreCourse(Course c){
         degree.addCoreCourse(c);
@@ -115,22 +140,6 @@ public void addElectiveCourse(Course c){
         CourseOffer co = cs.getCourseOfferByNumber(cn);
 
         co.assignEmptySeat(cl);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public CourseCatalog getCoursecatalog() {
-        return coursecatalog;
-    }
-
-    public void setCoursecatalog(CourseCatalog coursecatalog) {
-        this.coursecatalog = coursecatalog;
     }
 
     public Degree getDegree() {
