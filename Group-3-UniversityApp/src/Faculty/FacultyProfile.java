@@ -20,7 +20,7 @@ public class FacultyProfile extends Profile {
     private String title; //professor, associate professor, lecturer etc
     private String researchArea;
     
-    private Department department;
+    Department department;
     ArrayList <FacultyAssignment> facultyassignments; 
     
     public FacultyProfile(Person p) {

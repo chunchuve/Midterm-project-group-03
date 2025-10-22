@@ -5,8 +5,9 @@
  */
 package University;
 
+import Department.Department;
 import Employee.EmployeeProfile;
-//import Faculty.FacultyProfile;
+import Faculty.FacultyProfile;
 import Profile.Profile;
 //import Student.StudentProfile;
 
@@ -14,6 +15,7 @@ import UserAccounts.UserAccount;
 import UserAccounts.UserAccountDirectory;
 
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
+import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 //import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 //import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 //import UserInterface.WorkAreas.StudentRole.StudentSignUpJPanel;
@@ -28,6 +30,7 @@ import javax.swing.JPanel;
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
     University university;
+    Department department;
     UserAccount user;
 
     /**
@@ -164,7 +167,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         }
         user = useraccount;
         //StudentWorkAreaJPanel studentworkareajpanel;
-        //FacultyWorkAreaJPanel facultyworkarea;
+        FacultyWorkAreaJPanel facultyworkarea;
         AdminRoleWorkAreaJPanel adminworkarea;
         String r = useraccount.getRole();
         //System.out.println(r);
@@ -196,20 +199,20 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             CardSequencePanel.add("student", studentworkareajpanel);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
-        }
+        } */
 
          if (profile instanceof FacultyProfile) {
              
             //update last activity at the user login
             user.setLastActivity(LocalDateTime.now());
             FacultyProfile fp = (FacultyProfile) profile;
+            Department facultydept = fp.getDepartment(); //retrieve department from faculty profile during login
             facultyworkarea = new FacultyWorkAreaJPanel(university, CardSequencePanel, fp);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
-        */
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
