@@ -38,7 +38,9 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     public ProfileWorkAreaMainFrame() {
         initComponents();
         university = ConfigureUniversity.initialize();
-    
+        
+        // set logout button to be invisible
+        btnLogout.setVisible(false);
     }
 
     public void insert(JPanel jpanel) {
@@ -56,12 +58,13 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         SplitHomeArea = new javax.swing.JSplitPane();
         actionsidejpanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
+        lblUsername = new javax.swing.JLabel();
         UserNameTextField = new javax.swing.JTextField();
         PasswordTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         btnSignUpStudent = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         CardSequencePanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -70,14 +73,14 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         actionsidejpanel.setBackground(new java.awt.Color(0, 153, 153));
         actionsidejpanel.setMinimumSize(new java.awt.Dimension(200, 200));
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("User Name");
+        lblUsername.setText("User Name");
 
         UserNameTextField.setText("admin");
 
@@ -88,7 +91,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Password");
+        lblPassword.setText("Password");
 
         btnSignUpStudent.setText("Sign Up As Student");
         btnSignUpStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -97,40 +100,50 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout actionsidejpanelLayout = new javax.swing.GroupLayout(actionsidejpanel);
         actionsidejpanel.setLayout(actionsidejpanelLayout);
         actionsidejpanelLayout.setHorizontalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(actionsidejpanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionsidejpanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSignUpStudent)
                 .addGap(20, 20, 20))
+            .addGroup(actionsidejpanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogout)
+                    .addComponent(lblUsername)
+                    .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword)
+                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60))
         );
         actionsidejpanelLayout.setVerticalGroup(
             actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(actionsidejpanelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jLabel1)
+                .addComponent(lblUsername)
                 .addGap(4, 4, 4)
                 .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                 .addComponent(btnSignUpStudent)
-                .addGap(172, 172, 172))
+                .addGap(58, 58, 58)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
         );
 
         SplitHomeArea.setLeftComponent(actionsidejpanel);
@@ -212,6 +225,15 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
+         
+         // change sidebar visibility
+         lblUsername.setVisible(false);
+         lblPassword.setVisible(false);
+         btnLogin.setVisible(false);
+         UserNameTextField.setVisible(false);
+         PasswordTextField.setVisible(false);
+         btnSignUpStudent.setVisible(false);
+         btnLogout.setVisible(true);
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -230,7 +252,32 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         */
         
+        // change sidebar visibility
+//         lblUsername.setVisible(false);
+//         lblPassword.setVisible(false);
+//         btnLogin.setVisible(false);
+//         UserNameTextField.setVisible(false);
+//         PasswordTextField.setVisible(false);
+//         btnSignUpStudent.setVisible(false);
+//         btnLogout.setVisible(true);
+        
     }//GEN-LAST:event_btnSignUpStudentActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // change sidebar visibility
+         lblUsername.setVisible(true);
+         lblPassword.setVisible(true);
+         btnLogin.setVisible(true);
+         UserNameTextField.setVisible(true);
+         PasswordTextField.setVisible(true);
+         btnSignUpStudent.setVisible(true);
+         btnLogout.setVisible(false);
+         
+         // clear and refresh card sequence
+         CardSequencePanel.removeAll();
+         CardSequencePanel.revalidate();
+         CardSequencePanel.repaint();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,10 +327,11 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane SplitHomeArea;
     private javax.swing.JTextField UserNameTextField;
     private javax.swing.JPanel actionsidejpanel;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSignUpStudent;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
 }
