@@ -70,13 +70,7 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
             row[5] = sa.getInstructionMode();
             row[6] = sa.getnUID();
             
-            
-            //get nUID for student accounts only
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-                //StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-                //row[5] = stu.getnUID();
-            //}
-                                        
+                                   
             ((DefaultTableModel) StudentTable.getModel()).addRow(row);
         }  
     }
@@ -227,13 +221,13 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
     
     private void btnRemoveStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveStudentActionPerformed
         // TODO add your handling code here:
-        //remove selected User account
+        //remove selected student
         int row = StudentTable.getSelectedRow();
      
         //error handling
         if (row >= 0) {
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected faculty?", "Warning", JOptionPane.WARNING_MESSAGE);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected student?", "Warning", JOptionPane.WARNING_MESSAGE);
             
             if (dialogResult == JOptionPane.YES_OPTION) {
                 selectedStudent = (StudentProfile) StudentTable.getValueAt(row, 0);
@@ -270,8 +264,6 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) StudentTable.getModel()).removeRow(i);
         }
 
-        
-    
             Object[] row = new Object[7];
             row[0] = student;
             row[1] = student.getPerson().getFirstName();
@@ -280,11 +272,7 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
             row[4] = student.getProgramEnrolled();
             row[5] = student.getInstructionMode();
             row[6] = student.getnUID();
-            //display nUID for found student
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-            //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-            //    row[5] = stu.getnUID();
-            //}                           
+                                    
             ((DefaultTableModel) StudentTable.getModel()).addRow(row);
           
     }

@@ -4,17 +4,45 @@
  */
 package UserInterface.WorkAreas.FacultyRole.ManageCoursesResp;
 
+import CourseCatalog.Course;
+import CourseCatalog.CourseCatalog;
+import CourseSchedule.CourseOffer;
+import Department.Department;
+import Faculty.FacultyProfile;
+import University.University;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Sabrina
  */
 public class ViewCourseJPanel extends javax.swing.JPanel {
 
+    JPanel CardSequencePanel;
+    University university;
+    Department department;
+    FacultyProfile facultyProfile;
+    Course course;
+    CourseCatalog courseCatalog;
+    CourseOffer courseOffer;
+    
     /**
      * Creates new form ViewCourseJPanel
      */
-    public ViewCourseJPanel() {
+    public ViewCourseJPanel(University u, Course course, FacultyProfile fp, JPanel clp) {
+        university = u;
+        this.course = course;
+        this.facultyProfile = fp;
+        this.department = fp.getDepartment();
+        this.CardSequencePanel = clp;
         initComponents();
+        
+        refreshCourseTextFields();
+        setCourseViewMode();
     }
 
     /**
@@ -26,19 +54,220 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblCredits = new javax.swing.JLabel();
+        fieldCredits = new javax.swing.JTextField();
+        lblCourseDetails = new javax.swing.JLabel();
+        lblPrice = new javax.swing.JLabel();
+        fieldPrice = new javax.swing.JTextField();
+        lblCourseNumber = new javax.swing.JLabel();
+        fieldCourseName = new javax.swing.JTextField();
+        lblCourseName = new javax.swing.JLabel();
+        fieldCourseNumber = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+
+        lblCredits.setText("Course Credit:");
+
+        lblCourseDetails.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblCourseDetails.setText("Course Details");
+
+        lblPrice.setText("Course Price:");
+
+        lblCourseNumber.setText("Course Number:");
+
+        lblCourseName.setText("Course Name:");
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1136, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addComponent(lblCourseNumber)
+                            .addGap(18, 18, 18)
+                            .addComponent(fieldCourseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(70, 70, 70)
+                            .addComponent(btnSave)
+                            .addGap(58, 58, 58)
+                            .addComponent(btnUpdate)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCourseDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblPrice)
+                                    .addGap(36, 36, 36)
+                                    .addComponent(fieldPrice))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblCredits)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(fieldCredits))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblCourseName)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(fieldCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lblCourseDetails)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCourseNumber)
+                    .addComponent(fieldCourseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCourseName)
+                    .addComponent(fieldCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCredits)
+                    .addComponent(fieldCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblPrice))
+                    .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addComponent(btnSave)
+                    .addComponent(btnUpdate))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        setCourseEditMode();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        
+        Component[] panelStack = CardSequencePanel.getComponents();
+        JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
+        ManageCourseJPanel manageCourseJPanel = (ManageCourseJPanel) lastPanel;
+        manageCourseJPanel.refreshCourseTable();
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        int credits;
+        //int price; course price is not adjustable by faculty
+        
+        String number = fieldCourseNumber.getText();
+        String name = fieldCourseName.getText();
+
+        //check if all fields are filled out
+        if (number.isBlank() || name.isBlank()) {
+            JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            credits = Integer.parseInt(fieldCredits.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter the number of credits for this course.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        CourseCatalog cc = department.getCourseCatalog();
+        List<Course> courses = cc.getCourseList();
+        course.setCourseNumber(number);
+        course.setCourseName(name);
+        course.setCredits(credits);
+
+        JOptionPane.showMessageDialog(this, "Course updated successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        setCourseViewMode();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JTextField fieldCourseName;
+    private javax.swing.JTextField fieldCourseNumber;
+    private javax.swing.JTextField fieldCredits;
+    private javax.swing.JTextField fieldPrice;
+    private javax.swing.JLabel lblCourseDetails;
+    private javax.swing.JLabel lblCourseName;
+    private javax.swing.JLabel lblCourseNumber;
+    private javax.swing.JLabel lblCredits;
+    private javax.swing.JLabel lblPrice;
     // End of variables declaration//GEN-END:variables
+
+private void refreshCourseTextFields() {
+    CourseCatalog cc = department.getCourseCatalog();
+    List<Course> courses = cc.getCourseList();
+    fieldCourseNumber.setText(course.getCourseNumber());
+    fieldCourseName.setText(course.getCourseName());
+    fieldCredits.setText(String.valueOf(course.getCredits()));
+    fieldPrice.setText(String.valueOf(course.getCoursePrice()));
+    //fieldInstructorFName.setText(courseOffer.getFacultyProfile().getPerson().getFirstName());
+    //fieldInstructorLName.setText(courseOffer.getFacultyProfile().getPerson().getLastName());
+    
+}
+
+private void setCourseViewMode() {
+    fieldCourseNumber.setEnabled(false);
+    fieldCourseName.setEnabled(false);
+    fieldCredits.setEnabled(false);
+    fieldPrice.setEnabled(false);
+    //fieldInstructorFName.setEnabled(false);
+    //fieldInstructorLName.setEnabled(false);       
+    
+    btnSave.setEnabled(false);
+    btnUpdate.setEnabled(true);
+}
+
+private void setCourseEditMode() {
+    fieldCourseNumber.setEnabled(true);
+    fieldCourseName.setEnabled(true);
+    fieldCredits.setEnabled(true);
+    fieldPrice.setEnabled(false); //course price is not adjustable by faculty
+    //fieldInstructorFName.setEnabled(true);
+    //fieldInstructorLName.setEnabled(true);  
+    
+    btnSave.setEnabled(true);
+    btnUpdate.setEnabled(false);
+}
+    
 }

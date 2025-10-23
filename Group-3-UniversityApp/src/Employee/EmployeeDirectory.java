@@ -8,6 +8,7 @@ package Employee;
 import Department.Department;
 //import University.University;
 import Persona.Person;
+import Student.StudentProfile;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,10 @@ public class EmployeeDirectory {
         employeelist.add(ep);
         return ep;
     }
+    //remove employee
+    public void removeEmployeeProfile(EmployeeProfile employee) {
+        employeelist.remove(employee);
+    }
     
     //end of changes
     
@@ -63,6 +68,17 @@ public class EmployeeDirectory {
             return null; //not found after going through the whole list
          }
 
+    //search for employee by Person
+    public EmployeeProfile findEmployeeByPerson(Person p) {
+
+        for (EmployeeProfile ep : employeelist) {
+            
+            if (ep.getPerson().equals(p)) {
+                return ep;
+            }
+        }
+            return null; //not found after going through the whole list
+    }
     
     public ArrayList<EmployeeProfile> getEmployeelist() {
         return employeelist;

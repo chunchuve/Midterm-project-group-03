@@ -51,7 +51,6 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         }
 
         UserAccountDirectory uad = university.getUserAccountDirectory();
-        //StudentDirectory stuDir = business.getStudentDirectory();
         
         
         for (UserAccount ua : uad.getUserAccountList()) {
@@ -105,7 +104,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 80, 23);
+        Back.setBounds(30, 300, 74, 23);
 
         Next.setText("View/Next >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +118,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("User Accounts");
         add(jLabel1);
-        jLabel1.setBounds(30, 90, 190, 17);
+        jLabel1.setBounds(30, 90, 190, 19);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
@@ -162,7 +161,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(btnCreateUserAcc);
-        btnCreateUserAcc.setBounds(170, 300, 99, 23);
+        btnCreateUserAcc.setBounds(170, 300, 90, 23);
 
         btnRemoveUserAcc.setText("Remove User");
         btnRemoveUserAcc.addActionListener(new java.awt.event.ActionListener() {
@@ -175,9 +174,15 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Search by NUID");
         add(jLabel3);
-        jLabel3.setBounds(30, 360, 100, 17);
+        jLabel3.setBounds(30, 360, 100, 16);
+
+        txtSearchbyNUID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchbyNUIDActionPerformed(evt);
+            }
+        });
         add(txtSearchbyNUID);
-        txtSearchbyNUID.setBounds(150, 360, 200, 23);
+        txtSearchbyNUID.setBounds(150, 360, 200, 22);
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +237,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         
         //add new supplier
         //int i=1;
-        AddUserAccountJPanel as = new AddUserAccountJPanel(CardSequencePanel, university);
+        AddUserAccountJPanel1 as = new AddUserAccountJPanel1(CardSequencePanel, university);
         CardSequencePanel.add("AddUserAccount", as);
         CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
@@ -275,6 +280,10 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtSearchbyNUIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchbyNUIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchbyNUIDActionPerformed
     
     private void refreshSearchResults(UserAccount ua) {
         //clear table

@@ -35,5 +35,8 @@ public abstract class Profile {
         }
         return false;
     }
-
+    @Override
+    public String toString(){
+        return this.getPerson().toString();
+    }
 }

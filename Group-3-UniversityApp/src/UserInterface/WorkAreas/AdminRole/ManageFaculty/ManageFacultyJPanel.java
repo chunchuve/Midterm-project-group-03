@@ -67,14 +67,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             row[3] = fa.getDepartment().getName();
             row[4] = fa.getRole();
             row[5] = fa.getTitle();
-            
-            
-            //get nUID for student accounts only
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-                //StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-                //row[5] = stu.getnUID();
-            //}
-                                        
+                                       
             ((DefaultTableModel) FacultyTable.getModel()).addRow(row);
         }  
     }
@@ -110,7 +103,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 80, 23);
+        Back.setBounds(30, 300, 74, 23);
 
         Next.setText("View/Edit >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +117,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Faculty details");
         add(jLabel1);
-        jLabel1.setBounds(30, 90, 190, 17);
+        jLabel1.setBounds(30, 90, 190, 19);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage Faculty");
@@ -171,9 +164,15 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Search by ID");
         add(jLabel3);
-        jLabel3.setBounds(30, 360, 100, 17);
+        jLabel3.setBounds(30, 360, 100, 16);
+
+        txtSearchbyID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchbyIDActionPerformed(evt);
+            }
+        });
         add(txtSearchbyID);
-        txtSearchbyID.setBounds(150, 360, 200, 23);
+        txtSearchbyID.setBounds(150, 360, 200, 22);
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +194,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
-        //if(selecteduseraccount==null) return;
+        
         int row = FacultyTable.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table", "WARNING", JOptionPane.WARNING_MESSAGE);
@@ -225,7 +224,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     
     private void btnRemoveFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveFacultyActionPerformed
         // TODO add your handling code here:
-        //remove selected User account
+        //remove selected faculty account
         int row = FacultyTable.getSelectedRow();
      
         //error handling
@@ -259,6 +258,10 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtSearchbyIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchbyIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchbyIDActionPerformed
     
     private void refreshSearchResults(FacultyProfile faculty) {
         //clear table
@@ -276,11 +279,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             row[3] = faculty.getDepartment().getName();          
             row[4] = faculty.getRole();
             row[5] = faculty.getTitle();
-            //display nUID for found student
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-            //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-             //   row[5] = stu.getnUID();
-            //}                           
+                                    
             ((DefaultTableModel) FacultyTable.getModel()).addRow(row);
           
     }

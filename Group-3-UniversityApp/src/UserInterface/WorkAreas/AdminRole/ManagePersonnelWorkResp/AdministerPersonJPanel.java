@@ -120,11 +120,10 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row from the table", "WARNING", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        //UserAccount selUser = (UserAccount) UserAccountTable.getValueAt(row, 0);
-        selectedPerson = (Person) PeronTable.getValueAt(row, 0);
-        //System.out.println(selecteduseraccount);
         
-        UpdatePersonJPanel uuajp = new UpdatePersonJPanel(CardSequencePanel, university, selectedPerson);
+        selectedPerson = (Person) PeronTable.getValueAt(row, 0);
+        
+        UpdatePersonJPanel1 uuajp = new UpdatePersonJPanel1(CardSequencePanel, university, selectedPerson);
         CardSequencePanel.add("UpdatePersonJPanel", uuajp);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
@@ -169,16 +168,8 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             row[2] = selectedPerson.getLastName(); //last Name
             row[3] = selectedPerson.getDateOfBirth();
                                                             
-            //display nUID for found student
-            //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-            //    StudentProfile stu = (StudentProfile) selecteduseraccount.getAssociatedPersonProfile();
-            //    row[4] = stu.getnUID();
-            //}
-            
-                                                            
             ((DefaultTableModel) PeronTable.getModel()).addRow(row);
         
-            //System.out.println(selecteduseraccount);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back1;

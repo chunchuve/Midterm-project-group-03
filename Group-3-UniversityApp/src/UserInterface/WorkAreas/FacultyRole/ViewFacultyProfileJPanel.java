@@ -59,7 +59,7 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         lblUsername = new javax.swing.JLabel();
         fieldLastName = new javax.swing.JTextField();
         fieldTitle = new javax.swing.JTextField();
-        lblViewFacultyAccount = new javax.swing.JLabel();
+        lblMyProfile = new javax.swing.JLabel();
         fieldUsername = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         lblRole = new javax.swing.JLabel();
@@ -81,12 +81,15 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         fieldAddressLine2 = new javax.swing.JTextField();
         lblState = new javax.swing.JLabel();
         fieldState = new javax.swing.JTextField();
-        lblCity = new javax.swing.JLabel();
-        fieldCity = new javax.swing.JTextField();
         lblZipCode = new javax.swing.JLabel();
         fieldZipCode = new javax.swing.JTextField();
+        lblCity = new javax.swing.JLabel();
+        fieldCity = new javax.swing.JTextField();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDepartment.setText("Department:");
+        add(lblDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 476, -1, -1));
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -94,15 +97,24 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(396, 624, -1, -1));
+        add(fieldDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 473, 182, -1));
 
         lblTitle.setText("Title:");
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 476, -1, -1));
 
-        lblLastName.setText("Last Name:");
+        lblLastName.setText("*Last Name:");
+        add(lblLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 96, -1, -1));
 
-        lblUsername.setText("Username:");
+        lblUsername.setText("*Username:");
+        add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 540, -1, -1));
+        add(fieldLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 93, 182, -1));
+        add(fieldTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 473, 182, -1));
 
-        lblViewFacultyAccount.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblViewFacultyAccount.setText("My Profile");
+        lblMyProfile.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblMyProfile.setText("My Profile");
+        add(lblMyProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 18, 550, -1));
+        add(fieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 537, 182, -1));
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -110,14 +122,21 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 624, -1, -1));
 
         lblRole.setText("Role:");
+        add(lblRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 415, -1, -1));
 
         fieldRole.setEditable(false);
+        add(fieldRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 412, 182, -1));
 
-        lblPassword.setText("Password:");
+        lblPassword.setText("*Password:");
+        add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 540, -1, -1));
 
-        lblFirstName.setText("First Name:");
+        lblFirstName.setText("*First Name:");
+        add(lblFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 93, -1, -1));
+        add(fieldDOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 149, 182, -1));
+        add(fieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 537, 182, -1));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -125,176 +144,39 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 624, 100, -1));
 
         lblDOB.setText("Date of Birth:");
+        add(lblDOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 149, -1, -1));
+        add(fieldFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 93, 182, -1));
 
-        lblAddressLine1.setText("Address Line 1:");
+        lblAddressLine1.setText("*Address Line 1:");
+        add(lblAddressLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 205, -1, -1));
+        add(fieldAddressLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 205, 182, -1));
+        add(fieldPersonID, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 149, 182, -1));
 
-        lblResearchArea.setText("Research Area:");
+        lblResearchArea.setText("*Research Area:");
+        add(lblResearchArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 415, -1, -1));
 
         lblPersonID.setText("ID:");
+        add(lblPersonID, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 152, -1, -1));
+        add(fieldResearchArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 412, 182, -1));
 
         lblAddressLine2.setText("Address Line 2:");
+        add(lblAddressLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 208, -1, -1));
+        add(fieldAddressLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 205, 182, -1));
 
-        lblState.setText("State:");
+        lblState.setText("*State:");
+        add(lblState, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 269, -1, -1));
+        add(fieldState, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 266, 182, -1));
 
-        lblCity.setText("City:");
+        lblZipCode.setText("*Zip Code:");
+        add(lblZipCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 329, -1, -1));
+        add(fieldZipCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 326, 182, -1));
 
-        lblZipCode.setText("Zip Code:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(fieldTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblUsername)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(41, 41, 41)
-                                            .addComponent(fieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, Short.MAX_VALUE))))
-                                .addComponent(fieldRole, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblViewFacultyAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lblCity)
-                                        .addGap(73, 73, 73)
-                                        .addComponent(fieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(lblZipCode)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(fieldZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(lblState)
-                                                .addGap(68, 68, 68)
-                                                .addComponent(fieldState, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblDepartment)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(fieldDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblResearchArea)
-                                                .addGap(20, 20, 20)
-                                                .addComponent(fieldResearchArea, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(31, 31, 31)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblRole)
-                                            .addComponent(lblTitle)
-                                            .addComponent(lblPassword))
-                                        .addGap(226, 226, 226)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblFirstName)
-                                        .addComponent(lblDOB)
-                                        .addComponent(lblAddressLine1))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(fieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fieldAddressLine1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fieldDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(31, 31, 31)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblAddressLine2)
-                                                .addComponent(lblPersonID))
-                                            .addGap(18, 18, 18))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(lblLastName)
-                                            .addGap(38, 38, 38)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(fieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fieldPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fieldAddressLine2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240)
-                        .addComponent(btnSave)
-                        .addGap(64, 64, 64)
-                        .addComponent(btnUpdate)))
-                .addContainerGap(515, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblViewFacultyAccount)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFirstName)
-                        .addGap(40, 40, 40)
-                        .addComponent(lblDOB)
-                        .addGap(40, 40, 40)
-                        .addComponent(lblAddressLine1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLastName)
-                            .addComponent(fieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPersonID))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldAddressLine1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAddressLine2)
-                            .addComponent(fieldAddressLine2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblState)
-                    .addComponent(fieldState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCity))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblZipCode))
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblResearchArea)
-                    .addComponent(fieldResearchArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fieldRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRole))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fieldDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblTitle)
-                        .addComponent(lblDepartment))
-                    .addComponent(fieldTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(fieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPassword)
-                        .addComponent(lblUsername)))
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnSave))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
+        lblCity.setText("*City:");
+        add(lblCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 269, -1, -1));
+        add(fieldCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 266, 182, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -316,8 +198,10 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         String password = fieldPassword.getText();
         
 
-        if (firstName.isBlank() || lastName.isBlank() || dateOfBirth.isBlank() || id.isBlank() || line1.isBlank() || line2.isBlank() || city.isBlank() || state.isBlank() || zipCode.isBlank() || researchArea.isBlank() || deptName.isBlank() || title.isBlank() || username.isBlank() || password.isBlank()) {
-            JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
+        //check if all fields are filled out
+        //address line 2 is not mandatory so it is left out
+        if (firstName.isBlank() || lastName.isBlank() || dateOfBirth.isBlank() || id.isBlank() || line1.isBlank() || city.isBlank() || state.isBlank() || zipCode.isBlank() || researchArea.isBlank() || deptName.isBlank() || title.isBlank() || username.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(this, "All fields with (*) must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -387,6 +271,7 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDepartment;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblMyProfile;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPersonID;
     private javax.swing.JLabel lblResearchArea;
@@ -394,7 +279,6 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;
-    private javax.swing.JLabel lblViewFacultyAccount;
     private javax.swing.JLabel lblZipCode;
     // End of variables declaration//GEN-END:variables
 
@@ -442,16 +326,16 @@ private void setFacultyViewMode() {
 private void setFacultyEditMode() {
     fieldFirstName.setEnabled(true);
     fieldLastName.setEnabled(true);
-    fieldDOB.setEnabled(true);
-    fieldPersonID.setEnabled(true);
+    fieldDOB.setEnabled(false);
+    fieldPersonID.setEnabled(false);
     fieldAddressLine1.setEnabled(true);
     fieldAddressLine2.setEnabled(true);
     fieldCity.setEnabled(true);
     fieldState.setEnabled(true);
     fieldZipCode.setEnabled(true);
     fieldResearchArea.setEnabled(true);
-    fieldDepartment.setEnabled(true);
-    fieldTitle.setEnabled(true);
+    fieldDepartment.setEnabled(false);
+    fieldTitle.setEnabled(false);
     fieldRole.setEnabled(false);
     fieldUsername.setEnabled(true);
     fieldPassword.setEnabled(true);  
