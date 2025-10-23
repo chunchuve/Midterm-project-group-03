@@ -7,6 +7,7 @@
 package University;
 
 import College.College;
+import CourseCatalog.Course;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.CourseSchedule;
 import Department.Department;
@@ -55,8 +56,7 @@ class ConfigureUniversity {
         department2.newCourse("Mobile and Wireless Networking", "EECE 7364", 4);
         department2.newCourse("Web Design and User Experience Engineering", "INFO 6150", 4);
         department2.newCourse("Agile Software Development", "INFO 7245", 4);
-        
-        
+
         // Create Persons
         
         Person person001 = personDirectory.newPerson("ID1234", "John", "Smith", "10-16-1990"); //employee
@@ -121,6 +121,71 @@ class ConfigureUniversity {
         studentprofile1.setProgramEnrolled("MSDS");
         studentprofile1.setInstructionMode("OnCampus");
         studentprofile1.setnUID("NUID756893");
+    
+        //Create courses
+        Course c1 = department1.newCourse("High-Performance Computing", "EECE 5640",4);
+        Course c2 = department1.newCourse( "Introduction to Software Security", "EECE 5641", 4);
+        Course c3 = department2.newCourse("Computer System Security", "CY 5130", 4);
+        Course c4 = department2.newCourse("Mobile and Wireless Networking", "EECE 7364", 4);
+        Course c5 = department1.newCourse("Algorithms", "CS 5800", 4); //core
+        Course c6 = department1.newCourse("Programming Design Paradigm", "CS 5010", 4); //core
+        Course c7 = department2.newCourse("Application Engineering and Development", "INFO 5100", 4); //core
+        
+        // Set core and elective courses for degree
+        department1.addCoreCourse(c5);
+        department1.addCoreCourse(c6);
+        department1.addElectiveCourse(c1);
+        department1.addElectiveCourse(c2);
+        department2.addCoreCourse(c7);
+        department2.addElectiveCourse(c3);
+        department2.addElectiveCourse(c4);       
+        
+        // Create new course schedule
+        CourseSchedule courseSchedule1 = department1.newCourseSchedule("SPRING 2026");
+        CourseSchedule courseSchedule2 = department1.newCourseSchedule("SUMMER 2026");
+        CourseSchedule courseSchedule3 = department2.newCourseSchedule("SPRING 2026");
+        CourseSchedule courseSchedule4 = department2.newCourseSchedule("SUMMER 2026");
+        
+        // Set courses offer
+        CourseOffer courseOffer1 = courseSchedule1.newCourseOffer(c1.getCourseNumber());
+        CourseOffer courseOffer2 = courseSchedule1.newCourseOffer(c5.getCourseNumber());
+        CourseOffer courseOffer3 = courseSchedule1.newCourseOffer(c6.getCourseNumber());
+        CourseOffer courseOffer4 = courseSchedule2.newCourseOffer(c2.getCourseNumber());
+        CourseOffer courseOffer5 = courseSchedule2.newCourseOffer(c6.getCourseNumber());
+        CourseOffer courseOffer6 = courseSchedule2.newCourseOffer(c5.getCourseNumber());
+        CourseOffer courseOffer7 = courseSchedule3.newCourseOffer(c3.getCourseNumber());
+        CourseOffer courseOffer8 = courseSchedule3.newCourseOffer(c7.getCourseNumber());
+        CourseOffer courseOffer9 = courseSchedule3.newCourseOffer(c4.getCourseNumber());
+        CourseOffer courseOffer10 = courseSchedule4.newCourseOffer(c7.getCourseNumber());
+        CourseOffer courseOffer11 = courseSchedule4.newCourseOffer(c4.getCourseNumber());
+        
+        // assign faculty to courses offer
+        courseOffer1.AssignAsTeacher(facultyprofile0);
+        courseOffer2.AssignAsTeacher(facultyprofile0);
+        courseOffer3.AssignAsTeacher(facultyprofile1);
+        courseOffer4.AssignAsTeacher(facultyprofile0);
+        courseOffer5.AssignAsTeacher(facultyprofile1);
+        courseOffer6.AssignAsTeacher(facultyprofile0);
+        courseOffer7.AssignAsTeacher(facultyprofile1);
+        courseOffer8.AssignAsTeacher(facultyprofile1);
+        courseOffer9.AssignAsTeacher(facultyprofile0);
+        courseOffer10.AssignAsTeacher(facultyprofile1);
+        courseOffer11.AssignAsTeacher(facultyprofile1);
+        
+        // generate seats for course offers
+        courseOffer1.generatSeats(20);
+        courseOffer2.generatSeats(40);
+        courseOffer3.generatSeats(15);
+        courseOffer4.generatSeats(20);
+        courseOffer5.generatSeats(20);
+        courseOffer6.generatSeats(40);
+        courseOffer7.generatSeats(30);
+        courseOffer8.generatSeats(40);
+        courseOffer9.generatSeats(3);
+        courseOffer10.generatSeats(30);
+        courseOffer11.generatSeats(20);
+        
+// Create User accounts that link to specific profiles
         
          //Create course schedule and offer with faculty assignments
         CourseSchedule cs0 = department1.newCourseSchedule("Spring2026");

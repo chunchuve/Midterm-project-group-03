@@ -53,12 +53,14 @@ public class StudentProfile extends Profile {
         super(p); 
         this.nUID = nUID;
         this.department = department;
+        this.setDepartment(department);
     }
     
     public StudentProfile(Person p, Department department) {
         
         super(p); 
         this.department = department;
+        this.setDepartment(department);
     }
     //end
 
