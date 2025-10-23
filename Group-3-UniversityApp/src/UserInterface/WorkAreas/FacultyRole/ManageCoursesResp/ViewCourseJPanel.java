@@ -6,10 +6,14 @@ package UserInterface.WorkAreas.FacultyRole.ManageCoursesResp;
 
 import CourseCatalog.Course;
 import CourseCatalog.CourseCatalog;
+import CourseSchedule.CourseOffer;
 import Department.Department;
 import Faculty.FacultyProfile;
 import University.University;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -24,16 +28,21 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
     FacultyProfile facultyProfile;
     Course course;
     CourseCatalog courseCatalog;
+    CourseOffer courseOffer;
     
     /**
      * Creates new form ViewCourseJPanel
      */
-    public ViewCourseJPanel(University u, CourseCatalog cc, Course course, JPanel clp) {
+    public ViewCourseJPanel(University u, Course course, FacultyProfile fp, JPanel clp) {
         university = u;
-        this.courseCatalog = cc;
         this.course = course;
+        this.facultyProfile = fp;
+        this.department = fp.getDepartment();
         this.CardSequencePanel = clp;
         initComponents();
+        
+        refreshCourseTextFields();
+        setCourseViewMode();
     }
 
     /**
@@ -58,27 +67,16 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         lblCredits.setText("Course Credit:");
-        add(lblCredits, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 209, -1, -1));
-        add(fieldCredits, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 209, 182, -1));
 
         lblCourseDetails.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCourseDetails.setText("Course Details");
-        add(lblCourseDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 22, 550, -1));
 
         lblPrice.setText("Course Price:");
-        add(lblPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 273, -1, -1));
-        add(fieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 270, 182, -1));
 
         lblCourseNumber.setText("Course Number:");
-        add(lblCourseNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 97, -1, -1));
-        add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 153, 182, -1));
 
         lblCourseName.setText("Course Name:");
-        add(lblCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 153, -1, -1));
-        add(fieldCourseNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 97, 182, -1));
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +84,6 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 349, -1, -1));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +91,6 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 349, 100, -1));
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -102,68 +98,124 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
-        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 349, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addComponent(lblCourseNumber)
+                            .addGap(18, 18, 18)
+                            .addComponent(fieldCourseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(70, 70, 70)
+                            .addComponent(btnSave)
+                            .addGap(58, 58, 58)
+                            .addComponent(btnUpdate)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCourseDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblPrice)
+                                    .addGap(36, 36, 36)
+                                    .addComponent(fieldPrice))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblCredits)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(fieldCredits))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblCourseName)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(fieldCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lblCourseDetails)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCourseNumber)
+                    .addComponent(fieldCourseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCourseName)
+                    .addComponent(fieldCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCredits)
+                    .addComponent(fieldCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblPrice))
+                    .addComponent(fieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addComponent(btnSave)
+                    .addComponent(btnUpdate))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        //setFacultyEditMode();
+        setCourseEditMode();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         CardSequencePanel.remove(this);
-
+        
+        Component[] panelStack = CardSequencePanel.getComponents();
+        JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
+        ManageCourseJPanel manageCourseJPanel = (ManageCourseJPanel) lastPanel;
+        manageCourseJPanel.refreshCourseTable();
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        /*
-        String firstName = fieldFirstName.getText();
-        String lastName = fieldLastName.getText();
-        String dateOfBirth = fieldDOB.getText();
-        String id = fieldPersonID.getText();
-        String line1 = fieldAddressLine1.getText();
-        String line2 = fieldAddressLine2.getText();
-        String city = fieldCity.getText();
-        String state = fieldState.getText();
-        String zipCode = fieldZipCode.getText();
-        String researchArea = fieldResearchArea.getText();
-        String deptName = fieldDepartment.getText();
-        String title = fieldTitle.getText();
-        String username = fieldUsername.getText();
-        String password = fieldPassword.getText();
+        int credits;
+        //int price; course price is not adjustable by faculty
+        
+        String number = fieldCourseNumber.getText();
+        String name = fieldCourseName.getText();
 
         //check if all fields are filled out
-        if (firstName.isBlank() || lastName.isBlank() || dateOfBirth.isBlank() || id.isBlank() || line1.isBlank() || line2.isBlank() || city.isBlank() || state.isBlank() || zipCode.isBlank() || researchArea.isBlank() || deptName.isBlank() || title.isBlank() || username.isBlank() || password.isBlank()) {
+        if (number.isBlank() || name.isBlank()) {
             JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        try {
+            credits = Integer.parseInt(fieldCredits.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter the number of credits for this course.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        FacultyProfile facultyProfile = (FacultyProfile) userAccount.getAssociatedPersonProfile();
-        facultyProfile.getPerson().setFirstName(firstName);
-        facultyProfile.getPerson().setLastName(lastName);
-        facultyProfile.getPerson().setDateOfBirth(dateOfBirth);
-        facultyProfile.getPerson().setId(id);
-        facultyProfile.getPerson().getAddress().setLine1(line1);
-        facultyProfile.getPerson().getAddress().setLine2(line2);
-        facultyProfile.getPerson().getAddress().setCity(city);
-        facultyProfile.getPerson().getAddress().setState(state);
-        facultyProfile.getPerson().getAddress().setZipCode(zipCode);
-        facultyProfile.setResearchArea(researchArea);
-        facultyProfile.getDepartment().setName(deptName);
-        facultyProfile.setTitle(title);
+        CourseCatalog cc = department.getCourseCatalog();
+        List<Course> courses = cc.getCourseList();
+        course.setCourseNumber(number);
+        course.setCourseName(name);
+        course.setCredits(credits);
 
-        userAccount.setUsername(username);
-        userAccount.setPassword(password);
+        JOptionPane.showMessageDialog(this, "Course updated successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
-        //userAccount.setLastUpdated();
-
-        JOptionPane.showMessageDialog(this, "Account updated successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
-
-        setFacultyViewMode(); */
+        setCourseViewMode();
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
@@ -181,4 +233,41 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblCredits;
     private javax.swing.JLabel lblPrice;
     // End of variables declaration//GEN-END:variables
+
+private void refreshCourseTextFields() {
+    CourseCatalog cc = department.getCourseCatalog();
+    List<Course> courses = cc.getCourseList();
+    fieldCourseNumber.setText(course.getCourseNumber());
+    fieldCourseName.setText(course.getCourseName());
+    fieldCredits.setText(String.valueOf(course.getCredits()));
+    fieldPrice.setText(String.valueOf(course.getCoursePrice()));
+    //fieldInstructorFName.setText(courseOffer.getFacultyProfile().getPerson().getFirstName());
+    //fieldInstructorLName.setText(courseOffer.getFacultyProfile().getPerson().getLastName());
+    
+}
+
+private void setCourseViewMode() {
+    fieldCourseNumber.setEnabled(false);
+    fieldCourseName.setEnabled(false);
+    fieldCredits.setEnabled(false);
+    fieldPrice.setEnabled(false);
+    //fieldInstructorFName.setEnabled(false);
+    //fieldInstructorLName.setEnabled(false);       
+    
+    btnSave.setEnabled(false);
+    btnUpdate.setEnabled(true);
+}
+
+private void setCourseEditMode() {
+    fieldCourseNumber.setEnabled(true);
+    fieldCourseName.setEnabled(true);
+    fieldCredits.setEnabled(true);
+    fieldPrice.setEnabled(false); //course price is not adjustable by faculty
+    //fieldInstructorFName.setEnabled(true);
+    //fieldInstructorLName.setEnabled(true);  
+    
+    btnSave.setEnabled(true);
+    btnUpdate.setEnabled(false);
+}
+    
 }

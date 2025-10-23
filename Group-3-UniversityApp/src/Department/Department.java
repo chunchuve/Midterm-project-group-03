@@ -149,6 +149,14 @@ public void addElectiveCourse(Course c){
     public void setDegree(Degree degree) {
         this.degree = degree;
     }
+
+    public HashMap<String, CourseSchedule> getmasterCourseCatalog() {
+        return mastercoursecatalog;
+    }
+
+    public void setmasterCourseCatalog(HashMap<String, CourseSchedule> mastercoursecatalog) {
+        this.mastercoursecatalog = mastercoursecatalog;
+    }
     
     @Override
     public String toString() {

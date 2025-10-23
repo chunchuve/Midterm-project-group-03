@@ -53,7 +53,6 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Back = new javax.swing.JButton();
-        btnDeleteCourse = new javax.swing.JButton();
         lblCourses = new javax.swing.JLabel();
         lblManageCourses = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -66,13 +65,6 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
-            }
-        });
-
-        btnDeleteCourse.setText("Delete Course");
-        btnDeleteCourse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteCourseActionPerformed(evt);
             }
         });
 
@@ -126,16 +118,15 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(btnViewCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(btnDeleteCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Back))))
+                            .addComponent(Back)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnViewCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(506, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,9 +141,9 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSearch)
-                    .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewCourse)
-                    .addComponent(btnDeleteCourse))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(fieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnViewCourse)))
                 .addGap(37, 37, 37)
                 .addComponent(Back)
                 .addContainerGap(114, Short.MAX_VALUE))
@@ -165,27 +156,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
 
-        //       ((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
     }//GEN-LAST:event_BackActionPerformed
-
-    private void btnDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCourseActionPerformed
-        // TODO add your handling code here:
-        /*
-        int selectedRow = UserAccountTable.getSelectedRow();
-
-        if (selectedRow >= 0) {
-
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected account?","Warning",dialogButton);
-            if (dialogResult == JOptionPane.YES_OPTION) {
-                UserAccount selectedAccount = (UserAccount) UserAccountTable.getValueAt(selectedRow, 0);
-                business.getUserAccountDirectory().deleteUserAccount(selectedAccount);
-                refreshTable();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select an account from the list to delete.", "Warning",JOptionPane.WARNING_MESSAGE);
-        } */
-    }//GEN-LAST:event_btnDeleteCourseActionPerformed
 
     private void CourseTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CourseTableMousePressed
         // Extracts the row (uaser account) in the table that is selected by the user
@@ -210,7 +181,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
             Course foundCourse = department.getCourseCatalog().getCourseByNumber(number);
             
             if (foundCourse != null) {
-                ViewCourseJPanel vc = new ViewCourseJPanel(university, courseCatalog, foundCourse, CardSequencePanel);
+                ViewCourseJPanel vc = new ViewCourseJPanel(university, foundCourse, facultyProfile, CardSequencePanel);
                 CardSequencePanel.add("ViewCourseJPanel", vc);
                 CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
                 layout.next(CardSequencePanel);
@@ -228,7 +199,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         int selectedRow = CourseTable.getSelectedRow();
         if (selectedRow >=0) {
             Course selectedCourse = (Course) CourseTable.getValueAt(selectedRow, 0);
-            ViewCourseJPanel vc = new ViewCourseJPanel(university, courseCatalog, selectedCourse, CardSequencePanel);
+            ViewCourseJPanel vc = new ViewCourseJPanel(university, selectedCourse, facultyProfile, CardSequencePanel);
             CardSequencePanel.add("ViewCourseJPanel", vc);
             CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
             layout.next(CardSequencePanel);
@@ -261,7 +232,6 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JTable CourseTable;
-    private javax.swing.JButton btnDeleteCourse;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnViewCourse;
     private javax.swing.JTextField fieldSearch;
