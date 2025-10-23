@@ -67,10 +67,6 @@ public class StudentProfile extends Profile {
 
     public void setDepartment(Department department) {
         this.department = department;
-        // link student profile to department
-        this.department.getStudentDirectory().addStudentProfile(this);
-        // link person to department
-        this.department.getPersonDirectory().addPerson(this.getPerson());
     }
     
     public String getnUID() {

@@ -55,12 +55,6 @@ public class StudentDirectory {
         return sp;
     }
     
-    // add existing student
-    public void addStudentProfile(StudentProfile student) {
-        studentlist.add(student);
-    }
-    
-    
     //remove student
     public void removeStudentProfile(StudentProfile student) {
         studentlist.remove(student);
@@ -82,14 +76,25 @@ public class StudentDirectory {
     public StudentProfile findStudentByNUID(String nuid) {
 
         for (StudentProfile sp : studentlist) {
-            //System.out.println(sp.getnUID());
+            
             if (sp.isNUIDMatch(nuid)) {
                 return sp;
             }
         }
             return null; //not found after going through the whole list
     }
+    //search for student by Person
+    public StudentProfile findStudentByPerson(Person p) {
 
+        for (StudentProfile sp : studentlist) {
+            
+            if (sp.getPerson().equals(p)) {
+                return sp;
+            }
+        }
+            return null; //not found after going through the whole list
+    }
+    
     public ArrayList<StudentProfile> getStudentlist() {
         return studentlist;
     }

@@ -151,9 +151,13 @@ public class Department {
         return degree;
     }
 
-//    public void setDegree(Degree degree) {
-//        this.degree = degree;
-//    }
+    public void setDegree(Degree degree) {
+        this.degree = degree;
+    }
+
+    public HashMap<String, CourseSchedule> getMastercoursecatalog() {
+        return mastercoursecatalog;
+    }
     
     @Override
     public String toString() {

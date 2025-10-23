@@ -39,12 +39,6 @@ public class FacultyDirectory {
         teacherlist.add(fp);
         return fp;
     }
-    
-    // add existing faculty
-    public void addFaculty(FacultyProfile faculty) {
-        teacherlist.add(faculty);
-    }
-    
     //remove faculty
     public void removeFaculty(FacultyProfile faculty) {
         teacherlist.remove(faculty);
@@ -75,7 +69,17 @@ public class FacultyDirectory {
             return null; //not found after going through the whole list
          }
 
-    
+    //search for faculty by Person
+    public FacultyProfile findFacultyByPerson(Person p) {
+
+        for (FacultyProfile fp : teacherlist) {
+            
+            if (fp.getPerson().equals(p)) {
+                return fp;
+            }
+        }
+            return null; //not found after going through the whole list
+    }
 
     public ArrayList<FacultyProfile> getTeacherlist() {
         return teacherlist;

@@ -24,7 +24,10 @@ public abstract class Profile {
     public Person getPerson(){
         return person;
     }
-     
+    
+    public String getPersonFullName() {
+        return person.getFirstName() + " " + person.getLastName();
+    }
 
     public boolean isMatch(String id) {
         if (person.getPersonId().equals(id)) {
