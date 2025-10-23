@@ -6,9 +6,11 @@ package UserInterface.WorkAreas.FacultyRole;
 
 import Department.Department;
 import Faculty.FacultyProfile;
+import Student.StudentProfile;
 import University.University;
 import UserAccounts.UserAccount;
 import UserInterface.WorkAreas.FacultyRole.ManageCoursesResp.ManageCourseJPanel;
+import UserInterface.WorkAreas.FacultyRole.ManageStudentsResp.ManageStudentProfileJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +23,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     University university;
     Department department;
     FacultyProfile facultyProfile;
+    StudentProfile studentProfile;
     UserAccount userAccount;
     
     /**
@@ -144,7 +147,6 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-
         ManageCourseJPanel manageCourseJPanel = new ManageCourseJPanel(facultyProfile, CardSequencePanel);
 
         CardSequencePanel.add("ManageCourse",manageCourseJPanel);
@@ -153,7 +155,10 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-
+        ManageStudentProfileJPanel manageStudentProfileJPanel = new ManageStudentProfileJPanel(university, studentProfile, userAccount, CardSequencePanel);
+        
+        CardSequencePanel.add("ManageStudent",manageStudentProfileJPanel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed

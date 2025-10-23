@@ -40,6 +40,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         this.facultyProfile = fp;
         this.department = fp.getDepartment();
         initComponents();
+        
         refreshCourseTable();
     }
 
