@@ -79,11 +79,6 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
                 "Person ID", "First Name", "Last Name", "NUID"
             }
         ));
-        StudentTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                StudentTableMousePressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(StudentTable);
 
         btnSearch.setText("Search");
@@ -151,22 +146,6 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
         layout.previous(CardSequencePanel);
     }//GEN-LAST:event_BackActionPerformed
 
-    private void StudentTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StudentTableMousePressed
-        // Extracts the row (uaser account) in the table that is selected by the user
-        /*
-        int size = UserAccountTable.getRowCount();
-        int selectedrow = UserAccountTable.getSelectionModel().getLeadSelectionIndex();
-
-        if (selectedrow < 0 || selectedrow > size - 1) {
-            return;
-        }
-        selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(selectedrow, 0);
-        if (selecteduseraccount == null) {
-            return;
-
-        } */
-    }//GEN-LAST:event_StudentTableMousePressed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         if (!fieldSearch.getText().isBlank()) {
@@ -197,7 +176,7 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
             CardSequencePanel.add("ViewCourseJPanel", vc);
             CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
             layout.next(CardSequencePanel);
-        } else JOptionPane.showMessageDialog(null, "Please select a course from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else JOptionPane.showMessageDialog(null, "Please select a student from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btnViewStudentActionPerformed
 
     public void refreshStudentTable() {

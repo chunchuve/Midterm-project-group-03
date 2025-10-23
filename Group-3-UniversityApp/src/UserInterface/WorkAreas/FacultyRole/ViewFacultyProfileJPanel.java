@@ -103,10 +103,10 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         lblTitle.setText("Title:");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 476, -1, -1));
 
-        lblLastName.setText("Last Name:");
+        lblLastName.setText("*Last Name:");
         add(lblLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 96, -1, -1));
 
-        lblUsername.setText("Username:");
+        lblUsername.setText("*Username:");
         add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 540, -1, -1));
         add(fieldLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 93, 182, -1));
         add(fieldTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 473, 182, -1));
@@ -130,10 +130,10 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         fieldRole.setEditable(false);
         add(fieldRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 412, 182, -1));
 
-        lblPassword.setText("Password:");
+        lblPassword.setText("*Password:");
         add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 540, -1, -1));
 
-        lblFirstName.setText("First Name:");
+        lblFirstName.setText("*First Name:");
         add(lblFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 93, -1, -1));
         add(fieldDOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 149, 182, -1));
         add(fieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 537, 182, -1));
@@ -150,12 +150,12 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         add(lblDOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 149, -1, -1));
         add(fieldFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 93, 182, -1));
 
-        lblAddressLine1.setText("Address Line 1:");
+        lblAddressLine1.setText("*Address Line 1:");
         add(lblAddressLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 205, -1, -1));
         add(fieldAddressLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 205, 182, -1));
         add(fieldPersonID, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 149, 182, -1));
 
-        lblResearchArea.setText("Research Area:");
+        lblResearchArea.setText("*Research Area:");
         add(lblResearchArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 415, -1, -1));
 
         lblPersonID.setText("ID:");
@@ -166,15 +166,15 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         add(lblAddressLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 208, -1, -1));
         add(fieldAddressLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 205, 182, -1));
 
-        lblState.setText("State:");
+        lblState.setText("*State:");
         add(lblState, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 269, -1, -1));
         add(fieldState, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 266, 182, -1));
 
-        lblZipCode.setText("Zip Code:");
+        lblZipCode.setText("*Zip Code:");
         add(lblZipCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 329, -1, -1));
         add(fieldZipCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 326, 182, -1));
 
-        lblCity.setText("City:");
+        lblCity.setText("*City:");
         add(lblCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 269, -1, -1));
         add(fieldCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 266, 182, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -199,8 +199,9 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         
 
         //check if all fields are filled out
-        if (firstName.isBlank() || lastName.isBlank() || dateOfBirth.isBlank() || id.isBlank() || line1.isBlank() || line2.isBlank() || city.isBlank() || state.isBlank() || zipCode.isBlank() || researchArea.isBlank() || deptName.isBlank() || title.isBlank() || username.isBlank() || password.isBlank()) {
-            JOptionPane.showMessageDialog(this, "All fields must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
+        //address line 2 is not mandatory so it is left out
+        if (firstName.isBlank() || lastName.isBlank() || dateOfBirth.isBlank() || id.isBlank() || line1.isBlank() || city.isBlank() || state.isBlank() || zipCode.isBlank() || researchArea.isBlank() || deptName.isBlank() || title.isBlank() || username.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(this, "All fields with (*) must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

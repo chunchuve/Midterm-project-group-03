@@ -86,11 +86,6 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 "Number", "Name", "Credits", "Price"
             }
         ));
-        CourseTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                CourseTableMousePressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(CourseTable);
 
         btnSearch.setText("Search");
@@ -159,22 +154,6 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_BackActionPerformed
 
-    private void CourseTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CourseTableMousePressed
-        // Extracts the row (uaser account) in the table that is selected by the user
-        /*
-        int size = UserAccountTable.getRowCount();
-        int selectedrow = UserAccountTable.getSelectionModel().getLeadSelectionIndex();
-
-        if (selectedrow < 0 || selectedrow > size - 1) {
-            return;
-        }
-        selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(selectedrow, 0);
-        if (selecteduseraccount == null) {
-            return;
-
-        } */
-    }//GEN-LAST:event_CourseTableMousePressed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         if (!fieldSearch.getText().isBlank()) {
@@ -215,7 +194,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
             ((DefaultTableModel) CourseTable.getModel()).removeRow(i);
         }
         
-        CourseCatalog cc = department.getCourseCatalog();
+        CourseCatalog cc = department.getCourseCatalog(); //will retrieve courses based on logged in faculty's department
         List<Course> courses = cc.getCourseList();
         
         for (Course c : courses) {

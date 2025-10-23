@@ -60,7 +60,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblLastName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Last Name:"/>
+        <Property name="text" type="java.lang.String" value="*Last Name:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -70,7 +70,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblUsername">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Username:"/>
+        <Property name="text" type="java.lang.String" value="*Username:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -147,7 +147,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password:"/>
+        <Property name="text" type="java.lang.String" value="*Password:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -157,7 +157,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblFirstName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="First Name:"/>
+        <Property name="text" type="java.lang.String" value="*First Name:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -211,7 +211,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblAddressLine1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Address Line 1:"/>
+        <Property name="text" type="java.lang.String" value="*Address Line 1:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -235,7 +235,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblResearchArea">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Research Area:"/>
+        <Property name="text" type="java.lang.String" value="*Research Area:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -279,7 +279,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblState">
       <Properties>
-        <Property name="text" type="java.lang.String" value="State:"/>
+        <Property name="text" type="java.lang.String" value="*State:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -296,7 +296,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblZipCode">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Zip Code:"/>
+        <Property name="text" type="java.lang.String" value="*Zip Code:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -313,7 +313,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblCity">
       <Properties>
-        <Property name="text" type="java.lang.String" value="City:"/>
+        <Property name="text" type="java.lang.String" value="*City:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
