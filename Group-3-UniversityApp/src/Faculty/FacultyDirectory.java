@@ -39,6 +39,12 @@ public class FacultyDirectory {
         teacherlist.add(fp);
         return fp;
     }
+    
+    // add existing faculty
+    public void addFaculty(FacultyProfile faculty) {
+        teacherlist.add(faculty);
+    }
+    
     //remove faculty
     public void removeFaculty(FacultyProfile faculty) {
         teacherlist.remove(faculty);

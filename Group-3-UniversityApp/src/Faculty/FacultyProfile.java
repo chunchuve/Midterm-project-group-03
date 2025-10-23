@@ -88,6 +88,10 @@ public class FacultyProfile extends Profile {
 
     public void setDepartment(Department department) {
         this.department = department;
+        // link faculty to department
+        this.department.getFacultydirectory().addFaculty(this);
+        // link person to department
+        this.department.getPersonDirectory().addPerson(this.getPerson());
     }
 
     public ArrayList<FacultyAssignment> getFacultyassignments() {

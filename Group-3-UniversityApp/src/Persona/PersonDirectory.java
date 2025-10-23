@@ -39,6 +39,11 @@ public class PersonDirectory {
         return p;
     }
     
+    // add existing person
+    public void addPerson(Person person) {
+        personlist.add(person);
+    }
+    
     //remove person
     public void removePerson(Person person) {
         personlist.remove(person);

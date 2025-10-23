@@ -55,6 +55,12 @@ public class StudentDirectory {
         return sp;
     }
     
+    // add existing student
+    public void addStudentProfile(StudentProfile student) {
+        studentlist.add(student);
+    }
+    
+    
     //remove student
     public void removeStudentProfile(StudentProfile student) {
         studentlist.remove(student);

@@ -50,12 +50,14 @@ public class StudentProfile extends Profile {
         super(p); 
         this.nUID = nUID;
         this.department = department;
+        this.setDepartment(department);
     }
     
     public StudentProfile(Person p, Department department) {
         
         super(p); 
         this.department = department;
+        this.setDepartment(department);
     }
     //end
 
@@ -65,6 +67,10 @@ public class StudentProfile extends Profile {
 
     public void setDepartment(Department department) {
         this.department = department;
+        // link student profile to department
+        this.department.getStudentDirectory().addStudentProfile(this);
+        // link person to department
+        this.department.getPersonDirectory().addPerson(this.getPerson());
     }
     
     public String getnUID() {

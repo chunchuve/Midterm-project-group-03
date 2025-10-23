@@ -7,6 +7,8 @@
 package University;
 
 import College.College;
+import CourseCatalog.Course;
+import CourseSchedule.CourseSchedule;
 import Department.Department;
 import Persona.Person;
 import Persona.PersonDirectory;
@@ -45,10 +47,32 @@ class ConfigureUniversity {
         Department department2 = university.getCollege().newDepartment("Information Technology");
         
         //Create courses
-        department1.newCourse("High-Performance Computing", "EECE 5640",4);
-        department1.newCourse( "Introduction to Software Security", "EECE 5641", 4);
-        department2.newCourse("Computer System Security", "CY 5130", 4);
-        department2.newCourse("Mobile and Wireless Networking", "EECE 7364", 4);
+        Course c1 = department1.newCourse("High-Performance Computing", "EECE 5640",4);
+        Course c2 = department1.newCourse( "Introduction to Software Security", "EECE 5641", 4);
+        Course c3 = department2.newCourse("Computer System Security", "CY 5130", 4);
+        Course c4 = department2.newCourse("Mobile and Wireless Networking", "EECE 7364", 4);
+        Course c5 = department1.newCourse("Algorithms", "CS 5800", 4); //core
+        Course c6 = department1.newCourse("Programming Design Paradigm", "CS 5010", 4); //core
+        Course c7 = department2.newCourse("Application Engineering and Development", "INFO 5100", 4); //core
+        
+        // Set core and elective courses for degree
+        department1.addCoreCourse(c5);
+        department1.addCoreCourse(c6);
+        department1.addElectiveCourse(c1);
+        department1.addElectiveCourse(c2);
+        department2.addCoreCourse(c7);
+        department2.addElectiveCourse(c3);
+        department2.addElectiveCourse(c4);
+        
+        
+        
+        // Create new course schedule
+        CourseSchedule courseSchedule1 = department1.newCourseSchedule("SPRING 2026");
+        CourseSchedule courseSchedule2 = department1.newCourseSchedule("SUMMER 2026");
+        CourseSchedule courseSchedule3 = department2.newCourseSchedule("SPRING 2026");
+        CourseSchedule courseSchedule4 = department2.newCourseSchedule("SUMMER 2026");
+        
+        // 
         
         // Create Persons
         
