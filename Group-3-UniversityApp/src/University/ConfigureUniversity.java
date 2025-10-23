@@ -62,9 +62,7 @@ class ConfigureUniversity {
         department1.addElectiveCourse(c2);
         department2.addCoreCourse(c7);
         department2.addElectiveCourse(c3);
-        department2.addElectiveCourse(c4);
-        
-        
+        department2.addElectiveCourse(c4);       
         
         // Create new course schedule
         CourseSchedule courseSchedule1 = department1.newCourseSchedule("SPRING 2026");
@@ -72,7 +70,18 @@ class ConfigureUniversity {
         CourseSchedule courseSchedule3 = department2.newCourseSchedule("SPRING 2026");
         CourseSchedule courseSchedule4 = department2.newCourseSchedule("SUMMER 2026");
         
-        // 
+        // Set courses offer
+        courseSchedule1.newCourseOffer(c1.getCourseNumber());
+        courseSchedule1.newCourseOffer(c5.getCourseNumber());
+        courseSchedule1.newCourseOffer(c6.getCourseNumber());
+        courseSchedule2.newCourseOffer(c2.getCourseNumber());
+        courseSchedule2.newCourseOffer(c6.getCourseNumber());
+        courseSchedule2.newCourseOffer(c5.getCourseNumber());
+        courseSchedule3.newCourseOffer(c3.getCourseNumber());
+        courseSchedule3.newCourseOffer(c7.getCourseNumber());
+        courseSchedule3.newCourseOffer(c4.getCourseNumber());
+        courseSchedule4.newCourseOffer(c7.getCourseNumber());
+        courseSchedule4.newCourseOffer(c4.getCourseNumber());
         
         // Create Persons
         
