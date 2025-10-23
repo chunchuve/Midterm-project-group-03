@@ -46,8 +46,8 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         txtStatus.setText(selecteduseraccount.getStatus());
         txtRole.setText(selecteduseraccount.getRole());
         txtRole.setEnabled(false);
-        txtFullName.setText(selecteduseraccount.getPersonId());
-        txtFullName.setEnabled(false);
+        txtPersonID.setText(selecteduseraccount.getPersonId());
+        txtPersonID.setEnabled(false);
         
             
         //display nUID for found student
@@ -85,7 +85,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         lblRole = new javax.swing.JLabel();
         txtRole = new javax.swing.JTextField();
         lblFullName = new javax.swing.JLabel();
-        txtFullName = new javax.swing.JTextField();
+        txtPersonID = new javax.swing.JTextField();
         lblNUID = new javax.swing.JLabel();
         txtNUID = new javax.swing.JTextField();
 
@@ -115,7 +115,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
 
         lblRole.setText("Role");
 
-        lblFullName.setText("Full Name");
+        lblFullName.setText("Person ID");
 
         lblNUID.setText("NUID");
 
@@ -148,7 +148,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblFullName)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblNUID)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -185,7 +185,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
                     .addComponent(lblRole))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFullName))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -264,8 +264,8 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JTextField txtFullName;
     private javax.swing.JTextField txtNUID;
+    private javax.swing.JTextField txtPersonID;
     private javax.swing.JTextField txtPswd;
     private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtStatus;

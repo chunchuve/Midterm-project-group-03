@@ -67,14 +67,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             row[3] = fa.getDepartment().getName();
             row[4] = fa.getRole();
             row[5] = fa.getTitle();
-            
-            
-            //get nUID for student accounts only
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-                //StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-                //row[5] = stu.getnUID();
-            //}
-                                        
+                                       
             ((DefaultTableModel) FacultyTable.getModel()).addRow(row);
         }  
     }
@@ -201,7 +194,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
-        //if(selecteduseraccount==null) return;
+        
         int row = FacultyTable.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table", "WARNING", JOptionPane.WARNING_MESSAGE);
@@ -231,7 +224,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     
     private void btnRemoveFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveFacultyActionPerformed
         // TODO add your handling code here:
-        //remove selected User account
+        //remove selected faculty account
         int row = FacultyTable.getSelectedRow();
      
         //error handling
@@ -286,11 +279,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             row[3] = faculty.getDepartment().getName();          
             row[4] = faculty.getRole();
             row[5] = faculty.getTitle();
-            //display nUID for found student
-            //if (ua.getRole().equalsIgnoreCase("Student")) {
-            //    StudentProfile stu = (StudentProfile) ua.getAssociatedPersonProfile();
-             //   row[5] = stu.getnUID();
-            //}                           
+                                    
             ((DefaultTableModel) FacultyTable.getModel()).addRow(row);
           
     }

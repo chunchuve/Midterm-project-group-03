@@ -35,7 +35,7 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
     
     StudentProfile selectedStudent;
     /**
-     * Creates new form UpdateUserAccountJPanel
+     * Creates new form UpdateStudentJPanel
      */
     public UpdateStudentJPanel(JPanel jp, University university, StudentProfile student) {
         initComponents();
@@ -53,9 +53,7 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         txtMode.setText(selectedStudent.getInstructionMode());
         txtNUID.setText(selectedStudent.getnUID());
         txtPersonID.setEnabled(false);
-        
-        
-            
+         
         //display nUID for found student
         //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
         //    StudentProfile stu = (StudentProfile) selecteduseraccount.getAssociatedPersonProfile();
@@ -106,6 +104,7 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblTitle.setText("Update Student");
 
         lblFirstName.setText("Person ID");
@@ -225,7 +224,7 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         
-        //back to admin person form
+        //back to admin student form
         backAction();
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -234,17 +233,20 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
 
         //update student details
         saveFeatures();
-        JOptionPane.showMessageDialog(this, "Person updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Student updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void saveFeatures() {
        
-        //save faculty changes
+        //save student changes
         
-        //selectedFaculty.getPerson().setFirstName(txtFirstName.getText());
-        //selectedFaculty.getPerson().setLastName(txtLastName.getText());
-        
+        selectedStudent.getPerson().setFirstName(txtFirstName.getText());
+        selectedStudent.getPerson().setLastName(txtLastName.getText());
+        selectedStudent.getDepartment().setName(txtDepartment.getText());
+        selectedStudent.setProgramEnrolled(txtProgram.getText());
+        selectedStudent.setInstructionMode(txtMode.getText());
+        selectedStudent.setnUID(txtNUID.getText());
         
     }
     

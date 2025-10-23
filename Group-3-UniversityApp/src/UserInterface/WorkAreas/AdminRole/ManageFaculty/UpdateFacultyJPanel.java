@@ -51,20 +51,9 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
         txtRole.setText(selectedFaculty.getRole());
         txtTitle.setText(selectedFaculty.getTitle());
         txtPersonID.setEnabled(false);
+        txtRole.setEnabled(false);
+        txtDepartment.setEnabled(false);
         
-        
-            
-        //display nUID for found student
-        //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-        //    StudentProfile stu = (StudentProfile) selecteduseraccount.getAssociatedPersonProfile();
-        //    txtNUID.setText(stu.getnUID());
-        //}
-        
-        //disable edit for NUID for not students
-        //if (!selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-                
-        //        txtNUID.setEnabled(false);       
-        //}
         
     }
 
@@ -218,9 +207,9 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
 
-        //update user account
+        //update faculty record
         saveFeatures();
-        JOptionPane.showMessageDialog(this, "Person updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Faculty updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
        
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -230,6 +219,9 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
         
         selectedFaculty.getPerson().setFirstName(txtFirstName.getText());
         selectedFaculty.getPerson().setLastName(txtLastName.getText());
+        //selectedFaculty.getDepartment().setName(txtDepartment.getText());
+        //selectedFaculty.setRole(txtRole.getText());
+        selectedFaculty.setTitle(txtTitle.getText());
         
         
     }
