@@ -7,7 +7,10 @@ package UserInterface.WorkAreas.FacultyRole.ManageStudentsResp;
 import Student.StudentDirectory;
 import Student.StudentProfile;
 import University.University;
+import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,7 +22,7 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
     University university;
     //Department department;
     StudentDirectory studentDirectory;
-    StudentProfile studentProfile;
+    StudentProfile selectedStudent;
     //Course course;
     //CourseCatalog courseCatalog;
     
@@ -29,9 +32,15 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
     public ViewStudentProfileJPanel(University u, StudentDirectory sd, StudentProfile sp, JPanel clp) {
         university = u;
         this.studentDirectory = sd;
-        this.studentProfile = sp;
+        this.selectedStudent = sp;
         this.CardSequencePanel = clp;
         initComponents();
+        
+        fieldNUID.setText(this.selectedStudent.getnUID());
+        fieldFirstName.setText(this.selectedStudent.getPerson().getFirstName());
+        fieldLastName.setText(this.selectedStudent.getPerson().getLastName());
+        
+        refreshStudentDetailTable(sp);
     }
 
     /**
@@ -43,31 +52,194 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblMyProfile = new javax.swing.JLabel();
+        Back = new javax.swing.JButton();
+        lblManageCourses = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        HobbyInterestTable = new javax.swing.JTable();
+        btnViewStudent = new javax.swing.JButton();
+        lblNUID = new javax.swing.JLabel();
+        fieldNUID = new javax.swing.JTextField();
+        lblLastName = new javax.swing.JLabel();
+        lblFirstName = new javax.swing.JLabel();
+        fieldFirstName = new javax.swing.JTextField();
+        fieldLastName = new javax.swing.JTextField();
 
-        lblMyProfile.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblMyProfile.setText("Student Details");
+        Back.setText("<< Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
+
+        lblManageCourses.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblManageCourses.setText("Students Details");
+
+        HobbyInterestTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Hobbies", "Interests"
+            }
+        ));
+        HobbyInterestTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                HobbyInterestTableMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(HobbyInterestTable);
+
+        btnViewStudent.setText("View Student Transcript");
+        btnViewStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewStudentActionPerformed(evt);
+            }
+        });
+
+        lblNUID.setText("NUID:");
+
+        fieldNUID.setEditable(false);
+
+        lblLastName.setText("Last Name:");
+
+        lblFirstName.setText("First Name:");
+
+        fieldFirstName.setEditable(false);
+
+        fieldLastName.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(lblMyProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblNUID)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fieldNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblManageCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFirstName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblLastName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Back)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewStudent))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(506, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblMyProfile)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblFirstName)
+                            .addComponent(fieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(lblManageCourses)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLastName)
+                    .addComponent(fieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNUID)
+                    .addComponent(fieldNUID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnViewStudent)
+                    .addComponent(Back))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_BackActionPerformed
+
+    private void HobbyInterestTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HobbyInterestTableMousePressed
+        // Extracts the row (uaser account) in the table that is selected by the user
+        /*
+        int size = UserAccountTable.getRowCount();
+        int selectedrow = UserAccountTable.getSelectionModel().getLeadSelectionIndex();
+
+        if (selectedrow < 0 || selectedrow > size - 1) {
+            return;
+        }
+        selecteduseraccount = (UserAccount) UserAccountTable.getValueAt(selectedrow, 0);
+        if (selecteduseraccount == null) {
+            return;
+
+        } */
+    }//GEN-LAST:event_HobbyInterestTableMousePressed
+
+    private void btnViewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentActionPerformed
+        // TODO add your handling code here:
+        /*
+        int selectedRow = CourseTable.getSelectedRow();
+        if (selectedRow >=0) {
+            Course selectedCourse = (Course) CourseTable.getValueAt(selectedRow, 0);
+            ViewCourseJPanel vc = new ViewCourseJPanel(university, courseCatalog, selectedCourse, CardSequencePanel);
+            CardSequencePanel.add("ViewCourseJPanel", vc);
+            CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+            layout.next(CardSequencePanel);
+        } else JOptionPane.showMessageDialog(null, "Please select a course from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);
+        */
+    }//GEN-LAST:event_btnViewStudentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblMyProfile;
+    private javax.swing.JButton Back;
+    private javax.swing.JTable HobbyInterestTable;
+    private javax.swing.JButton btnViewStudent;
+    private javax.swing.JTextField fieldFirstName;
+    private javax.swing.JTextField fieldLastName;
+    private javax.swing.JTextField fieldNUID;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblManageCourses;
+    private javax.swing.JLabel lblNUID;
     // End of variables declaration//GEN-END:variables
+
+    public void refreshStudentDetailTable(StudentProfile selectedStudent) {
+        
+        DefaultTableModel model = (DefaultTableModel) HobbyInterestTable.getModel();
+        model.setRowCount(0);
+        
+        //if selected student is not null, then get hobbies and interests from studentProfile
+        if (selectedStudent != null) {
+            ArrayList<String> hobbies = selectedStudent.getHobbies();
+            ArrayList<String> interests = selectedStudent.getInterests();
+
+        // Display hobby and interests in separate rows
+            int maxRows = Math.max(hobbies.size(), interests.size()); //check which list is longer
+            for (int i = 0; i < maxRows; i++) { //loops through the rows based on hobbies/interests list
+                Object[] row = new Object[2];
+                row[0] = (i < hobbies.size()) ? hobbies.get(i) : ""; //add to row i if hobby is found, otherwise return blank
+                row[1] = (i < interests.size()) ? interests.get(i) : ""; //add to row i if interest is found, otherwise return blank
+                model.addRow(row);
+            }
+        }    
+    }
 }

@@ -67,11 +67,19 @@ class ConfigureUniversity {
     
         //Person person001 = personDirectory.newPerson("John Smith"); //employee
         
-        person002.getAddress().setLine1("127 Chipmunk Lane"); //creating address for faculty
+        
+        //creating address for faculty
+        person002.getAddress().setLine1("127 Chipmunk Lane"); 
         person002.getAddress().setLine2("Unit 1");
         person002.getAddress().setCity("Portland");
         person002.getAddress().setState("NY");
         person002.getAddress().setZipCode("14202");
+        
+        person006.getAddress().setLine1("11 Valley View Drive");
+        person006.getAddress().setLine2("");
+        person006.getAddress().setCity("West Roxbury");
+        person006.getAddress().setState("MA");
+        person006.getAddress().setZipCode("02132");
         
         
         //Person person003 = personDirectory.newPerson("Adam Rollen"); //student
@@ -120,6 +128,25 @@ class ConfigureUniversity {
         co1.AssignAsTeacher(facultyprofile1);
         CourseOffer co2 = cs0.newCourseOffer("EECE 5641");
         co2.AssignAsTeacher(facultyprofile0);
+        
+        //Create hobbies and interests for students
+        studentprofile0.addHobbies("Basketball");
+        studentprofile0.addHobbies("Traveling");
+        studentprofile0.addHobbies("Skiing");
+        studentprofile0.addHobbies("Reading");
+        studentprofile0.addInterests("Video game development");
+        studentprofile0.addInterests("Artificial Intelligence");
+        studentprofile0.addInterests("Cloud Computing");
+        
+        studentprofile1.addHobbies("Photography");
+        studentprofile1.addHobbies("Hiking");
+        studentprofile1.addHobbies("Golf");
+        studentprofile1.addHobbies("Video games");
+        studentprofile1.addInterests("Artificial Intelligence");
+        studentprofile1.addInterests("Virtual Reality");
+        studentprofile1.addInterests("Data Science");
+        
+        
 
    
         // Create User accounts that link to specific profiles

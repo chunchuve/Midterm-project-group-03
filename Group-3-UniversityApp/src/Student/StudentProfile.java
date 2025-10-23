@@ -27,8 +27,8 @@ public class StudentProfile extends Profile {
     private String termAdmittedFirst; // term admitted in
     private String instructionMode; // online or on-campus
     private String programEnrolled; //example MSIS
-    private String hobbies;
-    private String interests;
+    private ArrayList<String> hobbies; //added by sabrina
+    private ArrayList<String> interests; //added by sabrina
     private Department department;
     //end of changes
 
@@ -36,7 +36,10 @@ public class StudentProfile extends Profile {
         super(p);   
         transcript = new Transcript(this);
         employmenthistory = new EmploymentHistroy();
+        hobbies = new ArrayList<>(); //added by sabrina
+        interests = new ArrayList<>(); //added by sabrina
     }
+    
     
     //new constructor
     public StudentProfile(Person p, String nUID) {
@@ -107,20 +110,21 @@ public class StudentProfile extends Profile {
         this.programEnrolled = programEnrolled;
     }
 
-    public String getHobbies() {
+    //added by sabrina
+    public ArrayList<String> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(String hobbies) {
-        this.hobbies = hobbies;
+    public void addHobbies(String hobby) {
+        hobbies.add(hobby);
     }
 
-    public String getInterests() {
+    public ArrayList<String> getInterests() {
         return interests;
     }
 
-    public void setInterests(String interests) {
-        this.interests = interests;
+    public void addInterests(String interest) {
+        interests.add(interest);
     }
 
     
