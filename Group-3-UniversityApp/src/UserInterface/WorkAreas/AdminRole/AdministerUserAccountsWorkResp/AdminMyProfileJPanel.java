@@ -6,6 +6,7 @@ package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
 import University.University;
 import UserAccounts.UserAccount;
+import javax.swing.JOptionPane;
 
 import javax.swing.JPanel;
 
@@ -34,11 +35,10 @@ public class AdminMyProfileJPanel extends javax.swing.JPanel {
         String password = useraccount.getPassword();
         String personID = useraccount.getPersonId();
         
-        //System.out.println(personID);
-        
         txtUserName.setText(userName);
         txtPswd.setText(password);
-        txtFullName.setText(personID);
+        txtPersonID.setText(personID);
+        txtPersonID.setEnabled(false);
         
     }
 
@@ -57,7 +57,8 @@ public class AdminMyProfileJPanel extends javax.swing.JPanel {
         lblPassword = new javax.swing.JLabel();
         txtPswd = new javax.swing.JTextField();
         lblFullName = new javax.swing.JLabel();
-        txtFullName = new javax.swing.JTextField();
+        txtPersonID = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -83,11 +84,20 @@ public class AdminMyProfileJPanel extends javax.swing.JPanel {
         add(txtPswd);
         txtPswd.setBounds(250, 150, 180, 23);
 
-        lblFullName.setText("Full Name");
+        lblFullName.setText("Person ID");
         add(lblFullName);
         lblFullName.setBounds(120, 220, 80, 17);
-        add(txtFullName);
-        txtFullName.setBounds(250, 220, 180, 23);
+        add(txtPersonID);
+        txtPersonID.setBounds(250, 220, 180, 23);
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        add(btnSave);
+        btnSave.setBounds(250, 280, 72, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -98,13 +108,24 @@ public class AdminMyProfileJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        //save details
+        useraccount.setUsername(txtUserName.getText());
+        useraccount.setPassword(txtPswd.getText());
+        JOptionPane.showMessageDialog(this, "User details updated successfully ",
+                    "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel lblFullName;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JTextField txtFullName;
+    private javax.swing.JTextField txtPersonID;
     private javax.swing.JTextField txtPswd;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
