@@ -51,7 +51,6 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         }
 
         UserAccountDirectory uad = university.getUserAccountDirectory();
-        //StudentDirectory stuDir = business.getStudentDirectory();
         
         
         for (UserAccount ua : uad.getUserAccountList()) {
@@ -238,7 +237,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         
         //add new supplier
         //int i=1;
-        AddUserAccountJPanel as = new AddUserAccountJPanel(CardSequencePanel, university);
+        AddUserAccountJPanel1 as = new AddUserAccountJPanel1(CardSequencePanel, university);
         CardSequencePanel.add("AddUserAccount", as);
         CardLayout layout = (CardLayout)CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
