@@ -7,6 +7,8 @@
 package University;
 
 import College.College;
+import CourseSchedule.CourseOffer;
+import CourseSchedule.CourseSchedule;
 import Department.Department;
 import Persona.Person;
 import Persona.PersonDirectory;
@@ -46,9 +48,14 @@ class ConfigureUniversity {
         
         //Create courses
         department1.newCourse("High-Performance Computing", "EECE 5640",4);
-        department1.newCourse( "Introduction to Software Security", "EECE 5641", 4);
+        department1.newCourse("Introduction to Software Security", "EECE 5641", 4);
+        department1.newCourse("Combinatorial Optimization", "EECE 5360", 4);
+        department1.newCourse("Mobile Robotics", "EECE 5550", 4);
         department2.newCourse("Computer System Security", "CY 5130", 4);
         department2.newCourse("Mobile and Wireless Networking", "EECE 7364", 4);
+        department2.newCourse("Web Design and User Experience Engineering", "INFO 6150", 4);
+        department2.newCourse("Agile Software Development", "INFO 7245", 4);
+        
         
         // Create Persons
         
@@ -75,13 +82,13 @@ class ConfigureUniversity {
         //Person person008 = personDirectory.newPerson("Jack While");
         //Person person009 = personDirectory.newPerson("Fidelity"); //we use this as customer
 
-// Create Admins to manage the univ
+        // Create Admins to manage the univ
         
         EmployeeProfile employeeprofile0 = employeeDirectory.newEmployeeProfile(person001); //John Smith as employee username admin
         
 
         
-// create faculty      
+        // create faculty      
         FacultyProfile facultyprofile0 = facultyDirectory.newFacultyProfile(person002); //Gina Montana as faculty username gina
         facultyprofile0.setDepartment(department1);
         facultyprofile0.setResearchArea("Artificial Intelligence");
@@ -106,9 +113,16 @@ class ConfigureUniversity {
         studentprofile1.setProgramEnrolled("MSDS");
         studentprofile1.setInstructionMode("OnCampus");
         studentprofile1.setnUID("NUID756893");
+        
+         //Create course schedule and offer with faculty assignments
+        CourseSchedule cs0 = department1.newCourseSchedule("Spring2026");
+        CourseOffer co1 = cs0.newCourseOffer("EECE 5640");
+        co1.AssignAsTeacher(facultyprofile1);
+        CourseOffer co2 = cs0.newCourseOffer("EECE 5641");
+        co2.AssignAsTeacher(facultyprofile0);
 
    
-// Create User accounts that link to specific profiles
+        // Create User accounts that link to specific profiles
         
         UserAccount ua1 = userAccountDirectory.newUserAccount(facultyprofile1, "anna", "*123");
         ua1.setStatus("Active"); //set status active
