@@ -17,7 +17,11 @@ import Employee.EmployeeProfile;
 import Faculty.FacultyProfile;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -35,6 +39,9 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
 
     Person selectedPerson;
     Profile selectedProfile;
+    StudentProfile student;
+    EmployeeProfile employee;
+    FacultyProfile faculty;
     
     /**
      * Creates new form UpdatePersonJPanel
@@ -55,24 +62,24 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
         txtState.setText(selectedPerson.getAddress().getState());
         txtZip.setText(selectedPerson.getAddress().getZipCode());
         
-        String personId = selectedPerson.getPersonId();
+        //String personId = selectedPerson.getPersonId();
         //get the profile corresponding to personID selected and show that profile department
         try {
-            StudentProfile student = university.getStudentDirectory().findStudent(personId);
+            student = university.getStudentDirectory().findStudentByPerson(selectedPerson);
             txtDepartment.setText(student.getDepartment().getName());
-            this.selectedProfile = student;
+            selectedProfile = student;
             
         } catch(Exception e) {
             try {
-                EmployeeProfile employee = university.getEmployeeDirectory().findEmployee(personId);
+                employee = university.getEmployeeDirectory().findEmployeeByPerson(selectedPerson);
                 txtDepartment.setText(employee.getDepartment().getName());
-                this.selectedProfile = employee;
+                selectedProfile = employee;
                 
             } catch(Exception ex) {
                 try {
-                    FacultyProfile faculty = university.getFacultydirectory().findTeachingFaculty(personId);
+                    faculty = university.getFacultydirectory().findFacultyByPerson(selectedPerson);
                     txtDepartment.setText(faculty.getDepartment().getName());
-                    this.selectedProfile = faculty;
+                    selectedProfile = faculty;
                     
                 } catch(Exception ey) {
                     JOptionPane.showMessageDialog(this, "Person role is not defined yet", "Warning", JOptionPane.INFORMATION_MESSAGE);
@@ -82,8 +89,12 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
         }
         
          //display profile specific fields
-        txtRole.setText(selectedProfile.getRole());
-        
+        try {
+            txtRole.setText(selectedProfile.getRole());
+        } catch(Exception e){
+            return;
+        }
+       
         txtRole.setEnabled(false);
         txtDepartment.setEnabled(false);
     }
@@ -285,14 +296,30 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
 
         //save person changes
         saveFeatures();
-        JOptionPane.showMessageDialog(this, "Person updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void saveFeatures() {
        
         //save person changes
+        //check for blank input
+        if (txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || txtDateOfBirth.getText().isBlank() || 
+                txtCity.getText().isBlank() || txtState.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+            return;
+        }
         
+        if (!isValidName(txtFirstName.getText())) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else if (!isValidName(txtLastName.getText())) {
+                JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                
+        } else if (!isValidDate(txtDateOfBirth.getText(), "dd-MM-yyyy")) {
+            JOptionPane.showMessageDialog(this, "Enter date in dd-MM-yyyy format ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+           
+        } else  {
         selectedPerson.setFirstName(txtFirstName.getText());
         selectedPerson.setLastName(txtLastName.getText());
         selectedPerson.setDateOfBirth(txtDateOfBirth.getText());
@@ -304,6 +331,8 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
         address.setState(txtState.getText());
         address.setZipCode(txtZip.getText());
         selectedPerson.setAddress(address);
+        JOptionPane.showMessageDialog(this, "Person updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
         
         
     }
@@ -318,7 +347,10 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }
-
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidName(String s){
+        return s.matches("^[a-zA-Z]+$");
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -346,4 +378,24 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
     private javax.swing.JTextField txtState;
     private javax.swing.JTextField txtZip;
     // End of variables declaration//GEN-END:variables
+
+    public static boolean isValidDate(String dateText, String pattern) {
+        
+        try {
+            
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+                                            //.withResolverStyle(ResolverStyle.STRICT);
+            
+            // Attempt to parse the date string
+            System.out.println(dateText + " " + pattern);
+            LocalDate.parse(dateText, formatter);
+            System.out.println("Success");
+            return true; // Parsing successful, the string is a valid date
+        } catch (DateTimeParseException e) {
+            // Parsing failed, the string is not a valid date according to the pattern
+            System.out.println("fail");
+            return false;
+        }
+    
+    }
 }
