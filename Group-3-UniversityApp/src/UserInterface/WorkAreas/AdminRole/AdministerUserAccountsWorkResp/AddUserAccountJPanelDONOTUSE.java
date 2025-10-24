@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  * @author vrmohanc
  */
-public class AddUserAccountJPanel extends javax.swing.JPanel {
+public class AddUserAccountJPanelDONOTUSE extends javax.swing.JPanel {
     
     JPanel CardSequencePanel;
     University university;
@@ -27,7 +27,7 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddUserAccountJPanel
      */
-    public AddUserAccountJPanel(JPanel jp, University university) {
+    public AddUserAccountJPanelDONOTUSE(JPanel jp, University university) {
         initComponents();
         this.CardSequencePanel = jp;
         this.university = university;
@@ -175,33 +175,59 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         //add user account
-        Person p = university.getPersonDirectory().newPerson(txtPersonID.getText());
-        Profile pr = null;
-        if (txtRole.getText().equalsIgnoreCase("Student")) {
-            //add as new student
-            pr = university.getStudentDirectory().newStudentProfile(p);
-        } else if (txtRole.getText().equalsIgnoreCase("Admin")) {
-            //add as new employee
-            pr = university.getEmployeeDirectory().newEmployeeProfile(p);
-        } else if (txtRole.getText().equalsIgnoreCase("Faculty")) {
-            //add as new faculty
-            pr = university.getFacultydirectory().newFacultyProfile(p);
-        } else {
-            // \"Admin\" or \"Faculty\" or \"Student\"
-            JOptionPane.showMessageDialog(this, "User role invalid: select one of"
-                    + " \"Admin\" or \"Faculty\" or \"Student\" ",
-                    "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
+        
+        //input validations
+        //check for blank input
+        if (txtUserName.getText().isBlank() || txtPswd.getText().isBlank() || txtStatus.getText().isBlank() || txtRole.getText().isBlank() || txtPersonID.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"all fields are mandatory");
             return;
         }
+        //check for valid input
+        if (!isValidName(txtUserName.getText()) || !isValidName(txtPswd.getText()) ||
+            !isValidName(txtStatus.getText()) || !isValidName(txtRole.getText()) || !isValidName(txtPersonID.getText())    ){
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        } else if (!txtStatus.getText().equalsIgnoreCase("active") || 
+                !txtStatus.getText().equalsIgnoreCase("inactive")) {
+                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                return;
+        } else if (!txtRole.getText().equalsIgnoreCase("student") || 
+                !txtRole.getText().equalsIgnoreCase("admin") || !txtRole.getText().equalsIgnoreCase("faculty") ) {
+            JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        } else  
+            
+            {
         
-        UserAccount ua = university.getUserAccountDirectory().newUserAccount(pr, txtUserName.getText(), txtPswd.getText());
-        ua.setLastActivity(LocalDateTime.now());
-        ua.setLastUpdated(LocalDateTime.now());
-        ua.setStatus(txtStatus.getText());
-      
-        
-        JOptionPane.showMessageDialog(this, "New User successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        
+            Person p = university.getPersonDirectory().newPerson(txtPersonID.getText());
+            Profile pr = null;
+
+            if (txtRole.getText().equalsIgnoreCase("Student")) {
+                //add as new student
+                pr = university.getStudentDirectory().newStudentProfile(p);
+            } else if (txtRole.getText().equalsIgnoreCase("Admin")) {
+                //add as new employee
+                pr = university.getEmployeeDirectory().newEmployeeProfile(p);
+            } else if (txtRole.getText().equalsIgnoreCase("Faculty")) {
+                //add as new faculty
+                pr = university.getFacultydirectory().newFacultyProfile(p);
+            } else {
+                // \"Admin\" or \"Faculty\" or \"Student\"
+                JOptionPane.showMessageDialog(this, "User role invalid: select one of"
+                        + " \"Admin\" or \"Faculty\" or \"Student\" ",
+                        "Warning", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            UserAccount ua = university.getUserAccountDirectory().newUserAccount(pr, txtUserName.getText(), txtPswd.getText());
+            ua.setLastActivity(LocalDateTime.now());
+            ua.setLastUpdated(LocalDateTime.now());
+            ua.setStatus(txtStatus.getText());
+
+
+            JOptionPane.showMessageDialog(this, "New User successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddSupplierActionPerformed
 
     private void backAction() {
@@ -212,6 +238,16 @@ public class AddUserAccountJPanel extends javax.swing.JPanel {
         mua.refreshTable();
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
+    }
+    
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidName(String s){
+        return s.matches("^[a-zA-Z]+$");
+    }
+
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidNumber(String s){
+        return s.matches("^[0-9]+$");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

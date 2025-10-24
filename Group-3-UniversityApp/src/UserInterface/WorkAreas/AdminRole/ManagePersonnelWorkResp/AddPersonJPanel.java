@@ -22,6 +22,7 @@ import Department.Department;
 import Employee.EmployeeProfile;
 import Faculty.FacultyProfile;
 import Student.StudentProfile;
+import static UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.UpdatePersonJPanel1.isValidDate;
 
 /**
  *
@@ -265,9 +266,28 @@ public class AddPersonJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         //add new person
+        
+        //check for blank input
+        if (txtPersonID.getText().isBlank() || txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || txtDateOfBirth.getText().isBlank() || 
+                txtCity.getText().isBlank() || txtState.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"personID, first name, last name, date of birth, city and state are mandatory");
+            return;
+        }
+        
+        if (!isValidName(txtFirstName.getText())) {
+            JOptionPane.showMessageDialog(this, "First name must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else if (!isValidName(txtLastName.getText())) {
+                JOptionPane.showMessageDialog(this, "Last name be a string of alphabet ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                
+        } else if (!isValidDate(txtDateOfBirth.getText(), "dd-MM-yyyy")) {
+            JOptionPane.showMessageDialog(this, "Enter date in dd-MM-yyyy format ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+           
+        } else  {
         Person p = university.getPersonDirectory().newPerson(txtPersonID.getText(), 
                 txtFirstName.getText(), txtLastName.getText(), 
                  txtDateOfBirth.getText());
+        
         Address address = new Address();
         address.setLine1(txtLine1.getText());
         address.setLine2(txtLine2.getText());
@@ -293,7 +313,7 @@ public class AddPersonJPanel extends javax.swing.JPanel {
        
         
         JOptionPane.showMessageDialog(this, "New Person successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        
+        }
     }//GEN-LAST:event_btnAddPersonActionPerformed
 
     private void backAction() {
@@ -305,7 +325,10 @@ public class AddPersonJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }
-
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidName(String s){
+        return s.matches("^[a-zA-Z]+$");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton btnAddPerson;

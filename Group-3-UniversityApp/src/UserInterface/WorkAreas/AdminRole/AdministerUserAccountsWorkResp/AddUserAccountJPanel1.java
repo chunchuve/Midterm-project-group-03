@@ -176,37 +176,57 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
 
         //add user account
         
-        Person p = university.getPersonDirectory().findPerson(txtPersonID.getText());
-       
-        Profile pr = null;
-        if (txtRole.getText().equalsIgnoreCase("Student")) {
-            //find person's student profile
-            pr = university.getStudentDirectory().findStudentByPerson(p);
+        //input validations
+        //check for blank input
+        if (txtUserName.getText().isBlank() || txtPswd.getText().isBlank() || txtStatus.getText().isBlank() || txtRole.getText().isBlank() || txtPersonID.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+            return;
+        }
+        //check for valid input
+        if (!isValidName(txtUserName.getText())) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
             
-        } else if (txtRole.getText().equalsIgnoreCase("Admin")) {
-            //find person's faculty profile
-            pr = university.getEmployeeDirectory().findEmployeeByPerson(p);
-        } else if (txtRole.getText().equalsIgnoreCase("Faculty")) {
-            //find person's faculty profile
-            pr = university.getFacultydirectory().findFacultyByPerson(p);
-        } else {
-            // \"Admin\" or \"Faculty\" or \"Student\"
-            JOptionPane.showMessageDialog(this, "User role invalid: select one of"
-                    + " \"Admin\" or \"Faculty\" or \"Student\" and/or role and Person ID combo not found ",
-                    "Warning", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        if (!(pr == null)) {
-            UserAccount ua = university.getUserAccountDirectory().newUserAccount(pr, txtUserName.getText(), txtPswd.getText());
-            ua.setLastActivity(LocalDateTime.now());
-            ua.setLastUpdated(LocalDateTime.now());
-            ua.setStatus(txtStatus.getText());
-            JOptionPane.showMessageDialog(this, "New User successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Person with ID not found", "Warning", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+        } else if (!(txtStatus.getText().equalsIgnoreCase("active") || txtStatus.getText().equalsIgnoreCase("active") )) {
+                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                
+        } else if (!(txtRole.getText().equalsIgnoreCase("student") || 
+                txtRole.getText().equalsIgnoreCase("admin") || txtRole.getText().equalsIgnoreCase("faculty") )) {
+            JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else  {
+        
+            Person p = university.getPersonDirectory().findPerson(txtPersonID.getText());
+
+            Profile pr = null;
+            if (txtRole.getText().equalsIgnoreCase("Student")) {
+                //find person's student profile
+                pr = university.getStudentDirectory().findStudentByPerson(p);
+
+            } else if (txtRole.getText().equalsIgnoreCase("Admin")) {
+                //find person's faculty profile
+                pr = university.getEmployeeDirectory().findEmployeeByPerson(p);
+            } else if (txtRole.getText().equalsIgnoreCase("Faculty")) {
+                //find person's faculty profile
+                pr = university.getFacultydirectory().findFacultyByPerson(p);
+            } else {
+                // \"Admin\" or \"Faculty\" or \"Student\"
+                JOptionPane.showMessageDialog(this, "User role invalid: select one of"
+                        + " \"Admin\" or \"Faculty\" or \"Student\" and/or role and Person ID combo not found ",
+                        "Warning", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if (pr == null) {
+                JOptionPane.showMessageDialog(this, "Person with ID not found", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            } else {
+                UserAccount ua = university.getUserAccountDirectory().newUserAccount(pr, txtUserName.getText(), txtPswd.getText());
+                ua.setLastActivity(LocalDateTime.now());
+                ua.setLastUpdated(LocalDateTime.now());
+                ua.setStatus(txtStatus.getText());
+                JOptionPane.showMessageDialog(this, "New User successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            }
        
+        }
         
     }//GEN-LAST:event_btnAddSupplierActionPerformed
 
@@ -218,6 +238,16 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
         mua.refreshTable();
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
+    }
+    
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidName(String s){
+        return s.matches("^[a-zA-Z]+$");
+    }
+
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidNumber(String s){
+        return s.matches("^[0-9]+$");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
