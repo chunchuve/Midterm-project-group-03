@@ -49,8 +49,12 @@ public class Department {
         mastercoursecatalog = new HashMap<>();
         coursecatalog = new CourseCatalog(this);
      
-        degree = new Degree("MSIS");
+        degree = new Degree("Master of " + n);
         
+        // instantiate department's internal person, student, faculty directories
+        persondirectory = new PersonDirectory();
+        studentdirectory = new StudentDirectory();
+        facultydirectory = new FacultyDirectory();
     }
 
     public String getName() {
@@ -82,7 +86,8 @@ public class Department {
         degree.addCoreCourse(c);
         
     }
-public void addElectiveCourse(Course c){
+    
+    public void addElectiveCourse(Course c){
         degree.addElectiveCourse(c);
         
     }
@@ -93,7 +98,7 @@ public void addElectiveCourse(Course c){
     }
 
     public StudentDirectory getStudentDirectory() {
-    return studentdirectory;
+        return studentdirectory;
     }
 
     public CourseSchedule newCourseSchedule(String semester) {
@@ -148,6 +153,10 @@ public void addElectiveCourse(Course c){
 
     public void setDegree(Degree degree) {
         this.degree = degree;
+    }
+
+    public HashMap<String, CourseSchedule> getMastercoursecatalog() {
+        return mastercoursecatalog;
     }
     
     @Override

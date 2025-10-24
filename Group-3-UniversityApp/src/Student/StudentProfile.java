@@ -27,8 +27,8 @@ public class StudentProfile extends Profile {
     private String termAdmittedFirst; // term admitted in
     private String instructionMode; // online or on-campus
     private String programEnrolled; //example MSIS
-    private ArrayList<String> hobbies; //added by sabrina
-    private ArrayList<String> interests; //added by sabrina
+    private ArrayList<String> hobbies; 
+    private ArrayList<String> interests; 
     private Department department;
     //end of changes
 
@@ -36,8 +36,8 @@ public class StudentProfile extends Profile {
         super(p);   
         transcript = new Transcript(this);
         employmenthistory = new EmploymentHistroy();
-        hobbies = new ArrayList<>(); //added by sabrina
-        interests = new ArrayList<>(); //added by sabrina
+        hobbies = new ArrayList<>(); 
+        interests = new ArrayList<>(); 
     }
     
     
@@ -53,12 +53,14 @@ public class StudentProfile extends Profile {
         super(p); 
         this.nUID = nUID;
         this.department = department;
+        this.setDepartment(department);
     }
     
     public StudentProfile(Person p, Department department) {
         
         super(p); 
         this.department = department;
+        this.setDepartment(department);
     }
     //end
 
