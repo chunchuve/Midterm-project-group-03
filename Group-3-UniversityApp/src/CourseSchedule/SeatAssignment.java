@@ -54,7 +54,14 @@ public class SeatAssignment {
     public void setGrade(float grade) {
         this.grade = grade;
     }
-    
-    
+
+    public CourseLoad getCourseload() {
+        return courseload;
+    }
+
+    public void setCourseload(CourseLoad courseload) {
+        this.courseload = courseload;
+    }
+
     
 }

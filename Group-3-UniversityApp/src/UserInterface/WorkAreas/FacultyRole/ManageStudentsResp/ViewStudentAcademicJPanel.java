@@ -5,6 +5,7 @@
 package UserInterface.WorkAreas.FacultyRole.ManageStudentsResp;
 
 import CourseCatalog.Course;
+import CourseSchedule.CourseLoad;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.SeatAssignment;
 import Student.StudentDirectory;
@@ -207,7 +208,7 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPersonID;
     // End of variables declaration//GEN-END:variables
 
-    //JTable to display a student's courseload information and grade
+    //JTable to display a student's all courseload information and grade
     public void refreshStudentCourseTable(StudentProfile selectedStudent) {
         
         int rc = StudentCourseTable.getRowCount();
@@ -218,9 +219,10 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
         
         StudentProfile sp = selectedStudent;
         
-        for (SeatAssignment sa : sp.getCurrentCourseLoad().getSeatAssignments()) {
+        for (SeatAssignment sa : sp.getCourseList()) {
             CourseOffer co = sa.getCourseOffer();
             Course c = co.getSubjectCourse();
+            String semester = sa.getCourseload().getSemester();
             
             String facultyLastName;
             if (co.getFacultyProfile() == null) {
@@ -232,11 +234,13 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
         Object[] row = new Object[5];
         row[0] = c;
         row[1] = c.getCourseName();
-        row[2] = sp.getCurrentCourseLoad().getSemester();
+        row[2] = semester;
         row[3] = facultyLastName;
-        row[4] = sa.getGrade();
+        row[4] = sa.getGrade();    
         
         ((DefaultTableModel) StudentCourseTable.getModel()).addRow(row);
-        }
-    }    
+        } 
+        
+    }
+ 
 }
