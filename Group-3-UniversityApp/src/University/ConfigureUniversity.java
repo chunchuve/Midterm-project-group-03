@@ -7,8 +7,10 @@
 package University;
 
 import College.College;
+import CourseSchedule.CourseLoad;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.CourseSchedule;
+import CourseSchedule.SeatAssignment;
 import Department.Department;
 import Persona.Person;
 import Persona.PersonDirectory;
@@ -19,6 +21,7 @@ import Faculty.FacultyProfile;
 import Persona.Address;
 import Student.StudentDirectory;
 import Student.StudentProfile;
+import Student.Transcript;
 
 import UserAccounts.UserAccount;
 import UserAccounts.UserAccountDirectory;
@@ -123,11 +126,44 @@ class ConfigureUniversity {
         studentprofile1.setnUID("NUID756893");
         
          //Create course schedule and offer with faculty assignments
-        CourseSchedule cs0 = department1.newCourseSchedule("Spring2026");
-        CourseOffer co1 = cs0.newCourseOffer("EECE 5640");
+         
+        CourseSchedule csSpring2026 = department1.newCourseSchedule("Spring 2026");
+        CourseOffer co1 = csSpring2026.newCourseOffer("EECE 5640"); 
+        co1.generatSeats(15);
         co1.AssignAsTeacher(facultyprofile1);
-        CourseOffer co2 = cs0.newCourseOffer("EECE 5641");
+        CourseOffer co2 = csSpring2026.newCourseOffer("EECE 5641");
         co2.AssignAsTeacher(facultyprofile0);
+        co2.generatSeats(15);
+        CourseOffer co3 = csSpring2026.newCourseOffer("EECE 5360");
+        co3.generatSeats(10);
+        co3.AssignAsTeacher(facultyprofile1);
+        CourseOffer co4 = csSpring2026.newCourseOffer("EECE 5550");
+        co4.generatSeats(18);
+        co4.AssignAsTeacher(facultyprofile0);
+        
+        //Create student courseload, seat assignment, and grade
+        Transcript transcript1 = studentprofile0.getTranscript();
+        CourseLoad cl01Spring2026 = studentprofile0.newCourseLoad("Spring 2026");
+        SeatAssignment sa1 = cl01Spring2026.newSeatAssignment(co1);
+        SeatAssignment sa2 = cl01Spring2026.newSeatAssignment(co2);
+        SeatAssignment sa3 = cl01Spring2026.newSeatAssignment(co3);
+        SeatAssignment sa4 = cl01Spring2026.newSeatAssignment(co4);
+        sa1.setGrade(3.7f);
+        sa2.setGrade(4.0f);
+        sa3.setGrade(3.3f);
+        sa4.setGrade(3.3f);
+        
+        Transcript transcript2 = studentprofile1.getTranscript();
+        CourseLoad cl02Spring2026 = studentprofile1.newCourseLoad("Spring 2026");
+        SeatAssignment sa5 = cl02Spring2026.newSeatAssignment(co1);
+        SeatAssignment sa6 = cl02Spring2026.newSeatAssignment(co2);
+        SeatAssignment sa7 = cl02Spring2026.newSeatAssignment(co3);
+        SeatAssignment sa8 = cl02Spring2026.newSeatAssignment(co4);
+        sa5.setGrade(3.0f);
+        sa6.setGrade(3.7f);
+        sa7.setGrade(3.0f);
+        sa8.setGrade(3.3f);        
+        
         
         //Create hobbies and interests for students
         studentprofile0.addHobbies("Basketball");
