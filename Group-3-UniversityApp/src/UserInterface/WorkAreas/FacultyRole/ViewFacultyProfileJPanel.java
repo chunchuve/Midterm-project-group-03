@@ -100,7 +100,7 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(396, 624, -1, -1));
         add(fieldDepartment, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 473, 182, -1));
 
-        lblTitle.setText("Title:");
+        lblTitle.setText("*Title:");
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 476, -1, -1));
 
         lblLastName.setText("*Last Name:");
@@ -151,7 +151,7 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         add(fieldFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 93, 182, -1));
 
         lblAddressLine1.setText("*Address Line 1:");
-        add(lblAddressLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 205, -1, -1));
+        add(lblAddressLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
         add(fieldAddressLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 205, 182, -1));
         add(fieldPersonID, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 149, 182, -1));
 
@@ -335,7 +335,7 @@ private void setFacultyEditMode() {
     fieldZipCode.setEnabled(true);
     fieldResearchArea.setEnabled(true);
     fieldDepartment.setEnabled(false);
-    fieldTitle.setEnabled(false);
+    fieldTitle.setEnabled(true);
     fieldRole.setEnabled(false);
     fieldUsername.setEnabled(true);
     fieldPassword.setEnabled(true);  

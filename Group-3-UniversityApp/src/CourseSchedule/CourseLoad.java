@@ -42,8 +42,35 @@ public class CourseLoad {
         }
         return sum;
     }
+    
         public ArrayList<SeatAssignment> getSeatAssignments(){
             return seatassignments;
         }
+ 
+    public float calculateGPA() {
+        float totalGrade = 0;
+        float totalCredits = 0;
+        
+        for (SeatAssignment sa: seatassignments) {
+            float grade = sa.getGrade();
+            int credits = sa.getCourseOffer().getSubjectCourse().getCredits();
             
+            totalGrade = totalGrade + (grade * credits);
+            totalCredits = totalCredits + credits;
+        }
+        
+        if (totalCredits == 0) return 0;
+        return totalGrade / totalCredits;
+    }        
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+        
+    
+    
 }

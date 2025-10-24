@@ -4,12 +4,15 @@
  */
 package UserInterface.WorkAreas.FacultyRole.ManageStudentsResp;
 
+import CourseCatalog.Course;
+import CourseSchedule.CourseLoad;
+import CourseSchedule.CourseOffer;
+import CourseSchedule.SeatAssignment;
 import Student.StudentDirectory;
 import Student.StudentProfile;
 import University.University;
 import java.awt.CardLayout;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,17 +20,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Sabrina
  */
-public class ViewStudentProfileJPanel extends javax.swing.JPanel {
-
+public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
+    
     JPanel CardSequencePanel;
     University university;
     StudentDirectory studentDirectory;
     StudentProfile selectedStudent;
-    
+
     /**
-     * Creates new form ViewStudentProfileJPanel
+     * Creates new form ViewStudentAcademicJPanel
      */
-    public ViewStudentProfileJPanel(University u, StudentDirectory sd, StudentProfile sp, JPanel clp) {
+    public ViewStudentAcademicJPanel(University u, StudentDirectory sd, StudentProfile sp, JPanel clp) {
         university = u;
         this.studentDirectory = sd;
         this.selectedStudent = sp;
@@ -39,7 +42,11 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         fieldFirstName.setText(this.selectedStudent.getPerson().getFirstName());
         fieldLastName.setText(this.selectedStudent.getPerson().getLastName());
         
-        refreshStudentDetailTable(sp);
+        //format GPA to display up to 2 decimals
+        float GPA = this.selectedStudent.getCurrentCourseLoad().calculateGPA();
+        fieldGPA.setText(String.format("%.2f", GPA));
+        
+        refreshStudentCourseTable(sp);
     }
 
     /**
@@ -51,19 +58,22 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fieldLastName = new javax.swing.JTextField();
         Back = new javax.swing.JButton();
-        lblManageCourses = new javax.swing.JLabel();
+        lblPersonID = new javax.swing.JLabel();
+        lblAcademicProgress = new javax.swing.JLabel();
+        fieldPersonID = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        HobbyInterestTable = new javax.swing.JTable();
-        btnViewStudent = new javax.swing.JButton();
+        StudentCourseTable = new javax.swing.JTable();
         lblNUID = new javax.swing.JLabel();
         fieldNUID = new javax.swing.JTextField();
         lblLastName = new javax.swing.JLabel();
         lblFirstName = new javax.swing.JLabel();
         fieldFirstName = new javax.swing.JTextField();
-        fieldLastName = new javax.swing.JTextField();
-        lblPersonID = new javax.swing.JLabel();
-        fieldPersonID = new javax.swing.JTextField();
+        lblGPA = new javax.swing.JLabel();
+        fieldGPA = new javax.swing.JTextField();
+
+        fieldLastName.setEditable(false);
 
         Back.setText("<< Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -72,28 +82,25 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblManageCourses.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblManageCourses.setText("Students Details");
+        lblPersonID.setText("Person ID:");
 
-        HobbyInterestTable.setModel(new javax.swing.table.DefaultTableModel(
+        lblAcademicProgress.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblAcademicProgress.setText("Student Academic Progress");
+
+        fieldPersonID.setEditable(false);
+
+        StudentCourseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Hobbies", "Interests"
+                "Course Number", "Course Name", "Semester", "Instructor", "Grade"
             }
         ));
-        jScrollPane1.setViewportView(HobbyInterestTable);
-
-        btnViewStudent.setText("View Student Courses");
-        btnViewStudent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewStudentActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(StudentCourseTable);
 
         lblNUID.setText("NUID:");
 
@@ -105,11 +112,9 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
 
         fieldFirstName.setEditable(false);
 
-        fieldLastName.setEditable(false);
+        lblGPA.setText("GPA:");
 
-        lblPersonID.setText("Person ID:");
-
-        fieldPersonID.setEditable(false);
+        fieldGPA.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,19 +142,21 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(fieldFirstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(fieldLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(Back)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnViewStudent))
+                            .addComponent(lblGPA)
+                            .addGap(18, 18, 18)
+                            .addComponent(fieldGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblManageCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAcademicProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(506, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(lblManageCourses)
+                .addComponent(lblAcademicProgress)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -167,8 +174,10 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnViewStudent)
-                            .addComponent(Back)))
+                            .addComponent(Back)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblGPA)
+                                .addComponent(fieldGPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(lblFirstName))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
@@ -181,56 +190,57 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         layout.previous(CardSequencePanel);
     }//GEN-LAST:event_BackActionPerformed
 
-    private void btnViewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentActionPerformed
-        // TODO add your handling code here:
-        
-        //Check if student courseload is null
-        if (selectedStudent.getCurrentCourseLoad() == null) {
-        //if student courseload is null, pop up an error message
-            JOptionPane.showMessageDialog(null, "No courses were found for this student. Please ask student to enroll in courses.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-            ViewStudentAcademicJPanel viewStudentAcademicJPanel = new ViewStudentAcademicJPanel(university, university.getStudentDirectory(), selectedStudent, CardSequencePanel);
-            CardSequencePanel.add("ViewStudentAcademicJPanel", viewStudentAcademicJPanel);
-            CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
-            layout.next(CardSequencePanel);
-    }//GEN-LAST:event_btnViewStudentActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTable HobbyInterestTable;
-    private javax.swing.JButton btnViewStudent;
+    private javax.swing.JTable StudentCourseTable;
     private javax.swing.JTextField fieldFirstName;
+    private javax.swing.JTextField fieldGPA;
     private javax.swing.JTextField fieldLastName;
     private javax.swing.JTextField fieldNUID;
     private javax.swing.JTextField fieldPersonID;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAcademicProgress;
     private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblGPA;
     private javax.swing.JLabel lblLastName;
-    private javax.swing.JLabel lblManageCourses;
     private javax.swing.JLabel lblNUID;
     private javax.swing.JLabel lblPersonID;
     // End of variables declaration//GEN-END:variables
 
-    public void refreshStudentDetailTable(StudentProfile selectedStudent) {
+    //JTable to display a student's all courseload information and grade
+    public void refreshStudentCourseTable(StudentProfile selectedStudent) {
         
-        DefaultTableModel model = (DefaultTableModel) HobbyInterestTable.getModel();
-        model.setRowCount(0);
+        int rc = StudentCourseTable.getRowCount();
+        int i;
+        for (i = rc - 1; i>=0; i--) {
+            ((DefaultTableModel) StudentCourseTable.getModel()).removeRow(i);
+        }
         
-        //if selected student is not null, then get hobbies and interests from studentProfile
-        if (selectedStudent != null) {
-            ArrayList<String> hobbies = selectedStudent.getHobbies();
-            ArrayList<String> interests = selectedStudent.getInterests();
-
-        // Display hobby and interests in separate rows
-            int maxRows = Math.max(hobbies.size(), interests.size()); //check which list is longer
-            for (int i = 0; i < maxRows; i++) { //loops through the rows based on hobbies/interests list
-                Object[] row = new Object[2];
-                row[0] = (i < hobbies.size()) ? hobbies.get(i) : ""; //add to row i if hobby is found, otherwise return blank
-                row[1] = (i < interests.size()) ? interests.get(i) : ""; //add to row i if interest is found, otherwise return blank
-                model.addRow(row);
-            }
-        }    
+        StudentProfile sp = selectedStudent;
+        
+        for (SeatAssignment sa : sp.getCourseList()) {
+            CourseOffer co = sa.getCourseOffer();
+            Course c = co.getSubjectCourse();
+            String semester = sa.getCourseload().getSemester();
+            
+            String facultyLastName;
+            if (co.getFacultyProfile() == null) {
+                facultyLastName = "Not Assigned";
+            } else {
+                facultyLastName = co.getFacultyProfile().getPerson().getLastName();
+        }
+        
+        Object[] row = new Object[5];
+        row[0] = c;
+        row[1] = c.getCourseName();
+        row[2] = semester;
+        row[3] = facultyLastName;
+        row[4] = sa.getGrade();    
+        
+        ((DefaultTableModel) StudentCourseTable.getModel()).addRow(row);
+        } 
+        
     }
+ 
 }
