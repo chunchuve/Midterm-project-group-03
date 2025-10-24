@@ -4,6 +4,7 @@
  */
 package UserInterface.WorkAreas.StudentRole;
 
+import Department.Department;
 import Student.StudentProfile;
 import javax.swing.JPanel;
 
@@ -18,7 +19,8 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
      */
     StudentProfile student;
     JPanel CardSequencePanel;
-    public GraduationAuditJPanel(StudentProfile s, JPanel csp) {
+    Department d;
+    public GraduationAuditJPanel(StudentProfile s, Department d, JPanel csp) {
         initComponents();
         student = s;
         CardSequencePanel = csp;

@@ -12,6 +12,8 @@ package UserInterface.WorkAreas.StudentRole;
 
 
 
+import Department.Department;
+import UserInterface.WorkAreas.StudentRole.ClassRegistration.ClassRegistrationJPanel;
 import Student.StudentProfile;
 import University.University;
 import java.awt.CardLayout;
@@ -27,7 +29,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     javax.swing.JPanel CardSequencePanel;
     University university;
     StudentProfile student;
-
+    Department department;
     /**
      * Creates new form UnitRiskWorkArea
      * @param b
@@ -40,6 +42,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
         university = u;
         CardSequencePanel = clp;
         student = spp;
+        department = student.getDepartment();
         initComponents();
 
     }
@@ -190,15 +193,15 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_btnMyProfileActionPerformed
 
     private void btnGraduationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationActionPerformed
-        ClassRegistrationJPanel classRegistrationJPanel = new ClassRegistrationJPanel(student, CardSequencePanel);
-        CardSequencePanel.add("ClassRegistrationJPanel", classRegistrationJPanel);
+        GraduationAuditJPanel graduationAuditJPanel = new GraduationAuditJPanel(student, department, CardSequencePanel);
+        CardSequencePanel.add("GraduationAuditJPanel", graduationAuditJPanel);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
 
     }//GEN-LAST:event_btnGraduationActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
-        ClassRegistrationJPanel classRegistrationJPanel = new ClassRegistrationJPanel(student, CardSequencePanel);
+        ClassRegistrationJPanel classRegistrationJPanel = new ClassRegistrationJPanel(student, department, CardSequencePanel);
         CardSequencePanel.add("ClassRegistrationJPanel", classRegistrationJPanel);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);

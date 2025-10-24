@@ -63,6 +63,18 @@ public class CourseOffer {
         }
         return null;
     }
+    
+    public int getSeatAvailability() {
+        int index = 0;
+        for (Seat s: seatlist) {
+            // find the index for empty seat
+            if(!s.isOccupied()) {
+                break;
+            }
+            index++;
+        }
+        return seatlist.size() - index;
+    }
 
 
     public SeatAssignment assignEmptySeat(CourseLoad cl) {
@@ -88,11 +100,22 @@ public class CourseOffer {
         }
         return sum;
     }
+    
     public Course getSubjectCourse(){
         return course;
     }
+    
     public int getCreditHours(){
         return course.getCredits();
+    }
+
+    public ArrayList<Seat> getSeatlist() {
+        return seatlist;
+    }
+    
+    @Override
+    public String toString() {
+        return course.getCourseName();
     }
 
 }
