@@ -32,10 +32,24 @@ public class Seat {
         occupied = true;   
         return seatassignment;
     }
+    
     public CourseOffer getCourseOffer(){
         return courseoffer;
     }
     public int getCourseCredits(){
         return courseoffer.getCreditHours();
     }
+
+    public void setOccupied(Boolean occupied) {
+        this.occupied = occupied;
+    }
+
+    public void setSeatassignment(SeatAssignment seatassignment) {
+        this.seatassignment = seatassignment;
+    }
+    
+        public SeatAssignment getSeatassignment() {
+        return seatassignment;
+    }
+
 }

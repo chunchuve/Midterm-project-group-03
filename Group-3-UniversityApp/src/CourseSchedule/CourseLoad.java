@@ -42,8 +42,14 @@ public class CourseLoad {
         }
         return sum;
     }
-        public ArrayList<SeatAssignment> getSeatAssignments(){
-            return seatassignments;
-        }
+    
+    public void unEnrollCourse(SeatAssignment sa) {
+        sa.unAssignSeatFromStudent();
+        seatassignments.remove(sa);     
+    }
+            
+    public ArrayList<SeatAssignment> getSeatAssignments(){
+        return seatassignments;
+    }
             
 }

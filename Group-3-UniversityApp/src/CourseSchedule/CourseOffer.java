@@ -84,6 +84,16 @@ public class CourseOffer {
         cl.registerStudent(sa); //coures offer seat is now linked to student
         return sa;
     }
+    
+    public void unAssignSeat(SeatAssignment sa) {
+        for (Seat s: seatlist) {
+            if(s.getSeatassignment() == sa) {
+                s.setSeatassignment(null);
+                s.setOccupied(false);
+                break;
+            }
+        }
+    }
 
     public int getTotalCourseRevenues() {
 

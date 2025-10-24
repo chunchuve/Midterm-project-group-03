@@ -28,25 +28,37 @@ public class SeatAssignment {
         courseload = cl;
     }
     
+    public void unAssignSeatFromStudent() {
+        courseload = null; // unlink from student courseload
+        seat.getCourseOffer().unAssignSeat(this); // unassign seatassignment from course offer (change seat to not occupied, seat assignment to null)
+    }
+    
     public int getCreditHours(){
         return seat.getCourseCredits();
        
     }
+    
     public Seat getSeat(){
         return seat;
     }
+    
     public CourseOffer getCourseOffer(){
         
         return seat.getCourseOffer();
     }
+    
     public Course getAssociatedCourse(){
         
         return getCourseOffer().getSubjectCourse();
     }
+    
     public float GetCourseStudentScore(){
         return getCreditHours()*grade;
     }
     
-    
-    
+    @Override
+    public String toString() {
+        //return course name
+        return seat.getCourseOffer().toString();
+    }
 }
