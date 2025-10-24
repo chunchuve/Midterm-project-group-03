@@ -148,6 +148,7 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        //Search students based on NUID
         if (!fieldSearch.getText().isBlank()) {
             
             String nUID = fieldSearch.getText();
@@ -179,6 +180,7 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
         } else JOptionPane.showMessageDialog(null, "Please select a student from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btnViewStudentActionPerformed
 
+    //Populate JTable with student profiles
     public void refreshStudentTable() {
         int rc = StudentTable.getRowCount();
         int i;

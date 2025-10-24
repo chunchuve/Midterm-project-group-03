@@ -208,7 +208,7 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPersonID;
     // End of variables declaration//GEN-END:variables
 
-    //JTable to display a student's all courseload information and grade
+    //Populate JTable to display a student's all courseload information and grade
     public void refreshStudentCourseTable(StudentProfile selectedStudent) {
         
         int rc = StudentCourseTable.getRowCount();

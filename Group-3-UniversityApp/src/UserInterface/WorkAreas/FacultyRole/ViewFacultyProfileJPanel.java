@@ -12,6 +12,7 @@ import UserAccounts.UserAccount;
 import UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -182,6 +183,7 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         
+        //Retrieve data from text fields
         String firstName = fieldFirstName.getText();
         String lastName = fieldLastName.getText();
         String dateOfBirth = fieldDOB.getText();
@@ -205,7 +207,7 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
             return;
         }
 
-
+        //set data 
         FacultyProfile facultyProfile = (FacultyProfile) userAccount.getAssociatedPersonProfile();
         facultyProfile.getPerson().setFirstName(firstName);
         facultyProfile.getPerson().setLastName(lastName);
@@ -224,7 +226,7 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         userAccount.setUsername(username);
         userAccount.setPassword(password);
 
-        //userAccount.setLastUpdated();
+        userAccount.setLastUpdated(LocalDateTime.now());
 
         JOptionPane.showMessageDialog(this, "Account updated successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
