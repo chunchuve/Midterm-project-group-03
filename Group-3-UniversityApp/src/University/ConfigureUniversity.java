@@ -113,7 +113,7 @@ class ConfigureUniversity {
         
         studentprofile1.setDepartment(facultyprofile0.getDepartment()); //assign computer science engg
         studentprofile1.setProgramEnrolled("MSDS");
-        studentprofile1.setInstructionMode("OnCampus");
+        studentprofile1.setInstructionMode("On Campus");
         studentprofile1.setnUID("NUID756893");
     
         //Create courses
