@@ -185,7 +185,7 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         //Check if student courseload is null
-        if (selectedStudent.getCurrentCourseLoad() == null) {
+        if (selectedStudent.getTranscript() == null) {
         //if student courseload is null, pop up an error message
             JOptionPane.showMessageDialog(null, "No courses were found for this student. Please ask student to enroll in courses.", "Error", JOptionPane.ERROR_MESSAGE);
             return;

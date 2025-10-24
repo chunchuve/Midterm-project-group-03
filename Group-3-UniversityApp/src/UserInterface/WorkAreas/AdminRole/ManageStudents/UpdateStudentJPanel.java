@@ -19,6 +19,7 @@ import UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -85,9 +86,9 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         txtMode = new javax.swing.JTextField();
         txtNUID = new javax.swing.JTextField();
         lblCity1 = new javax.swing.JLabel();
-        lblCity2 = new javax.swing.JLabel();
+        lblHobbies = new javax.swing.JLabel();
         txtHobbies = new javax.swing.JTextField();
-        lblCity3 = new javax.swing.JLabel();
+        lblInterests = new javax.swing.JLabel();
         txtInterests = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
@@ -123,9 +124,9 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
 
         lblCity1.setText("NUID");
 
-        lblCity2.setText("Hobbies");
+        lblHobbies.setText("Hobbies");
 
-        lblCity3.setText("Interests");
+        lblInterests.setText("Interests");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -169,8 +170,8 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
                                     .addComponent(txtNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblCity3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblHobbies, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblInterests, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtHobbies, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,11 +221,11 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHobbies, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCity2))
+                    .addComponent(lblHobbies))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtInterests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCity3))
+                    .addComponent(lblInterests))
                 .addGap(29, 29, 29)
                 .addComponent(btnSave)
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -258,8 +259,8 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         
         //check for blank input
         if (txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || 
-                txtProgram.getText().isBlank() || txtMode.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+                txtProgram.getText().isBlank() || txtMode.getText().isBlank() || txtHobbies.getText().isBlank() || txtInterests.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"All fields are mandatory");
             return;
         }
         
@@ -270,10 +271,16 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
                 
         } else if (!isValidName(txtProgram.getText())) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);          
             
         } else if (!(txtMode.getText().equalsIgnoreCase("Online") || txtMode.getText().equalsIgnoreCase("On Campus") )) {
-                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Mode can be either \"Online\" or \"On Campus\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
+        } else if (!txtHobbies.getText().matches("^[a-zA-Z, ]+$")) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet. Please separate multiple hobbies with a comma.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
+        } else if (!txtInterests.getText().matches("^[a-zA-Z, ]+$")) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet. Please separate multiple interests with a comma.", "Warning", JOptionPane.INFORMATION_MESSAGE);                  
                 
         } else {
         selectedStudent.getPerson().setFirstName(txtFirstName.getText());
@@ -282,7 +289,30 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         selectedStudent.setProgramEnrolled(txtProgram.getText());
         selectedStudent.setInstructionMode(txtMode.getText());
         selectedStudent.setnUID(txtNUID.getText());
-        JOptionPane.showMessageDialog(this, "Student updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
+        //Get hobbies and interests separated by comma
+        //Store into an array list
+        String hobbiesList = txtHobbies.getText();
+        String[] hobbiesArray = hobbiesList.split("\\s*,\\s*"); //split by comma
+ 
+        for (String hobby : hobbiesArray) {
+            hobby = hobby.trim();
+            if (!hobby.isEmpty()) {
+                selectedStudent.addHobbies(hobby); //Store into StudentProfile
+            }
+        } 
+         
+        String interestsList = txtInterests.getText();
+        String[] interestsArray = interestsList.split("\\s*,\\s*"); //split by comma
+
+        for (String interest : interestsArray) {
+            interest = interest.trim();
+            if (!interest.isEmpty()) {
+                selectedStudent.addInterests(interest); //Store into StudentProfile
+            }
+        } 
+                
+        JOptionPane.showMessageDialog(this, "Student updated successfully", "Information", JOptionPane.INFORMATION_MESSAGE);
         }
         
     }
@@ -306,10 +336,10 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblCity1;
-    private javax.swing.JLabel lblCity2;
-    private javax.swing.JLabel lblCity3;
     private javax.swing.JLabel lblDateOfBirth;
     private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblHobbies;
+    private javax.swing.JLabel lblInterests;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblLine1;
     private javax.swing.JLabel lblLine2;

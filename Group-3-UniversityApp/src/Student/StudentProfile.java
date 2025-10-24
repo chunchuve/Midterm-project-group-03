@@ -112,23 +112,34 @@ public class StudentProfile extends Profile {
         this.programEnrolled = programEnrolled;
     }
 
-    //added by sabrina
     public ArrayList<String> getHobbies() {
         return hobbies;
     }
 
+    //create hobby array list if it is empty
+    //add hobby if it is not included in the list
     public void addHobbies(String hobby) {
+        if (hobbies == null) {
+            hobbies = new ArrayList<>();
+        }
+        if (!hobbies.contains(hobby)) {
         hobbies.add(hobby);
+        }
     }
 
     public ArrayList<String> getInterests() {
         return interests;
     }
-
+    //create interest array list if it is empty
+    //add interest if it is not included in the list
     public void addInterests(String interest) {
+        if (interests == null) {
+            interests = new ArrayList<>();
+        }
+        if (!interests.contains(interests)) {
         interests.add(interest);
-    }
-
+        }
+    }    
     
     //public boolean isMatch(String id) {
        // return person.getPersonId().equals(id);
