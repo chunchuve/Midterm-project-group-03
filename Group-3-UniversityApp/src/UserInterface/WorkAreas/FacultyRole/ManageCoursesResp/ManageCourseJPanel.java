@@ -156,6 +156,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        //Search course based on course number
         if (!fieldSearch.getText().isBlank()) {
             String number = fieldSearch.getText();
             Course foundCourse = department.getCourseCatalog().getCourseByNumber(number);
@@ -175,7 +176,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
     private void btnViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCourseActionPerformed
         // TODO add your handling code here:
-
+        //Select a course to view
         int selectedRow = CourseTable.getSelectedRow();
         if (selectedRow >=0) {
             Course selectedCourse = (Course) CourseTable.getValueAt(selectedRow, 0);
@@ -187,6 +188,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnViewCourseActionPerformed
 
+    //Populate JTable with course details
     public void refreshCourseTable() {
         int rc = CourseTable.getRowCount();
         int i;

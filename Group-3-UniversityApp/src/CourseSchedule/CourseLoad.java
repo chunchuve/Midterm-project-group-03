@@ -46,10 +46,10 @@ public class CourseLoad {
         public ArrayList<SeatAssignment> getSeatAssignments(){
             return seatassignments;
         }
- 
+ //Method to calculate student's GPA
     public float calculateGPA() {
-        float totalGrade = 0;
-        float totalCredits = 0;
+        float totalGrade = 0; //start at zero
+        float totalCredits = 0; //start at zero
         
         for (SeatAssignment sa: seatassignments) {
             float grade = sa.getGrade();
