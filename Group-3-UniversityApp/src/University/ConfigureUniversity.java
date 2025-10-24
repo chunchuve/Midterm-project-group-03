@@ -57,7 +57,7 @@ class ConfigureUniversity {
         Person person002 = personDirectory.newPerson("ID3456", "Gina", "Montana", "11-15-1980"); //faculty
         Person person003 = personDirectory.newPerson("ID7890", "Adam", "Rollen", "09-10-2003"); //student
         Person person005 = personDirectory.newPerson("ID7845", "Jim", "Dellon", "01-01-2004"); //student
-        Person person006 = personDirectory.newPerson("ID7845", "Anna", "Shnider", "01-01-2004"); //faculty
+        Person person006 = personDirectory.newPerson("ID7840", "Anna", "Shnider", "01-01-2004"); //faculty
     
         //Person person001 = personDirectory.newPerson("John Smith"); //employee
         

@@ -215,11 +215,32 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         //update user account
+        
+        //input validations
+        //check for blank input
+        if (txtUserName.getText().isBlank() || txtPswd.getText().isBlank() || txtStatus.getText().isBlank() || 
+                txtRole.getText().isBlank() || txtPersonID.getText().isBlank() || txtNUID.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+            return;
+        }
+        //check for valid input
+        if (!isValidName(txtUserName.getText())) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        } else if (!(txtStatus.getText().equalsIgnoreCase("active") || txtStatus.getText().equalsIgnoreCase("active") )) {
+                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                return;
+        } else if (!(txtRole.getText().equalsIgnoreCase("student") || 
+                txtRole.getText().equalsIgnoreCase("admin") || txtRole.getText().equalsIgnoreCase("faculty") )) {
+            JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        } else
+        
         saveFeatures();
         JOptionPane.showMessageDialog(this, "Account updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
         
-        txtUserName.setEditable(false);
-        txtPswd.setEditable(false);
+        txtRole.setEditable(false);
+        txtPersonID.setEditable(false);
        
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -253,7 +274,17 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }
+    
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidName(String s){
+        return s.matches("^[a-zA-Z]+$");
+    }
 
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidNumber(String s){
+        return s.matches("^[0-9]+$");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton btnSave;

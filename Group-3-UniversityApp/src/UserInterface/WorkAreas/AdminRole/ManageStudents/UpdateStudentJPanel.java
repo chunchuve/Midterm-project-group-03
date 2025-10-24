@@ -53,18 +53,9 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         txtMode.setText(selectedStudent.getInstructionMode());
         txtNUID.setText(selectedStudent.getnUID());
         txtPersonID.setEnabled(false);
-         
-        //display nUID for found student
-        //if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-        //    StudentProfile stu = (StudentProfile) selecteduseraccount.getAssociatedPersonProfile();
-        //    txtNUID.setText(stu.getnUID());
-        //}
+         //txtRole.setEnabled(false);
+        txtDepartment.setEnabled(false);
         
-        //disable edit for NUID for not students
-        //if (!selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
-                
-        //        txtNUID.setEnabled(false);       
-        //}
         
     }
 
@@ -233,7 +224,7 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
 
         //update student details
         saveFeatures();
-        JOptionPane.showMessageDialog(this, "Student updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
        
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -241,12 +232,34 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
        
         //save student changes
         
+        //check for blank input
+        if (txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || 
+                txtProgram.getText().isBlank() || txtMode.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+            return;
+        }
+        
+        if (!isValidName(txtFirstName.getText()) || txtFirstName.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else if (!isValidName(txtLastName.getText()) || txtLastName.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                
+        } else if (!isValidName(txtProgram.getText())) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else if (!(txtMode.getText().equalsIgnoreCase("Online") || txtMode.getText().equalsIgnoreCase("On Campus") )) {
+                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                
+        } else {
         selectedStudent.getPerson().setFirstName(txtFirstName.getText());
         selectedStudent.getPerson().setLastName(txtLastName.getText());
-        selectedStudent.getDepartment().setName(txtDepartment.getText());
+        //selectedStudent.getDepartment().setName(txtDepartment.getText());
         selectedStudent.setProgramEnrolled(txtProgram.getText());
         selectedStudent.setInstructionMode(txtMode.getText());
         selectedStudent.setnUID(txtNUID.getText());
+        JOptionPane.showMessageDialog(this, "Student updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }
     
@@ -260,7 +273,10 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }
-
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidName(String s){
+        return s.matches("^[a-zA-Z]+$");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton btnSave;

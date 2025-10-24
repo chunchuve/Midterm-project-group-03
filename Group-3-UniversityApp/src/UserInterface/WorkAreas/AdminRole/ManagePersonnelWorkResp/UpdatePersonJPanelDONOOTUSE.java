@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vrmohanc
  */
-public class UpdatePersonJPanel extends javax.swing.JPanel {
+public class UpdatePersonJPanelDONOOTUSE extends javax.swing.JPanel {
     
     JPanel CardSequencePanel;
     University university;
@@ -39,7 +39,7 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UpdatePersonJPanel
      */
-    public UpdatePersonJPanel(JPanel jp, University university, Person person) {
+    public UpdatePersonJPanelDONOOTUSE(JPanel jp, University university, Person person) {
         initComponents();
         this.CardSequencePanel = jp;
         this.university = university;

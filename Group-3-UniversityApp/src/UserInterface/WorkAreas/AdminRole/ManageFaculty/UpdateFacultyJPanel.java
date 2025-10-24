@@ -209,20 +209,33 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
 
         //update faculty record
         saveFeatures();
-        JOptionPane.showMessageDialog(this, "Faculty updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void saveFeatures() {
        
         //save faculty changes
+        //check for blank input
+        
+        if (!isValidName(txtFirstName.getText()) || txtFirstName.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else if (!isValidName(txtLastName.getText()) || txtLastName.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                
+        } else if (!isValidName(txtTitle.getText())) {
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else  {
         
         selectedFaculty.getPerson().setFirstName(txtFirstName.getText());
         selectedFaculty.getPerson().setLastName(txtLastName.getText());
         //selectedFaculty.getDepartment().setName(txtDepartment.getText());
         //selectedFaculty.setRole(txtRole.getText());
         selectedFaculty.setTitle(txtTitle.getText());
-        
+        JOptionPane.showMessageDialog(this, "Faculty updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }
     
@@ -236,7 +249,10 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }
-
+    //check for valid name: expected alphabet a-z or A-Z
+    private static boolean isValidName(String s){
+        return s.matches("^[a-zA-Z]+$");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton btnSave;
