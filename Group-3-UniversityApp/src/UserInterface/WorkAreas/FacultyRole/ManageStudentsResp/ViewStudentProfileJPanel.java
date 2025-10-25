@@ -65,6 +65,8 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         lblPersonID = new javax.swing.JLabel();
         fieldPersonID = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(204, 255, 204));
+
         Back.setText("<< Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

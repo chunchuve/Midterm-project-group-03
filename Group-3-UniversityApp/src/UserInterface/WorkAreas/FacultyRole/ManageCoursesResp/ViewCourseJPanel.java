@@ -67,6 +67,8 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 255, 204));
+
         lblCredits.setText("Course Credit:");
 
         lblCourseDetails.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N

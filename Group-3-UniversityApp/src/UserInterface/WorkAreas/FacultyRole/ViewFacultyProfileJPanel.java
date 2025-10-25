@@ -87,6 +87,8 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         lblCity = new javax.swing.JLabel();
         fieldCity = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(204, 255, 204));
+
         lblDepartment.setText("Department:");
 
         btnSave.setText("Save");

@@ -73,6 +73,8 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
         lblGPA = new javax.swing.JLabel();
         fieldGPA = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(204, 255, 204));
+
         fieldLastName.setEditable(false);
 
         Back.setText("<< Back");
