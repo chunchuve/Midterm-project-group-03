@@ -90,7 +90,7 @@ public class CourseOffer {
     
     public void unAssignSeat(SeatAssignment sa) {
         for (Seat s: seatlist) {
-            if(s.getSeatassignment() == sa) {
+            if(s.getSeatassignment().equals(sa)) {
                 s.setSeatassignment(null);
                 s.setOccupied(false);
                 break;

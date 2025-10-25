@@ -18,7 +18,7 @@ public class SeatAssignment {
     CourseLoad courseload;
     
     public SeatAssignment(CourseLoad cl, Seat s){
-        seat = s;
+        seat = s; 
         courseload = cl;
         
         // initial grade

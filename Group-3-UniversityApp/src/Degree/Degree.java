@@ -19,6 +19,7 @@ public class Degree {
     String title;
     ArrayList<Course> corelist;
     ArrayList<Course> electives;
+    int requiredCredits = 32;
 
     public Degree(String name) {
         title = name;
@@ -43,20 +44,47 @@ public class Degree {
         //For each core course in the core list of the degree do the following:
         //Check if the core class at hand is in the transcrip
         //Repeat this check for the electives as well
-        ArrayList sas = sp.getCourseList(); //seatAssignments extracted from course loads
+        
+        ArrayList<SeatAssignment> sas = sp.getCourseList(); //seatAssignments extracted from course loads
 
         if (validateCoreClasses(sas) == false) {
             return false;
         }//core classes satisfied
 
-        //Do the electives check in case some taken classes are not part of the electives
-      
         //Check for the total number of credit hours that it is above 32
+        int countedCredits = getTotalValidCredits(sas);
+        if (countedCredits < 32) {
+            return false;
+        }
+
 
         else return true; //student has at least 32 credit hours per NEU requirements
 
     }
 
+    public int getTotalValidCredits(ArrayList<SeatAssignment> sas) {
+        int sum = 0;
+        // count core credits
+        for (Course c: corelist) {
+            for (SeatAssignment sa: sas) {
+                if (sa.getAssociatedCourse().equals(c)) {
+                    sum = sum + c.getCredits();
+                }
+            }
+        }
+        
+        // count elective credits
+        for (Course c: electives) {
+            for (SeatAssignment sa: sas) {
+                if (sa.getAssociatedCourse().equals(c)) {
+                    sum = sum + c.getCredits();
+                }
+            }
+        }
+      
+        return sum;
+    }
+    
     public boolean validateCoreClasses(ArrayList<SeatAssignment> sas) {
 
         //For each core course in the core list of the degree do the following:
@@ -71,14 +99,36 @@ public class Degree {
 
     }
 
+    // check by seat assignment list
     public boolean isCoreSatisfied(ArrayList<SeatAssignment> sas, Course c) {
         for (SeatAssignment sa : sas) {
+            // check if the student's seat assignment list has the core course
             if (sa.getAssociatedCourse().equals(c)) {
-                return true;
+                // check if passed
+                if(isCoreGradePassed(sa, c)){
+                    return true;
+                }
             }
         }
         return false;
-
+    }
+    
+    // check if meet core course requirement (at least 3.0 or B)
+    public boolean isCoreGradePassed(SeatAssignment sa, Course c) {
+        // check if grade is at least 3.0 or B
+        if(sa.getGrade() >= 3.0){
+            return true;
+        }
+        return false;
+    }
+    
+    // check if meet elective course requirement (at least 2.0 or C)
+    public boolean isElectiveGradePassed(SeatAssignment sa, Course c) {
+        // check if grade is at least 2.0 or C
+        if(sa.getGrade() >= 2.0){
+            return true;
+        }
+        return false;
     }
 
     public int getTotalElectiveCoursesTaken(ArrayList<SeatAssignment> sas) {
@@ -100,6 +150,18 @@ public class Degree {
         }
         return false;
 
+    }
+
+    public ArrayList<Course> getCorelist() {
+        return corelist;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public ArrayList<Course> getElectives() {
+        return electives;
     }
 
 }
