@@ -9,6 +9,7 @@ import Student.StudentProfile;
 import University.University;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,11 +21,8 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
 
     JPanel CardSequencePanel;
     University university;
-    //Department department;
     StudentDirectory studentDirectory;
     StudentProfile selectedStudent;
-    //Course course;
-    //CourseCatalog courseCatalog;
     
     /**
      * Creates new form ViewStudentProfileJPanel
@@ -90,7 +88,7 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(HobbyInterestTable);
 
-        btnViewStudent.setText("View Student Transcript");
+        btnViewStudent.setText("View Student Courses");
         btnViewStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewStudentActionPerformed(evt);
@@ -185,16 +183,17 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
 
     private void btnViewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentActionPerformed
         // TODO add your handling code here:
-        /*
-        int selectedRow = CourseTable.getSelectedRow();
-        if (selectedRow >=0) {
-            Course selectedCourse = (Course) CourseTable.getValueAt(selectedRow, 0);
-            ViewCourseJPanel vc = new ViewCourseJPanel(university, courseCatalog, selectedCourse, CardSequencePanel);
-            CardSequencePanel.add("ViewCourseJPanel", vc);
+        
+        //Check if student courseload is null
+        if (selectedStudent.getTranscript() == null) {
+        //if student courseload is null, pop up an error message
+            JOptionPane.showMessageDialog(null, "No courses were found for this student. Please ask student to enroll in courses.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            ViewStudentAcademicJPanel viewStudentAcademicJPanel = new ViewStudentAcademicJPanel(university, university.getStudentDirectory(), selectedStudent, CardSequencePanel);
+            CardSequencePanel.add("ViewStudentAcademicJPanel", viewStudentAcademicJPanel);
             CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
             layout.next(CardSequencePanel);
-        } else JOptionPane.showMessageDialog(null, "Please select a course from the list to view.", "Warning", JOptionPane.WARNING_MESSAGE);
-        */
     }//GEN-LAST:event_btnViewStudentActionPerformed
 
 

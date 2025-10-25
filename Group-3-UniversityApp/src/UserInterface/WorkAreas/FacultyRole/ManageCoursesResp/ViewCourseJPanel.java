@@ -181,6 +181,7 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
         Component[] panelStack = CardSequencePanel.getComponents();
         JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
         ManageCourseJPanel manageCourseJPanel = (ManageCourseJPanel) lastPanel;
+        //Refreshes JTable with updated data
         manageCourseJPanel.refreshCourseTable();
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
@@ -241,8 +242,7 @@ private void refreshCourseTextFields() {
     fieldCourseName.setText(course.getCourseName());
     fieldCredits.setText(String.valueOf(course.getCredits()));
     fieldPrice.setText(String.valueOf(course.getCoursePrice()));
-    //fieldInstructorFName.setText(courseOffer.getFacultyProfile().getPerson().getFirstName());
-    //fieldInstructorLName.setText(courseOffer.getFacultyProfile().getPerson().getLastName());
+
     
 }
 
@@ -251,8 +251,7 @@ private void setCourseViewMode() {
     fieldCourseName.setEnabled(false);
     fieldCredits.setEnabled(false);
     fieldPrice.setEnabled(false);
-    //fieldInstructorFName.setEnabled(false);
-    //fieldInstructorLName.setEnabled(false);       
+   
     
     btnSave.setEnabled(false);
     btnUpdate.setEnabled(true);
@@ -262,9 +261,7 @@ private void setCourseEditMode() {
     fieldCourseNumber.setEnabled(true);
     fieldCourseName.setEnabled(true);
     fieldCredits.setEnabled(true);
-    fieldPrice.setEnabled(false); //course price is not adjustable by faculty
-    //fieldInstructorFName.setEnabled(true);
-    //fieldInstructorLName.setEnabled(true);  
+    fieldPrice.setEnabled(false); //course price is not adjustable by faculty 
     
     btnSave.setEnabled(true);
     btnUpdate.setEnabled(false);

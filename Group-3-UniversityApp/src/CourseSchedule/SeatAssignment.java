@@ -56,6 +56,23 @@ public class SeatAssignment {
         return getCreditHours()*grade;
     }
     
+
+    public float getGrade() {
+        return grade;
+    }
+
+    public void setGrade(float grade) {
+        this.grade = grade;
+    }
+
+    public CourseLoad getCourseload() {
+        return courseload;
+    }
+
+    public void setCourseload(CourseLoad courseload) {
+        this.courseload = courseload;
+    }
+
     @Override
     public String toString() {
         //return course name

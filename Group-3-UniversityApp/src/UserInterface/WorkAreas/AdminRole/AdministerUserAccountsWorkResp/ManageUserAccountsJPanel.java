@@ -104,7 +104,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 74, 23);
+        Back.setBounds(30, 300, 90, 23);
 
         Next.setText("View/Next >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +118,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("User Accounts");
         add(jLabel1);
-        jLabel1.setBounds(30, 90, 190, 19);
+        jLabel1.setBounds(30, 90, 190, 17);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
@@ -161,7 +161,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(btnCreateUserAcc);
-        btnCreateUserAcc.setBounds(170, 300, 90, 23);
+        btnCreateUserAcc.setBounds(169, 300, 100, 23);
 
         btnRemoveUserAcc.setText("Remove User");
         btnRemoveUserAcc.addActionListener(new java.awt.event.ActionListener() {
@@ -170,11 +170,11 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(btnRemoveUserAcc);
-        btnRemoveUserAcc.setBounds(310, 300, 110, 23);
+        btnRemoveUserAcc.setBounds(320, 300, 110, 23);
 
         jLabel3.setText("Search by NUID");
         add(jLabel3);
-        jLabel3.setBounds(30, 360, 100, 16);
+        jLabel3.setBounds(30, 360, 100, 17);
 
         txtSearchbyNUID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +182,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(txtSearchbyNUID);
-        txtSearchbyNUID.setBounds(150, 360, 200, 22);
+        txtSearchbyNUID.setBounds(150, 360, 200, 23);
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {

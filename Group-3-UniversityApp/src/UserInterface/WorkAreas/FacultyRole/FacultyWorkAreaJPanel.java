@@ -166,7 +166,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         
         ViewFacultyProfileJPanel viewFacultyProfileJPanel;
         viewFacultyProfileJPanel = new ViewFacultyProfileJPanel(university, university.getUserAccountDirectory(), userAccount, CardSequencePanel);
-        //CardSequencePanel.removeAll();
+
         CardSequencePanel.add("viewFacultyProfileJPanel", viewFacultyProfileJPanel);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);    
     }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed

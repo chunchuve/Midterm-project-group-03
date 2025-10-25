@@ -7,6 +7,7 @@ package CourseSchedule;
 
 import java.util.ArrayList;
 
+
 /**
  *
  * @author kal bugrara
@@ -43,6 +44,7 @@ public class CourseLoad {
         return sum;
     }
     
+
     public void unEnrollCourse(SeatAssignment sa) {
         sa.unAssignSeatFromStudent();
         seatassignments.remove(sa);     
@@ -51,5 +53,36 @@ public class CourseLoad {
     public ArrayList<SeatAssignment> getSeatAssignments(){
         return seatassignments;
     }
+
+    public ArrayList<SeatAssignment> getSeatAssignments(){
+            return seatassignments;
+    }
+    
+ //Method to calculate student's GPA
+    public float calculateGPA() {
+        float totalGrade = 0; //start at zero
+        float totalCredits = 0; //start at zero
+        
+        for (SeatAssignment sa: seatassignments) {
+            float grade = sa.getGrade();
+            int credits = sa.getCourseOffer().getSubjectCourse().getCredits();
             
+            totalGrade = totalGrade + (grade * credits);
+            totalCredits = totalCredits + credits;
+        }
+        
+        if (totalCredits == 0) return 0;
+        return totalGrade / totalCredits;
+    }        
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+        
+    
+    
 }

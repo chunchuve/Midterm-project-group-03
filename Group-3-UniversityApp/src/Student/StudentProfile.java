@@ -27,8 +27,8 @@ public class StudentProfile extends Profile {
     private String termAdmittedFirst; // term admitted in
     private String instructionMode; // online or on-campus
     private String programEnrolled; //example MSIS
-    private ArrayList<String> hobbies; //added by sabrina
-    private ArrayList<String> interests; //added by sabrina
+    private ArrayList<String> hobbies; 
+    private ArrayList<String> interests; 
     private Department department;
     //end of changes
 
@@ -36,8 +36,8 @@ public class StudentProfile extends Profile {
         super(p);   
         transcript = new Transcript(this);
         employmenthistory = new EmploymentHistroy();
-        hobbies = new ArrayList<>(); //added by sabrina
-        interests = new ArrayList<>(); //added by sabrina
+        hobbies = new ArrayList<>(); 
+        interests = new ArrayList<>(); 
     }
     
     
@@ -112,23 +112,34 @@ public class StudentProfile extends Profile {
         this.programEnrolled = programEnrolled;
     }
 
-    //added by sabrina
     public ArrayList<String> getHobbies() {
         return hobbies;
     }
 
+    //create hobby array list if it is empty
+    //add hobby if it is not included in the list
     public void addHobbies(String hobby) {
+        if (hobbies == null) {
+            hobbies = new ArrayList<>();
+        }
+        if (!hobbies.contains(hobby)) {
         hobbies.add(hobby);
+        }
     }
 
     public ArrayList<String> getInterests() {
         return interests;
     }
-
+    //create interest array list if it is empty
+    //add interest if it is not included in the list
     public void addInterests(String interest) {
+        if (interests == null) {
+            interests = new ArrayList<>();
+        }
+        if (!interests.contains(interests)) {
         interests.add(interest);
-    }
-
+        }
+    }    
     
     //public boolean isMatch(String id) {
        // return person.getPersonId().equals(id);
