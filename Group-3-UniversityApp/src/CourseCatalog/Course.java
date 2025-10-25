@@ -57,6 +57,10 @@ public class Course {
         this.credits = credits;
     }
     
+    public String getCourseFullName() {
+        return number + " " + name;
+    }
+    
     
 @Override
     public String toString(){

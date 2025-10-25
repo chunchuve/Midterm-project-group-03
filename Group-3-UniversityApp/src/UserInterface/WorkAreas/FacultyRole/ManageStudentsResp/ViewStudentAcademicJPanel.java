@@ -46,7 +46,7 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
         float GPA = this.selectedStudent.getCurrentCourseLoad().calculateGPA();
         fieldGPA.setText(String.format("%.2f", GPA));
         
-        refreshStudentCourseTable(sp);
+        populateStudentCourseTable(sp);
     }
 
     /**
@@ -64,7 +64,7 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
         lblAcademicProgress = new javax.swing.JLabel();
         fieldPersonID = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        StudentCourseTable = new javax.swing.JTable();
+        tblStudentCourse = new javax.swing.JTable();
         lblNUID = new javax.swing.JLabel();
         fieldNUID = new javax.swing.JTextField();
         lblLastName = new javax.swing.JLabel();
@@ -72,6 +72,8 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
         fieldFirstName = new javax.swing.JTextField();
         lblGPA = new javax.swing.JLabel();
         fieldGPA = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(204, 255, 204));
 
         fieldLastName.setEditable(false);
 
@@ -89,7 +91,7 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
 
         fieldPersonID.setEditable(false);
 
-        StudentCourseTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblStudentCourse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -99,8 +101,16 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
             new String [] {
                 "Course Number", "Course Name", "Semester", "Instructor", "Grade"
             }
-        ));
-        jScrollPane1.setViewportView(StudentCourseTable);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblStudentCourse);
 
         lblNUID.setText("NUID:");
 
@@ -126,27 +136,25 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblNUID)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fieldNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblPersonID)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(fieldPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblNUID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblPersonID, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fieldPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fieldNUID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblFirstName)
-                                .addComponent(lblLastName))
-                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                                .addComponent(lblLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(fieldFirstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(fieldLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(Back)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblGPA)
-                            .addGap(18, 18, 18)
+                            .addComponent(lblGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(fieldGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblAcademicProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -173,11 +181,11 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Back)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblGPA)
-                                .addComponent(fieldGPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(fieldGPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Back)))
                     .addComponent(lblFirstName))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
@@ -193,7 +201,6 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTable StudentCourseTable;
     private javax.swing.JTextField fieldFirstName;
     private javax.swing.JTextField fieldGPA;
     private javax.swing.JTextField fieldLastName;
@@ -206,16 +213,15 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblNUID;
     private javax.swing.JLabel lblPersonID;
+    private javax.swing.JTable tblStudentCourse;
     // End of variables declaration//GEN-END:variables
 
     //Populate JTable to display a student's all courseload information and grade
-    public void refreshStudentCourseTable(StudentProfile selectedStudent) {
+    public void populateStudentCourseTable(StudentProfile selectedStudent) {
         
-        int rc = StudentCourseTable.getRowCount();
-        int i;
-        for (i = rc - 1; i>=0; i--) {
-            ((DefaultTableModel) StudentCourseTable.getModel()).removeRow(i);
-        }
+        //clears table rows
+        DefaultTableModel model = (DefaultTableModel) tblStudentCourse.getModel();
+        model.setRowCount(0);
         
         StudentProfile sp = selectedStudent;
         
@@ -224,21 +230,20 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
             Course c = co.getSubjectCourse();
             String semester = sa.getCourseload().getSemester();
             
-            String facultyLastName;
+            String facultyName;
             if (co.getFacultyProfile() == null) {
-                facultyLastName = "Not Assigned";
+                facultyName = "Not Assigned";
             } else {
-                facultyLastName = co.getFacultyProfile().getPerson().getLastName();
+                facultyName = co.getFacultyProfile().getPerson().getFullName();
         }
         
-        Object[] row = new Object[5];
-        row[0] = c;
-        row[1] = c.getCourseName();
-        row[2] = semester;
-        row[3] = facultyLastName;
-        row[4] = sa.getGrade();    
-        
-        ((DefaultTableModel) StudentCourseTable.getModel()).addRow(row);
+                Object[] row = new Object[5];
+                row[0] = c;
+                row[1] = c.getCourseName();
+                row[2] = semester;
+                row[3] = facultyName;
+                row[4] = sa.getGrade();    
+                model.addRow(row);
         } 
         
     }

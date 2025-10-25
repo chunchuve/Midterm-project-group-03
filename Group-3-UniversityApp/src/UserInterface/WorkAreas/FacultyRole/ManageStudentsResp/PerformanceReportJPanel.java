@@ -4,17 +4,49 @@
  */
 package UserInterface.WorkAreas.FacultyRole.ManageStudentsResp;
 
+import CourseCatalog.Course;
+import CourseSchedule.CourseLoad;
+import CourseSchedule.CourseOffer;
+import CourseSchedule.CourseSchedule;
+import CourseSchedule.SeatAssignment;
+import Department.Department;
+import Faculty.FacultyProfile;
+import Student.StudentDirectory;
+import Student.StudentProfile;
+import University.University;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Sabrina
  */
 public class PerformanceReportJPanel extends javax.swing.JPanel {
+    
+    JPanel CardSequencePanel;
+    University university;
+    Department department;
+    StudentDirectory studentDirectory;
+    StudentProfile studentProfile;
+    FacultyProfile facultyProfile;
+    CourseSchedule courseSchedule;
+    CourseLoad courseLoad;
+    CourseOffer courseOffer;
 
     /**
      * Creates new form PerformanceReportJPanel
      */
-    public PerformanceReportJPanel() {
+    public PerformanceReportJPanel(University u, StudentDirectory sd, StudentProfile sp, FacultyProfile fp, JPanel clp) {
+        university = u;
+        this.department = fp.getDepartment();
+        this.studentDirectory = sd;
+        this.studentProfile = sp;
+        this.CardSequencePanel = clp;
         initComponents();
+        
+        populateSemesterCombo();
     }
 
     /**
@@ -26,19 +58,194 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Back = new javax.swing.JButton();
+        lblSemester = new javax.swing.JLabel();
+        lblAcademicProgress = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStudentGrade = new javax.swing.JTable();
+        lblNUID = new javax.swing.JLabel();
+        cmbSemester = new javax.swing.JComboBox<>();
+        cmbCourseName = new javax.swing.JComboBox<>();
+
+        setBackground(new java.awt.Color(204, 255, 204));
+
+        Back.setText("<< Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
+
+        lblSemester.setText("Semester:");
+
+        lblAcademicProgress.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblAcademicProgress.setText("Students Performance Report");
+
+        tblStudentGrade.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "NUID", "First Name", "Last Name", "Instructor", "Grade"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblStudentGrade);
+
+        lblNUID.setText("Course Name:");
+
+        cmbSemester.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSemesterActionPerformed(evt);
+            }
+        });
+
+        cmbCourseName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCourseNameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Back)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAcademicProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblSemester, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(506, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lblAcademicProgress)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSemester)
+                    .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNUID)
+                    .addComponent(cmbCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(Back)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+        layout.previous(CardSequencePanel);
+    }//GEN-LAST:event_BackActionPerformed
+
+    private void cmbSemesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSemesterActionPerformed
+        // TODO add your handling code here:
+        //Populate courses after selecting a semester
+        String selectedSemester = (String) cmbSemester.getSelectedItem();
+        if (selectedSemester != null) {
+            populateCourseCombo(selectedSemester);
+        }
+    }//GEN-LAST:event_cmbSemesterActionPerformed
+
+    private void cmbCourseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseNameActionPerformed
+        // TODO add your handling code here:
+        populateStudentGradeTable();
+        
+    }//GEN-LAST:event_cmbCourseNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Back;
+    private javax.swing.JComboBox<CourseOffer> cmbCourseName;
+    private javax.swing.JComboBox<String> cmbSemester;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAcademicProgress;
+    private javax.swing.JLabel lblNUID;
+    private javax.swing.JLabel lblSemester;
+    private javax.swing.JTable tblStudentGrade;
     // End of variables declaration//GEN-END:variables
+
+    //Populate combo box for semesters
+    private void populateSemesterCombo() {
+        cmbSemester.removeAllItems();
+        
+        for (String semester : department.getMastercoursecatalog().keySet()) {
+            cmbSemester.addItem(semester);
+        }
+    }
+    
+    //Populate course combo box based on semester selected in semester combo box
+    private void populateCourseCombo(String semester) {
+        cmbCourseName.removeAllItems();
+        
+        CourseSchedule cs = department.getCourseSchedule(semester);
+        if (cs != null) {
+            for (CourseOffer co : cs.getSchedule()) {
+                Course course = co.getSubjectCourse();
+                cmbCourseName.addItem(co);
+            }
+        }
+    }
+    
+    //populate JTable with students and class grades
+    private void populateStudentGradeTable() {
+        CourseOffer selectedCourse = (CourseOffer) cmbCourseName.getSelectedItem();
+        if (selectedCourse == null) {
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblStudentGrade.getModel();
+        model.setRowCount(0);
+        
+        for (StudentProfile sp : university.getStudentDirectory().getStudentlist()) {
+            for (SeatAssignment sa : sp.getCourseList()) {
+                if (sa.getCourseOffer().equals(selectedCourse)) {
+                    
+                    String facultyName;
+                    if (selectedCourse.getFacultyProfile() == null) {
+                        facultyName = "Not Assigned";
+                    } else {
+                        facultyName = selectedCourse.getFacultyProfile().getPerson().getFullName();
+                    }
+                    
+                    Object row[] = new Object[5];
+                    row[0] = sp.getnUID();
+                    row[1] = sp.getPerson().getFirstName();
+                    row[2] = sp.getPerson().getLastName();
+                    row[3] = facultyName;
+                    row[4] = sa.getGrade();
+                    model.addRow(row);
+                }
+                
+            }
+        }
+    }
+
 }

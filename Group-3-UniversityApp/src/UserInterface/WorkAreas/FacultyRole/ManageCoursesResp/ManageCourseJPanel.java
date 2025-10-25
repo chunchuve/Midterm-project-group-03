@@ -41,7 +41,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         this.department = fp.getDepartment();
         initComponents();
         
-        refreshCourseTable();
+        populateCourseTable();
     }
 
     /**
@@ -57,10 +57,12 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         lblCourses = new javax.swing.JLabel();
         lblManageCourses = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        CourseTable = new javax.swing.JTable();
+        tblCourses = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
         fieldSearch = new javax.swing.JTextField();
         btnViewCourse = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(204, 255, 204));
 
         Back.setText("<< Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +77,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         lblManageCourses.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblManageCourses.setText("Manage Courses");
 
-        CourseTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblCourses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -85,8 +87,16 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
             new String [] {
                 "Number", "Name", "Credits", "Price"
             }
-        ));
-        jScrollPane1.setViewportView(CourseTable);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblCourses);
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -177,9 +187,9 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private void btnViewCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCourseActionPerformed
         // TODO add your handling code here:
         //Select a course to view
-        int selectedRow = CourseTable.getSelectedRow();
+        int selectedRow = tblCourses.getSelectedRow();
         if (selectedRow >=0) {
-            Course selectedCourse = (Course) CourseTable.getValueAt(selectedRow, 0);
+            Course selectedCourse = (Course) tblCourses.getValueAt(selectedRow, 0);
             ViewCourseJPanel vc = new ViewCourseJPanel(university, selectedCourse, facultyProfile, CardSequencePanel);
             CardSequencePanel.add("ViewCourseJPanel", vc);
             CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
@@ -189,12 +199,10 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnViewCourseActionPerformed
 
     //Populate JTable with course details
-    public void refreshCourseTable() {
-        int rc = CourseTable.getRowCount();
-        int i;
-        for (i = rc - 1; i>=0; i--) {
-            ((DefaultTableModel) CourseTable.getModel()).removeRow(i);
-        }
+    public void populateCourseTable() {
+        //clears table rows
+        DefaultTableModel model = (DefaultTableModel) tblCourses.getModel();
+        model.setRowCount(0);
         
         CourseCatalog cc = department.getCourseCatalog(); //will retrieve courses based on logged in faculty's department
         List<Course> courses = cc.getCourseList();
@@ -205,20 +213,19 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         row[1] = c.getCourseName();
         row[2] = c.getCredits();
         row[3] = c.getCoursePrice();
-        
-        ((DefaultTableModel) CourseTable.getModel()).addRow(row);
+        model.addRow(row);
     }
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTable CourseTable;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnViewCourse;
     private javax.swing.JTextField fieldSearch;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCourses;
     private javax.swing.JLabel lblManageCourses;
+    private javax.swing.JTable tblCourses;
     // End of variables declaration//GEN-END:variables
 }

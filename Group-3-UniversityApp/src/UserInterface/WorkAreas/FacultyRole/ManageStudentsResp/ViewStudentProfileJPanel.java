@@ -54,7 +54,7 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         Back = new javax.swing.JButton();
         lblManageCourses = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        HobbyInterestTable = new javax.swing.JTable();
+        tblHobbyInterest = new javax.swing.JTable();
         btnViewStudent = new javax.swing.JButton();
         lblNUID = new javax.swing.JLabel();
         fieldNUID = new javax.swing.JTextField();
@@ -64,6 +64,8 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         fieldLastName = new javax.swing.JTextField();
         lblPersonID = new javax.swing.JLabel();
         fieldPersonID = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(204, 255, 204));
 
         Back.setText("<< Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +77,7 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
         lblManageCourses.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblManageCourses.setText("Students Details");
 
-        HobbyInterestTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblHobbyInterest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -85,8 +87,16 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
             new String [] {
                 "Hobbies", "Interests"
             }
-        ));
-        jScrollPane1.setViewportView(HobbyInterestTable);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblHobbyInterest);
 
         btnViewStudent.setText("View Student Courses");
         btnViewStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -121,19 +131,17 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblNUID)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fieldNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblPersonID)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(fieldPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblNUID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblPersonID, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fieldPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fieldNUID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblFirstName)
-                                .addComponent(lblLastName))
-                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                                .addComponent(lblLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(fieldFirstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(fieldLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -199,7 +207,6 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTable HobbyInterestTable;
     private javax.swing.JButton btnViewStudent;
     private javax.swing.JTextField fieldFirstName;
     private javax.swing.JTextField fieldLastName;
@@ -211,11 +218,12 @@ public class ViewStudentProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblManageCourses;
     private javax.swing.JLabel lblNUID;
     private javax.swing.JLabel lblPersonID;
+    private javax.swing.JTable tblHobbyInterest;
     // End of variables declaration//GEN-END:variables
 
     public void refreshStudentDetailTable(StudentProfile selectedStudent) {
         
-        DefaultTableModel model = (DefaultTableModel) HobbyInterestTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblHobbyInterest.getModel();
         model.setRowCount(0);
         
         //if selected student is not null, then get hobbies and interests from studentProfile

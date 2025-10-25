@@ -11,6 +11,7 @@ import University.University;
 import UserAccounts.UserAccount;
 import UserInterface.WorkAreas.FacultyRole.ManageCoursesResp.ManageCourseJPanel;
 import UserInterface.WorkAreas.FacultyRole.ManageStudentsResp.ManageStudentProfileJPanel;
+import UserInterface.WorkAreas.FacultyRole.ManageStudentsResp.PerformanceReportJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -173,6 +174,12 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        
+        PerformanceReportJPanel performanceReportJPanel;
+        performanceReportJPanel = new PerformanceReportJPanel(university, university.getStudentDirectory(), studentProfile, facultyProfile, CardSequencePanel);
+
+        CardSequencePanel.add("performanceReportJPanel", performanceReportJPanel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);        
     }//GEN-LAST:event_jButton11ActionPerformed
 
 
