@@ -182,7 +182,7 @@ public class ViewCourseJPanel extends javax.swing.JPanel {
         JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
         ManageCourseJPanel manageCourseJPanel = (ManageCourseJPanel) lastPanel;
         //Refreshes JTable with updated data
-        manageCourseJPanel.refreshCourseTable();
+        manageCourseJPanel.populateCourseTable();
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
