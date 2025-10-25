@@ -346,37 +346,48 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
         String password = fieldPassword.getText();
         
 
-        //check if all fields are filled out
+        //check if all fields are filled out & data validation
         //address line 2 is not mandatory so it is left out
         if (firstName.isBlank() || lastName.isBlank() || dateOfBirth.isBlank() || id.isBlank() || line1.isBlank() || city.isBlank() || state.isBlank() || zipCode.isBlank() || researchArea.isBlank() || deptName.isBlank() || title.isBlank() || username.isBlank() || password.isBlank()) {
             JOptionPane.showMessageDialog(this, "All fields with (*) must be filled out.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } else if (!firstName.matches("^[a-zA-Z]+$") || (!lastName.matches("^[a-zA-Z]+$"))) {
+            JOptionPane.showMessageDialog(this, "Please input full name using only letters.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!city.matches("^[a-zA-Z]+$")){   
+            JOptionPane.showMessageDialog(this, "Please input city using only letters.","Error", JOptionPane.ERROR_MESSAGE);    
+        } else if (!state.matches("[A-Z]{2}")){   
+            JOptionPane.showMessageDialog(this, "Please input state using only two capital letters.","Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!zipCode.matches("^\\d+$")) {
+            JOptionPane.showMessageDialog(this, "Please input zip code using only numbers.","Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!researchArea.matches("[a-zA-Z ]+")) {
+            JOptionPane.showMessageDialog(this, "Please input research area using only letters.","Error", JOptionPane.ERROR_MESSAGE);
+        } else {   
 
-        //set data 
-        FacultyProfile facultyProfile = (FacultyProfile) userAccount.getAssociatedPersonProfile();
-        facultyProfile.getPerson().setFirstName(firstName);
-        facultyProfile.getPerson().setLastName(lastName);
-        facultyProfile.getPerson().setDateOfBirth(dateOfBirth);
-        facultyProfile.getPerson().setId(id);
-        facultyProfile.getPerson().getAddress().setLine1(line1);
-        facultyProfile.getPerson().getAddress().setLine2(line2);
-        facultyProfile.getPerson().getAddress().setCity(city);
-        facultyProfile.getPerson().getAddress().setState(state);
-        facultyProfile.getPerson().getAddress().setZipCode(zipCode);
-        facultyProfile.setResearchArea(researchArea);
-        facultyProfile.getDepartment().setName(deptName);
-        facultyProfile.setTitle(title);
+            //set data 
+            FacultyProfile facultyProfile = (FacultyProfile) userAccount.getAssociatedPersonProfile();
+            facultyProfile.getPerson().setFirstName(firstName);
+            facultyProfile.getPerson().setLastName(lastName);
+            facultyProfile.getPerson().setDateOfBirth(dateOfBirth);
+            facultyProfile.getPerson().setId(id);
+            facultyProfile.getPerson().getAddress().setLine1(line1);
+            facultyProfile.getPerson().getAddress().setLine2(line2);
+            facultyProfile.getPerson().getAddress().setCity(city);
+            facultyProfile.getPerson().getAddress().setState(state);
+            facultyProfile.getPerson().getAddress().setZipCode(zipCode);
+            facultyProfile.setResearchArea(researchArea);
+            facultyProfile.getDepartment().setName(deptName);
+            facultyProfile.setTitle(title);
         
 
-        userAccount.setUsername(username);
-        userAccount.setPassword(password);
+            userAccount.setUsername(username);
+            userAccount.setPassword(password);
 
-        userAccount.setLastUpdated(LocalDateTime.now());
+            userAccount.setLastUpdated(LocalDateTime.now());
 
-        JOptionPane.showMessageDialog(this, "Account updated successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Account updated successfully.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
-        setFacultyViewMode();
+            setFacultyViewMode();
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
