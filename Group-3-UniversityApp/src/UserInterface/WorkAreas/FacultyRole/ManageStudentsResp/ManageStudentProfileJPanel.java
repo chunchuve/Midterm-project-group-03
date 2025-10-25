@@ -55,6 +55,8 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
         fieldSearch = new javax.swing.JTextField();
         btnViewStudent = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 255, 204));
+
         Back.setText("<< Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
