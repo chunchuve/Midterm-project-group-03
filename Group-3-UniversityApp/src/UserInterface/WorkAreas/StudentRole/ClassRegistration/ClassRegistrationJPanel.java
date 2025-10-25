@@ -160,17 +160,17 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
         tblEnrolled.setFont(new java.awt.Font("Lucida Grande", 0, 13)); // NOI18N
         tblEnrolled.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Number", "Name", "Faculty", "Availability", "Credit Hr."
+                "Number", "Name", "Faculty", "Credit Hr."
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -236,37 +236,37 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
                 .addGap(52, 52, 52)
                 .addComponent(lblTitle)
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Back)
-                        .addGap(42, 42, 42))
+                        .addGap(20, 20, 20)
+                        .addComponent(lblCourseOffers))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(lblCourseOffers))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCourseDetails)
+                    .addComponent(btnEnroll))
+                .addGap(15, 15, 15)
+                .addComponent(lblEnroll)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCourseDetails)
-                            .addComponent(btnEnroll))
-                        .addGap(20, 20, 20)
-                        .addComponent(lblEnroll)
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btnRemoveEnroll)
-                        .addGap(84, 84, 84)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addContainerGap(120, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(Back)
+                        .addGap(107, 107, 107))))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -363,7 +363,7 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for (SeatAssignment s: currentCourseLoad.getSeatAssignments()) {
-            Object row[] = new Object[5];
+            Object row[] = new Object[4];
                 row[0] = s.getCourseOffer().getCourseNumber();
                 row[1] = s;
 
@@ -374,8 +374,7 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
                     facultyName = faculty.getPersonFullName();
                 }
                 row[2] = facultyName;
-                row[3] = s.getCourseOffer().getSeatAvailability();
-                row[4] = s.getCourseOffer().getCreditHours();
+                row[3] = s.getCourseOffer().getCreditHours();
                 model.addRow(row);
         
         }

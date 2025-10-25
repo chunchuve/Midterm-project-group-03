@@ -53,10 +53,6 @@ public class CourseLoad {
     public ArrayList<SeatAssignment> getSeatAssignments(){
         return seatassignments;
     }
-
-    public ArrayList<SeatAssignment> getSeatAssignments(){
-            return seatassignments;
-    }
     
  //Method to calculate student's GPA
     public float calculateGPA() {
