@@ -225,6 +225,12 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for (StudentProfile sp : university.getStudentDirectory().getStudentlist()) {
+            
+            //skip student if transcript is null
+            if (sp.getTranscript() == null) { 
+                continue;
+            }
+            
             for (SeatAssignment sa : sp.getCourseList()) {
                 if (sa.getCourseOffer().equals(selectedCourse)) {
                     
