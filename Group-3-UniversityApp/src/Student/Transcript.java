@@ -7,6 +7,7 @@ package Student;
 
 import Student.StudentProfile;
 import CourseSchedule.CourseLoad;
+import CourseSchedule.CourseOffer;
 import CourseSchedule.SeatAssignment;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,6 +91,18 @@ public class Transcript {
 
         return temp2;
 
+    }
+    
+    public boolean isCourseEnrolled(CourseOffer co) {
+        for (CourseLoad cl: courseloadlist.values()){
+        // compare the course numbers
+            for (SeatAssignment sa: cl.getSeatAssignments()) {
+                if(sa.getCourseOffer().getCourseNumber() == co.getCourseNumber()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

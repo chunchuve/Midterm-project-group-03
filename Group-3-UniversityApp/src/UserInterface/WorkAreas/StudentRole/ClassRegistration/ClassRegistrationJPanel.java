@@ -4,13 +4,20 @@
  */
 package UserInterface.WorkAreas.StudentRole.ClassRegistration;
 
+import CourseSchedule.CourseLoad;
 import CourseSchedule.CourseOffer;
 import CourseSchedule.CourseSchedule;
+import CourseSchedule.SeatAssignment;
 import Department.Department;
 import Profile.Profile;
 import Student.StudentProfile;
+import Student.Transcript;
 import java.awt.CardLayout;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,13 +37,19 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
     Department department;
     HashMap<String, CourseSchedule> masterCourseSchedule;
     JPanel CardSequencePanel;
+    Transcript transcript;
+    Set<String> futureSemesters;
     public ClassRegistrationJPanel(StudentProfile s, Department d, JPanel csp) {
         initComponents();
         student = s;
         department = d;
         CardSequencePanel = csp;
         
+        transcript = student.getTranscript();
         masterCourseSchedule = department.getMastercoursecatalog();
+        
+        // get future semesters by filtering
+        futureSemesters = getFutureSemesters();
         populateCombo();
         populateCourseOfferTable();
     }
@@ -55,17 +68,17 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
         lblCourseOffers = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCourseOffers = new javax.swing.JTable();
-        btnViewOrderItem = new javax.swing.JButton();
-        btnRemoveOrderItem = new javax.swing.JButton();
+        btnRemoveEnroll = new javax.swing.JButton();
         btnEnroll = new javax.swing.JButton();
-        btnProductDetails = new javax.swing.JButton();
+        btnCourseDetails = new javax.swing.JButton();
         lblSemester = new javax.swing.JLabel();
         cmbSemester = new javax.swing.JComboBox();
         txtSearch = new javax.swing.JTextField();
-        lblItemsInCart = new javax.swing.JLabel();
+        lblEnroll = new javax.swing.JLabel();
         btnSearchCourse = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblCart = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblEnrolled = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
@@ -102,18 +115,14 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblCourseOffers);
+        if (tblCourseOffers.getColumnModel().getColumnCount() > 0) {
+            tblCourseOffers.getColumnModel().getColumn(1).setMinWidth(200);
+        }
 
-        btnViewOrderItem.setText("View Item");
-        btnViewOrderItem.addActionListener(new java.awt.event.ActionListener() {
+        btnRemoveEnroll.setText("Remove Enrollment");
+        btnRemoveEnroll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewOrderItemActionPerformed(evt);
-            }
-        });
-
-        btnRemoveOrderItem.setText("Remove Enrollment");
-        btnRemoveOrderItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveOrderItemActionPerformed(evt);
+                btnRemoveEnrollActionPerformed(evt);
             }
         });
 
@@ -124,10 +133,10 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnProductDetails.setText("View Course Detail");
-        btnProductDetails.addActionListener(new java.awt.event.ActionListener() {
+        btnCourseDetails.setText("View Course Detail");
+        btnCourseDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductDetailsActionPerformed(evt);
+                btnCourseDetailsActionPerformed(evt);
             }
         });
 
@@ -139,7 +148,7 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblItemsInCart.setText("Current Enrollment:");
+        lblEnroll.setText("Enrolled Courses:");
 
         btnSearchCourse.setText("Search Class");
         btnSearchCourse.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +157,8 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
             }
         });
 
-        tblCart.setModel(new javax.swing.table.DefaultTableModel(
+        tblEnrolled.setFont(new java.awt.Font("Lucida Grande", 0, 13)); // NOI18N
+        tblEnrolled.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -156,18 +166,28 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Item Name", "Price", "Quantity", "Total Amount"
+                "Number", "Name", "Faculty", "Credit Hr."
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblCart);
+        jScrollPane3.setViewportView(tblEnrolled);
+        if (tblEnrolled.getColumnModel().getColumnCount() > 0) {
+            tblEnrolled.getColumnModel().getColumn(1).setMinWidth(200);
+        }
+
+        jButton1.setText("Clear Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -180,32 +200,35 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(Back)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblCourseOffers)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnSearchCourse))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(265, 265, 265)
-                                    .addComponent(btnEnroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnProductDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-                                .addComponent(lblItemsInCart)
-                                .addComponent(jScrollPane2))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnViewOrderItem)
-                                .addGap(27, 27, 27)
-                                .addComponent(btnRemoveOrderItem)))))
-                .addContainerGap(230, Short.MAX_VALUE))
+                                .addComponent(btnCourseDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEnroll, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Back)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblEnroll, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnRemoveEnroll)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+                                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblCourseOffers)
+                                                .addGap(466, 466, 466)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnSearchCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))))))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,43 +236,51 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
                 .addGap(52, 52, 52)
                 .addComponent(lblTitle)
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblCourseOffers))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCourseDetails)
+                    .addComponent(btnEnroll))
+                .addGap(15, 15, 15)
+                .addComponent(lblEnroll)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnRemoveEnroll)
+                        .addContainerGap(120, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(Back)
-                        .addGap(42, 42, 42))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbSemester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCourseOffers)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnProductDetails)
-                            .addComponent(btnEnroll))
-                        .addGap(20, 20, 20)
-                        .addComponent(lblItemsInCart)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRemoveOrderItem)
-                            .addComponent(btnViewOrderItem))
-                        .addGap(84, 84, 84))))
+                        .addGap(107, 107, 107))))
         );
     }// </editor-fold>//GEN-END:initComponents
     
     // populate semester combo box
     private void populateCombo() {
-        Set<String> semesters = masterCourseSchedule.keySet();
-        for (String s: semesters) {
+        //Set<String> semesters = masterCourseSchedule.keySet();
+        
+
+        for (String s: futureSemesters) {
             cmbSemester.addItem(s);
         }
     }
+    
+
     
     private void populateCourseOfferTable() {
         // get selected semester
@@ -314,6 +345,44 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
         
     }
     
+    private void populateEnrolledCourseTable() { 
+        // get selected semester
+        String selectedSemester = (String) cmbSemester.getSelectedItem();
+        // validate selected semester
+        if (selectedSemester == null) {
+            return;
+        }
+        
+        // check if courseload for this semester existed, if not, create a courseload
+        CourseLoad currentCourseLoad = transcript.getCourseLoadBySemester(selectedSemester);
+        if(currentCourseLoad == null) {
+            currentCourseLoad = transcript.newCourseLoad(selectedSemester);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblEnrolled.getModel();
+        model.setRowCount(0);
+        
+        for (SeatAssignment s: currentCourseLoad.getSeatAssignments()) {
+            Object row[] = new Object[4];
+                row[0] = s.getCourseOffer().getCourseNumber();
+                row[1] = s;
+
+                // check faculty
+                String facultyName = "Unknown";
+                Profile faculty = s.getCourseOffer().getFacultyProfile();
+                if (faculty != null) {
+                    facultyName = faculty.getPersonFullName();
+                }
+                row[2] = facultyName;
+                row[3] = s.getCourseOffer().getCreditHours();
+                model.addRow(row);
+        
+        }
+        
+        
+        
+        
+    }
     
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
@@ -321,21 +390,83 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_BackActionPerformed
 
-    private void btnViewOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrderItemActionPerformed
-
-    }//GEN-LAST:event_btnViewOrderItemActionPerformed
-
-    private void btnRemoveOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveOrderItemActionPerformed
-
-    }//GEN-LAST:event_btnRemoveOrderItemActionPerformed
+    private void btnRemoveEnrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveEnrollActionPerformed
+        int selectedRowIndex = tblEnrolled.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an enrolled course to remove", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        SeatAssignment selectedSA = (SeatAssignment) tblEnrolled.getValueAt(selectedRowIndex, 1);
+        // get selected semester
+        String selectedSemester = (String) cmbSemester.getSelectedItem();
+        // validate selected semester
+        if (selectedSemester == null) {
+            return;
+        }
+        
+        // get the course load
+        CourseLoad currentCourseLoad = transcript.getCourseLoadBySemester(selectedSemester);
+        
+    // unassign seat from student's course load
+        try{
+            currentCourseLoad.unEnrollCourse(selectedSA);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Something wrong. Please refresh", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        //repopulate table
+        populateCourseOfferTable();
+        populateEnrolledCourseTable();
+        
+        // show successful message
+        JOptionPane.showMessageDialog(this, "Selected course successfully un-enrolled.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        return;
+        
+    }//GEN-LAST:event_btnRemoveEnrollActionPerformed
 
     private void btnEnrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnrollActionPerformed
-
-
+        int selectedRowIndex = tblCourseOffers.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a course offer to enroll.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // get selected course offer
+        CourseOffer selectedCourseOffer = (CourseOffer) tblCourseOffers.getValueAt(selectedRowIndex, 1);
+        // check seat availability
+        if(selectedCourseOffer.getSeatAvailability() <= 0) {
+            JOptionPane.showMessageDialog(this, "Sorry, not enough seats. Please select a different course offer to enroll.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // get selected semester
+        String selectedSemester = (String) cmbSemester.getSelectedItem();
+        // validate selected semester
+        if (selectedSemester == null) {
+            return;
+        }
+        
+        // get courseload
+        CourseLoad cl = transcript.getCourseLoadBySemester(selectedSemester);
+        
+        // check if already enrolled
+        if(transcript.isCourseEnrolled(selectedCourseOffer)) {
+            JOptionPane.showMessageDialog(this, "Sorry. You already enrolled or took this course.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // enroll
+        SeatAssignment sa = selectedCourseOffer.assignEmptySeat(cl);
+        
+        //repopulate table
+        populateCourseOfferTable();
+        populateEnrolledCourseTable();
     }//GEN-LAST:event_btnEnrollActionPerformed
 
-    private void btnProductDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductDetailsActionPerformed
+    private void btnCourseDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseDetailsActionPerformed
         String selectedSemester = (String) cmbSemester.getSelectedItem();
+        
         int selectedRowIndex = tblCourseOffers.getSelectedRow();
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a course offer from the table to view", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -348,10 +479,11 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
         
-    }//GEN-LAST:event_btnProductDetailsActionPerformed
+    }//GEN-LAST:event_btnCourseDetailsActionPerformed
 
     private void cmbSemesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSemesterActionPerformed
         populateCourseOfferTable();
+        populateEnrolledCourseTable();
     }//GEN-LAST:event_cmbSemesterActionPerformed
 
     private void btnSearchCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCourseActionPerformed
@@ -374,25 +506,98 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
         populateCourseOfferTable(keyword, selectedSemester);
     }//GEN-LAST:event_btnSearchCourseActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        populateCourseOfferTable();
+        txtSearch.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
+
+    private Set<String> getFutureSemesters() {
+        Set<String> semesters = masterCourseSchedule.keySet();
+        Set<String> filteredSemesters = new HashSet<>();
+        
+        // get today's year and academic season
+        int currentYear = LocalDate.now().getYear();
+        String currentSeason = getCurrentSeason();
+        for (String s: semesters) {
+            try{
+                // split the semester string ex. "Fall 2026"
+                String[] semesterParts = s.split(" ");
+                // Get semester season
+                String semesterSeason = semesterParts[0];
+                int semesterYear = Integer.parseInt(semesterParts[1]);
+                
+                // add the semester if the year is greater than current year
+                if (semesterYear > currentYear) {
+                    filteredSemesters.add(s);
+                } else if(semesterYear == currentYear) {
+                    // add the semester if the semester season didn't begin
+                    if(!didSemesterSeasonBegin(currentSeason, semesterSeason)) {
+                        filteredSemesters.add(s);
+                    }
+                }
+            } catch( Exception e) {
+                System.out.println("non-formatted semesters are ignored");
+            }
+        }
+    // get today's date
+        
+         
+        return filteredSemesters;
+    }
+
+    private boolean didSemesterSeasonBegin(String currentSeason, String semesterSeason) {
+        List<String> seasonList = Arrays.asList("spring", "summer", "fall", "winter");
+        
+        int currentSeasonIndex = seasonList.indexOf(currentSeason);
+        int semesterSeasonIndex = seasonList.indexOf(semesterSeason.toLowerCase());
+        // handle index error
+        if(currentSeasonIndex <0 || semesterSeasonIndex <0) {
+            return true;
+        }
+        
+        if(semesterSeasonIndex > currentSeasonIndex) {
+            return false;
+        }
+        return true;
+    }
+    
+    private String getCurrentSeason() {
+        int month = LocalDate.now().getMonthValue();
+        if (month == 12 || month == 1) {
+            return "winter";
+        }
+        else if(month >=9) {
+            return "fall";
+        } else if (month >= 5) {
+            return "summer";
+        } else {
+            return "spring";
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JButton btnCourseDetails;
     private javax.swing.JButton btnEnroll;
-    private javax.swing.JButton btnProductDetails;
-    private javax.swing.JButton btnRemoveOrderItem;
+    private javax.swing.JButton btnRemoveEnroll;
     private javax.swing.JButton btnSearchCourse;
-    private javax.swing.JButton btnViewOrderItem;
     private javax.swing.JComboBox cmbSemester;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCourseOffers;
-    private javax.swing.JLabel lblItemsInCart;
+    private javax.swing.JLabel lblEnroll;
     private javax.swing.JLabel lblSemester;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTable tblCart;
     private javax.swing.JTable tblCourseOffers;
+    private javax.swing.JTable tblEnrolled;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+
+
+
 
 
 

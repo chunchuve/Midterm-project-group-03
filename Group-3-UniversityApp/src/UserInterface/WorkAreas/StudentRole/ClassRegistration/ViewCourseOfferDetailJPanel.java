@@ -121,16 +121,15 @@ public class ViewCourseOfferDetailJPanel extends javax.swing.JPanel {
                                 .addGap(34, 34, 34)
                                 .addComponent(lblSemester)))
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldSemester, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(fieldPrice)
-                                .addComponent(fieldAvail)
-                                .addComponent(fieldCreditHours)
-                                .addComponent(fieldFaculty)
-                                .addComponent(fieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(fieldCourseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(457, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fieldPrice)
+                            .addComponent(fieldAvail)
+                            .addComponent(fieldCreditHours)
+                            .addComponent(fieldFaculty)
+                            .addComponent(fieldSemester, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                            .addComponent(fieldCourseNumber)
+                            .addComponent(fieldName))))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +179,6 @@ public class ViewCourseOfferDetailJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JButton btnSave;
     private javax.swing.JTextField fieldAvail;
     private javax.swing.JTextField fieldCourseNumber;
     private javax.swing.JTextField fieldCreditHours;
