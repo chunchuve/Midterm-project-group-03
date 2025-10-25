@@ -36,10 +36,17 @@ public class Transcript {
         return 0;
     }
 
-    public CourseLoad newCourseLoad(String sem) {
-
-        currentcourseload = new CourseLoad(sem);
-        courseloadlist.put(sem, currentcourseload);
+    public CourseLoad newCourseLoad(String newSemester) {
+        // check if there is a course load existed for that semester
+        for (String semester: courseloadlist.keySet()){
+            if (newSemester.equalsIgnoreCase(semester)) {
+                return courseloadlist.get(semester);
+            }
+        }
+        
+        // if course load for this semester not found
+        currentcourseload = new CourseLoad(newSemester);
+        courseloadlist.put(newSemester, currentcourseload);
         return currentcourseload;
     }
 

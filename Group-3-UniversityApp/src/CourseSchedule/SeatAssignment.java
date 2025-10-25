@@ -6,6 +6,7 @@
 package CourseSchedule;
 
 import CourseCatalog.Course;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +17,7 @@ public class SeatAssignment {
     Seat seat;
     boolean like; //true means like and false means not like
     CourseLoad courseload;
+    ArrayList<AssignmentSubmission> assignmentSubmissionList = new ArrayList<>();
     
     public SeatAssignment(CourseLoad cl, Seat s){
         seat = s; 
@@ -83,6 +85,15 @@ public class SeatAssignment {
         return grade >= 0;
     }
 
+    public ArrayList<AssignmentSubmission> getAssignmentSubmissionList() {
+        return assignmentSubmissionList;
+    }
+
+    public void addAssignment(String name, String comment, String filePath) {
+        AssignmentSubmission newAssignment = new AssignmentSubmission(name, comment, filePath);
+        assignmentSubmissionList.add(newAssignment);
+    }
+    
     @Override
     public String toString() {
         //return course name
