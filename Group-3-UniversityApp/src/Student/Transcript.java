@@ -78,7 +78,9 @@ public class Transcript {
         float cumulativeScore = this.getStudentTotalScore();
         int cumulativeCreditHours = this.getStudentTotalCreditHours();
         
-        return cumulativeScore/cumulativeCreditHours;
+        float notRoundedGPA = cumulativeScore/cumulativeCreditHours;
+        float roundedGPA = (float) Math.round(notRoundedGPA * 100.0f) / 100.0f;
+        return roundedGPA;
     }
     
     //sat index means student rated their courses with likes;

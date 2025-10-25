@@ -12,6 +12,7 @@ package UserInterface.WorkAreas.StudentRole;
 
 
 
+import UserInterface.WorkAreas.StudentRole.GraduationAudit.GraduationAuditJPanel;
 import UserInterface.WorkAreas.StudentRole.Transcript.TranscriptJPanel;
 import Department.Department;
 import UserInterface.WorkAreas.StudentRole.ClassRegistration.ClassRegistrationJPanel;
@@ -84,7 +85,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
         btnMyProfile.setBackground(new java.awt.Color(102, 153, 255));
         btnMyProfile.setFont(getFont());
         btnMyProfile.setForeground(new java.awt.Color(255, 255, 255));
-        btnMyProfile.setText("Manage Profile");
+        btnMyProfile.setText("View Profile");
         btnMyProfile.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnMyProfile.setMaximumSize(new java.awt.Dimension(200, 40));
         btnMyProfile.setMinimumSize(new java.awt.Dimension(20, 20));

@@ -37,6 +37,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
     public ProfileWorkAreaMainFrame() {
         initComponents();
+        setSize(1200,800);
         university = ConfigureUniversity.initialize();
         
         // set logout button to be invisible

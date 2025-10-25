@@ -224,19 +224,19 @@ class ConfigureUniversity {
         //Adam Rollen
         Transcript transcript1 = studentprofile0.getTranscript();
         CourseLoad cl01Spring2027 = studentprofile0.newCourseLoad("SPRING 2027");
-        SeatAssignment sa1 = cl01Spring2027.newSeatAssignment(co1);
-        SeatAssignment sa2 = cl01Spring2027.newSeatAssignment(co2);
-        SeatAssignment sa3 = cl01Spring2027.newSeatAssignment(co3);
-        SeatAssignment sa4 = cl01Spring2027.newSeatAssignment(co4);
+        SeatAssignment sa1 = co1.assignEmptySeat(cl01Spring2027);
+        SeatAssignment sa2 = co2.assignEmptySeat(cl01Spring2027);
+        SeatAssignment sa3 = co3.assignEmptySeat(cl01Spring2027);
+        SeatAssignment sa4 = co4.assignEmptySeat(cl01Spring2027);
         sa1.setGrade(3.7f);
         sa2.setGrade(4.0f);
         sa3.setGrade(3.3f);
         sa4.setGrade(3.3f);
         
         CourseLoad cl01Fall2026 = studentprofile0.newCourseLoad("FALL 2026");
-        SeatAssignment sa9 = cl01Fall2026.newSeatAssignment(co5);
-        SeatAssignment sa10 = cl01Fall2026.newSeatAssignment(co6);
-        SeatAssignment sa11 = cl01Fall2026.newSeatAssignment(co7);
+        SeatAssignment sa9 = co5.assignEmptySeat(cl01Fall2026);
+        SeatAssignment sa10 = co6.assignEmptySeat(cl01Fall2026);
+        SeatAssignment sa11 = co7.assignEmptySeat(cl01Fall2026);
         sa9.setGrade(4.0f);
         sa10.setGrade(4.0f);
         sa11.setGrade(3.3f);
@@ -244,19 +244,19 @@ class ConfigureUniversity {
         //Jim Dellon
         Transcript transcript2 = studentprofile1.getTranscript();
         CourseLoad cl02Spring2027 = studentprofile1.newCourseLoad("SPRING 2027");
-        SeatAssignment sa5 = cl02Spring2027.newSeatAssignment(co1);
-        SeatAssignment sa6 = cl02Spring2027.newSeatAssignment(co2);
-        SeatAssignment sa7 = cl02Spring2027.newSeatAssignment(co3);
-        SeatAssignment sa8 = cl02Spring2027.newSeatAssignment(co4);
+        SeatAssignment sa5 = co1.assignEmptySeat(cl02Spring2027);
+        SeatAssignment sa6 = co2.assignEmptySeat(cl02Spring2027);
+        SeatAssignment sa7 = co3.assignEmptySeat(cl02Spring2027);
+        SeatAssignment sa8 = co4.assignEmptySeat(cl02Spring2027);
         sa5.setGrade(3.0f);
         sa6.setGrade(3.7f);
         sa7.setGrade(3.0f);
         sa8.setGrade(3.3f);
 
         CourseLoad cl02Fall2026 = studentprofile1.newCourseLoad("FALL 2026");
-        SeatAssignment sa12 = cl02Fall2026.newSeatAssignment(co5);
-        SeatAssignment sa13 = cl02Fall2026.newSeatAssignment(co6);
-        SeatAssignment sa14 = cl02Fall2026.newSeatAssignment(co7);
+        SeatAssignment sa12 = co5.assignEmptySeat(cl02Fall2026);
+        SeatAssignment sa13 = co6.assignEmptySeat(cl02Fall2026);
+        SeatAssignment sa14 = co7.assignEmptySeat(cl02Fall2026);
         sa12.setGrade(3.0f);
         sa13.setGrade(2.7f);
         sa14.setGrade(3.0f);
