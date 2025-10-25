@@ -65,6 +65,22 @@ public class Transcript {
         }
         return sum;
     }
+    
+    public int getStudentTotalCreditHours() {
+        int sum = 0;
+        for (CourseLoad cl: courseloadlist.values()) {
+            sum = sum + cl.getSemesterCreditHours();
+        }
+        return sum;
+    }
+    
+    public float getCumulativeGPA() {
+        float cumulativeScore = this.getStudentTotalScore();
+        int cumulativeCreditHours = this.getStudentTotalCreditHours();
+        
+        return cumulativeScore/cumulativeCreditHours;
+    }
+    
     //sat index means student rated their courses with likes;
     public int getStudentSatifactionIndex() {
         ArrayList<SeatAssignment> courseregistrations = getCourseList();
@@ -92,6 +108,12 @@ public class Transcript {
         return temp2;
 
     }
+
+    // get courseloadlist with semesters
+    public HashMap<String, CourseLoad> getMasterCourseloadlist() {
+        return courseloadlist;
+    }
+    
     
     public boolean isCourseEnrolled(CourseOffer co) {
         for (CourseLoad cl: courseloadlist.values()){
@@ -104,5 +126,6 @@ public class Transcript {
         }
         return false;
     }
+    
 
 }

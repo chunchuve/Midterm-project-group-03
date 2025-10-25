@@ -16,9 +16,13 @@ public class SeatAssignment {
     Seat seat;
     boolean like; //true means like and false means not like
     CourseLoad courseload;
+    
     public SeatAssignment(CourseLoad cl, Seat s){
         seat = s;
         courseload = cl;
+        
+        // initial grade
+        grade = -1; // not graded
     }
      
     public boolean getLike(){
@@ -71,6 +75,12 @@ public class SeatAssignment {
 
     public void setCourseload(CourseLoad courseload) {
         this.courseload = courseload;
+    }
+    
+    public boolean isCompleted() {
+        // check if graded
+        // if less than 0, not graded
+        return grade >= 0;
     }
 
     @Override

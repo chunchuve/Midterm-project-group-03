@@ -39,12 +39,26 @@ public class CourseLoad {
     public float getSemesterScore(){ //total score for a full semeter
         float sum = 0;
         for (SeatAssignment sa: seatassignments){
-            sum = sum + sa.GetCourseStudentScore();
+            if(sa.isCompleted()){
+                // only count if completed
+                sum = sum + sa.GetCourseStudentScore();
+            }
         }
         return sum;
     }
     
-
+    public int getSemesterCreditHours() {
+        // total credit hours for a semester
+        int sum = 0;
+        for (SeatAssignment sa: seatassignments) {
+            // only count if completed
+            if (sa.isCompleted()) {
+                sum = sum + sa.getCreditHours();
+            }
+        }
+        return sum;
+    }
+    
     public void unEnrollCourse(SeatAssignment sa) {
         sa.unAssignSeatFromStudent();
         seatassignments.remove(sa);     

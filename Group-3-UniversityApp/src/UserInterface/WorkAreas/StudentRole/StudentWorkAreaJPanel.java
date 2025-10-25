@@ -12,6 +12,7 @@ package UserInterface.WorkAreas.StudentRole;
 
 
 
+import UserInterface.WorkAreas.StudentRole.Transcript.TranscriptJPanel;
 import Department.Department;
 import UserInterface.WorkAreas.StudentRole.ClassRegistration.ClassRegistrationJPanel;
 import Student.StudentProfile;
