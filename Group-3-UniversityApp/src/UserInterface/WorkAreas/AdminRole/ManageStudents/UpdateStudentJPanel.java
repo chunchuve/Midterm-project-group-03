@@ -60,14 +60,26 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         
         //display hobbies, interests;
         String hobbies, interests;
+        
+        if (selectedStudent.getHobbies() == null || selectedStudent.getInterests() == null) {
+            
+        }
+        
         ArrayList<String> hobbiesList = selectedStudent.getHobbies();
         ArrayList<String> interestsList = selectedStudent.getInterests();
-        // Convert the ArrayList to a String array 
-        hobbies = String.join(",", hobbiesList);
-        interests = String.join(",", interestsList);
         
-        txtHobbies.setText(hobbies);
-        txtInterests.setText(interests);
+        //null check
+        if (hobbiesList == null || interestsList == null) {
+            txtHobbies.setText(" ");
+            txtInterests.setText(" ");
+        } else {
+            // Convert the ArrayList to a String array 
+            hobbies = String.join(", ", hobbiesList);
+            interests = String.join(", ", interestsList);
+
+            txtHobbies.setText(hobbies);
+            txtInterests.setText(interests);
+        }    
     }
 
     /**
