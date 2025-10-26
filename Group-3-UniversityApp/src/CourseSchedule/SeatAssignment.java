@@ -24,7 +24,7 @@ public class SeatAssignment {
         courseload = cl;
         
         // initial grade
-        grade = -1; // not graded
+        //grade = -1; // not graded
     }
      
     public boolean getLike(){
@@ -64,6 +64,12 @@ public class SeatAssignment {
     
 
     public float getGrade() {
+        // if not graded
+        if(this.grade == -1.0f) {
+            return 0.0f;
+        }
+        
+        // return grade
         return grade;
     }
 

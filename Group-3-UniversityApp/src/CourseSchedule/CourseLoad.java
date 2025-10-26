@@ -18,7 +18,7 @@ public class CourseLoad {
     
     public CourseLoad(String s){
         seatassignments = new ArrayList();
-        semester = s;
+        semester = s.toUpperCase();
     }
     
     //redundant method
@@ -62,8 +62,12 @@ public class CourseLoad {
     }
     
     public void unEnrollCourse(SeatAssignment sa) {
+        if (sa == null) {
+            return;
+        }
+        seatassignments.remove(sa); 
         sa.unAssignSeatFromStudent();
-        seatassignments.remove(sa);     
+            
     }
             
     public ArrayList<SeatAssignment> getSeatAssignments(){
@@ -92,7 +96,7 @@ public class CourseLoad {
     }
 
     public void setSemester(String semester) {
-        this.semester = semester;
+        this.semester = semester.toUpperCase();
     }
         
     

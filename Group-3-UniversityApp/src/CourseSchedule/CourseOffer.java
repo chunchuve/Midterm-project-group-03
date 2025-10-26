@@ -89,11 +89,20 @@ public class CourseOffer {
     }
     
     public void unAssignSeat(SeatAssignment sa) {
+        if (sa == null) {
+            return;
+        }
+        
         for (Seat s: seatlist) {
-            if(s.getSeatassignment().equals(sa)) {
+            SeatAssignment currentSA = s.getSeatassignment();
+            if(currentSA != null) {
+                if (currentSA == sa) {
                 s.setSeatassignment(null);
                 s.setOccupied(false);
-                break;
+                
+                //throw new RuntimeException("--- FIRST UNENROLLMENT SUCCESSFUL ---");
+                return;
+                }
             }
         }
     }

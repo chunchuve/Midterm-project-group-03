@@ -34,18 +34,18 @@ public class StudentViewProfileJPanel extends javax.swing.JPanel {
         String lastname = student.getPerson().getLastName();
         String NUID = student.getnUID();
         String department = student.getDepartment().getName();
-        String admittedTerm = student.getTermAdmittedFirst();
+        String mode = student.getInstructionMode();
         String program = student.getProgramEnrolled();
                 
         // set the field
         fieldName.setText(firstname + " " + lastname);
-        fieldAdmittedTerm.setText(admittedTerm);
+        fieldMode.setText(mode);
         fieldDepartment.setText(department);
         fieldProgram.setText(program);
         fieldNUID.setText(NUID);
         
         fieldName.setEditable(false);
-        fieldAdmittedTerm.setEditable(false);
+        fieldMode.setEditable(false);
         fieldDepartment.setEditable(false);
         fieldProgram.setEditable(false);
         fieldNUID.setEditable(false);
@@ -65,7 +65,7 @@ public class StudentViewProfileJPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblAdmittedTerm = new javax.swing.JLabel();
-        fieldAdmittedTerm = new javax.swing.JTextField();
+        fieldMode = new javax.swing.JTextField();
         lblDepartment = new javax.swing.JLabel();
         lblProgram = new javax.swing.JLabel();
         fieldDepartment = new javax.swing.JTextField();
@@ -81,7 +81,7 @@ public class StudentViewProfileJPanel extends javax.swing.JPanel {
 
         lblName.setText("Name:");
 
-        lblAdmittedTerm.setText("Admitted Term:");
+        lblAdmittedTerm.setText("Instruction Mode:");
 
         lblDepartment.setText("Department:");
 
@@ -118,10 +118,10 @@ public class StudentViewProfileJPanel extends javax.swing.JPanel {
                             .addComponent(fieldProgram, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(fieldNUID)
                             .addComponent(fieldDepartment)
-                            .addComponent(fieldAdmittedTerm)
+                            .addComponent(fieldMode)
                             .addComponent(fieldName))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(Back)
@@ -139,7 +139,7 @@ public class StudentViewProfileJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAdmittedTerm)
-                    .addComponent(fieldAdmittedTerm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDepartment)
@@ -167,8 +167,8 @@ public class StudentViewProfileJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTextField fieldAdmittedTerm;
     private javax.swing.JTextField fieldDepartment;
+    private javax.swing.JTextField fieldMode;
     private javax.swing.JTextField fieldNUID;
     private javax.swing.JTextField fieldName;
     private javax.swing.JTextField fieldProgram;

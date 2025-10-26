@@ -44,6 +44,7 @@ public class StudentProfile extends Profile {
     //new constructor
     public StudentProfile(Person p, String nUID) {
        super(p);
+       transcript = new Transcript(this);
        this.nUID = nUID;
     }
     
@@ -52,6 +53,7 @@ public class StudentProfile extends Profile {
         
         super(p); 
         this.nUID = nUID;
+        transcript = new Transcript(this);
         this.department = department;
         this.setDepartment(department);
     }
@@ -59,6 +61,7 @@ public class StudentProfile extends Profile {
     public StudentProfile(Person p, Department department) {
         
         super(p); 
+        transcript = new Transcript(this);
         this.department = department;
         this.setDepartment(department);
     }
@@ -163,7 +166,7 @@ public class StudentProfile extends Profile {
 
     public CourseLoad getCourseLoadBySemester(String semester) {
 
-        return transcript.getCourseLoadBySemester(semester);
+        return transcript.getCourseLoadBySemester(semester.toUpperCase());
     }
 
     public CourseLoad getCurrentCourseLoad() {

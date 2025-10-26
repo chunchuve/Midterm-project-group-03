@@ -68,7 +68,10 @@ public class Degree {
         for (Course c: corelist) {
             for (SeatAssignment sa: sas) {
                 if (sa.getAssociatedCourse().equals(c)) {
-                    sum = sum + c.getCredits();
+                    // only count with class completed and passed
+                    if (sa.isCompleted()  && this.isCoreGradePassed(sa, c)) {
+                        sum = sum + c.getCredits();
+                    }
                 }
             }
         }
@@ -77,7 +80,39 @@ public class Degree {
         for (Course c: electives) {
             for (SeatAssignment sa: sas) {
                 if (sa.getAssociatedCourse().equals(c)) {
-                    sum = sum + c.getCredits();
+                    // only count with class completed and passed
+                    if (sa.isCompleted()  && this.isElectiveGradePassed(sa, c)) {
+                        sum = sum + c.getCredits();
+                    }
+                }
+            }
+        }
+      
+        return sum;
+    }
+    
+    public int getTotalPendingCredits(ArrayList<SeatAssignment> sas) {
+        int sum = 0;
+        // count core credits that are in progress (no grades yet)
+        for (Course c: corelist) {
+            for (SeatAssignment sa: sas) {
+                if (sa.getAssociatedCourse().equals(c)) {
+                    // only count with class completed
+                    if (!sa.isCompleted()) {
+                        sum = sum + c.getCredits();
+                    }
+                }
+            }
+        }
+        
+        // count elective credits
+        for (Course c: electives) {
+            for (SeatAssignment sa: sas) {
+                if (sa.getAssociatedCourse().equals(c)) {
+                    // only count with class not completed
+                    if (!sa.isCompleted()) {
+                        sum = sum + c.getCredits();
+                    }
                 }
             }
         }
@@ -145,7 +180,10 @@ public class Degree {
     public boolean isElectiveSatisfied(SeatAssignment sa) {
         for (Course c : electives) {
             if (sa.getAssociatedCourse().equals(c)) {
-                return true;
+                // the class is completed and passed
+                if (sa.isCompleted() && isElectiveGradePassed(sa, c)) {
+                    return true;
+                }
             }
         }
         return false;

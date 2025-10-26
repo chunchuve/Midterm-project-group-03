@@ -58,6 +58,7 @@ class ConfigureUniversity {
         Person person003 = personDirectory.newPerson("ID7890", "Adam", "Rollen", "09-10-2003"); //student
         Person person005 = personDirectory.newPerson("ID7845", "Jim", "Dellon", "01-01-2004"); //student
         Person person006 = personDirectory.newPerson("ID7840", "Anna", "Shnider", "01-01-2004"); //faculty
+        Person person007 = personDirectory.newPerson("ID1106", "Jane", "Smith", "06-06-2000"); // student
     
         //Person person001 = personDirectory.newPerson("John Smith"); //employee
         
@@ -105,6 +106,7 @@ class ConfigureUniversity {
         
         StudentProfile studentprofile0 = studentDirectory.newStudentProfile(person003); //Adam Rollen as student username adam
         StudentProfile studentprofile1 = studentDirectory.newStudentProfile(person005); //Jim Dellon as student username jim
+        StudentProfile studentprofile2 = studentDirectory.newStudentProfile(person007); //Jane Smith as student username jane
         
         studentprofile0.setDepartment(facultyprofile0.getDepartment()); //assign computer science engg
         studentprofile0.setProgramEnrolled("MSIS");
@@ -115,6 +117,11 @@ class ConfigureUniversity {
         studentprofile1.setProgramEnrolled("MSDS");
         studentprofile1.setInstructionMode("On Campus");
         studentprofile1.setnUID("NUID756893");
+        
+        studentprofile2.setDepartment(facultyprofile0.getDepartment()); //assign computer science engg
+        studentprofile2.setProgramEnrolled("MSIS");
+        studentprofile2.setInstructionMode("On Campus");
+        studentprofile2.setnUID("NUID20006");
     
         //Create courses
         Course c1 = department1.newCourse("High-Performance Computing", "EECE 5640",4);
@@ -191,28 +198,28 @@ class ConfigureUniversity {
         
          //Create course schedule and offer with faculty assignments
          
-        CourseSchedule csSpring2027 = department1.newCourseSchedule("SPRING 2027");
-        CourseOffer co1 = csSpring2027.newCourseOffer("EECE 5640");
+        CourseSchedule csSpring2025 = department1.newCourseSchedule("SPRING 2025");
+        CourseOffer co1 = csSpring2025.newCourseOffer("EECE 5640");
         co1.generatSeats(15);
         co1.AssignAsTeacher(facultyprofile1);
-        CourseOffer co2 = csSpring2027.newCourseOffer("EECE 5641");
+        CourseOffer co2 = csSpring2025.newCourseOffer("EECE 5641");
         co2.generatSeats(20);
         co2.AssignAsTeacher(facultyprofile0);
-        CourseOffer co3 = csSpring2027.newCourseOffer("EECE 5360");
+        CourseOffer co3 = csSpring2025.newCourseOffer("EECE 5360");
         co3.generatSeats(10);
         co3.AssignAsTeacher(facultyprofile1);
-        CourseOffer co4 = csSpring2027.newCourseOffer("EECE 5550");
+        CourseOffer co4 = csSpring2025.newCourseOffer("EECE 5550");
         co4.generatSeats(18);
         co4.AssignAsTeacher(facultyprofile0);
         
-        CourseSchedule csFall2026 = department1.newCourseSchedule("FALL 2026");
-        CourseOffer co5 = csFall2026.newCourseOffer("CS 5010");
+        CourseSchedule csFall2025 = department1.newCourseSchedule("FALL 2025");
+        CourseOffer co5 = csFall2025.newCourseOffer("CS 5010");
         co5.generatSeats(15);
         co5.AssignAsTeacher(facultyprofile0);
-        CourseOffer co6 = csFall2026.newCourseOffer("CY 5240");
+        CourseOffer co6 = csFall2025.newCourseOffer("CY 5240");
         co6.generatSeats(15);
         co6.AssignAsTeacher(facultyprofile1);
-        CourseOffer co7 = csFall2026.newCourseOffer("CS 5800");
+        CourseOffer co7 = csFall2025.newCourseOffer("CS 5800");
         co7.generatSeats(10);
         co7.AssignAsTeacher(facultyprofile0);
         
@@ -223,43 +230,54 @@ class ConfigureUniversity {
         
         //Adam Rollen
         Transcript transcript1 = studentprofile0.getTranscript();
-        CourseLoad cl01Spring2027 = studentprofile0.newCourseLoad("SPRING 2027");
-        SeatAssignment sa1 = co1.assignEmptySeat(cl01Spring2027);
-        SeatAssignment sa2 = co2.assignEmptySeat(cl01Spring2027);
-        SeatAssignment sa3 = co3.assignEmptySeat(cl01Spring2027);
-        SeatAssignment sa4 = co4.assignEmptySeat(cl01Spring2027);
+        CourseLoad cl01Spring2025 = studentprofile0.newCourseLoad("SPRING 2025");
+        SeatAssignment sa1 = co1.assignEmptySeat(cl01Spring2025);
+        SeatAssignment sa2 = co2.assignEmptySeat(cl01Spring2025);
+        SeatAssignment sa3 = co3.assignEmptySeat(cl01Spring2025);
+        SeatAssignment sa4 = co4.assignEmptySeat(cl01Spring2025);
         sa1.setGrade(3.7f);
         sa2.setGrade(4.0f);
         sa3.setGrade(3.3f);
         sa4.setGrade(3.3f);
         
-        CourseLoad cl01Fall2026 = studentprofile0.newCourseLoad("FALL 2026");
-        SeatAssignment sa9 = co5.assignEmptySeat(cl01Fall2026);
-        SeatAssignment sa10 = co6.assignEmptySeat(cl01Fall2026);
-        SeatAssignment sa11 = co7.assignEmptySeat(cl01Fall2026);
+        
+        CourseLoad cl01Fall2025 = studentprofile0.newCourseLoad("FALL 2025");
+        SeatAssignment sa9 = co5.assignEmptySeat(cl01Fall2025);
+        SeatAssignment sa10 = co6.assignEmptySeat(cl01Fall2025);
+        SeatAssignment sa11 = co7.assignEmptySeat(cl01Fall2025);
         sa9.setGrade(4.0f);
         sa10.setGrade(4.0f);
         sa11.setGrade(3.3f);
         
         //Jim Dellon
         Transcript transcript2 = studentprofile1.getTranscript();
-        CourseLoad cl02Spring2027 = studentprofile1.newCourseLoad("SPRING 2027");
-        SeatAssignment sa5 = co1.assignEmptySeat(cl02Spring2027);
-        SeatAssignment sa6 = co2.assignEmptySeat(cl02Spring2027);
-        SeatAssignment sa7 = co3.assignEmptySeat(cl02Spring2027);
-        SeatAssignment sa8 = co4.assignEmptySeat(cl02Spring2027);
+        CourseLoad cl02Spring2025 = studentprofile1.newCourseLoad("SPRING 2025");
+        SeatAssignment sa5 = co1.assignEmptySeat(cl02Spring2025);
+        SeatAssignment sa6 = co2.assignEmptySeat(cl02Spring2025);
+        SeatAssignment sa7 = co3.assignEmptySeat(cl02Spring2025);
+        SeatAssignment sa8 = co4.assignEmptySeat(cl02Spring2025);
         sa5.setGrade(3.0f);
         sa6.setGrade(3.7f);
         sa7.setGrade(3.0f);
         sa8.setGrade(3.3f);
 
-        CourseLoad cl02Fall2026 = studentprofile1.newCourseLoad("FALL 2026");
-        SeatAssignment sa12 = co5.assignEmptySeat(cl02Fall2026);
-        SeatAssignment sa13 = co6.assignEmptySeat(cl02Fall2026);
-        SeatAssignment sa14 = co7.assignEmptySeat(cl02Fall2026);
+        CourseLoad cl02Fall2025 = studentprofile1.newCourseLoad("FALL 2025");
+        SeatAssignment sa12 = co5.assignEmptySeat(cl02Fall2025);
+        SeatAssignment sa13 = co6.assignEmptySeat(cl02Fall2025);
+        SeatAssignment sa14 = co7.assignEmptySeat(cl02Fall2025);
         sa12.setGrade(3.0f);
         sa13.setGrade(2.7f);
         sa14.setGrade(3.0f);
+        
+        // Jane
+        CourseLoad sp2_clSpring2025 = studentprofile2.newCourseLoad("SPRING 2025");
+        SeatAssignment sa15 = co1.assignEmptySeat(sp2_clSpring2025);
+        SeatAssignment sa16 = co2.assignEmptySeat(sp2_clSpring2025);
+        CourseLoad sp2_clFall2025 = studentprofile2.newCourseLoad("FALL 2025");
+        SeatAssignment sa17 = co5.assignEmptySeat(sp2_clFall2025);
+        sa15.setGrade(3.0f);
+        sa16.setGrade(4.0f);
+        
         
         
         //Create hobbies and interests for students
@@ -300,6 +318,10 @@ class ConfigureUniversity {
         
         UserAccount ua5 = userAccountDirectory.newUserAccount(facultyprofile0, "gina", "*123");
         ua5.setStatus("Active"); //set status active
+      
+        UserAccount ua7 = userAccountDirectory.newUserAccount(studentprofile2, "jane", "****");
+        ua7.setStatus("Active"); //set status active
+        
         
         return university;
 

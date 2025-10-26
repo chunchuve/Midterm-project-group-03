@@ -45,8 +45,8 @@ public class Transcript {
         }
         
         // if course load for this semester not found
-        currentcourseload = new CourseLoad(newSemester);
-        courseloadlist.put(newSemester, currentcourseload);
+        currentcourseload = new CourseLoad(newSemester.toUpperCase());
+        courseloadlist.put(newSemester.toUpperCase(), currentcourseload);
         return currentcourseload;
     }
 
@@ -58,7 +58,7 @@ public class Transcript {
 
     public CourseLoad getCourseLoadBySemester(String semester) {
 
-        return courseloadlist.get(semester);
+        return courseloadlist.get(semester.toUpperCase());
 
     }
 

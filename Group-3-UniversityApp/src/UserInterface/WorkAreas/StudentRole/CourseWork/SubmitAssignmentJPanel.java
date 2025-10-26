@@ -7,9 +7,12 @@ package UserInterface.WorkAreas.StudentRole.CourseWork;
 import CourseSchedule.AssignmentSubmission;
 import CourseSchedule.SeatAssignment;
 import Profile.Profile;
+import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
+import java.awt.CardLayout;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Stack;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,11 +34,13 @@ public class SubmitAssignmentJPanel extends javax.swing.JPanel {
     private final JFileChooser fileChooser = new JFileChooser();
     String submissionFilePath = null;
     File submissionFile = null;
+    StudentWorkAreaJPanel swajp;
     
-    public SubmitAssignmentJPanel(SeatAssignment sa, JPanel csp) {
+    public SubmitAssignmentJPanel(SeatAssignment sa, JPanel csp, StudentWorkAreaJPanel swajp) {
         initComponents();
         this.sa = sa;
         CardSequencePanel = csp;
+        this.swajp = swajp; // help with stack navigation
         
         //filter file type by word or pdf
         FileFilter fileFilter = new FileNameExtensionFilter("Word or PDF Documents", "pdf", "docx");
@@ -168,18 +173,19 @@ public class SubmitAssignmentJPanel extends javax.swing.JPanel {
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtName)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
-                        .addGap(154, 154, 154)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAttach, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRemove)
-                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(125, 125, 125))
+                            .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnAttach, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnRemove))
+                            .addComponent(btnSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(156, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(77, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(Back2)
@@ -201,8 +207,9 @@ public class SubmitAssignmentJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescription)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(btnRemove)
-                        .addGap(28, 28, 28)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSubmit))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
@@ -239,9 +246,14 @@ public class SubmitAssignmentJPanel extends javax.swing.JPanel {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // select selected file and file path to null
-        submissionFilePath = null;
-        submissionFile = null;
-        JOptionPane.showMessageDialog(this, "Attachment successfully removed!", "Information", JOptionPane.INFORMATION_MESSAGE);
+        if (submissionFilePath != null || submissionFile != null) {
+            submissionFilePath = null;
+            submissionFile = null;
+            JOptionPane.showMessageDialog(this, "Attachment successfully removed!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+            JOptionPane.showMessageDialog(this, "There is no attachment to remove.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            return;
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
@@ -261,13 +273,28 @@ public class SubmitAssignmentJPanel extends javax.swing.JPanel {
         
         sa.addAssignment(assignmentName, comment, submissionFilePath);
         JOptionPane.showMessageDialog(this, "Assignment successfully Submitted", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        
+        //repopulate fields, unattach files, and populate table
+        txtName.setText("");
+        txtComment.setText("");
+        submissionFile = null;
+        submissionFilePath = null;
         populateAssignmentTable();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void Back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back2ActionPerformed
-        // TODO add your handling code here:
-        CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        Stack<String> historyStack = swajp.getHistoryStack();
+        JPanel csp = swajp.getCardSequencePanel();
+        if (!historyStack.empty()) {
+            String previousKey = historyStack.pop();
+            CardLayout layout = (CardLayout) csp.getLayout();
+            layout.show(csp, previousKey);
+            csp.remove(this);
+        }else {
+            // go to student main frame
+            CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+            layout.show(CardSequencePanel, "StudentWorkAreaJPanel");
+        }
     }//GEN-LAST:event_Back2ActionPerformed
 
 

@@ -28,10 +28,10 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     Transcript transcript;
     HashMap<String, CourseLoad> masterCourseLoad;
     public TranscriptJPanel(StudentProfile s, JPanel csp) {
+        
         initComponents();
         student = s;
         CardSequencePanel = csp;
-        
         transcript = student.getTranscript();
         populateTranscript();
         

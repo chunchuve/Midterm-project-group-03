@@ -21,7 +21,7 @@ public class CourseSchedule {
     String semester;
 
     public CourseSchedule(String s, CourseCatalog cc) {
-        semester = s;
+        semester = s.toUpperCase();
         coursecatalog = cc;
         schedule = new ArrayList();
 
