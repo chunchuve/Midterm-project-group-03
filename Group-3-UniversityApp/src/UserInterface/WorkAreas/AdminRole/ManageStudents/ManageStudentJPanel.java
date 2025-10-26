@@ -235,6 +235,10 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
                 
                 //removes person associated with the studentprofile
                 university.getPersonDirectory().removePerson(selectedStudent.getPerson());
+                
+                //set status of useraccount to inactive when student profile is deleted
+                UserAccount user = university.getUserAccountDirectory().findUserAccountByProfile(selectedStudent);
+                user.setStatus("Inactive");
                
                 refreshTable();
             }
