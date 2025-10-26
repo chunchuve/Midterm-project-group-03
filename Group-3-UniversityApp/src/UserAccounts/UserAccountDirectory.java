@@ -38,7 +38,15 @@ public class UserAccountDirectory {
         useraccountlist.remove(acc);
     }
     
-    
+    public UserAccount findUserAccountByProfile(Profile profile) {
+        for (UserAccount ua: useraccountlist) {
+            //if (ua.getProfile().equals(profile)) {
+              //  return ua;
+            //}
+            if (ua.isProfileMatch(profile)) return ua;
+        }
+        return null;
+    }
     
     public UserAccount findUserAccount(String id) {
 

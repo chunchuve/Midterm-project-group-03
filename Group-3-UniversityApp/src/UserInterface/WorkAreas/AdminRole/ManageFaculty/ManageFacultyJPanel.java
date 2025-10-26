@@ -236,10 +236,12 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
                 selectedFaculty = (FacultyProfile) FacultyTable.getValueAt(row, 0);
                 university.getFacultydirectory().removeFaculty(selectedFaculty);
                 
-                //removes person associated with the faculty profile
+                //delete person associated with the faculty profile
                 university.getPersonDirectory().removePerson(selectedFaculty.getPerson());
                 
-                //university.getUserAccountDirectory().removeUserAccount(selectedFaculty);
+                //set status of useraccount to inactive when faculty profile is deleted
+                UserAccount user = university.getUserAccountDirectory().findUserAccountByProfile(selectedFaculty);
+                user.setStatus("Inactive");
                
                 refreshTable();
             }
