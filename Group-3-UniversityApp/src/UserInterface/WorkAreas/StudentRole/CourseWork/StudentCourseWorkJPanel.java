@@ -38,9 +38,10 @@ public class StudentCourseWorkJPanel extends javax.swing.JPanel {
         student = s;
         CardSequencePanel = csp;
         transcript = student.getTranscript();
-        
+
         
         populateCombo();
+
     }
 
     /**
@@ -166,6 +167,11 @@ public class StudentCourseWorkJPanel extends javax.swing.JPanel {
         for (String s: semesters) {
             cmbSemester.addItem(s);
         }
+        
+        if(transcript.getMasterCourseloadlist().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "You have no courses record. Please navigate to 'Registration' to enroll courses.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
     }
 
     private void populateCourseLoadTable() {
@@ -223,7 +229,11 @@ public class StudentCourseWorkJPanel extends javax.swing.JPanel {
 
     private void btnCourseDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseDetailsActionPerformed
         String selectedSemester = (String) cmbSemester.getSelectedItem();
-
+        if (selectedSemester == null) {
+            JOptionPane.showMessageDialog(this, "Please select a semester first.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         int selectedRowIndex = tblCourseLoad.getSelectedRow();
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a course from the table to view", "Warning", JOptionPane.WARNING_MESSAGE);

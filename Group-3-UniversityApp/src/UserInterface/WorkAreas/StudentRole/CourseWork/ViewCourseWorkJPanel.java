@@ -45,6 +45,11 @@ public class ViewCourseWorkJPanel extends javax.swing.JPanel {
             fieldStatus.setText("In Progress");
             fieldGrade.setText("N/A");
         }
+        
+        // gray out the submit assignment button if the course is completed
+        if(status) {
+            btnAssignment.setEnabled(false);
+        }
     }
 
     /**

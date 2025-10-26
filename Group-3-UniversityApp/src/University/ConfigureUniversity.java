@@ -320,7 +320,7 @@ class ConfigureUniversity {
         ua5.setStatus("Active"); //set status active
       
         UserAccount ua7 = userAccountDirectory.newUserAccount(studentprofile2, "jane", "****");
-        ua5.setStatus("Active"); //set status active
+        ua7.setStatus("Active"); //set status active
         
         
         return university;
