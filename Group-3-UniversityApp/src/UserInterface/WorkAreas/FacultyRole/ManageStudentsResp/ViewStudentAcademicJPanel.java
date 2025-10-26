@@ -231,19 +231,29 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
             Course c = co.getSubjectCourse();
             String semester = sa.getCourseload().getSemester();
             
-            String facultyName;
-            if (co.getFacultyProfile() == null) {
-                facultyName = "Not Assigned";
-            } else {
-                facultyName = co.getFacultyProfile().getPerson().getFullName();
-        }
+                //Display not assignmed if an instructor has not been assigned to a course
+                String facultyName;
+                if (co.getFacultyProfile() == null) {
+                    facultyName = "Not Assigned";
+                } else {
+                    facultyName = co.getFacultyProfile().getPerson().getFullName();
+                }
+                
+                //Display grade as N/A if a student has not completed a course
+                String displayGrade;
+                if (sa.getGrade() == 0.0f) {
+                    displayGrade = "N/A";
+                } else {
+                    displayGrade = String.valueOf(sa.getGrade());
+                }
+            
         
                 Object[] row = new Object[5];
                 row[0] = c;
                 row[1] = c.getCourseName();
                 row[2] = semester;
                 row[3] = facultyName;
-                row[4] = sa.getGrade();    
+                row[4] = displayGrade;    
                 model.addRow(row);
         } 
         

@@ -116,8 +116,6 @@ public class ViewFacultyProfileJPanel extends javax.swing.JPanel {
 
         lblRole.setText("Role:");
 
-        fieldRole.setEditable(false);
-
         lblPassword.setText("*Password:");
 
         lblFirstName.setText("*First Name:");
@@ -464,42 +462,42 @@ private void refreshFacultyTextFields() {
 }
 
 private void setFacultyViewMode() {
-    fieldFirstName.setEnabled(false);
-    fieldLastName.setEnabled(false);
-    fieldDOB.setEnabled(false);
-    fieldPersonID.setEnabled(false);
-    fieldAddressLine1.setEnabled(false);
-    fieldAddressLine2.setEnabled(false);
-    fieldCity.setEnabled(false);
-    fieldState.setEnabled(false);
-    fieldZipCode.setEnabled(false);
-    fieldResearchArea.setEnabled(false);
-    fieldDepartment.setEnabled(false);
-    fieldTitle.setEnabled(false);
-    fieldRole.setEnabled(false);
-    fieldUsername.setEnabled(false);
-    fieldPassword.setEnabled(false);        
+    fieldFirstName.setEditable(false);
+    fieldLastName.setEditable(false);
+    fieldDOB.setEditable(false);
+    fieldPersonID.setEditable(false);
+    fieldAddressLine1.setEditable(false);
+    fieldAddressLine2.setEditable(false);
+    fieldCity.setEditable(false);
+    fieldState.setEditable(false);
+    fieldZipCode.setEditable(false);
+    fieldResearchArea.setEditable(false);
+    fieldDepartment.setEditable(false);
+    fieldTitle.setEditable(false);
+    fieldRole.setEditable(false);
+    fieldUsername.setEditable(false);
+    fieldPassword.setEditable(false);        
     
     btnSave.setEnabled(false);
     btnUpdate.setEnabled(true);
 }
 
 private void setFacultyEditMode() {
-    fieldFirstName.setEnabled(true);
-    fieldLastName.setEnabled(true);
-    fieldDOB.setEnabled(false);
-    fieldPersonID.setEnabled(false);
-    fieldAddressLine1.setEnabled(true);
-    fieldAddressLine2.setEnabled(true);
-    fieldCity.setEnabled(true);
-    fieldState.setEnabled(true);
-    fieldZipCode.setEnabled(true);
-    fieldResearchArea.setEnabled(true);
-    fieldDepartment.setEnabled(false);
-    fieldTitle.setEnabled(false);
-    fieldRole.setEnabled(false);
-    fieldUsername.setEnabled(true);
-    fieldPassword.setEnabled(true);  
+    fieldFirstName.setEditable(true);
+    fieldLastName.setEditable(true);
+    fieldDOB.setEditable(false);
+    fieldPersonID.setEditable(false);
+    fieldAddressLine1.setEditable(true);
+    fieldAddressLine2.setEditable(true);
+    fieldCity.setEditable(true);
+    fieldState.setEditable(true);
+    fieldZipCode.setEditable(true);
+    fieldResearchArea.setEditable(true);
+    fieldDepartment.setEditable(false);
+    fieldTitle.setEditable(false);
+    fieldRole.setEditable(false);
+    fieldUsername.setEditable(true);
+    fieldPassword.setEditable(true);  
     
     btnSave.setEnabled(true);
     btnUpdate.setEnabled(false);
