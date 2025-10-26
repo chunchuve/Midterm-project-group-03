@@ -71,6 +71,14 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
             fieldTotalStatus.setText("Not Satisfied");
         }
         
+        // disable editing the fields
+        fieldElectivesNumber.setEditable(false);
+        fieldPendingCH.setEditable(false);
+        fieldValidCH.setEditable(false);
+        fieldTotalStatus.setEditable(false);
+        fieldDegree.setEditable(false);
+        fieldCoreStatus.setEditable(false);
+        
         //populate tables
         populateCoreTable();
         populateElectiveTable();

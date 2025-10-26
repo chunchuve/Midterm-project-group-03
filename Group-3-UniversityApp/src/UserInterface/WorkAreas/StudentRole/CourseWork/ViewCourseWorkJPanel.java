@@ -53,6 +53,14 @@ public class ViewCourseWorkJPanel extends javax.swing.JPanel {
             btnAssignment.setEnabled(false);
             lblNote.setVisible(true);
         }
+        
+        // set editable to false
+        fieldCourseNumber.setEditable(false);
+        fieldName.setEditable(false);
+        fieldFaculty.setEditable(false);
+        fieldCreditHours.setEditable(false);
+        fieldStatus.setEditable(false);
+        fieldGrade.setEditable(false);
     }
 
     /**
