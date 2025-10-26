@@ -103,7 +103,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 74, 23);
+        Back.setBounds(30, 300, 80, 23);
 
         Next.setText("View/Edit >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Faculty details");
         add(jLabel1);
-        jLabel1.setBounds(30, 90, 190, 19);
+        jLabel1.setBounds(30, 90, 190, 17);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage Faculty");
@@ -160,11 +160,11 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             }
         });
         add(btnRemoveFaculty);
-        btnRemoveFaculty.setBounds(310, 300, 110, 23);
+        btnRemoveFaculty.setBounds(280, 300, 140, 23);
 
         jLabel3.setText("Search by ID");
         add(jLabel3);
-        jLabel3.setBounds(30, 360, 100, 16);
+        jLabel3.setBounds(30, 360, 100, 17);
 
         txtSearchbyID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +172,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             }
         });
         add(txtSearchbyID);
-        txtSearchbyID.setBounds(150, 360, 200, 22);
+        txtSearchbyID.setBounds(150, 360, 200, 23);
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +235,11 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             if (dialogResult == JOptionPane.YES_OPTION) {
                 selectedFaculty = (FacultyProfile) FacultyTable.getValueAt(row, 0);
                 university.getFacultydirectory().removeFaculty(selectedFaculty);
+                
+                //removes person associated with the faculty profile
+                university.getPersonDirectory().removePerson(selectedFaculty.getPerson());
+                
+                //university.getUserAccountDirectory().removeUserAccount(selectedFaculty);
                
                 refreshTable();
             }
