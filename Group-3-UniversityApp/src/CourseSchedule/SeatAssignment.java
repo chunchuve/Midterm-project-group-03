@@ -24,7 +24,7 @@ public class SeatAssignment {
         courseload = cl;
         
         // initial grade
-        //grade = -1; // not graded
+        grade = -1.0f; // not graded
     }
      
     public boolean getLike(){
