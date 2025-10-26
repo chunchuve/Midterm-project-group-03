@@ -11,6 +11,7 @@ import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.io.File;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Stack;
 import javax.swing.JFileChooser;
@@ -61,12 +62,13 @@ public class SubmitAssignmentJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblAssignment.getModel();
         model.setRowCount(0);
         
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         for (AssignmentSubmission as: assignmentList) {
             Object row[] = new Object[4];
                 row[0] = as.getAssignmentName();
                 row[1] = as.getComment();
                 row[2] = as.getFilePath();
-                row[3] = as.getSubmissionDate();
+                row[3] = as.getSubmissionDate().format(formatter);
                 model.addRow(row);
         }
         

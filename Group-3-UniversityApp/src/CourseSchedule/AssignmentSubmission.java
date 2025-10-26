@@ -4,7 +4,8 @@
  */
 package CourseSchedule;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 /**
  *
@@ -15,12 +16,12 @@ public class AssignmentSubmission {
     String assignmentName;
     String comment;
     String filePath;
-    LocalDate submissionDate;
+    LocalDateTime submissionDate;
     public AssignmentSubmission(String name, String comment, String filePath) {
         assignmentName = name;
         this.comment = comment;
         this.filePath = filePath;
-        submissionDate = LocalDate.now();
+        submissionDate = LocalDateTime.now();
     }
 
     public String getAssignmentName() {
@@ -35,7 +36,7 @@ public class AssignmentSubmission {
         return filePath;
     }
 
-    public LocalDate getSubmissionDate() {
+    public LocalDateTime getSubmissionDate() {
         return submissionDate;
     }
         

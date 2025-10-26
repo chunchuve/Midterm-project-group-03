@@ -35,9 +35,15 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         transcript = student.getTranscript();
         populateTranscript();
         
+        // get data to fields
         fieldGPA.setText(String.valueOf(transcript.getCumulativeGPA()));
         fieldCredits.setText(String.valueOf(transcript.getStudentTotalCreditHours()));
         fieldQP.setText(String.valueOf(transcript.getStudentTotalScore()));
+        
+        // disable editing
+        fieldGPA.setEditable(false);
+        fieldCredits.setEditable(false);
+        fieldQP.setEditable(false);
     }
 
     /**
