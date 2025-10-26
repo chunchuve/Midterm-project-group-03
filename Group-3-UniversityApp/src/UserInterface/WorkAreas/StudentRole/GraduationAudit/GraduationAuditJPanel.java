@@ -57,6 +57,9 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
         // populate number of electives took
         fieldElectivesNumber.setText(String.valueOf(degree.getTotalElectiveCoursesTaken(seatAssignmentList)));       
         
+        // populate number of pending credits
+        fieldPendingCH.setText(String.valueOf(degree.getTotalPendingCredits(seatAssignmentList)));
+
         // populate number of valid credits
         fieldValidCH.setText(String.valueOf(degree.getTotalValidCredits(seatAssignmentList)));
         
@@ -104,6 +107,8 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
         fieldElectivesNumber = new javax.swing.JTextField();
         lblValidCH = new javax.swing.JLabel();
         fieldValidCH = new javax.swing.JTextField();
+        fieldPendingCH = new javax.swing.JTextField();
+        lblPendingCH = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
@@ -200,6 +205,11 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
 
         fieldValidCH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        fieldPendingCH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        lblPendingCH.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPendingCH.setText("Pending Credit Hours:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,7 +256,11 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblTotalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(101, 101, 101)
+                                .addComponent(lblPendingCH, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldPendingCH, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblValidCH, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +295,10 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValidCH)
-                    .addComponent(fieldValidCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldValidCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPendingCH)
+                        .addComponent(fieldPendingCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldTotalStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,7 +336,7 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
                         if (satisfied) {
                             status = "Passed";
                         } else {
-                            status = "Not Satisfied";
+                            status = "Failed";
                         }
                     }
                 }      
@@ -345,7 +362,7 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
             row[1] = elective.getCourseName();
             row[2] = elective.getCredits();
             String grade = "N/A";
-            String status = "";
+            String status = "Not Taking";
             for (SeatAssignment sa: seatAssignmentList) {
                 // check if the student took the course
                 if (sa.getAssociatedCourse().equals(elective)) {
@@ -357,9 +374,9 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
                         boolean satisfied = degree.isElectiveGradePassed(sa, elective);
                         // if 2.0 (C) or above, passed
                         if (satisfied) {
-                            status = "Satisfied";
+                            status = "Passed";
                         } else {
-                            status = "Not Satisfied";
+                            status = "Failed";
                         }
                     }
                 }      
@@ -386,6 +403,7 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField fieldCoreStatus;
     private javax.swing.JTextField fieldDegree;
     private javax.swing.JTextField fieldElectivesNumber;
+    private javax.swing.JTextField fieldPendingCH;
     private javax.swing.JTextField fieldTotalStatus;
     private javax.swing.JTextField fieldValidCH;
     private javax.swing.JScrollPane jScrollPane1;
@@ -397,6 +415,7 @@ public class GraduationAuditJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblCoreStatus;
     private javax.swing.JLabel lblDegree;
     private javax.swing.JLabel lblElective;
+    private javax.swing.JLabel lblPendingCH;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblToalNotes;
     private javax.swing.JLabel lblTotalStatus;

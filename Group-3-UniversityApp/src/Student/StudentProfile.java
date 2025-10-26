@@ -163,7 +163,7 @@ public class StudentProfile extends Profile {
 
     public CourseLoad getCourseLoadBySemester(String semester) {
 
-        return transcript.getCourseLoadBySemester(semester);
+        return transcript.getCourseLoadBySemester(semester.toUpperCase());
     }
 
     public CourseLoad getCurrentCourseLoad() {

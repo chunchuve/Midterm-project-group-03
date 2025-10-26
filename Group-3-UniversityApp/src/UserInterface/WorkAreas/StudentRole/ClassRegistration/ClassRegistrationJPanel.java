@@ -547,10 +547,10 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
     }
 
     private boolean didSemesterSeasonBegin(String currentSeason, String semesterSeason) {
-        List<String> seasonList = Arrays.asList("spring", "summer", "fall", "winter");
+        List<String> seasonList = Arrays.asList("SPRING", "SUMMER", "FALL", "WINTER");
         
         int currentSeasonIndex = seasonList.indexOf(currentSeason);
-        int semesterSeasonIndex = seasonList.indexOf(semesterSeason.toLowerCase());
+        int semesterSeasonIndex = seasonList.indexOf(semesterSeason.toUpperCase());
         // handle index error
         if(currentSeasonIndex <0 || semesterSeasonIndex <0) {
             return true;
@@ -565,14 +565,14 @@ public class ClassRegistrationJPanel extends javax.swing.JPanel {
     private String getCurrentSeason() {
         int month = LocalDate.now().getMonthValue();
         if (month == 12 || month == 1) {
-            return "winter";
+            return "WINTER";
         }
         else if(month >=9) {
-            return "fall";
+            return "FALL";
         } else if (month >= 5) {
-            return "summer";
+            return "SUMMER";
         } else {
-            return "spring";
+            return "SPRING";
         }
     }
     

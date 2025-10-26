@@ -9,8 +9,11 @@ import CourseSchedule.SeatAssignment;
 import Profile.Profile;
 import Student.StudentProfile;
 import Student.Transcript;
+import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
+import java.util.Date;
 import java.util.Set;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -28,10 +31,10 @@ public class StudentCourseWorkJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     Transcript transcript;
     Set<String> semesters;
-    
-    public StudentCourseWorkJPanel(StudentProfile s, JPanel csp) {
+    StudentWorkAreaJPanel swajp;
+    public StudentCourseWorkJPanel(StudentProfile s, JPanel csp, StudentWorkAreaJPanel swajp) {
         initComponents();
-        
+        this.swajp = swajp;
         student = s;
         CardSequencePanel = csp;
         transcript = student.getTranscript();
@@ -200,8 +203,18 @@ public class StudentCourseWorkJPanel extends javax.swing.JPanel {
     
     private void Back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back2ActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        Stack<String> historyStack = swajp.getHistoryStack();
+        JPanel csp = swajp.getCardSequencePanel();
+        if (!historyStack.empty()) {
+            String previousKey = historyStack.pop();
+            CardLayout layout = (CardLayout) csp.getLayout();
+            layout.show(csp, previousKey);
+            csp.remove(this);
+        }else {
+            // go to student main frame
+            CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+            layout.show(CardSequencePanel, "StudentWorkAreaJPanel");
+        }
     }//GEN-LAST:event_Back2ActionPerformed
 
     private void cmbSemesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSemesterActionPerformed
@@ -218,10 +231,12 @@ public class StudentCourseWorkJPanel extends javax.swing.JPanel {
         }
 
         SeatAssignment selectedSA = (SeatAssignment) tblCourseLoad.getValueAt(selectedRowIndex, 1);
-        ViewCourseWorkJPanel vcodjp = new ViewCourseWorkJPanel(selectedSA, CardSequencePanel);
-        CardSequencePanel.add("ViewCourseOfferDetailJPanel", vcodjp);
+        
+        swajp.getHistoryStack().push("StudentCourseWorkJPanel");
+        ViewCourseWorkJPanel vcodjp = new ViewCourseWorkJPanel(selectedSA, CardSequencePanel, swajp);
+        CardSequencePanel.add("ViewCourseWorkJPanel", vcodjp);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
-        layout.next(CardSequencePanel);
+        layout.show(CardSequencePanel, "ViewCourseWorkJPanel");
 
     }//GEN-LAST:event_btnCourseDetailsActionPerformed
 

@@ -69,7 +69,11 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="lblTotalStatus" min="-2" pref="184" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                              <Component id="lblPendingCH" min="-2" pref="159" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="fieldPendingCH" min="-2" pref="133" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="lblValidCH" min="-2" pref="159" max="-2" attributes="0"/>
                           </Group>
@@ -116,6 +120,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblValidCH" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fieldValidCH" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="lblPendingCH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="fieldPendingCH" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -352,6 +360,19 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="fieldPendingCH">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPendingCH">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Pending Credit Hours:"/>
       </Properties>
     </Component>
   </SubComponents>

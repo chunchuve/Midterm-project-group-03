@@ -20,6 +20,7 @@ import UserInterface.WorkAreas.StudentRole.ClassRegistration.ClassRegistrationJP
 import Student.StudentProfile;
 import University.University;
 import java.awt.CardLayout;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -39,7 +40,8 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
      * @param spp
      * @param clp
      */
-
+    private Stack<String> panelHistory = new Stack<>();
+    
     public StudentWorkAreaJPanel(University u, StudentProfile spp, JPanel clp) {
 
         university = u;
@@ -50,6 +52,14 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
     }
 
+    // to fix the stack navigation problem
+    public Stack<String> getHistoryStack() {
+        return panelHistory;
+    }
+    
+    public JPanel getCardSequencePanel() {
+        return CardSequencePanel;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,7 +191,8 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCourseWorkIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
-        StudentCourseWorkJPanel courseworkJPanel = new StudentCourseWorkJPanel(student, CardSequencePanel);
+        panelHistory.push("StudentWorkAreaJPanel");
+        StudentCourseWorkJPanel courseworkJPanel = new StudentCourseWorkJPanel(student, CardSequencePanel, this);
         CardSequencePanel.add("StudentCourseWorkJPanel", courseworkJPanel);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);

@@ -42,22 +42,17 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="fieldCourseNumber" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="fieldName" alignment="1" pref="228" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lblFaculty" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblCreditHours" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="fieldGrade" min="-2" pref="263" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="fieldName" pref="265" max="32767" attributes="0"/>
+                                      <Component id="fieldCourseNumber" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="fieldGrade" min="-2" pref="228" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                                      <Component id="lblSatus" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblFaculty" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCreditHours" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSatus" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -74,7 +69,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace pref="80" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

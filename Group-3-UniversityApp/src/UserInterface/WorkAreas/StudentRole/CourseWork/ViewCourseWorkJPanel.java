@@ -5,7 +5,9 @@
 package UserInterface.WorkAreas.StudentRole.CourseWork;
 
 import CourseSchedule.SeatAssignment;
+import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
+import java.util.Stack;
 import javax.swing.JPanel;
 
 /**
@@ -19,10 +21,12 @@ public class ViewCourseWorkJPanel extends javax.swing.JPanel {
      */
     SeatAssignment sa;
     JPanel CardSequencePanel;
-    public ViewCourseWorkJPanel(SeatAssignment sa, JPanel csp) {
+    StudentWorkAreaJPanel swajp;
+    public ViewCourseWorkJPanel(SeatAssignment sa, JPanel csp, StudentWorkAreaJPanel swajp) {
         initComponents();
         this.sa = sa;
         CardSequencePanel = csp;
+        this.swajp = swajp;
         
         populateFields();
     }
@@ -127,18 +131,15 @@ public class ViewCourseWorkJPanel extends javax.swing.JPanel {
                                         .addComponent(lblName)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(fieldCourseNumber)
-                                            .addComponent(fieldName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
-                                        .addGap(49, 49, 49)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblFaculty)
-                                            .addComponent(lblCreditHours)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(fieldGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(82, 82, 82)
-                                        .addComponent(lblSatus)))
+                                    .addComponent(fieldGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(fieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                                        .addComponent(fieldCourseNumber)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFaculty, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblCreditHours, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblSatus, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(fieldCreditHours, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
@@ -148,7 +149,7 @@ public class ViewCourseWorkJPanel extends javax.swing.JPanel {
                         .addGap(52, 52, 52)
                         .addComponent(Back2)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(80, 80, 80))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +184,21 @@ public class ViewCourseWorkJPanel extends javax.swing.JPanel {
 
     private void Back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back2ActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        Stack<String> historyStack = swajp.getHistoryStack();
+        JPanel csp = swajp.getCardSequencePanel();
+        if (!historyStack.empty()) {
+            String previousKey = historyStack.pop();
+            CardLayout layout = (CardLayout) csp.getLayout();
+            layout.show(csp, previousKey);
+            csp.remove(this);
+        }else {
+            // go to student main frame
+            CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
+            layout.show(CardSequencePanel, "StudentWorkAreaJPanel");
+        }
+        
+        //CardSequencePanel.remove(this);
+        //((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_Back2ActionPerformed
 
     private void fieldCourseNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCourseNumberActionPerformed
@@ -192,7 +206,9 @@ public class ViewCourseWorkJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCourseNumberActionPerformed
 
     private void btnAssignmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignmentActionPerformed
-        SubmitAssignmentJPanel sajp = new SubmitAssignmentJPanel(sa, CardSequencePanel);
+        swajp.getHistoryStack().push("ViewCourseWorkJPanel");
+        
+        SubmitAssignmentJPanel sajp = new SubmitAssignmentJPanel(sa, CardSequencePanel, swajp);
         CardSequencePanel.add("SubmitAssignmentJPanel", sajp);
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.next(CardSequencePanel);
