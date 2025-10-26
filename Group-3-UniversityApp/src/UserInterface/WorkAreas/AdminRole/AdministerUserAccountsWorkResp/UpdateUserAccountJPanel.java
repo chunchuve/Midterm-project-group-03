@@ -219,8 +219,8 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         //input validations
         //check for blank input
         if (txtUserName.getText().isBlank() || txtPswd.getText().isBlank() || txtStatus.getText().isBlank() || 
-                txtRole.getText().isBlank() || txtPersonID.getText().isBlank() || txtNUID.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+                txtRole.getText().isBlank() || txtPersonID.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null,"All fields are mandatory.");
             return;
         }
         //check for valid input
@@ -235,6 +235,14 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
             return;
         } else
+        
+        //check if NUID is blank only for students    
+        if (selecteduseraccount.getRole().equalsIgnoreCase("Student")) {
+            if (txtNUID.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null,"All fields are mandatory.");
+                return;
+            }
+        }    
         
         saveFeatures();
         JOptionPane.showMessageDialog(this, "Account updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
