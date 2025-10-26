@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class UserAccountDirectory {
 
     //Department department;
-    //ArrayList<UserAccount> studentlist;
+    
     ArrayList<UserAccount> useraccountlist ;
     
       public UserAccountDirectory (){
@@ -37,6 +37,7 @@ public class UserAccountDirectory {
     public void removeUserAccount(UserAccount acc) {
         useraccountlist.remove(acc);
     }
+    
     
     
     public UserAccount findUserAccount(String id) {

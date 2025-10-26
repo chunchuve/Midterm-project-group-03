@@ -163,7 +163,7 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
             }
         });
         add(btnRemoveStudent);
-        btnRemoveStudent.setBounds(310, 300, 110, 23);
+        btnRemoveStudent.setBounds(280, 300, 140, 23);
 
         jLabel3.setText("Search by ID");
         add(jLabel3);
@@ -232,6 +232,9 @@ public class ManageStudentJPanel extends javax.swing.JPanel {
             if (dialogResult == JOptionPane.YES_OPTION) {
                 selectedStudent = (StudentProfile) StudentTable.getValueAt(row, 0);
                 university.getStudentdirectory().removeStudentProfile(selectedStudent);
+                
+                //removes person associated with the studentprofile
+                university.getPersonDirectory().removePerson(selectedStudent.getPerson());
                
                 refreshTable();
             }
