@@ -234,6 +234,7 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
             for (SeatAssignment sa : sp.getCourseList()) {
                 if (sa.getCourseOffer().equals(selectedCourse)) {
                     
+                    //Display not assignmed if an instructor has not been assigned to a course
                     String facultyName;
                     if (selectedCourse.getFacultyProfile() == null) {
                         facultyName = "Not Assigned";
@@ -241,12 +242,20 @@ public class PerformanceReportJPanel extends javax.swing.JPanel {
                         facultyName = selectedCourse.getFacultyProfile().getPerson().getFullName();
                     }
                     
+                    //Display grade as N/A if a student has not completed a course
+                    String displayGrade;
+                    if (sa.getGrade() == 0.0f) {
+                        displayGrade = "N/A";
+                    } else {
+                        displayGrade = String.valueOf(sa.getGrade());
+                    }
+                    
                     Object row[] = new Object[5];
                     row[0] = sp.getnUID();
                     row[1] = sp.getPerson().getFirstName();
                     row[2] = sp.getPerson().getLastName();
                     row[3] = facultyName;
-                    row[4] = sa.getGrade();
+                    row[4] = displayGrade;
                     model.addRow(row);
                 }
                 

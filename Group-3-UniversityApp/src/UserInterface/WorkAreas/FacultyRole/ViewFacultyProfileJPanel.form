@@ -315,9 +315,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fieldRole">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>

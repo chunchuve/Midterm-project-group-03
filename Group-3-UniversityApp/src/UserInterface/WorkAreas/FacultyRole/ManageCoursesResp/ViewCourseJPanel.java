@@ -249,10 +249,10 @@ private void refreshCourseTextFields() {
 }
 
 private void setCourseViewMode() {
-    fieldCourseNumber.setEnabled(false);
-    fieldCourseName.setEnabled(false);
-    fieldCredits.setEnabled(false);
-    fieldPrice.setEnabled(false);
+    fieldCourseNumber.setEditable(false);
+    fieldCourseName.setEditable(false);
+    fieldCredits.setEditable(false);
+    fieldPrice.setEditable(false);
    
     
     btnSave.setEnabled(false);
@@ -260,10 +260,10 @@ private void setCourseViewMode() {
 }
 
 private void setCourseEditMode() {
-    fieldCourseNumber.setEnabled(true);
-    fieldCourseName.setEnabled(true);
-    fieldCredits.setEnabled(true);
-    fieldPrice.setEnabled(false); //course price is not adjustable by faculty 
+    fieldCourseNumber.setEditable(true);
+    fieldCourseName.setEditable(true);
+    fieldCredits.setEditable(true);
+    fieldPrice.setEditable(false); //course price is not adjustable by faculty 
     
     btnSave.setEnabled(true);
     btnUpdate.setEnabled(false);
