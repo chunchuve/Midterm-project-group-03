@@ -1,5 +1,3 @@
-# Midterm-project-group-03
-Info 5100 Fall 25 Midterm-project-group-03
 - **Documentation (README file)**
     - Project Title: Digital University Application
 - **Team Information**
@@ -117,15 +115,14 @@ Info 5100 Fall 25 Midterm-project-group-03
                 4.  Students can attach pdf or docx file, remove attached files, and submit the assignment. After submission, the assignment submission table should record name, comment, file path, and submission time. Submission cannot be deleted.
                 5.  Newly enrolled/unenrolled courses from the registration panel will be displayed and reflected in the corresponding semester.
             2.  **Registration**
-
-1.  Students can enroll in and unenroll from courses in this panel.
-2.  Only schedules for future semesters are displayed. Students cannot view or register for courses offered in past or current semesters.
-3.  Students can select the semester to see the course offerings for that semester.
-4.  Students can search for classes based on keywords using either course number or name. The keyword does not have to match the full course number and name exactly. The search filter applies only to the selected semester, not to all course offerings across all semesters.
-5.  Students can select a course offer to view the course details.
-6.  Students can select a course to enroll in. Seat availability will be reflected in enrollment (availability is subtracted by one when a student is enrolled). Students cannot enroll in the courses they have already taken or are enrolled in. Students cannot enroll in courses that are full (a warning message appears for 0 seats available).
-7.  Students can see enrolled courses for the future semesters and remove enrollments. The seat availability for a course offer will be updated when a student unenrolls from a course (seat availability added 1).
-    - - 1.  **Graduation Audit**
+                1.  Students can enroll in and unenroll from courses in this panel.
+                2.  Only schedules for future semesters are displayed. Students cannot view or register for courses offered in past or current semesters.
+                3.  Students can select the semester to see the course offerings for that semester.
+                4.  Students can search for classes based on keywords using either course number or name. The keyword does not have to match the full course number and name exactly. The search filter applies only to the selected semester, not to all course offerings across all semesters.
+                5.  Students can select a course offer to view the course details.
+                6.  Students can select a course to enroll in. Seat availability will be reflected in enrollment (availability is subtracted by one when a student is enrolled). Students cannot enroll in the courses they have already taken or are enrolled in. Students cannot enroll in courses that are full (a warning message appears for 0 seats available).
+                7.  Students can see enrolled courses for the future semesters and remove enrollments. The seat availability for a course offer will be updated when a student unenrolls from a course (seat availability added 1).
+            3.  **Graduation Audit**
                 1.  Students can view the progress of their degree at the graduation auditing portal.
                 2.  The portal displays the degree title, a list of core courses, and a list of electives.
                 3.  The courses will show the grade and progress of the students (Not enrolled, In Progress, Passed, Failed).
@@ -135,11 +132,11 @@ Info 5100 Fall 25 Midterm-project-group-03
                 7.  The “Total Valid Credit Hours” shows total credit hours for the completed and passed department-related courses. Does not count for non-department courses.
                 8.  The “Graduation Requirement Status” will show “satisfied” when the student has passed all the core requirements and has at least 32 total valid credit hours.
                 9.  Newly enrolled and unenrolled courses from the Registration panel will be reflected in the course lists. And the pending credit hours will be updated to reflect it.
-            2.  **Transcript**
+            4.  **Transcript**
                 1.  Students can view their academic history on the transcript panel. The panel displays all courses a student has taken and enrolled in, the semesters, grades, and details for each course, as well as their cumulative GPA, credit hours, and quality points.
                 2.  The cumulative GPA, credit hours, and quality points are only counted for the courses they completed. They do not count courses in progress.
                 3.  The newly enrolled and unenrolled courses from the Registration panel will be displayed in the transcript.
-            3.  **Student Profile** (Non-required/Not-listed Use Case)
+            5.  **Student Profile** (Non-required/Not-listed Use Case)
                 1.  Students can view their profile information, such as full name, instruction mode, department, program, and NUID.
 
 - **Testing Guide**
@@ -182,11 +179,11 @@ Info 5100 Fall 25 Midterm-project-group-03
         - Student class needed an attribute to store a student’s hobbies and interests. Originally set the attribute as a String, but this will make it difficult to maintain. The type was changed to an array list to account for multiple hobbies and interests.
         - Displaying a student’s multiple hobbies and interests in a JTable. A method was created that loops through a student’s hobbies and interests and adds one per row.
     - Student Portal:
-- Class registration page has to display future semesters only. Methods were created to split the semester string, get the current date, compare by season and year, and filter out past or current semesters.
-- To unenroll a course. Methods were created to unlink the relationships between seat assignment, seat, and course offer, and remove the seat assignment from the course load list.
-- Consider GPA/credit hours/graduation status for incomplete/ungraded courses. Methods were edited to make the GPA calculation and validation for credit hours and graduation status to filter out non-graded courses. If in-progress courses are not filtered out, the GPA will be weighed down by the 0s in non-graded courses, and students can pass the graduation requirement just by enrolling in all core classes and meeting the 32-credit-hour requirement.
-- An assignment submission is an object that should have properties such as name, submission date, file (file path), and comments. Created an assignment submission class. Each Seat Assignment instance (or the student’s grade and information for a course) should have an ArrayList to hold the assignment submissions.
-- Assignment submission needs to attach files. However, files are too big to store for this project and will slow down the application. The file path will be recorded instead.
+        - Class registration page has to display future semesters only. Methods were created to split the semester string, get the current date, compare by season and year, and filter out past or current semesters.
+        - To unenroll a course. Methods were created to unlink the relationships between seat assignment, seat, and course offer, and remove the seat assignment from the course load list.
+        - Consider GPA/credit hours/graduation status for incomplete/ungraded courses. Methods were edited to make the GPA calculation and validation for credit hours and graduation status to filter out non-graded courses. If in-progress courses are not filtered out, the GPA will be weighed down by the 0s in non-graded courses, and students can pass the graduation requirement just by enrolling in all core classes and meeting the 32-credit-hour requirement.
+        - An assignment submission is an object that should have properties such as name, submission date, file (file path), and comments. Created an assignment submission class. Each Seat Assignment instance (or the student’s grade and information for a course) should have an ArrayList to hold the assignment submissions.
+        - Assignment submission needs to attach files. However, files are too big to store for this project and will slow down the application. The file path will be recorded instead.
 - **Future Enhancements**
     - Allow faculty members to modify an instructor for a course.
     - Allow faculty members to view the course status for a student (ex. enrolled, in progress, withdraw, completed)
