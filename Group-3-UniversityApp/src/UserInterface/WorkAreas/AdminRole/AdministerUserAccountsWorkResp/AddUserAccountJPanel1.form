@@ -55,7 +55,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="289" max="32767" attributes="0"/>
+              <EmptySpace pref="284" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -71,7 +71,7 @@
                           <Component id="btnAddSupplier" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="289" max="32767" attributes="0"/>
+                  <EmptySpace pref="284" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -132,12 +132,15 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="New User Account"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblUserName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User Name"/>
+        <Property name="text" type="java.lang.String" value="User Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserName">
@@ -152,28 +155,28 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPswd">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password"/>
+        <Property name="text" type="java.lang.String" value="Password*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPswd">
     </Component>
     <Component class="javax.swing.JLabel" name="lblStatus">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
+        <Property name="text" type="java.lang.String" value="Status*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtStatus">
     </Component>
     <Component class="javax.swing.JLabel" name="lblRole">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Role"/>
+        <Property name="text" type="java.lang.String" value="Role*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRole">
     </Component>
     <Component class="javax.swing.JLabel" name="lblFullName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Person ID"/>
+        <Property name="text" type="java.lang.String" value="Person ID*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPersonID">

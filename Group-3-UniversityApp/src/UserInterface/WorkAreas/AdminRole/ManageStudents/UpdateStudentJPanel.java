@@ -20,6 +20,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -57,7 +58,16 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
          //txtRole.setEnabled(false);
         txtDepartment.setEnabled(false);
         
+        //display hobbies, interests;
+        String hobbies, interests;
+        ArrayList<String> hobbiesList = selectedStudent.getHobbies();
+        ArrayList<String> interestsList = selectedStudent.getInterests();
+        // Convert the ArrayList to a String array 
+        hobbies = String.join(",", hobbiesList);
+        interests = String.join(",", interestsList);
         
+        txtHobbies.setText(hobbies);
+        txtInterests.setText(interests);
     }
 
     /**
@@ -112,21 +122,21 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblLastName.setText("First Name");
+        lblLastName.setText("First Name*");
 
-        lblDateOfBirth.setText("Last Name");
+        lblDateOfBirth.setText("Last Name*");
 
         lblLine1.setText("Department");
 
-        lblLine2.setText("Program");
+        lblLine2.setText("Program enrolled*");
 
-        lblCity.setText("Mode");
+        lblCity.setText("Mode*");
 
         lblCity1.setText("NUID");
 
-        lblHobbies.setText("Hobbies");
+        lblHobbies.setText("Hobbies*");
 
-        lblInterests.setText("Interests");
+        lblInterests.setText("Interests*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -169,9 +179,9 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblHobbies, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblInterests, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblHobbies, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblInterests, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtHobbies, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,27 +270,27 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         //check for blank input
         if (txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || 
                 txtProgram.getText().isBlank() || txtMode.getText().isBlank() || txtHobbies.getText().isBlank() || txtInterests.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"All fields are mandatory");
+            JOptionPane.showMessageDialog(null,"All fields marked with * are mandatory");
             return;
         }
         
         if (!isValidName(txtFirstName.getText()) || txtFirstName.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "First name must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
             
         } else if (!isValidName(txtLastName.getText()) || txtLastName.getText().isBlank()) {
-                JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Last name must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
                 
         } else if (!isValidName(txtProgram.getText())) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);          
+            JOptionPane.showMessageDialog(this, "Program must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);          
             
         } else if (!(txtMode.getText().equalsIgnoreCase("Online") || txtMode.getText().equalsIgnoreCase("On Campus") )) {
                 JOptionPane.showMessageDialog(this, "Mode can be either \"Online\" or \"On Campus\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
         
         } else if (!txtHobbies.getText().matches("^[a-zA-Z, ]+$")) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet. Please separate multiple hobbies with a comma.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Hobbies must be a string of alphabet. Please separate multiple hobbies with a comma.", "Warning", JOptionPane.INFORMATION_MESSAGE);
         
         } else if (!txtInterests.getText().matches("^[a-zA-Z, ]+$")) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet. Please separate multiple interests with a comma.", "Warning", JOptionPane.INFORMATION_MESSAGE);                  
+            JOptionPane.showMessageDialog(this, "Interests must be a string of alphabet. Please separate multiple interests with a comma.", "Warning", JOptionPane.INFORMATION_MESSAGE);                  
                 
         } else {
         selectedStudent.getPerson().setFirstName(txtFirstName.getText());

@@ -65,9 +65,9 @@
                                   <Component id="txtNUID" min="-2" pref="270" max="-2" attributes="1"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblHobbies" min="-2" pref="53" max="-2" attributes="0"/>
-                                      <Component id="lblInterests" min="-2" pref="53" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lblHobbies" max="32767" attributes="0"/>
+                                      <Component id="lblInterests" pref="70" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -191,14 +191,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblLastName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="First Name"/>
+        <Property name="text" type="java.lang.String" value="First Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtFirstName">
     </Component>
     <Component class="javax.swing.JLabel" name="lblDateOfBirth">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Last Name"/>
+        <Property name="text" type="java.lang.String" value="Last Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtLastName">
@@ -212,14 +212,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblLine2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Program"/>
+        <Property name="text" type="java.lang.String" value="Program enrolled*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtProgram">
     </Component>
     <Component class="javax.swing.JLabel" name="lblCity">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mode"/>
+        <Property name="text" type="java.lang.String" value="Mode*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMode">
@@ -233,14 +233,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblHobbies">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hobbies"/>
+        <Property name="text" type="java.lang.String" value="Hobbies*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtHobbies">
     </Component>
     <Component class="javax.swing.JLabel" name="lblInterests">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Interests"/>
+        <Property name="text" type="java.lang.String" value="Interests*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtInterests">

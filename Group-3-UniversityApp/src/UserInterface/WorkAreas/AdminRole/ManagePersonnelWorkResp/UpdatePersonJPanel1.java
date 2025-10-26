@@ -144,7 +144,7 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblTitle.setText("Update Person");
 
-        lblFirstName.setText("First Name");
+        lblFirstName.setText("First Name*");
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -153,17 +153,17 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
             }
         });
 
-        lblLastName.setText("Last Name");
+        lblLastName.setText("Last Name*");
 
-        lblDateOfBirth.setText("Date of Birth");
+        lblDateOfBirth.setText("Date of Birth*");
 
         lblLine1.setText("Line 1");
 
         lblLine2.setText("Line 2");
 
-        lblCity.setText("City");
+        lblCity.setText("City*");
 
-        lblCity1.setText("State");
+        lblCity1.setText("State*");
 
         lblCity2.setText("Zip");
 
@@ -306,19 +306,23 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
         //check for blank input
         if (txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || txtDateOfBirth.getText().isBlank() || 
                 txtCity.getText().isBlank() || txtState.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+            JOptionPane.showMessageDialog(this,"fields marked with * are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (!isValidName(txtFirstName.getText())) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "First name must be a string of alphabet", "Error", JOptionPane.ERROR_MESSAGE);
             
         } else if (!isValidName(txtLastName.getText())) {
-                JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Last name must be a string of alphabet ", "Error", JOptionPane.ERROR_MESSAGE);
                 
         } else if (!isValidDate(txtDateOfBirth.getText(), "dd-MM-yyyy")) {
-            JOptionPane.showMessageDialog(this, "Enter date in dd-MM-yyyy format ", "Warning", JOptionPane.INFORMATION_MESSAGE);
-           
+            JOptionPane.showMessageDialog(this, "Enter date in dd-MM-yyyy format ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!isValidName(txtCity.getText())) {
+                JOptionPane.showMessageDialog(this, "City name must be a string of alphabet ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!isValidName(txtState.getText())) {
+                JOptionPane.showMessageDialog(this, "State must be any two letters of alphabet ", "Error", JOptionPane.ERROR_MESSAGE);
+                           
         } else  {
         selectedPerson.setFirstName(txtFirstName.getText());
         selectedPerson.setLastName(txtLastName.getText());
@@ -331,7 +335,7 @@ public class UpdatePersonJPanel1 extends javax.swing.JPanel {
         address.setState(txtState.getText());
         address.setZipCode(txtZip.getText());
         selectedPerson.setAddress(address);
-        JOptionPane.showMessageDialog(this, "Person updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Person updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
         
         

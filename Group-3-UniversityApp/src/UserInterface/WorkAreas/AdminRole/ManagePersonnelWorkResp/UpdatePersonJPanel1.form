@@ -180,7 +180,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblFirstName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="First Name"/>
+        <Property name="text" type="java.lang.String" value="First Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtFirstName">
@@ -195,14 +195,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblLastName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Last Name"/>
+        <Property name="text" type="java.lang.String" value="Last Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtLastName">
     </Component>
     <Component class="javax.swing.JLabel" name="lblDateOfBirth">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Date of Birth"/>
+        <Property name="text" type="java.lang.String" value="Date of Birth*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDateOfBirth">
@@ -223,14 +223,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblCity">
       <Properties>
-        <Property name="text" type="java.lang.String" value="City"/>
+        <Property name="text" type="java.lang.String" value="City*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCity">
     </Component>
     <Component class="javax.swing.JLabel" name="lblCity1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="State"/>
+        <Property name="text" type="java.lang.String" value="State*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtState">
