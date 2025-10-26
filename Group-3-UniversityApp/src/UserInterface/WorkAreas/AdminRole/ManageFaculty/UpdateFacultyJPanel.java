@@ -102,15 +102,15 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblLastName.setText("First Name");
+        lblLastName.setText("First Name*");
 
-        lblDateOfBirth.setText("Last Name");
+        lblDateOfBirth.setText("Last Name*");
 
         lblLine1.setText("Department");
 
         lblLine2.setText("Role");
 
-        lblCity.setText("Title");
+        lblCity.setText("Job Title*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -130,27 +130,27 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
                                 .addComponent(lblDateOfBirth)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblLine1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblLine2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblCity, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblLastName)
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(284, Short.MAX_VALUE))
+                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblLine1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDepartment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(279, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(60, 60, 60)
@@ -216,16 +216,21 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
     private void saveFeatures() {
        
         //save faculty changes
+        
         //check for blank input
+        if (txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || txtTitle.getText().isBlank() ) {
+            JOptionPane.showMessageDialog(null,"all fields makred with * are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         if (!isValidName(txtFirstName.getText()) || txtFirstName.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "First name must be a string of alphabet", "Error", JOptionPane.ERROR_MESSAGE);
             
         } else if (!isValidName(txtLastName.getText()) || txtLastName.getText().isBlank()) {
-                JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Last name must be a string of alphabet", "Error", JOptionPane.ERROR_MESSAGE);
                 
         } else if (!isValidName(txtTitle.getText())) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Job title must be a string of alphabet", "Error", JOptionPane.ERROR_MESSAGE);
             
         } else  {
         
@@ -234,7 +239,7 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
         //selectedFaculty.getDepartment().setName(txtDepartment.getText());
         //selectedFaculty.setRole(txtRole.getText());
         selectedFaculty.setTitle(txtTitle.getText());
-        JOptionPane.showMessageDialog(this, "Faculty updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Faculty updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
         
     }

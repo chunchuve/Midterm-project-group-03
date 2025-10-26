@@ -95,7 +95,7 @@ public class AddPersonJPanel extends javax.swing.JPanel {
 
         lblTitle.setText("Create New Person");
 
-        lblPersonID.setText("Person ID");
+        lblPersonID.setText("Person ID*");
 
         btnAddPerson.setText("Add");
         btnAddPerson.addActionListener(new java.awt.event.ActionListener() {
@@ -104,19 +104,19 @@ public class AddPersonJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblFirstName.setText("First Name");
+        lblFirstName.setText("First Name*");
 
-        lblLastName.setText("Last Name");
+        lblLastName.setText("Last Name*");
 
-        lblDateOfBirth.setText("Date of Birth");
+        lblDateOfBirth.setText("Date of Birth*");
 
-        lblLine1.setText("Line 1");
+        lblLine1.setText("Line 1 ");
 
         lblLine2.setText("Line 2");
 
-        lblCity.setText("City");
+        lblCity.setText("City*");
 
-        lblState.setText("State");
+        lblState.setText("State*");
 
         lblZip.setText("Zip Code");
 
@@ -190,12 +190,12 @@ public class AddPersonJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(255, 255, 255)
                         .addComponent(btnAddPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(60, 60, 60)
                     .addComponent(lblPersonID)
-                    .addContainerGap(606, Short.MAX_VALUE)))
+                    .addContainerGap(601, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,23 +270,27 @@ public class AddPersonJPanel extends javax.swing.JPanel {
         //check for blank input
         if (txtPersonID.getText().isBlank() || txtFirstName.getText().isBlank() || txtLastName.getText().isBlank() || txtDateOfBirth.getText().isBlank() || 
                 txtCity.getText().isBlank() || txtState.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"personID, first name, last name, date of birth, city and state are mandatory");
+            JOptionPane.showMessageDialog(this,"fields marked with * are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (!isValidName(txtFirstName.getText())) {
-            JOptionPane.showMessageDialog(this, "First name must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "First name must be a string of alphabet", "Error", JOptionPane.ERROR_MESSAGE);
             
         } else if (!isValidName(txtLastName.getText())) {
-                JOptionPane.showMessageDialog(this, "Last name be a string of alphabet ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Last name be a string of alphabet ", "Error", JOptionPane.ERROR_MESSAGE);
                 
         } else if (!isValidDate(txtDateOfBirth.getText(), "dd-MM-yyyy")) {
-            JOptionPane.showMessageDialog(this, "Enter date in dd-MM-yyyy format ", "Warning", JOptionPane.INFORMATION_MESSAGE);
-           
+            JOptionPane.showMessageDialog(this, "Enter date in dd-MM-yyyy format ", "Error", JOptionPane.ERROR_MESSAGE);
+        
+        } else if (!isValidName(txtCity.getText())) {
+                JOptionPane.showMessageDialog(this, "City name must be a string of alphabet ", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!isValidName(txtState.getText())) {
+                JOptionPane.showMessageDialog(this, "State name must be any two letters of alphabet ", "Error", JOptionPane.ERROR_MESSAGE);
         } else  {
-        Person p = university.getPersonDirectory().newPerson(txtPersonID.getText(), 
-                txtFirstName.getText(), txtLastName.getText(), 
-                 txtDateOfBirth.getText());
+                Person p = university.getPersonDirectory().newPerson(txtPersonID.getText(), 
+                    txtFirstName.getText(), txtLastName.getText(), 
+                    txtDateOfBirth.getText());
         
         Address address = new Address();
         address.setLine1(txtLine1.getText());
@@ -312,8 +316,8 @@ public class AddPersonJPanel extends javax.swing.JPanel {
         }
        
         
-        JOptionPane.showMessageDialog(this, "New Person successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        }
+        JOptionPane.showMessageDialog(this, "New Person successfully added", "Success", JOptionPane.INFORMATION_MESSAGE);
+      }
     }//GEN-LAST:event_btnAddPersonActionPerformed
 
     private void backAction() {

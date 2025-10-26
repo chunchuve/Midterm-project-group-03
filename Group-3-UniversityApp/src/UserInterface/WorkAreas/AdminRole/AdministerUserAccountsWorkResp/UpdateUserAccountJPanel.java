@@ -100,7 +100,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
 
         lblTitle.setText("Update User Account");
 
-        lblUserName.setText("User Name");
+        lblUserName.setText("User Name*");
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -109,9 +109,9 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblPswd.setText("Password");
+        lblPswd.setText("Password*");
 
-        lblStatus.setText("Status");
+        lblStatus.setText("Status*");
 
         lblRole.setText("Role");
 
@@ -155,14 +155,14 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(60, 60, 60)
                     .addComponent(lblUserName)
                     .addGap(22, 22, 22)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(289, Short.MAX_VALUE)))
+                    .addContainerGap(284, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,26 +218,25 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         
         //input validations
         //check for blank input
-        if (txtUserName.getText().isBlank() || txtPswd.getText().isBlank() || txtStatus.getText().isBlank() || 
-                txtRole.getText().isBlank() || txtPersonID.getText().isBlank() || txtNUID.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+        if (txtUserName.getText().isBlank() || txtPswd.getText().isBlank() || txtStatus.getText().isBlank() ) {
+            JOptionPane.showMessageDialog(null,"fields marked with * are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         //check for valid input
         if (!isValidName(txtUserName.getText())) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (!(txtStatus.getText().equalsIgnoreCase("active") || txtStatus.getText().equalsIgnoreCase("active") )) {
-                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!(txtStatus.getText().equalsIgnoreCase("active") || txtStatus.getText().equalsIgnoreCase("inactive") )) {
+                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
         } else if (!(txtRole.getText().equalsIgnoreCase("student") || 
                 txtRole.getText().equalsIgnoreCase("admin") || txtRole.getText().equalsIgnoreCase("faculty") )) {
-            JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         } else
         
         saveFeatures();
-        JOptionPane.showMessageDialog(this, "Account updated successfully", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Account updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         
         txtRole.setEditable(false);
         txtPersonID.setEditable(false);

@@ -65,9 +65,10 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblTitle.setText("New User Account");
 
-        lblUserName.setText("User Name");
+        lblUserName.setText("User Name*");
 
         btnAddSupplier.setText("Add");
         btnAddSupplier.addActionListener(new java.awt.event.ActionListener() {
@@ -76,13 +77,13 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
             }
         });
 
-        lblPswd.setText("Password");
+        lblPswd.setText("Password*");
 
-        lblStatus.setText("Status");
+        lblStatus.setText("Status*");
 
-        lblRole.setText("Role");
+        lblRole.setText("Role*");
 
-        lblFullName.setText("Person ID");
+        lblFullName.setText("Person ID*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -114,7 +115,7 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
                                 .addComponent(lblFullName)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtPersonID, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +127,7 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(114, 114, 114)
                             .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(289, Short.MAX_VALUE)))
+                    .addContainerGap(284, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,19 +180,19 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
         //input validations
         //check for blank input
         if (txtUserName.getText().isBlank() || txtPswd.getText().isBlank() || txtStatus.getText().isBlank() || txtRole.getText().isBlank() || txtPersonID.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null,"all fields are mandatory");
+            JOptionPane.showMessageDialog(null,"all fields are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         //check for valid input
         if (!isValidName(txtUserName.getText())) {
-            JOptionPane.showMessageDialog(this, "Entry must be a string of alphabet", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username must be a string of alphabet", "Error", JOptionPane.ERROR_MESSAGE);
             
-        } else if (!(txtStatus.getText().equalsIgnoreCase("active") || txtStatus.getText().equalsIgnoreCase("active") )) {
-                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!(txtStatus.getText().equalsIgnoreCase("active") || txtStatus.getText().equalsIgnoreCase("inactive") )) {
+                JOptionPane.showMessageDialog(this, "Status can be either \"active\" or \"inactive\" ", "Error", JOptionPane.ERROR_MESSAGE);
                 
         } else if (!(txtRole.getText().equalsIgnoreCase("student") || 
                 txtRole.getText().equalsIgnoreCase("admin") || txtRole.getText().equalsIgnoreCase("faculty") )) {
-            JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Role can be either \"student\" or \"admin\" or \"faculty\" ", "ERROR", JOptionPane.ERROR_MESSAGE);
             
         } else  {
         
@@ -223,7 +224,7 @@ public class AddUserAccountJPanel1 extends javax.swing.JPanel {
                 ua.setLastActivity(LocalDateTime.now());
                 ua.setLastUpdated(LocalDateTime.now());
                 ua.setStatus(txtStatus.getText());
-                JOptionPane.showMessageDialog(this, "New User successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "New User successfully added", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
        
         }

@@ -63,7 +63,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="289" max="32767" attributes="0"/>
+              <EmptySpace pref="284" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -71,7 +71,7 @@
                   <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                   <Component id="txtUserName" min="-2" pref="270" max="-2" attributes="1"/>
-                  <EmptySpace pref="289" max="32767" attributes="0"/>
+                  <EmptySpace pref="284" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -142,7 +142,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblUserName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User Name"/>
+        <Property name="text" type="java.lang.String" value="User Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserName">
@@ -157,14 +157,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPswd">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password"/>
+        <Property name="text" type="java.lang.String" value="Password*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPswd">
     </Component>
     <Component class="javax.swing.JLabel" name="lblStatus">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
+        <Property name="text" type="java.lang.String" value="Status*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtStatus">
