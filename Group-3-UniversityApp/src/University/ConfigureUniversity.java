@@ -272,11 +272,11 @@ class ConfigureUniversity {
         // Jane
         CourseLoad sp2_clSpring2025 = studentprofile2.newCourseLoad("SPRING 2025");
         SeatAssignment sa15 = co1.assignEmptySeat(sp2_clSpring2025);
+        SeatAssignment sa16 = co2.assignEmptySeat(sp2_clSpring2025);
         CourseLoad sp2_clFall2025 = studentprofile2.newCourseLoad("FALL 2025");
-        SeatAssignment sa16 = co5.assignEmptySeat(sp2_clFall2025);
-        SeatAssignment sa17 = co6.assignEmptySeat(sp2_clFall2025);
-        SeatAssignment sa18 = co7.assignEmptySeat(sp2_clFall2025);
+        SeatAssignment sa17 = co5.assignEmptySeat(sp2_clFall2025);
         sa15.setGrade(3.0f);
+        sa16.setGrade(4.0f);
         
         
         

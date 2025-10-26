@@ -43,7 +43,8 @@ public class ViewStudentAcademicJPanel extends javax.swing.JPanel {
         fieldLastName.setText(this.selectedStudent.getPerson().getLastName());
         
         //format GPA to display up to 2 decimals
-        float GPA = this.selectedStudent.getCurrentCourseLoad().calculateGPA();
+        float GPA = this.selectedStudent.getTranscript().getCumulativeGPA();
+        //float GPA = this.selectedStudent.getCurrentCourseLoad().calculateGPA();
         fieldGPA.setText(String.format("%.2f", GPA));
         
         populateStudentCourseTable(sp);
